@@ -27,15 +27,16 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         txt_SOBToday = new javax.swing.JTextField();
         txt_SOBScale = new javax.swing.JTextField();
         txt_SOBYesterday = new javax.swing.JTextField();
-        btn_SOB_Add = new javax.swing.JButton();
-        btn_SOBEdit = new javax.swing.JButton();
-        btn_SOBDelete = new javax.swing.JButton();
-        btn_SOBSave = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabl_SOBRecords = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menu_Forms = new javax.swing.JMenu();
         menu_ATA = new javax.swing.JMenuItem();
+        menu_Actions = new javax.swing.JMenu();
+        menu_Add_Record = new javax.swing.JMenuItem();
+        menu_Edit_Mode = new javax.swing.JMenuItem();
+        menu_Save = new javax.swing.JMenuItem();
+        menu_Delete = new javax.swing.JMenuItem();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,38 +109,6 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
                 .addGap(70, 70, 70))
         );
 
-        btn_SOB_Add.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_SOB_Add.setText("Add Record ");
-        btn_SOB_Add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SOB_AddActionPerformed(evt);
-            }
-        });
-
-        btn_SOBEdit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_SOBEdit.setText("Edit Record");
-        btn_SOBEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SOBEditActionPerformed(evt);
-            }
-        });
-
-        btn_SOBDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_SOBDelete.setText("Delete Record");
-        btn_SOBDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SOBDeleteActionPerformed(evt);
-            }
-        });
-
-        btn_SOBSave.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_SOBSave.setText("Save Record");
-        btn_SOBSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_SOBSaveActionPerformed(evt);
-            }
-        });
-
         tabl_SOBRecords.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -153,7 +122,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabl_SOBRecords);
 
-        jMenu1.setText("Forms");
+        menu_Forms.setText("Forms");
 
         menu_ATA.setText("Activity Tolerance Form");
         menu_ATA.addActionListener(new java.awt.event.ActionListener() {
@@ -161,9 +130,45 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
                 menu_ATAActionPerformed(evt);
             }
         });
-        jMenu1.add(menu_ATA);
+        menu_Forms.add(menu_ATA);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menu_Forms);
+
+        menu_Actions.setText("Actions");
+
+        menu_Add_Record.setText("Add Record");
+        menu_Add_Record.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Add_RecordActionPerformed(evt);
+            }
+        });
+        menu_Actions.add(menu_Add_Record);
+
+        menu_Edit_Mode.setText("Edit Record");
+        menu_Edit_Mode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Edit_ModeActionPerformed(evt);
+            }
+        });
+        menu_Actions.add(menu_Edit_Mode);
+
+        menu_Save.setText("Save Record");
+        menu_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_SaveActionPerformed(evt);
+            }
+        });
+        menu_Actions.add(menu_Save);
+
+        menu_Delete.setText("Delete Record");
+        menu_Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_DeleteActionPerformed(evt);
+            }
+        });
+        menu_Actions.add(menu_Delete);
+
+        jMenuBar1.add(menu_Actions);
 
         setJMenuBar(jMenuBar1);
 
@@ -182,16 +187,6 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
                         .addGap(59, 59, 59)
                         .addComponent(l_SOBA, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(235, 235, 235))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(btn_SOB_Add)
-                .addGap(73, 73, 73)
-                .addComponent(btn_SOBEdit)
-                .addGap(63, 63, 63)
-                .addComponent(btn_SOBSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_SOBDelete)
-                .addGap(59, 59, 59))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,39 +200,33 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
                         .addComponent(l_SOBA)
                         .addGap(18, 18, 18)
                         .addComponent(panel_SOBA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_SOB_Add)
-                    .addComponent(btn_SOBEdit)
-                    .addComponent(btn_SOBSave)
-                    .addComponent(btn_SOBDelete))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_SOB_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SOB_AddActionPerformed
-        UnlockScreen();
-    }//GEN-LAST:event_btn_SOB_AddActionPerformed
-
-    private void btn_SOBEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SOBEditActionPerformed
-        UnlockScreen();
-    }//GEN-LAST:event_btn_SOBEditActionPerformed
-
-    private void btn_SOBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SOBSaveActionPerformed
-        LockScreen();
-    }//GEN-LAST:event_btn_SOBSaveActionPerformed
-
-    private void btn_SOBDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SOBDeleteActionPerformed
-        LockScreen();
-    }//GEN-LAST:event_btn_SOBDeleteActionPerformed
 
     private void menu_ATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAActionPerformed
          Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview();
          ATA.setVisible(true);
          this.dispose();
     }//GEN-LAST:event_menu_ATAActionPerformed
+
+    private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
+        UnlockScreen();
+    }//GEN-LAST:event_menu_Add_RecordActionPerformed
+
+    private void menu_Edit_ModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_ModeActionPerformed
+        UnlockScreen();
+    }//GEN-LAST:event_menu_Edit_ModeActionPerformed
+
+    private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
+        LockScreen();
+    }//GEN-LAST:event_menu_SaveActionPerformed
+
+    private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed
+        LockScreen();
+    }//GEN-LAST:event_menu_DeleteActionPerformed
 
     
     public static void main(String args[]) {
@@ -302,11 +291,6 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_SOBDelete;
-    private javax.swing.JButton btn_SOBEdit;
-    private javax.swing.JButton btn_SOBSave;
-    private javax.swing.JButton btn_SOB_Add;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -316,6 +300,12 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private javax.swing.JLabel l_SOBToday;
     private javax.swing.JLabel l_SOBYesterday;
     private javax.swing.JMenuItem menu_ATA;
+    private javax.swing.JMenu menu_Actions;
+    private javax.swing.JMenuItem menu_Add_Record;
+    private javax.swing.JMenuItem menu_Delete;
+    private javax.swing.JMenuItem menu_Edit_Mode;
+    private javax.swing.JMenu menu_Forms;
+    private javax.swing.JMenuItem menu_Save;
     private javax.swing.JPanel panel_SOBA;
     private javax.swing.JTable tabl_SOBRecords;
     private javax.swing.JTextField txt_SOBScale;
