@@ -122,6 +122,8 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tabl_SOBRecords);
 
+        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
         menu_Forms.setText("Forms");
 
         menu_ATA.setText("Activity Tolerance Form");
@@ -200,7 +202,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
                         .addComponent(l_SOBA)
                         .addGap(18, 18, 18)
                         .addComponent(panel_SOBA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         pack();
@@ -230,30 +232,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Shortness_of_Breath_Interview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Shortness_of_Breath_Interview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Shortness_of_Breath_Interview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Shortness_of_Breath_Interview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Shortness_of_Breath_Interview().setVisible(true);
@@ -265,26 +244,27 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private void LockScreen () {
         txt_SOBToday.setEditable(false);
         txt_SOBToday.setBackground(Color.lightGray);
+        txt_SOBToday.setText(" ");
         
         txt_SOBScale.setEditable(false);
         txt_SOBScale.setBackground(Color.lightGray);
+        txt_SOBScale.setText(" ");
         
         txt_SOBYesterday.setEditable(false);
         txt_SOBYesterday.setBackground(Color.lightGray);
+        txt_SOBYesterday.setText(" ");
         
         
     }
     
     private void UnlockScreen () {
-        txt_SOBToday.setText(" ");
+        
         txt_SOBToday.setEditable(true);
         txt_SOBToday.setBackground(Color.white);
         
-        txt_SOBScale.setText(" ");
         txt_SOBScale.setEditable(true);
         txt_SOBScale.setBackground(Color.white);
         
-        txt_SOBYesterday.setText(" ");
         txt_SOBYesterday.setEditable(true);
         txt_SOBYesterday.setBackground(Color.white);
         

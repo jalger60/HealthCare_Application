@@ -37,13 +37,14 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         txt_ATClimb7_10steps = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        txt_ATAdd = new javax.swing.JButton();
-        txt_ATDelete = new javax.swing.JButton();
-        txt_ATEdit = new javax.swing.JButton();
-        txt_ATSave = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_SOBA = new javax.swing.JMenu();
         SOBA_form = new javax.swing.JMenuItem();
+        menu_ATAOptions = new javax.swing.JMenu();
+        menu_Add_Record = new javax.swing.JMenuItem();
+        menu_Edit_Record = new javax.swing.JMenuItem();
+        menu_Save_Record = new javax.swing.JMenuItem();
+        menu_Delete_Record = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -186,37 +187,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        txt_ATAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_ATAdd.setText("Add Record");
-        txt_ATAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_ATAddActionPerformed(evt);
-            }
-        });
-
-        txt_ATDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_ATDelete.setText("Delete Record");
-        txt_ATDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_ATDeleteActionPerformed(evt);
-            }
-        });
-
-        txt_ATEdit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_ATEdit.setText("Edit Record");
-        txt_ATEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_ATEditActionPerformed(evt);
-            }
-        });
-
-        txt_ATSave.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_ATSave.setText("Save Record");
-        txt_ATSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_ATSaveActionPerformed(evt);
-            }
-        });
+        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         menu_SOBA.setText("Forms");
 
@@ -230,6 +201,42 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_SOBA);
 
+        menu_ATAOptions.setText("Actions");
+
+        menu_Add_Record.setText("Add Record");
+        menu_Add_Record.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Add_RecordActionPerformed(evt);
+            }
+        });
+        menu_ATAOptions.add(menu_Add_Record);
+
+        menu_Edit_Record.setText("Edit Record");
+        menu_Edit_Record.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Edit_RecordActionPerformed(evt);
+            }
+        });
+        menu_ATAOptions.add(menu_Edit_Record);
+
+        menu_Save_Record.setText("Save Record");
+        menu_Save_Record.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Save_RecordActionPerformed(evt);
+            }
+        });
+        menu_ATAOptions.add(menu_Save_Record);
+
+        menu_Delete_Record.setText("Delete Record");
+        menu_Delete_Record.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Delete_RecordActionPerformed(evt);
+            }
+        });
+        menu_ATAOptions.add(menu_Delete_Record);
+
+        jMenuBar1.add(menu_ATAOptions);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -241,27 +248,11 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
                 .addComponent(lbl_AT_Title, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(256, 256, 256))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txt_ATAdd)
-                        .addGap(67, 67, 67)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_ATEdit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(txt_ATSave)
-                        .addGap(70, 70, 70)
-                        .addComponent(txt_ATDelete)
-                        .addGap(93, 93, 93))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(panel_ATA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(panel_ATA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,39 +266,33 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panel_ATA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_ATEdit)
-                    .addComponent(txt_ATAdd)
-                    .addComponent(txt_ATSave)
-                    .addComponent(txt_ATDelete))
-                .addGap(26, 26, 26))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txt_ATAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ATAddActionPerformed
-        UnlockScreen();
-    }//GEN-LAST:event_txt_ATAddActionPerformed
-
-    private void txt_ATEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ATEditActionPerformed
-        UnlockScreen();
-    }//GEN-LAST:event_txt_ATEditActionPerformed
-
-    private void txt_ATSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ATSaveActionPerformed
-        LockScreen();
-    }//GEN-LAST:event_txt_ATSaveActionPerformed
-
-    private void txt_ATDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ATDeleteActionPerformed
-        LockScreen();
-    }//GEN-LAST:event_txt_ATDeleteActionPerformed
 
     private void SOBA_formActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SOBA_formActionPerformed
         Shortness_of_Breath_Interview SOBA = new Shortness_of_Breath_Interview();
         SOBA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_SOBA_formActionPerformed
+
+    private void menu_Edit_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_RecordActionPerformed
+        UnlockScreen();
+    }//GEN-LAST:event_menu_Edit_RecordActionPerformed
+
+    private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
+        UnlockScreen();
+    }//GEN-LAST:event_menu_Add_RecordActionPerformed
+
+    private void menu_Save_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Save_RecordActionPerformed
+        LockScreen();
+    }//GEN-LAST:event_menu_Save_RecordActionPerformed
+
+    private void menu_Delete_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Delete_RecordActionPerformed
+        LockScreen();
+    }//GEN-LAST:event_menu_Delete_RecordActionPerformed
 
     
     public static void main(String args[]) {
@@ -346,28 +331,36 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private void LockScreen () {
         txt_ATEating.setEditable(false);
         txt_ATEating.setBackground(Color.lightGray);
+        txt_ATEating.setText(" ");
         
         txt_ATDrinking.setEditable(false);
         txt_ATDrinking.setBackground(Color.lightGray);
+        txt_ATDrinking.setText(" ");
         
         txt_ATDressing.setEditable(false);
         txt_ATDressing.setBackground(Color.lightGray);
+        txt_ATDressing.setText(" ");
         
         txt_ATWalking_House.setEditable(false);
         txt_ATWalking_House.setBackground(Color.lightGray);
+        txt_ATWalking_House.setText(" ");
         
         
         txt_ATClimbing_Stairs.setEditable(false);
         txt_ATClimbing_Stairs.setBackground(Color.lightGray);
+        txt_ATClimbing_Stairs.setText(" ");
         
         txt_ATClimb1_3steps.setEditable(false);
         txt_ATClimb1_3steps.setBackground(Color.lightGray);
+        txt_ATClimb1_3steps.setText(" ");
         
         txt_ATClimb4_6steps.setEditable(false);
         txt_ATClimb4_6steps.setBackground(Color.lightGray);
+        txt_ATClimb4_6steps.setText(" ");
         
         txt_ATClimb7_10steps.setEditable(false);
         txt_ATClimb7_10steps.setBackground(Color.lightGray);
+        txt_ATClimb7_10steps.setText(" ");
                          
                 
     }
@@ -376,11 +369,15 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         txt_ATEating.setEditable(true);
         txt_ATEating.setBackground(Color.white);
         
+        
+        
         txt_ATDrinking.setEditable(true);
         txt_ATDrinking.setBackground(Color.white);
+       
         
         txt_ATDressing.setEditable(true);
         txt_ATDressing.setBackground(Color.white);
+        
         
         txt_ATWalking_House.setEditable(true);
         txt_ATWalking_House.setBackground(Color.white);
@@ -413,19 +410,20 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_ATEating;
     private javax.swing.JLabel lbl_ATWalking_House;
     private javax.swing.JLabel lbl_AT_Title;
+    private javax.swing.JMenu menu_ATAOptions;
+    private javax.swing.JMenuItem menu_Add_Record;
+    private javax.swing.JMenuItem menu_Delete_Record;
+    private javax.swing.JMenuItem menu_Edit_Record;
     private javax.swing.JMenu menu_SOBA;
+    private javax.swing.JMenuItem menu_Save_Record;
     private javax.swing.JPanel panel_ATA;
-    private javax.swing.JButton txt_ATAdd;
     private javax.swing.JTextField txt_ATClimb1_3steps;
     private javax.swing.JTextField txt_ATClimb4_6steps;
     private javax.swing.JTextField txt_ATClimb7_10steps;
     private javax.swing.JTextField txt_ATClimbing_Stairs;
-    private javax.swing.JButton txt_ATDelete;
     private javax.swing.JTextField txt_ATDressing;
     private javax.swing.JTextField txt_ATDrinking;
     private javax.swing.JTextField txt_ATEating;
-    private javax.swing.JButton txt_ATEdit;
-    private javax.swing.JButton txt_ATSave;
     private javax.swing.JTextField txt_ATWalking_House;
     // End of variables declaration//GEN-END:variables
 }
