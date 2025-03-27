@@ -32,6 +32,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_Forms = new javax.swing.JMenu();
         menu_ATA = new javax.swing.JMenuItem();
+        menu_Patient_Selection = new javax.swing.JMenuItem();
         menu_Actions = new javax.swing.JMenu();
         menu_Add_Record = new javax.swing.JMenuItem();
         menu_Edit_Mode = new javax.swing.JMenuItem();
@@ -134,6 +135,14 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         });
         menu_Forms.add(menu_ATA);
 
+        menu_Patient_Selection.setText("Patient Selection Form");
+        menu_Patient_Selection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Patient_SelectionActionPerformed(evt);
+            }
+        });
+        menu_Forms.add(menu_Patient_Selection);
+
         jMenuBar1.add(menu_Forms);
 
         menu_Actions.setText("Actions");
@@ -230,6 +239,12 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         LockScreen();
     }//GEN-LAST:event_menu_DeleteActionPerformed
 
+    private void menu_Patient_SelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectionActionPerformed
+        Patient_Selection patient_select = new Patient_Selection();
+        patient_select.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menu_Patient_SelectionActionPerformed
+
     
     public static void main(String args[]) {
         
@@ -285,6 +300,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_Delete;
     private javax.swing.JMenuItem menu_Edit_Mode;
     private javax.swing.JMenu menu_Forms;
+    private javax.swing.JMenuItem menu_Patient_Selection;
     private javax.swing.JMenuItem menu_Save;
     private javax.swing.JPanel panel_SOBA;
     private javax.swing.JTable tabl_SOBRecords;

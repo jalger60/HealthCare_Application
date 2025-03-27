@@ -40,6 +40,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_SOBA = new javax.swing.JMenu();
         SOBA_form = new javax.swing.JMenuItem();
+        menu_Patient_Select = new javax.swing.JMenuItem();
         menu_ATAOptions = new javax.swing.JMenu();
         menu_Add_Record = new javax.swing.JMenuItem();
         menu_Edit_Record = new javax.swing.JMenuItem();
@@ -199,6 +200,14 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         });
         menu_SOBA.add(SOBA_form);
 
+        menu_Patient_Select.setText("Patient Selection Form");
+        menu_Patient_Select.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Patient_SelectActionPerformed(evt);
+            }
+        });
+        menu_SOBA.add(menu_Patient_Select);
+
         jMenuBar1.add(menu_SOBA);
 
         menu_ATAOptions.setText("Actions");
@@ -293,6 +302,12 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private void menu_Delete_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Delete_RecordActionPerformed
         LockScreen();
     }//GEN-LAST:event_menu_Delete_RecordActionPerformed
+
+    private void menu_Patient_SelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectActionPerformed
+        Patient_Selection patient_select = new Patient_Selection();
+        patient_select.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menu_Patient_SelectActionPerformed
 
     
     public static void main(String args[]) {
@@ -414,6 +429,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_Add_Record;
     private javax.swing.JMenuItem menu_Delete_Record;
     private javax.swing.JMenuItem menu_Edit_Record;
+    private javax.swing.JMenuItem menu_Patient_Select;
     private javax.swing.JMenu menu_SOBA;
     private javax.swing.JMenuItem menu_Save_Record;
     private javax.swing.JPanel panel_ATA;

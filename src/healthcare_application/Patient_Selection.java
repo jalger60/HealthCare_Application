@@ -3,13 +3,16 @@ package healthcare_application;
 
 import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.PatientSelection_DBOperations;
+import javax.swing.JOptionPane;
+
 public class Patient_Selection extends javax.swing.JFrame {
 
-    
+    private int PatientID;
     
     
     public Patient_Selection() {
         initComponents();
+        
     }
 
     
@@ -46,6 +49,9 @@ public class Patient_Selection extends javax.swing.JFrame {
 
         tabl_Patient_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {},
+                {},
+                {},
                 {},
                 {},
                 {},
@@ -150,10 +156,6 @@ public class Patient_Selection extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
-        performSearch();
-    }//GEN-LAST:event_btn_SearchActionPerformed
-
     private void menu_ATAFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAFormActionPerformed
         Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview();
         ATA.setVisible(true);
@@ -166,8 +168,20 @@ public class Patient_Selection extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_menu_SOBAActionPerformed
 
+    private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
+        performSearch();
+    }//GEN-LAST:event_btn_SearchActionPerformed
+
     public String GetTxt_Search_BoxText() {
         return txt_Search_Box.getText();
+    }
+    
+    public int getPatientID() {
+        return PatientID;
+    }
+
+    public void setPatientID(int patientID) {
+        this.PatientID = patientID;
     }
     
     
@@ -187,11 +201,37 @@ public class Patient_Selection extends javax.swing.JFrame {
         String searchText = txt_Search_Box.getText();
         PatientSelection_DBOperations dbOperations = new PatientSelection_DBOperations();
         DefaultTableModel table = dbOperations.SearchforPatients(searchText);
-        
 
         tabl_Patient_Table.setModel(table);
-        
+
+        // Check if the table has rows
+        if (tabl_Patient_Table.getRowCount() > 0) {
+            // Add a ListSelectionListener to detect row selection
+            tabl_Patient_Table.getSelectionModel().addListSelectionListener(event -> {
+                if (!event.getValueIsAdjusting()) { // Prevent double triggering
+                    int selectedRow = tabl_Patient_Table.getSelectedRow();
+
+                    if (selectedRow != -1) { // Ensure a row is selected
+                        int patientIDColumnIndex = 0; // Modify based on the actual column index
+
+                        Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, patientIDColumnIndex);
+
+                        if (patientIDValue != null) {
+                            try {
+                                int patientID = Integer.parseInt(patientIDValue.toString());
+                                setPatientID(patientID); // Store the selected Patient ID
+                          
+                            } catch (NumberFormatException e) {
+                                System.err.println("Invalid Patient ID format: " + e.getMessage());
+                            }
+                        }
+                    }
+                }
+            });
+        }
     }
+    
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

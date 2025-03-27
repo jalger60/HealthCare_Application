@@ -2,6 +2,7 @@ package healthcare_application.DBUtils;
 
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 public class PatientSelection_DBOperations {
 
@@ -25,7 +26,15 @@ public class PatientSelection_DBOperations {
         Connection dbConnection = connectToDatabase();
         CallableStatement callableStatement = null;
         ResultSet resultSet = null;
-        DefaultTableModel tableModel = new DefaultTableModel(); // Create a DefaultTableModel
+        
+        DefaultTableModel tableModel = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // Make all cells non-editable
+        }
+        };
+        
+        
 
         if (dbConnection != null) {
             try {
@@ -48,17 +57,21 @@ public class PatientSelection_DBOperations {
                         tableModel.addColumn(metaData.getColumnName(i));
                     }
 
-                    // Add data rows to the table model
-                    while (resultSet.next()) {
-                        Object[] rowData = new Object[columnCount];
-                        for (int i = 1; i <= columnCount; i++) {
-                            rowData[i - 1] = resultSet.getString(i); // Assuming String data, adjust if needed
+                    // Check if resultSet is empty (i.e., no matching names found)
+                    if (!resultSet.isBeforeFirst()) { 
+                        JOptionPane.showMessageDialog(null, 
+                            "No patients found matching the search criteria.", 
+                            "Information", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        // Add data rows to the table model
+                        while (resultSet.next()) {
+                            Object[] rowData = new Object[columnCount];
+                            for (int i = 1; i <= columnCount; i++) {
+                                rowData[i - 1] = resultSet.getString(i); 
+                            }
+                            tableModel.addRow(rowData);
                         }
-                        tableModel.addRow(rowData);
                     }
-                } else {
-                    System.out.println("No patients found matching the search criteria.");
-                    // You might want to clear the table model if no results are found, or handle it in the JFrame
                 }
 
             } catch (SQLException ex) {
