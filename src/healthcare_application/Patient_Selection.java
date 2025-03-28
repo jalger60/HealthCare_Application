@@ -12,6 +12,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     
     public Patient_Selection() {
         initComponents();
+        GetAllPatients();
         
     }
 
@@ -28,6 +29,7 @@ public class Patient_Selection extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabl_Patient_Table = new javax.swing.JTable();
         btn_Search = new javax.swing.JButton();
+        btn_BackToAll = new javax.swing.JButton();
         menu_PSelect_Bar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menu_ATAForm = new javax.swing.JMenuItem();
@@ -71,36 +73,48 @@ public class Patient_Selection extends javax.swing.JFrame {
             }
         });
 
+        btn_BackToAll.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_BackToAll.setText("Back To All Results");
+        btn_BackToAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BackToAllActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_PSelectLayout = new javax.swing.GroupLayout(panel_PSelect);
         panel_PSelect.setLayout(panel_PSelectLayout);
         panel_PSelectLayout.setHorizontalGroup(
             panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_PSelectLayout.createSequentialGroup()
                 .addGap(148, 148, 148)
-                .addGroup(panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(panel_PSelectLayout.createSequentialGroup()
-                        .addComponent(lbl_Search)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_Search_Box, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbox_Search_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(lbl_Search)
+                .addGap(18, 18, 18)
+                .addComponent(txt_Search_Box, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cbox_Search_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Search)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_BackToAll)
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_PSelectLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(208, 208, 208))
         );
         panel_PSelectLayout.setVerticalGroup(
             panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_PSelectLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(26, 26, 26)
                 .addGroup(panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbox_Search_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_Search_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_Search)
-                    .addComponent(btn_Search))
-                .addGap(18, 18, 18)
+                    .addComponent(btn_Search)
+                    .addComponent(btn_BackToAll))
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         menu_PSelect_Bar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -135,22 +149,23 @@ public class Patient_Selection extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(298, 298, 298)
-                .addComponent(lbl_PSelect_Title)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panel_PSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(panel_PSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lbl_PSelect_Title)
+                        .addGap(350, 350, 350))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(44, 44, 44)
                 .addComponent(lbl_PSelect_Title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panel_PSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,6 +186,11 @@ public class Patient_Selection extends javax.swing.JFrame {
     private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
         performSearch();
     }//GEN-LAST:event_btn_SearchActionPerformed
+
+    private void btn_BackToAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackToAllActionPerformed
+        txt_Search_Box.setText(" ");
+        GetAllPatients();
+    }//GEN-LAST:event_btn_BackToAllActionPerformed
 
     public String GetTxt_Search_BoxText() {
         return txt_Search_Box.getText();
@@ -231,10 +251,45 @@ public class Patient_Selection extends javax.swing.JFrame {
         }
     }
     
+    private void GetAllPatients() {
+        
+        PatientSelection_DBOperations dbOperations = new PatientSelection_DBOperations();
+        DefaultTableModel table = dbOperations.SearchforAllPatients();
+
+        tabl_Patient_Table.setModel(table);
+
+        // Check if the table has rows
+        if (tabl_Patient_Table.getRowCount() > 0) {
+            // Add a ListSelectionListener to detect row selection
+            tabl_Patient_Table.getSelectionModel().addListSelectionListener(event -> {
+                if (!event.getValueIsAdjusting()) { // Prevent double triggering
+                    int selectedRow = tabl_Patient_Table.getSelectedRow();
+
+                    if (selectedRow != -1) { // Ensure a row is selected
+                        int patientIDColumnIndex = 0; // Modify based on the actual column index
+
+                        Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, patientIDColumnIndex);
+
+                        if (patientIDValue != null) {
+                            try {
+                                int patientID = Integer.parseInt(patientIDValue.toString());
+                                setPatientID(patientID); // Store the selected Patient ID
+                          
+                            } catch (NumberFormatException e) {
+                                System.err.println("Invalid Patient ID format: " + e.getMessage());
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+    
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_BackToAll;
     private javax.swing.JButton btn_Search;
     private javax.swing.JComboBox<String> cbox_Search_Box;
     private javax.swing.JMenu jMenu1;
