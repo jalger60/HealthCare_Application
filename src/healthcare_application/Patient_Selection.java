@@ -4,6 +4,8 @@ package healthcare_application;
 import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.PatientSelection_DBOperations;
 import javax.swing.JOptionPane;
+import javax.swing.table.JTableHeader;
+import java.awt.Font;
 
 public class Patient_Selection extends javax.swing.JFrame {
 
@@ -218,45 +220,60 @@ public class Patient_Selection extends javax.swing.JFrame {
     }
     
     private void performSearch() {
-        String searchText = txt_Search_Box.getText();
-        PatientSelection_DBOperations dbOperations = new PatientSelection_DBOperations();
-        DefaultTableModel table = dbOperations.SearchforPatients(searchText);
+    String searchText = txt_Search_Box.getText();
+    PatientSelection_DBOperations dbOperations = new PatientSelection_DBOperations();
+    DefaultTableModel table = dbOperations.SearchforPatients(searchText);
 
-        tabl_Patient_Table.setModel(table);
+    // Set the new column names
+    String[] columnNames = {"Patient ID", "Last Name", "First Name", "Phone Number", "Date of Birth"};
+    table.setColumnIdentifiers(columnNames);
 
-        // Check if the table has rows
-        if (tabl_Patient_Table.getRowCount() > 0) {
-            // Add a ListSelectionListener to detect row selection
-            tabl_Patient_Table.getSelectionModel().addListSelectionListener(event -> {
-                if (!event.getValueIsAdjusting()) { // Prevent double triggering
-                    int selectedRow = tabl_Patient_Table.getSelectedRow();
+    tabl_Patient_Table.setModel(table);
+    
+    JTableHeader header = tabl_Patient_Table.getTableHeader();
+    header.setFont(header.getFont().deriveFont(Font.BOLD));
 
-                    if (selectedRow != -1) { // Ensure a row is selected
-                        int patientIDColumnIndex = 0; // Modify based on the actual column index
+    // Check if the table has rows
+    if (tabl_Patient_Table.getRowCount() > 0) {
+        // Add a ListSelectionListener to detect row selection
+        tabl_Patient_Table.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) { // Prevent double triggering
+                int selectedRow = tabl_Patient_Table.getSelectedRow();
 
-                        Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, patientIDColumnIndex);
+                if (selectedRow != -1) { // Ensure a row is selected
+                    int patientIDColumnIndex = 0; // Modify based on the actual column index
 
-                        if (patientIDValue != null) {
-                            try {
-                                int patientID = Integer.parseInt(patientIDValue.toString());
-                                setPatientID(patientID); // Store the selected Patient ID
-                          
-                            } catch (NumberFormatException e) {
-                                System.err.println("Invalid Patient ID format: " + e.getMessage());
-                            }
+                    Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, patientIDColumnIndex);
+
+                    if (patientIDValue != null) {
+                        try {
+                            int patientID = Integer.parseInt(patientIDValue.toString());
+                            setPatientID(patientID); // Store the selected Patient ID
+                        
+                        } catch (NumberFormatException e) {
+                            System.err.println("Invalid Patient ID format: " + e.getMessage());
                         }
                     }
                 }
-            });
-        }
+            }
+        });
     }
+}
+
     
     private void GetAllPatients() {
         
         PatientSelection_DBOperations dbOperations = new PatientSelection_DBOperations();
         DefaultTableModel table = dbOperations.SearchforAllPatients();
+        
+        String[] columnNames = {"Patient ID", "Last Name", "First Name", "Phone Number", "Date of Birth"};
+        table.setColumnIdentifiers(columnNames);
+
 
         tabl_Patient_Table.setModel(table);
+        JTableHeader header = tabl_Patient_Table.getTableHeader();
+        header.setFont(header.getFont().deriveFont(Font.BOLD));
+
 
         // Check if the table has rows
         if (tabl_Patient_Table.getRowCount() > 0) {
