@@ -1,0 +1,1168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Menu class="javax.swing.JMenuBar" name="menu_PatientDemographics">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="1"/>
+        </Property>
+      </Properties>
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="menu_Forms">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Forms"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menu_Actions">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Actions"/>
+          </Properties>
+        </Menu>
+      </SubComponents>
+    </Menu>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="menu_PatientDemographics"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="lbl_PDTitle" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="312" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="panel_PDemographics" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Component id="lbl_PDTitle" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="panel_PDemographics" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="60" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lbl_PDTitle">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="24" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Patient Demographics "/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JPanel" name="panel_PDemographics">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="lbl_PtPreLastName" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_LastName" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_FirstName" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_Home_Address" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txt_PreLastName" pref="198" max="32767" attributes="0"/>
+                                          <Component id="txt_LastName" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txt_FirstName" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="txt_HomeAddress" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="lbl_State" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_City" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_ZipCode" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_Country" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txt_City" min="-2" pref="198" max="-2" attributes="0"/>
+                                      <Component id="cbox_State" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="txt_ZipCode" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="cbox_Country" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                                          <Component id="lbl_CurrentHCP" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="lbl_MartialStatus" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_Gender" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cbox_Martial_Status" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbox_Gender" min="-2" pref="125" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+                                          <Component id="lbl_Comments" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jScrollPane2" min="-2" pref="254" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbl_NextofKin" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="txt_Next_of_kin" pref="258" max="32767" attributes="0"/>
+                                                  <Component id="lbl_NOKRP" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txt_NOKR" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="101" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_Citizenship" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_MobilePhone" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_EmPhoneNum" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_Email" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_SSN" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_DOB" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_Ethnic" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txt_MobilePhone" max="32767" attributes="0"/>
+                                  <Component id="txt_Em_Phone_Num" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_Email" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="pass_SSN" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="datechooser_DOB" alignment="0" pref="204" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="cbox_Citizenship" alignment="1" min="-2" pref="155" max="-2" attributes="0"/>
+                                  <Component id="cbox_Ethnicity" min="-2" pref="155" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbl_FirstName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_FirstName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_Gender" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbox_Gender" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_MartialStatus" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txt_LastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_LastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbox_Martial_Status" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_CurrentHCP" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lbl_PtPreLastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_PreLastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lbl_Home_Address" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_HomeAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txt_City" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbl_City" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lbl_State" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbox_State" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_ZipCode" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_ZipCode" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lbl_Comments" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbl_Country" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbox_Country" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbl_Citizenship" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbox_Citizenship" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbox_Ethnicity" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_Ethnic" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbl_MobilePhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_MobilePhone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txt_Em_Phone_Num" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_EmPhoneNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_Email" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_Email" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbl_SSN" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="pass_SSN" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_DOB" min="-2" max="-2" attributes="0"/>
+                              <Component id="datechooser_DOB" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jScrollPane2" min="-2" pref="145" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="lbl_NextofKin" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="txt_Next_of_kin" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="lbl_NOKRP" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="txt_NOKR" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lbl_FirstName">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="First Name"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_FirstName">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_LastName">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Last Name"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_LastName">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_PtPreLastName">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Previous Last Name"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_PreLastName">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_Home_Address">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Home Address"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_HomeAddress">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_City">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="City"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_City">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_State">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="State"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbox_State">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="50">
+                <StringItem index="0" value="Alabama"/>
+                <StringItem index="1" value="Alaska"/>
+                <StringItem index="2" value="Arizona"/>
+                <StringItem index="3" value="Arkansas"/>
+                <StringItem index="4" value="California"/>
+                <StringItem index="5" value="Colorado"/>
+                <StringItem index="6" value="Connecticut"/>
+                <StringItem index="7" value="Delaware"/>
+                <StringItem index="8" value="Florida"/>
+                <StringItem index="9" value="Georgia"/>
+                <StringItem index="10" value="Hawaii"/>
+                <StringItem index="11" value="Idaho"/>
+                <StringItem index="12" value="Illinois"/>
+                <StringItem index="13" value="Indiana"/>
+                <StringItem index="14" value="Iowa"/>
+                <StringItem index="15" value="Kansas"/>
+                <StringItem index="16" value="Kentucky"/>
+                <StringItem index="17" value="Louisiana"/>
+                <StringItem index="18" value="Maine"/>
+                <StringItem index="19" value="Maryland"/>
+                <StringItem index="20" value="Massachusetts"/>
+                <StringItem index="21" value="Michigan"/>
+                <StringItem index="22" value="Minnesota"/>
+                <StringItem index="23" value="Mississippi"/>
+                <StringItem index="24" value="Missouri"/>
+                <StringItem index="25" value="Montana"/>
+                <StringItem index="26" value="Nebraska"/>
+                <StringItem index="27" value="Nevada"/>
+                <StringItem index="28" value="New Hampshire"/>
+                <StringItem index="29" value="New Jersey"/>
+                <StringItem index="30" value="New Mexico"/>
+                <StringItem index="31" value="New York"/>
+                <StringItem index="32" value="North Carolina"/>
+                <StringItem index="33" value="North Dakota"/>
+                <StringItem index="34" value="Ohio"/>
+                <StringItem index="35" value="Oklahoma"/>
+                <StringItem index="36" value="Oregon"/>
+                <StringItem index="37" value="Pennsylvania"/>
+                <StringItem index="38" value="Rhode Island"/>
+                <StringItem index="39" value="South Carolina"/>
+                <StringItem index="40" value="South Dakota"/>
+                <StringItem index="41" value="Tennessee"/>
+                <StringItem index="42" value="Texas"/>
+                <StringItem index="43" value="Utah"/>
+                <StringItem index="44" value="Vermont"/>
+                <StringItem index="45" value="Virginia"/>
+                <StringItem index="46" value="Washington"/>
+                <StringItem index="47" value="West Virginia"/>
+                <StringItem index="48" value="Wisconsin"/>
+                <StringItem index="49" value="Wyoming"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_ZipCode">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Zip Code"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_ZipCode">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_Country">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Country"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbox_Country">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="194">
+                <StringItem index="0" value="Afghanistan"/>
+                <StringItem index="1" value="Albania"/>
+                <StringItem index="2" value="Algeria"/>
+                <StringItem index="3" value="Andorra"/>
+                <StringItem index="4" value="Angola"/>
+                <StringItem index="5" value="Antigua and Barbuda"/>
+                <StringItem index="6" value="Argentina"/>
+                <StringItem index="7" value="Armenia"/>
+                <StringItem index="8" value="Australia"/>
+                <StringItem index="9" value="Austria"/>
+                <StringItem index="10" value="Azerbaijan"/>
+                <StringItem index="11" value="Bahamas"/>
+                <StringItem index="12" value="Bahrain"/>
+                <StringItem index="13" value="Bangladesh"/>
+                <StringItem index="14" value="Barbados"/>
+                <StringItem index="15" value="Belarus"/>
+                <StringItem index="16" value="Belgium"/>
+                <StringItem index="17" value="Belize"/>
+                <StringItem index="18" value="Benin"/>
+                <StringItem index="19" value="Bhutan"/>
+                <StringItem index="20" value="Bolivia"/>
+                <StringItem index="21" value="Bosnia and Herzegovina"/>
+                <StringItem index="22" value="Botswana"/>
+                <StringItem index="23" value="Brazil"/>
+                <StringItem index="24" value="Brunei"/>
+                <StringItem index="25" value="Bulgaria"/>
+                <StringItem index="26" value="Burkina Faso"/>
+                <StringItem index="27" value="Burundi"/>
+                <StringItem index="28" value="Cabo Verde"/>
+                <StringItem index="29" value="Cambodia"/>
+                <StringItem index="30" value="Cameroon"/>
+                <StringItem index="31" value="Canada"/>
+                <StringItem index="32" value="Central African Republic"/>
+                <StringItem index="33" value="Chad"/>
+                <StringItem index="34" value="Chile"/>
+                <StringItem index="35" value="China"/>
+                <StringItem index="36" value="Colombia"/>
+                <StringItem index="37" value="Comoros"/>
+                <StringItem index="38" value="Congo (Congo-Brazzaville)"/>
+                <StringItem index="39" value="Costa Rica"/>
+                <StringItem index="40" value="Croatia"/>
+                <StringItem index="41" value="Cuba"/>
+                <StringItem index="42" value="Cyprus"/>
+                <StringItem index="43" value="Czechia (Czech Republic)"/>
+                <StringItem index="44" value="Democratic Republic of the Congo (Congo-Kinshasa)"/>
+                <StringItem index="45" value="Denmark"/>
+                <StringItem index="46" value="Djibouti"/>
+                <StringItem index="47" value="Dominica"/>
+                <StringItem index="48" value="Dominican Republic"/>
+                <StringItem index="49" value="Ecuador"/>
+                <StringItem index="50" value="Egypt"/>
+                <StringItem index="51" value="El Salvador"/>
+                <StringItem index="52" value="Equatorial Guinea"/>
+                <StringItem index="53" value="Eritrea"/>
+                <StringItem index="54" value="Estonia"/>
+                <StringItem index="55" value="Eswatini"/>
+                <StringItem index="56" value="Ethiopia"/>
+                <StringItem index="57" value="Fiji"/>
+                <StringItem index="58" value="Finland"/>
+                <StringItem index="59" value="France"/>
+                <StringItem index="60" value="Gabon"/>
+                <StringItem index="61" value="Gambia"/>
+                <StringItem index="62" value="Georgia"/>
+                <StringItem index="63" value="Germany"/>
+                <StringItem index="64" value="Ghana"/>
+                <StringItem index="65" value="Greece"/>
+                <StringItem index="66" value="Grenada"/>
+                <StringItem index="67" value="Guatemala"/>
+                <StringItem index="68" value="Guinea"/>
+                <StringItem index="69" value="Guinea-Bissau"/>
+                <StringItem index="70" value="Guyana"/>
+                <StringItem index="71" value="Haiti"/>
+                <StringItem index="72" value="Honduras"/>
+                <StringItem index="73" value="Hungary"/>
+                <StringItem index="74" value="Iceland"/>
+                <StringItem index="75" value="India"/>
+                <StringItem index="76" value="Indonesia"/>
+                <StringItem index="77" value="Iran"/>
+                <StringItem index="78" value="Iraq"/>
+                <StringItem index="79" value="Ireland"/>
+                <StringItem index="80" value="Israel"/>
+                <StringItem index="81" value="Italy"/>
+                <StringItem index="82" value="Jamaica"/>
+                <StringItem index="83" value="Japan"/>
+                <StringItem index="84" value="Jordan"/>
+                <StringItem index="85" value="Kazakhstan"/>
+                <StringItem index="86" value="Kenya"/>
+                <StringItem index="87" value="Kiribati"/>
+                <StringItem index="88" value="Korea (North)"/>
+                <StringItem index="89" value="Korea (South)"/>
+                <StringItem index="90" value="Kuwait"/>
+                <StringItem index="91" value="Kyrgyzstan"/>
+                <StringItem index="92" value="Laos"/>
+                <StringItem index="93" value="Latvia"/>
+                <StringItem index="94" value="Lebanon"/>
+                <StringItem index="95" value="Lesotho"/>
+                <StringItem index="96" value="Liberia"/>
+                <StringItem index="97" value="Libya"/>
+                <StringItem index="98" value="Liechtenstein"/>
+                <StringItem index="99" value="Lithuania"/>
+                <StringItem index="100" value="Luxembourg"/>
+                <StringItem index="101" value="Madagascar"/>
+                <StringItem index="102" value="Malawi"/>
+                <StringItem index="103" value="Malaysia"/>
+                <StringItem index="104" value="Maldives"/>
+                <StringItem index="105" value="Mali"/>
+                <StringItem index="106" value="Malta"/>
+                <StringItem index="107" value="Marshall Islands"/>
+                <StringItem index="108" value="Mauritania"/>
+                <StringItem index="109" value="Mauritius"/>
+                <StringItem index="110" value="Mexico"/>
+                <StringItem index="111" value="Micronesia"/>
+                <StringItem index="112" value="Moldova"/>
+                <StringItem index="113" value="Monaco"/>
+                <StringItem index="114" value="Mongolia"/>
+                <StringItem index="115" value="Montenegro"/>
+                <StringItem index="116" value="Morocco"/>
+                <StringItem index="117" value="Mozambique"/>
+                <StringItem index="118" value="Myanmar (Burma)"/>
+                <StringItem index="119" value="Namibia"/>
+                <StringItem index="120" value="Nauru"/>
+                <StringItem index="121" value="Nepal"/>
+                <StringItem index="122" value="Netherlands"/>
+                <StringItem index="123" value="New Zealand"/>
+                <StringItem index="124" value="Nicaragua"/>
+                <StringItem index="125" value="Niger"/>
+                <StringItem index="126" value="Nigeria"/>
+                <StringItem index="127" value="North Macedonia"/>
+                <StringItem index="128" value="Norway"/>
+                <StringItem index="129" value="Oman"/>
+                <StringItem index="130" value="Pakistan"/>
+                <StringItem index="131" value="Palau"/>
+                <StringItem index="132" value="Panama"/>
+                <StringItem index="133" value="Papua New Guinea"/>
+                <StringItem index="134" value="Paraguay"/>
+                <StringItem index="135" value="Peru"/>
+                <StringItem index="136" value="Philippines"/>
+                <StringItem index="137" value="Poland"/>
+                <StringItem index="138" value="Portugal"/>
+                <StringItem index="139" value="Qatar"/>
+                <StringItem index="140" value="Romania"/>
+                <StringItem index="141" value="Russia"/>
+                <StringItem index="142" value="Rwanda"/>
+                <StringItem index="143" value="Saint Kitts and Nevis"/>
+                <StringItem index="144" value="Saint Lucia"/>
+                <StringItem index="145" value="Saint Vincent and the Grenadines"/>
+                <StringItem index="146" value="Samoa"/>
+                <StringItem index="147" value="San Marino"/>
+                <StringItem index="148" value="Sao Tome and Principe"/>
+                <StringItem index="149" value="Saudi Arabia"/>
+                <StringItem index="150" value="Senegal"/>
+                <StringItem index="151" value="Serbia"/>
+                <StringItem index="152" value="Seychelles"/>
+                <StringItem index="153" value="Sierra Leone"/>
+                <StringItem index="154" value="Singapore"/>
+                <StringItem index="155" value="Slovakia"/>
+                <StringItem index="156" value="Slovenia"/>
+                <StringItem index="157" value="Solomon Islands"/>
+                <StringItem index="158" value="Somalia"/>
+                <StringItem index="159" value="South Africa"/>
+                <StringItem index="160" value="South Sudan"/>
+                <StringItem index="161" value="Spain"/>
+                <StringItem index="162" value="Sri Lanka"/>
+                <StringItem index="163" value="Sudan"/>
+                <StringItem index="164" value="Suriname"/>
+                <StringItem index="165" value="Sweden"/>
+                <StringItem index="166" value="Switzerland"/>
+                <StringItem index="167" value="Syria"/>
+                <StringItem index="168" value="Taiwan"/>
+                <StringItem index="169" value="Tajikistan"/>
+                <StringItem index="170" value="Tanzania"/>
+                <StringItem index="171" value="Thailand"/>
+                <StringItem index="172" value="Timor-Leste"/>
+                <StringItem index="173" value="Togo"/>
+                <StringItem index="174" value="Tonga"/>
+                <StringItem index="175" value="Trinidad and Tobago"/>
+                <StringItem index="176" value="Tunisia"/>
+                <StringItem index="177" value="Turkey"/>
+                <StringItem index="178" value="Turkmenistan"/>
+                <StringItem index="179" value="Tuvalu"/>
+                <StringItem index="180" value="Uganda"/>
+                <StringItem index="181" value="Ukraine"/>
+                <StringItem index="182" value="United Arab Emirates"/>
+                <StringItem index="183" value="United Kingdom"/>
+                <StringItem index="184" value="United States"/>
+                <StringItem index="185" value="Uruguay"/>
+                <StringItem index="186" value="Uzbekistan"/>
+                <StringItem index="187" value="Vanuatu"/>
+                <StringItem index="188" value="Vatican City"/>
+                <StringItem index="189" value="Venezuela"/>
+                <StringItem index="190" value="Vietnam"/>
+                <StringItem index="191" value="Yemen"/>
+                <StringItem index="192" value="Zambia"/>
+                <StringItem index="193" value="Zimbabwe"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_Citizenship">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Citizenship"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbox_Citizenship">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="194">
+                <StringItem index="0" value="Afghan"/>
+                <StringItem index="1" value="Albanian"/>
+                <StringItem index="2" value="Algerian"/>
+                <StringItem index="3" value="Andorran"/>
+                <StringItem index="4" value="Angolan"/>
+                <StringItem index="5" value="Antiguan or Barbudan"/>
+                <StringItem index="6" value="Argentine"/>
+                <StringItem index="7" value="Armenian"/>
+                <StringItem index="8" value="Australian"/>
+                <StringItem index="9" value="Austrian"/>
+                <StringItem index="10" value="Azerbaijani"/>
+                <StringItem index="11" value="Bahamian"/>
+                <StringItem index="12" value="Bahraini"/>
+                <StringItem index="13" value="Bangladeshi"/>
+                <StringItem index="14" value="Barbadian"/>
+                <StringItem index="15" value="Belarusian"/>
+                <StringItem index="16" value="Belgian"/>
+                <StringItem index="17" value="Belizean"/>
+                <StringItem index="18" value="Beninese"/>
+                <StringItem index="19" value="Bhutanese"/>
+                <StringItem index="20" value="Bolivian"/>
+                <StringItem index="21" value="Bosnian or Herzegovinian"/>
+                <StringItem index="22" value="Botswanan"/>
+                <StringItem index="23" value="Brazilian"/>
+                <StringItem index="24" value="Bruneian"/>
+                <StringItem index="25" value="Bulgarian"/>
+                <StringItem index="26" value="Burkinab&#xe9;"/>
+                <StringItem index="27" value="Burundian"/>
+                <StringItem index="28" value="Cape Verdean"/>
+                <StringItem index="29" value="Cambodian"/>
+                <StringItem index="30" value="Cameroonian"/>
+                <StringItem index="31" value="Canadian"/>
+                <StringItem index="32" value="Central African"/>
+                <StringItem index="33" value="Chadian"/>
+                <StringItem index="34" value="Chilean"/>
+                <StringItem index="35" value="Chinese"/>
+                <StringItem index="36" value="Colombian"/>
+                <StringItem index="37" value="Comoran"/>
+                <StringItem index="38" value="Congolese"/>
+                <StringItem index="39" value="Costa Rican"/>
+                <StringItem index="40" value="Croatian"/>
+                <StringItem index="41" value="Cuban"/>
+                <StringItem index="42" value="Cypriot"/>
+                <StringItem index="43" value="Czech"/>
+                <StringItem index="44" value="Congolese"/>
+                <StringItem index="45" value="Danish"/>
+                <StringItem index="46" value="Djiboutian"/>
+                <StringItem index="47" value="Dominican"/>
+                <StringItem index="48" value="Dominican"/>
+                <StringItem index="49" value="Ecuadorian"/>
+                <StringItem index="50" value="Egyptian"/>
+                <StringItem index="51" value="Salvadoran"/>
+                <StringItem index="52" value="Equatorial Guinean"/>
+                <StringItem index="53" value="Eritrean"/>
+                <StringItem index="54" value="Estonian"/>
+                <StringItem index="55" value="Swazi"/>
+                <StringItem index="56" value="Ethiopian"/>
+                <StringItem index="57" value="Fijian"/>
+                <StringItem index="58" value="Finnish"/>
+                <StringItem index="59" value="French"/>
+                <StringItem index="60" value="Gabonese"/>
+                <StringItem index="61" value="Gambian"/>
+                <StringItem index="62" value="Georgian"/>
+                <StringItem index="63" value="German"/>
+                <StringItem index="64" value="Ghanaian"/>
+                <StringItem index="65" value="Greek"/>
+                <StringItem index="66" value="Grenadian"/>
+                <StringItem index="67" value="Guatemalan"/>
+                <StringItem index="68" value="Guinean"/>
+                <StringItem index="69" value="Guinean-Bissauan"/>
+                <StringItem index="70" value="Guyanese"/>
+                <StringItem index="71" value="Haitian"/>
+                <StringItem index="72" value="Honduran"/>
+                <StringItem index="73" value="Hungarian"/>
+                <StringItem index="74" value="Icelander"/>
+                <StringItem index="75" value="Indian"/>
+                <StringItem index="76" value="Indonesian"/>
+                <StringItem index="77" value="Iranian"/>
+                <StringItem index="78" value="Iraqi"/>
+                <StringItem index="79" value="Irish"/>
+                <StringItem index="80" value="Israeli"/>
+                <StringItem index="81" value="Italian"/>
+                <StringItem index="82" value="Jamaican"/>
+                <StringItem index="83" value="Japanese"/>
+                <StringItem index="84" value="Jordanian"/>
+                <StringItem index="85" value="Kazakhstani"/>
+                <StringItem index="86" value="Kenyan"/>
+                <StringItem index="87" value="I-Kiribati"/>
+                <StringItem index="88" value="North Korean"/>
+                <StringItem index="89" value="South Korean"/>
+                <StringItem index="90" value="Kuwaiti"/>
+                <StringItem index="91" value="Kyrgyz"/>
+                <StringItem index="92" value="Laotian"/>
+                <StringItem index="93" value="Latvian"/>
+                <StringItem index="94" value="Lebanese"/>
+                <StringItem index="95" value="Mosotho"/>
+                <StringItem index="96" value="Liberian"/>
+                <StringItem index="97" value="Libyan"/>
+                <StringItem index="98" value="Liechtensteinian"/>
+                <StringItem index="99" value="Lithuanian"/>
+                <StringItem index="100" value="Luxembourger"/>
+                <StringItem index="101" value="Malagasy"/>
+                <StringItem index="102" value="Malawian"/>
+                <StringItem index="103" value="Malaysian"/>
+                <StringItem index="104" value="Maldivian"/>
+                <StringItem index="105" value="Malian"/>
+                <StringItem index="106" value="Maltese"/>
+                <StringItem index="107" value="Marshallese"/>
+                <StringItem index="108" value="Mauritanian"/>
+                <StringItem index="109" value="Mauritian"/>
+                <StringItem index="110" value="Mexican"/>
+                <StringItem index="111" value="Micronesian"/>
+                <StringItem index="112" value="Moldovan"/>
+                <StringItem index="113" value="Monegasque"/>
+                <StringItem index="114" value="Mongolian"/>
+                <StringItem index="115" value="Montenegrin"/>
+                <StringItem index="116" value="Moroccan"/>
+                <StringItem index="117" value="Mozambican"/>
+                <StringItem index="118" value="Burmese"/>
+                <StringItem index="119" value="Namibian"/>
+                <StringItem index="120" value="Nauruan"/>
+                <StringItem index="121" value="Nepali"/>
+                <StringItem index="122" value="Dutch"/>
+                <StringItem index="123" value="New Zealander"/>
+                <StringItem index="124" value="Nicaraguan"/>
+                <StringItem index="125" value="Nigerien"/>
+                <StringItem index="126" value="Nigerian"/>
+                <StringItem index="127" value="Macedonian"/>
+                <StringItem index="128" value="Norwegian"/>
+                <StringItem index="129" value="Omani"/>
+                <StringItem index="130" value="Pakistani"/>
+                <StringItem index="131" value="Palauan"/>
+                <StringItem index="132" value="Panamanian"/>
+                <StringItem index="133" value="Papua New Guinean"/>
+                <StringItem index="134" value="Paraguayan"/>
+                <StringItem index="135" value="Peruvian"/>
+                <StringItem index="136" value="Filipino or Filipina"/>
+                <StringItem index="137" value="Polish"/>
+                <StringItem index="138" value="Portuguese"/>
+                <StringItem index="139" value="Qatari"/>
+                <StringItem index="140" value="Romanian"/>
+                <StringItem index="141" value="Russian"/>
+                <StringItem index="142" value="Rwandan"/>
+                <StringItem index="143" value="Kittitian or Nevisian"/>
+                <StringItem index="144" value="Saint Lucian"/>
+                <StringItem index="145" value="Vincentian"/>
+                <StringItem index="146" value="Samoan"/>
+                <StringItem index="147" value="Sammarinese"/>
+                <StringItem index="148" value="S&#xe3;o Tom&#xe9;an"/>
+                <StringItem index="149" value="Saudi"/>
+                <StringItem index="150" value="Senegalese"/>
+                <StringItem index="151" value="Serbian"/>
+                <StringItem index="152" value="Seychellois"/>
+                <StringItem index="153" value="Sierra Leonean"/>
+                <StringItem index="154" value="Singaporean"/>
+                <StringItem index="155" value="Slovak"/>
+                <StringItem index="156" value="Slovenian"/>
+                <StringItem index="157" value="Solomon Islander"/>
+                <StringItem index="158" value="Somali"/>
+                <StringItem index="159" value="South African"/>
+                <StringItem index="160" value="South Sudanese"/>
+                <StringItem index="161" value="Spanish"/>
+                <StringItem index="162" value="Sri Lankan"/>
+                <StringItem index="163" value="Sudanese"/>
+                <StringItem index="164" value="Surinamese"/>
+                <StringItem index="165" value="Swedish"/>
+                <StringItem index="166" value="Swiss"/>
+                <StringItem index="167" value="Syrian"/>
+                <StringItem index="168" value="Taiwanese"/>
+                <StringItem index="169" value="Tajik"/>
+                <StringItem index="170" value="Tanzanian"/>
+                <StringItem index="171" value="Thai"/>
+                <StringItem index="172" value="Timorese"/>
+                <StringItem index="173" value="Togolese"/>
+                <StringItem index="174" value="Tongan"/>
+                <StringItem index="175" value="Trinidadian or Tobagonian"/>
+                <StringItem index="176" value="Tunisian"/>
+                <StringItem index="177" value="Turkish"/>
+                <StringItem index="178" value="Turkmen"/>
+                <StringItem index="179" value="Tuvaluan"/>
+                <StringItem index="180" value="Ugandan"/>
+                <StringItem index="181" value="Ukrainian"/>
+                <StringItem index="182" value="Emirati"/>
+                <StringItem index="183" value="British"/>
+                <StringItem index="184" value="American"/>
+                <StringItem index="185" value="Uruguayan"/>
+                <StringItem index="186" value="Uzbek"/>
+                <StringItem index="187" value="Ni-Vanuatu"/>
+                <StringItem index="188" value="Vatican"/>
+                <StringItem index="189" value="Venezuelan"/>
+                <StringItem index="190" value="Vietnamese"/>
+                <StringItem index="191" value="Yemeni"/>
+                <StringItem index="192" value="Zambian"/>
+                <StringItem index="193" value="Zimbabwean"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_MobilePhone">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Mobile Phone"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_EmPhoneNum">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Emergency Contact Number"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_Email">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Email Address"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_MobilePhone">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_Em_Phone_Num">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_Email">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_SSN">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="SSN"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_DOB">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Date of Birth"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="pass_SSN">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="datechooser_DOB">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_Gender">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Gender"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbox_Gender">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="Male"/>
+                <StringItem index="1" value="Female"/>
+                <StringItem index="2" value="Non-Binary"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbox_Ethnicity">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="14">
+                <StringItem index="0" value="African American"/>
+                <StringItem index="1" value="Alaska Native"/>
+                <StringItem index="2" value="American Indian"/>
+                <StringItem index="3" value="Arab American"/>
+                <StringItem index="4" value="Asian American"/>
+                <StringItem index="5" value="Black"/>
+                <StringItem index="6" value="Caucasian"/>
+                <StringItem index="7" value="Chicano"/>
+                <StringItem index="8" value="Hispanic"/>
+                <StringItem index="9" value="Latino"/>
+                <StringItem index="10" value="Mixed Race"/>
+                <StringItem index="11" value="Native American"/>
+                <StringItem index="12" value="Native Hawaiian"/>
+                <StringItem index="13" value="Pacific Islander"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_Ethnic">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Ethnicity"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_MartialStatus">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Martial Status"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbox_Martial_Status">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="6">
+                <StringItem index="0" value="Divorced"/>
+                <StringItem index="1" value="Legally Separated"/>
+                <StringItem index="2" value="Married"/>
+                <StringItem index="3" value="Never Married"/>
+                <StringItem index="4" value="Single"/>
+                <StringItem index="5" value="Widowed"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_CurrentHCP">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Current Primary Health Care Provider"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="txtA_CurrentHCP">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="rows" type="int" value="5"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="lbl_Comments">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Comments"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="txtA_Comments">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="rows" type="int" value="5"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="lbl_NextofKin">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Next of Kin"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_NOKRP">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Relationship to Patient (Next of Kin)"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_Next_of_kin">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_NOKR">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="14" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

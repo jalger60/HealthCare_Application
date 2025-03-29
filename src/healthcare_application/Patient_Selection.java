@@ -3,6 +3,7 @@ package healthcare_application;
 
 import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.PatientSelection_DBOperations;
+import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
 import javax.swing.JOptionPane;
 import javax.swing.table.JTableHeader;
 import java.awt.Font;
@@ -12,9 +13,12 @@ public class Patient_Selection extends javax.swing.JFrame {
     private int PatientID;
     
     
+    
+    
     public Patient_Selection() {
         initComponents();
         GetAllPatients();
+       
         
     }
 
@@ -36,6 +40,7 @@ public class Patient_Selection extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         menu_ATAForm = new javax.swing.JMenuItem();
         menu_SOBA = new javax.swing.JMenuItem();
+        menu_PDemographics = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -139,6 +144,14 @@ public class Patient_Selection extends javax.swing.JFrame {
         });
         jMenu1.add(menu_SOBA);
 
+        menu_PDemographics.setText("Patient Demographics Form");
+        menu_PDemographics.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_PDemographicsActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menu_PDemographics);
+
         menu_PSelect_Bar.add(jMenu1);
 
         jMenu2.setText("Actions");
@@ -194,6 +207,19 @@ public class Patient_Selection extends javax.swing.JFrame {
         GetAllPatients();
     }//GEN-LAST:event_btn_BackToAllActionPerformed
 
+    private void menu_PDemographicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_PDemographicsActionPerformed
+        Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
+        Patient_Demographics patient = operations.getPatientDemographics(PatientID); // Fetch patient data
+
+        if (patient != null) {
+            patient.setVisible(true); // Show patient form with data
+            this.dispose(); // Close current form if necessary
+        } else {
+            JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        this.dispose();
+    }//GEN-LAST:event_menu_PDemographicsActionPerformed
+
     public String GetTxt_Search_BoxText() {
         return txt_Search_Box.getText();
     }
@@ -220,44 +246,45 @@ public class Patient_Selection extends javax.swing.JFrame {
     }
     
     private void performSearch() {
-    String searchText = txt_Search_Box.getText();
-    PatientSelection_DBOperations dbOperations = new PatientSelection_DBOperations();
-    DefaultTableModel table = dbOperations.SearchforPatients(searchText);
+        String searchText = txt_Search_Box.getText();
+        PatientSelection_DBOperations dbOperations = new PatientSelection_DBOperations();
+        DefaultTableModel table = dbOperations.SearchforPatients(searchText);
 
-    // Set the new column names
-    String[] columnNames = {"Patient ID", "Last Name", "First Name", "Phone Number", "Date of Birth"};
-    table.setColumnIdentifiers(columnNames);
+        // Set the new column names
+        String[] columnNames = {"Patient ID", "Last Name", "First Name", "Phone Number", "Date of Birth"};
+        table.setColumnIdentifiers(columnNames);
 
-    tabl_Patient_Table.setModel(table);
-    
-    JTableHeader header = tabl_Patient_Table.getTableHeader();
-    header.setFont(header.getFont().deriveFont(Font.BOLD));
+        tabl_Patient_Table.setModel(table);
 
-    // Check if the table has rows
-    if (tabl_Patient_Table.getRowCount() > 0) {
-        // Add a ListSelectionListener to detect row selection
-        tabl_Patient_Table.getSelectionModel().addListSelectionListener(event -> {
-            if (!event.getValueIsAdjusting()) { // Prevent double triggering
-                int selectedRow = tabl_Patient_Table.getSelectedRow();
+        JTableHeader header = tabl_Patient_Table.getTableHeader();
+        header.setFont(header.getFont().deriveFont(Font.BOLD));
 
-                if (selectedRow != -1) { // Ensure a row is selected
-                    int patientIDColumnIndex = 0; // Modify based on the actual column index
+        // Check if the table has rows
+        if (tabl_Patient_Table.getRowCount() > 0) {
+            // Add a ListSelectionListener to detect row selection
+            tabl_Patient_Table.getSelectionModel().addListSelectionListener(event -> {
+                if (!event.getValueIsAdjusting()) { // Prevent double triggering
+                    int selectedRow = tabl_Patient_Table.getSelectedRow();
 
-                    Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, patientIDColumnIndex);
+                    if (selectedRow != -1) { // Ensure a row is selected
+                        int patientIDColumnIndex = 0; // Modify based on the actual column index
 
-                    if (patientIDValue != null) {
-                        try {
-                            int patientID = Integer.parseInt(patientIDValue.toString());
-                            setPatientID(patientID); // Store the selected Patient ID
-                        
-                        } catch (NumberFormatException e) {
-                            System.err.println("Invalid Patient ID format: " + e.getMessage());
+                        Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, patientIDColumnIndex);
+
+                        if (patientIDValue != null) {
+                            try {
+                                int patientID = Integer.parseInt(patientIDValue.toString());
+                                setPatientID(patientID); // Store the selected Patient ID
+                                System.out.println(getPatientID());
+
+                            } catch (NumberFormatException e) {
+                                System.err.println("Invalid Patient ID format: " + e.getMessage());
+                            }
                         }
                     }
                 }
-            }
-        });
-    }
+            });
+        }
 }
 
     
@@ -315,6 +342,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_PSelect_Title;
     private javax.swing.JLabel lbl_Search;
     private javax.swing.JMenuItem menu_ATAForm;
+    private javax.swing.JMenuItem menu_PDemographics;
     private javax.swing.JMenuBar menu_PSelect_Bar;
     private javax.swing.JMenuItem menu_SOBA;
     private javax.swing.JPanel panel_PSelect;
