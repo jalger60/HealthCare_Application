@@ -11,7 +11,7 @@ import java.awt.Font;
 public class Patient_Selection extends javax.swing.JFrame {
 
     private int PatientID;
-    
+    Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
     
     
     
@@ -208,7 +208,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_BackToAllActionPerformed
 
     private void menu_PDemographicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_PDemographicsActionPerformed
-        Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
+        
         Patient_Demographics patient = operations.getPatientDemographics(PatientID); // Fetch patient data
 
         if (patient != null) {
