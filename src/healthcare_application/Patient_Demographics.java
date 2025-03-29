@@ -2,12 +2,13 @@
 package healthcare_application;
 
 import javax.swing.*;
-
+import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
 
 
 public class Patient_Demographics extends javax.swing.JFrame {
 
     private int patientID;
+    Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
     
     public Patient_Demographics() {
         initComponents();
@@ -16,9 +17,17 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
     
     public Patient_Demographics(int patientID) {
-        this.patientID = patientID;
+        setPatientID(patientID);
         initComponents();
         
+    }
+    
+    public int getPatientID () {
+        return this.patientID;
+    }
+    
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
     }
     
     // Getters and setters for JComboBox fields
@@ -70,14 +79,15 @@ public class Patient_Demographics extends javax.swing.JFrame {
         cbox_State.setSelectedItem(value);
     }
 
-    // Getters and setters for JDateChooser and JPasswordField
-    public java.util.Date getDatechooser_DOBValue() {
-        return datechooser_DOB.getDate();
+    // Setter for datechooser_DOB
+    public void setDatechooser_DOB(com.toedter.calendar.JDateChooser datechooser_DOB) {
+        this.datechooser_DOB = datechooser_DOB;
     }
 
-    public void setDatechooser_DOB(java.util.Date value) {
-        datechooser_DOB.setDate(value);
-    }
+    // Getter for datechooser_DOB
+    public com.toedter.calendar.JDateChooser getDatechooser_DOB() {
+        return this.datechooser_DOB;
+}
 
     public String getPass_SSNValue() {
         return new String(pass_SSN.getPassword());  // Convert char[] to String
@@ -193,9 +203,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
         txt_ZipCode.setText(value);
     }
     
-    private void loadpatientdata() {
-        txt_FirstName.setText(getTxt_LastNameValue());
-    }
+    
     
 
     /**
@@ -256,6 +264,9 @@ public class Patient_Demographics extends javax.swing.JFrame {
         menu_PatientDemographics = new javax.swing.JMenuBar();
         menu_Forms = new javax.swing.JMenu();
         menu_Actions = new javax.swing.JMenu();
+        menu_Add = new javax.swing.JMenuItem();
+        menu_Edit = new javax.swing.JMenuItem();
+        menu_Save = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -571,6 +582,21 @@ public class Patient_Demographics extends javax.swing.JFrame {
         menu_PatientDemographics.add(menu_Forms);
 
         menu_Actions.setText("Actions");
+
+        menu_Add.setText("Add Record");
+        menu_Actions.add(menu_Add);
+
+        menu_Edit.setText("Edit Record");
+        menu_Actions.add(menu_Edit);
+
+        menu_Save.setText("Save Record");
+        menu_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_SaveActionPerformed(evt);
+            }
+        });
+        menu_Actions.add(menu_Save);
+
         menu_PatientDemographics.add(menu_Actions);
 
         setJMenuBar(menu_PatientDemographics);
@@ -600,6 +626,11 @@ public class Patient_Demographics extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
+        operations.updatePatientDemographics(getPatientID());
+        
+    }//GEN-LAST:event_menu_SaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -671,8 +702,11 @@ public class Patient_Demographics extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_State;
     private javax.swing.JLabel lbl_ZipCode;
     private javax.swing.JMenu menu_Actions;
+    private javax.swing.JMenuItem menu_Add;
+    private javax.swing.JMenuItem menu_Edit;
     private javax.swing.JMenu menu_Forms;
     private javax.swing.JMenuBar menu_PatientDemographics;
+    private javax.swing.JMenuItem menu_Save;
     private javax.swing.JPanel panel_PDemographics;
     private javax.swing.JPasswordField pass_SSN;
     private javax.swing.JTextArea txtA_Comments;

@@ -18,6 +18,26 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Actions"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menu_Add">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Add Record"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menu_Edit">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Edit Record"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menu_Save">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Save Record"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_SaveActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
