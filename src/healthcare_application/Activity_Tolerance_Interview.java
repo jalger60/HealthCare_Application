@@ -343,7 +343,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }
     
     
-    private void LockScreen () {
+    public void LockScreen () {
         txt_ATEating.setEditable(false);
         txt_ATEating.setBackground(Color.lightGray);
         txt_ATEating.setText(" ");

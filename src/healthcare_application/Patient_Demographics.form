@@ -13,6 +13,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Forms"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menu_Patient_Selection">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Patient Selection Form"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_Patient_SelectionActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_Actions">
           <Properties>

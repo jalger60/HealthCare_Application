@@ -4,6 +4,7 @@ package healthcare_application;
 
 import javax.swing.*;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
+import java.awt.Color;
 
 
 
@@ -15,13 +16,14 @@ public class Patient_Demographics extends javax.swing.JFrame {
     
     public Patient_Demographics() {
         initComponents();
-        
+        LockScreen();
         
     }
     
     public Patient_Demographics(int patientID) {
         setPatientID(patientID);
         initComponents();
+        LockScreen();
         
         
         
@@ -215,42 +217,166 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     
-   public void loadPatientData() {
-    // Example: Fetch patient data from the database (replace with your actual implementation)
-    
-    
-        // Populate the form fields with the patient's data
-        txt_LastName.setText(getTxt_LastNameValue());
-        txt_PreLastName.setText(getTxt_PreLastNameValue());
-        txt_FirstName.setText(getTxt_FirstNameValue());
-        txt_HomeAddress.setText(getTxt_HomeAddressValue());
-        txt_City.setText(getTxt_CityValue());
-        cbox_State.setSelectedItem(getCbox_StateValue());
-        txt_ZipCode.setText(getTxt_ZipCodeValue());
-        cbox_Country.setSelectedItem(getCbox_CountryValue());
-        cbox_Citizenship.setSelectedItem(getCbox_CitizenshipValue());
-        txt_MobilePhone.setText(getTxt_MobilePhoneValue());
-        txt_Em_Phone_Num.setText(getTxt_Em_Phone_NumValue());
-        txt_Email.setText(getTxt_EmailValue());
-        pass_SSN.setText(getPass_SSNValue());
+   private void LockScreen() {
+     
+        txt_LastName.setText(" ");
+        txt_LastName.setEditable(false);
+        txt_LastName.setBackground(Color.lightGray);
+        
+        txt_PreLastName.setText(" ");
+        txt_PreLastName.setEditable(false);
+        txt_PreLastName.setBackground(Color.lightGray);
+        
+        txt_FirstName.setText("");
+        txt_FirstName.setEditable(false);
+        txt_FirstName.setBackground(Color.LIGHT_GRAY);
 
+        txt_HomeAddress.setText("");
+        txt_HomeAddress.setEditable(false);
+        txt_HomeAddress.setBackground(Color.LIGHT_GRAY);
+
+        txt_City.setText("");
+        txt_City.setEditable(false);
+        txt_City.setBackground(Color.LIGHT_GRAY);
+
+        txt_ZipCode.setText("");
+        txt_ZipCode.setEditable(false);
+        txt_ZipCode.setBackground(Color.LIGHT_GRAY);
+
+        txt_MobilePhone.setText("");
+        txt_MobilePhone.setEditable(false);
+        txt_MobilePhone.setBackground(Color.LIGHT_GRAY);
+
+        txt_Em_Phone_Num.setText("");
+        txt_Em_Phone_Num.setEditable(false);
+        txt_Em_Phone_Num.setBackground(Color.LIGHT_GRAY);
+
+        txt_Email.setText("");
+        txt_Email.setEditable(false);
+        txt_Email.setBackground(Color.LIGHT_GRAY);
+
+        pass_SSN.setText("");
+        pass_SSN.setEditable(false);
+        pass_SSN.setBackground(Color.LIGHT_GRAY);
+
+        txtA_CurrentHCP.setText("");
+        txtA_CurrentHCP.setEditable(false);
+        txtA_CurrentHCP.setBackground(Color.LIGHT_GRAY);
+
+        txtA_Comments.setText("");
+        txtA_Comments.setEditable(false);
+        txtA_Comments.setBackground(Color.LIGHT_GRAY);
+
+        txt_NOKR.setText("");
+        txt_NOKR.setEditable(false);
+        txt_NOKR.setBackground(Color.LIGHT_GRAY);
+
+        txt_Next_of_kin.setText("");
+        txt_Next_of_kin.setEditable(false);
+        txt_Next_of_kin.setBackground(Color.LIGHT_GRAY);
+
+        // Disable dropdown selections
+        cbox_State.setSelectedIndex(-1);
+        cbox_State.setEnabled(false);
+        cbox_State.setBackground(Color.LIGHT_GRAY);
+
+        cbox_Country.setSelectedIndex(-1);
+        cbox_Country.setEnabled(false);
+        cbox_Country.setBackground(Color.LIGHT_GRAY);
+
+        cbox_Citizenship.setSelectedIndex(-1);
+        cbox_Citizenship.setEnabled(false);
+        cbox_Citizenship.setBackground(Color.LIGHT_GRAY);
+
+        cbox_Gender.setSelectedIndex(-1);
+        cbox_Gender.setEnabled(false);
+        cbox_Gender.setBackground(Color.LIGHT_GRAY);
+
+        cbox_Ethnicity.setSelectedIndex(-1);
+        cbox_Ethnicity.setEnabled(false);
+        cbox_Ethnicity.setBackground(Color.LIGHT_GRAY);
+
+        cbox_Martial_Status.setSelectedIndex(-1);
+        cbox_Martial_Status.setEnabled(false);
+        cbox_Martial_Status.setBackground(Color.LIGHT_GRAY);
+
+        // Clear and disable the date chooser
+        datechooser_DOB.setDate(null);
+        datechooser_DOB.setEnabled(false);
+        datechooser_DOB.setBackground(Color.LIGHT_GRAY);
         
-        java.util.Date dob = datechooser_DOB.getDate();
-        if (dob != null) {
-            setDatechooser_DOB(datechooser_DOB);  // If date is selected, set the DOB
-        } else {
-            setDatechooser_DOB(null);  // Set as null if no date is selected
-        }
-        
-        cbox_Gender.setSelectedItem(getCbox_GenderValue());
-        cbox_Ethnicity.setSelectedItem(getCbox_EthnicityValue());
-        cbox_Martial_Status.setSelectedItem(getCbox_Martial_StatusValue());
-        txtA_CurrentHCP.setText(getTxtA_CurrentHCPValue());
-        txtA_Comments.setText(getTxtA_CommentsValue());
-        txt_NOKR.setText(getTxt_NOKRValue());
-        txt_Next_of_kin.setText(getTxt_Next_of_kinValue());
     
-}
+   }
+   
+   private void UnLockScreen () {
+        txt_LastName.setEditable(true);
+        txt_LastName.setBackground(Color.WHITE);
+
+        txt_PreLastName.setEditable(true);
+        txt_PreLastName.setBackground(Color.WHITE);
+
+        txt_FirstName.setEditable(true);
+        txt_FirstName.setBackground(Color.WHITE);
+
+        txt_HomeAddress.setEditable(true);
+        txt_HomeAddress.setBackground(Color.WHITE);
+
+        txt_City.setEditable(true);
+        txt_City.setBackground(Color.WHITE);
+
+        txt_ZipCode.setEditable(true);
+        txt_ZipCode.setBackground(Color.WHITE);
+
+        txt_MobilePhone.setEditable(true);
+        txt_MobilePhone.setBackground(Color.WHITE);
+
+        txt_Em_Phone_Num.setEditable(true);
+        txt_Em_Phone_Num.setBackground(Color.WHITE);
+
+        txt_Email.setEditable(true);
+        txt_Email.setBackground(Color.WHITE);
+
+        pass_SSN.setEditable(true);
+        pass_SSN.setBackground(Color.WHITE);
+
+        txtA_CurrentHCP.setEditable(true);
+        txtA_CurrentHCP.setBackground(Color.WHITE);
+
+        txtA_Comments.setEditable(true);
+        txtA_Comments.setBackground(Color.WHITE);
+
+        txt_NOKR.setEditable(true);
+        txt_NOKR.setBackground(Color.WHITE);
+
+        txt_Next_of_kin.setEditable(true);
+        txt_Next_of_kin.setBackground(Color.WHITE);
+
+        // Enable dropdown selections
+        cbox_State.setEnabled(true);
+        cbox_State.setBackground(Color.WHITE);
+
+        cbox_Country.setEnabled(true);
+        cbox_Country.setBackground(Color.WHITE);
+
+        cbox_Citizenship.setEnabled(true);
+        cbox_Citizenship.setBackground(Color.WHITE);
+
+        cbox_Gender.setEnabled(true);
+        cbox_Gender.setBackground(Color.WHITE);
+
+        cbox_Ethnicity.setEnabled(true);
+        cbox_Ethnicity.setBackground(Color.WHITE);
+
+        cbox_Martial_Status.setEnabled(true);
+        cbox_Martial_Status.setBackground(Color.WHITE);
+
+        // Enable the date chooser
+        datechooser_DOB.setEnabled(true);
+        datechooser_DOB.setBackground(Color.WHITE);
+       
+   }
+   
+   
     
     
 
@@ -311,6 +437,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
         txt_NOKR = new javax.swing.JTextField();
         menu_PatientDemographics = new javax.swing.JMenuBar();
         menu_Forms = new javax.swing.JMenu();
+        menu_Patient_Selection = new javax.swing.JMenuItem();
         menu_Actions = new javax.swing.JMenu();
         menu_Add = new javax.swing.JMenuItem();
         menu_Edit = new javax.swing.JMenuItem();
@@ -628,6 +755,15 @@ public class Patient_Demographics extends javax.swing.JFrame {
         menu_PatientDemographics.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         menu_Forms.setText("Forms");
+
+        menu_Patient_Selection.setText("Patient Selection Form");
+        menu_Patient_Selection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Patient_SelectionActionPerformed(evt);
+            }
+        });
+        menu_Forms.add(menu_Patient_Selection);
+
         menu_PatientDemographics.add(menu_Forms);
 
         menu_Actions.setText("Actions");
@@ -696,7 +832,11 @@ public class Patient_Demographics extends javax.swing.JFrame {
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
         
-       operations.updatePatientDemographics(this, PDpatientID);
+      if (PDpatientID == 0) {
+         operations.addPatientDemographics(this);
+       } else {
+         operations.updatePatientDemographics(this, PDpatientID);
+       } 
         
         
         
@@ -704,18 +844,27 @@ public class Patient_Demographics extends javax.swing.JFrame {
 
     private void menu_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_EditActionPerformed
         
-        // TODO add your handling code here:
+            UnLockScreen();
     }//GEN-LAST:event_menu_EditActionPerformed
 
     private void menu_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_deleteActionPerformed
         
             operations.deletePatientDemographics(PDpatientID);
+            LockScreen();
     }//GEN-LAST:event_menu_deleteActionPerformed
 
     private void menu_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_AddActionPerformed
-        operations.addPatientDemographics(this);
+        UnLockScreen();
         
     }//GEN-LAST:event_menu_AddActionPerformed
+
+    private void menu_Patient_SelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectionActionPerformed
+        PDpatientID = 0;
+        Patient_Selection select = new Patient_Selection ();
+        select.setVisible(true);
+        select.setPatientID(PDpatientID);
+        this.dispose();
+    }//GEN-LAST:event_menu_Patient_SelectionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -791,6 +940,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_Edit;
     private javax.swing.JMenu menu_Forms;
     private javax.swing.JMenuBar menu_PatientDemographics;
+    private javax.swing.JMenuItem menu_Patient_Selection;
     private javax.swing.JMenuItem menu_Save;
     private javax.swing.JMenuItem menu_delete;
     private javax.swing.JPanel panel_PDemographics;

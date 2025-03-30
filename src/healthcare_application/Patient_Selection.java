@@ -216,6 +216,7 @@ public class Patient_Selection extends javax.swing.JFrame {
             // No patient selected, open a blank Patient_Demographics form for a new patient
             Patient_Demographics newPatientForm = new Patient_Demographics();
             newPatientForm.setVisible(true);
+            
         } else {
             // Fetch patient data for an existing patient
             Patient_Demographics patient = operations.getPatientDemographics(patientID);
