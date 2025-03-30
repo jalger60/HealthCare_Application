@@ -10,7 +10,7 @@ import java.awt.Font;
 
 public class Patient_Selection extends javax.swing.JFrame {
 
-    private int PatientID;
+    private static int PatientID;
     Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
     
     
@@ -209,11 +209,12 @@ public class Patient_Selection extends javax.swing.JFrame {
 
     private void menu_PDemographicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_PDemographicsActionPerformed
         
-        Patient_Demographics patient = operations.getPatientDemographics(PatientID); // Fetch patient data
-
+        Patient_Demographics patient = operations.getPatientDemographics(getPatientID()); // Fetch patient data
+      
         if (patient != null) {
             patient.setVisible(true); // Show patient form with data
-            this.dispose(); // Close current form if necessary
+            patient.setPatientID(PatientID);
+            
         } else {
             JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -224,7 +225,7 @@ public class Patient_Selection extends javax.swing.JFrame {
         return txt_Search_Box.getText();
     }
     
-    public int getPatientID() {
+    public static int getPatientID() {
         return PatientID;
     }
 

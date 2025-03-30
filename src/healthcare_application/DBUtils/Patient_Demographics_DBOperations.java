@@ -77,20 +77,32 @@ public class Patient_Demographics_DBOperations {
         return patient;
     }
     
-    public void updatePatientDemographics(int patientID) {
-        Patient_Demographics patient = new Patient_Demographics();
-        Connection con = PatientSelection_DBOperations.connectToDatabase();
-        if (con != null) {
-            CallableStatement stmt = null;
-            
-            try {
-                // Call the stored procedure EditPatientDemographics
-                String storedProc = "{CALL EditPatientDemographics(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
-                stmt = con.prepareCall(storedProc);
+  
+    public void updatePatientDemographics(int patientID, Patient_Demographics patient) {
+        
+        
+        
+        
+        try (Connection con = PatientSelection_DBOperations.connectToDatabase()) {
+
+            if (con == null) {
+                System.out.println("Connection to the database failed!");
+                return;
+            }
+
+            String storedProc = "{CALL EditPatientDemographics(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"; // 22 parameters
+
+            try (CallableStatement stmt = con.prepareCall(storedProc)) {
+
+           
                 
-                stmt.setInt(1, patientID); // Only for filtering, not updating
-             
-                // Set parameters - ensuring PatientID is set first
+                if (patient == null) {
+                    System.out.println("Patient Demographics not found for ID: " + patientID);
+                    return; // Or throw an exception
+                }
+
+                // 2. Set parameters for the stored procedure
+                stmt.setInt(1, patientID);  
                 stmt.setString(2, patient.getTxt_LastNameValue());
                 stmt.setString(3, patient.getTxt_PreLastNameValue());
                 stmt.setString(4, patient.getTxt_FirstNameValue());
@@ -104,13 +116,13 @@ public class Patient_Demographics_DBOperations {
                 stmt.setString(12, patient.getTxt_Em_Phone_NumValue());
                 stmt.setString(13, patient.getTxt_EmailValue());
                 stmt.setString(14, patient.getPass_SSNValue());
-
+                
                 // Handle the DOB field safely
-                java.util.Date dob = patient.getDatechooser_DOB().getDate();
+                java.util.Date dob = (patient.getDatechooser_DOB() != null) ? patient.getDatechooser_DOB().getDate() : null;
                 if (dob != null) {
                     stmt.setDate(15, new java.sql.Date(dob.getTime()));
                 } else {
-                    stmt.setNull(15, java.sql.Types.DATE); // In case DOB is null
+                    stmt.setNull(15, java.sql.Types.DATE);
                 }
 
                 stmt.setString(16, patient.getCbox_GenderValue());
@@ -118,30 +130,30 @@ public class Patient_Demographics_DBOperations {
                 stmt.setString(18, patient.getCbox_Martial_StatusValue());
                 stmt.setString(19, patient.getTxtA_CurrentHCPValue());
                 stmt.setString(20, patient.getTxtA_CommentsValue());
-                stmt.setString(21, patient.getTxt_NOKRValue());
-                stmt.setString(22, patient.getTxt_Next_of_kinValue());
+                stmt.setString(21, patient.getTxt_NOKRValue());  // Next of Kin
+                stmt.setString(22, patient.getTxt_Next_of_kinValue()); // Next of Kin Relationship
 
-                // Execute update
+
+                // Log parameter values
+                System.out.println("Updating Patient ID: " + patientID);
+                
+                
+                
+                // 3. Execute update
                 stmt.executeUpdate();
+                
 
             } catch (SQLException ex) {
                 System.err.println("Error executing stored procedure: " + ex.getMessage());
-                
-            } finally {
-                try {
-                    if (stmt != null) stmt.close();
-                    if (con != null) con.close();
-                } catch (SQLException ex) {
-                    System.err.println("Error closing resources: " + ex.getMessage());
-                }
+                System.err.println("SQL State: " + ex.getSQLState() + " | Error Code: " + ex.getErrorCode());
             }
-        } else {
-            System.out.println("Connection to the database failed!");
-            
+        } catch (SQLException ex) {
+            System.err.println("Database connection error: " + ex.getMessage());
         }
+    
+
+    
     }
-
-
 
     
 }

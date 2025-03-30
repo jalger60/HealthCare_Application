@@ -1,6 +1,8 @@
 package healthcare_application.DBUtils;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
@@ -11,12 +13,15 @@ public class PatientSelection_DBOperations {
                 + "/healthcare_app_java?autoReconnect=true&useSSL=false";
         Connection con = null;
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(dbURL, "root", "password");
             System.out.println("Database connected successfully!"); // Optional confirmation message
         } catch (SQLException ex) {
             System.err.println("Database Connection Error: " + ex.getMessage());
             // Consider throwing the exception or handling it more gracefully
             // For now, printing the error and returning null connection
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PatientSelection_DBOperations.class.getName()).log(Level.SEVERE, null, ex);
         }
         return con;
     }

@@ -1,14 +1,17 @@
 
 package healthcare_application;
 
+
 import javax.swing.*;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
 
 
+
 public class Patient_Demographics extends javax.swing.JFrame {
 
-    private int patientID;
+    private int PDpatientID;
     Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
+   
     
     public Patient_Demographics() {
         initComponents();
@@ -20,23 +23,25 @@ public class Patient_Demographics extends javax.swing.JFrame {
         setPatientID(patientID);
         initComponents();
         
+        
+        
     }
     
-    public int getPatientID () {
-        return this.patientID;
+    public int getPatientID() {
+        return PDpatientID;
     }
     
-    public void setPatientID(int patientID) {
-        this.patientID = patientID;
+    public void setPatientID(int PDpatientID) {
+        this.PDpatientID = PDpatientID;
     }
     
-    // Getters and setters for JComboBox fields
+    // Getters and setters for JComboBox fields with null or empty check
     public String getCbox_CitizenshipValue() {
         return (String) cbox_Citizenship.getSelectedItem();
     }
 
     public void setCbox_Citizenship(String value) {
-        cbox_Citizenship.setSelectedItem(value);
+        cbox_Citizenship.setSelectedItem(isNullOrEmpty(value) ? null : value);
     }
 
     public String getCbox_CountryValue() {
@@ -44,7 +49,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setCbox_Country(String value) {
-        cbox_Country.setSelectedItem(value);
+        cbox_Country.setSelectedItem(isNullOrEmpty(value) ? null : value);
     }
 
     public String getCbox_EthnicityValue() {
@@ -52,7 +57,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setCbox_Ethnicity(String value) {
-        cbox_Ethnicity.setSelectedItem(value);
+        cbox_Ethnicity.setSelectedItem(isNullOrEmpty(value) ? null : value);
     }
 
     public String getCbox_GenderValue() {
@@ -60,7 +65,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setCbox_Gender(String value) {
-        cbox_Gender.setSelectedItem(value);
+        cbox_Gender.setSelectedItem(isNullOrEmpty(value) ? null : value);
     }
 
     public String getCbox_Martial_StatusValue() {
@@ -68,7 +73,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setCbox_Martial_Status(String value) {
-        cbox_Martial_Status.setSelectedItem(value);
+        cbox_Martial_Status.setSelectedItem(isNullOrEmpty(value) ? null : value);
     }
 
     public String getCbox_StateValue() {
@@ -76,25 +81,26 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setCbox_State(String value) {
-        cbox_State.setSelectedItem(value);
+        cbox_State.setSelectedItem(isNullOrEmpty(value) ? null : value);
     }
 
-    // Setter for datechooser_DOB
+    // Setter for datechooser_DOB with null check
     public void setDatechooser_DOB(com.toedter.calendar.JDateChooser datechooser_DOB) {
-        this.datechooser_DOB = datechooser_DOB;
+        this.datechooser_DOB = (datechooser_DOB != null) ? datechooser_DOB : null;
     }
 
     // Getter for datechooser_DOB
     public com.toedter.calendar.JDateChooser getDatechooser_DOB() {
         return this.datechooser_DOB;
-}
+    }
 
+    // Getter and setter for pass_SSN (Password field)
     public String getPass_SSNValue() {
         return new String(pass_SSN.getPassword());  // Convert char[] to String
     }
 
     public void setPass_SSN(String value) {
-        pass_SSN.setText(value);
+        pass_SSN.setText(isNullOrEmpty(value) ? null : value);
     }
 
     // Getters and setters for JTextArea fields
@@ -103,7 +109,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxtA_Comments(String value) {
-        txtA_Comments.setText(value);
+        txtA_Comments.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxtA_CurrentHCPValue() {
@@ -111,7 +117,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxtA_CurrentHCP(String value) {
-        txtA_CurrentHCP.setText(value);
+        txtA_CurrentHCP.setText(isNullOrEmpty(value) ? null : value);
     }
 
     // Getters and setters for JTextField fields
@@ -120,7 +126,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_City(String value) {
-        txt_City.setText(value);
+        txt_City.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxt_Em_Phone_NumValue() {
@@ -128,7 +134,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_Em_Phone_Num(String value) {
-        txt_Em_Phone_Num.setText(value);
+        txt_Em_Phone_Num.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxt_EmailValue() {
@@ -136,7 +142,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_Email(String value) {
-        txt_Email.setText(value);
+        txt_Email.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxt_FirstNameValue() {
@@ -144,7 +150,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_FirstName(String value) {
-        txt_FirstName.setText(value);
+        txt_FirstName.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxt_HomeAddressValue() {
@@ -152,7 +158,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_HomeAddress(String value) {
-        txt_HomeAddress.setText(value);
+        txt_HomeAddress.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxt_LastNameValue() {
@@ -160,7 +166,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_LastName(String value) {
-        txt_LastName.setText(value);
+        txt_LastName.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxt_MobilePhoneValue() {
@@ -168,7 +174,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_MobilePhone(String value) {
-        txt_MobilePhone.setText(value);
+        txt_MobilePhone.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxt_NOKRValue() {
@@ -176,7 +182,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_NOKR(String value) {
-        txt_NOKR.setText(value);
+        txt_NOKR.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxt_Next_of_kinValue() {
@@ -184,7 +190,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_Next_of_kin(String value) {
-        txt_Next_of_kin.setText(value);
+        txt_Next_of_kin.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxt_PreLastNameValue() {
@@ -192,7 +198,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_PreLastName(String value) {
-        txt_PreLastName.setText(value);
+        txt_PreLastName.setText(isNullOrEmpty(value) ? null : value);
     }
 
     public String getTxt_ZipCodeValue() {
@@ -200,9 +206,51 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
 
     public void setTxt_ZipCode(String value) {
-        txt_ZipCode.setText(value);
+        txt_ZipCode.setText(isNullOrEmpty(value) ? null : value);
     }
+
+    // Helper method to check if a value is null or empty
+    private boolean isNullOrEmpty(String value) {
+        return value == null || value.trim().isEmpty();
+    }
+
     
+   public void loadPatientData() {
+    // Example: Fetch patient data from the database (replace with your actual implementation)
+    
+    
+        // Populate the form fields with the patient's data
+        txt_LastName.setText(getTxt_LastNameValue());
+        txt_PreLastName.setText(getTxt_PreLastNameValue());
+        txt_FirstName.setText(getTxt_FirstNameValue());
+        txt_HomeAddress.setText(getTxt_HomeAddressValue());
+        txt_City.setText(getTxt_CityValue());
+        cbox_State.setSelectedItem(getCbox_StateValue());
+        txt_ZipCode.setText(getTxt_ZipCodeValue());
+        cbox_Country.setSelectedItem(getCbox_CountryValue());
+        cbox_Citizenship.setSelectedItem(getCbox_CitizenshipValue());
+        txt_MobilePhone.setText(getTxt_MobilePhoneValue());
+        txt_Em_Phone_Num.setText(getTxt_Em_Phone_NumValue());
+        txt_Email.setText(getTxt_EmailValue());
+        pass_SSN.setText(getPass_SSNValue());
+
+        
+        java.util.Date dob = datechooser_DOB.getDate();
+        if (dob != null) {
+            setDatechooser_DOB(datechooser_DOB);  // If date is selected, set the DOB
+        } else {
+            setDatechooser_DOB(null);  // Set as null if no date is selected
+        }
+        
+        cbox_Gender.setSelectedItem(getCbox_GenderValue());
+        cbox_Ethnicity.setSelectedItem(getCbox_EthnicityValue());
+        cbox_Martial_Status.setSelectedItem(getCbox_Martial_StatusValue());
+        txtA_CurrentHCP.setText(getTxtA_CurrentHCPValue());
+        txtA_Comments.setText(getTxtA_CommentsValue());
+        txt_NOKR.setText(getTxt_NOKRValue());
+        txt_Next_of_kin.setText(getTxt_Next_of_kinValue());
+    
+}
     
     
 
@@ -587,6 +635,11 @@ public class Patient_Demographics extends javax.swing.JFrame {
         menu_Actions.add(menu_Add);
 
         menu_Edit.setText("Edit Record");
+        menu_Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_EditActionPerformed(evt);
+            }
+        });
         menu_Actions.add(menu_Edit);
 
         menu_Save.setText("Save Record");
@@ -628,9 +681,17 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
-        operations.updatePatientDemographics(getPatientID());
+        
+       
+        
+        
         
     }//GEN-LAST:event_menu_SaveActionPerformed
+
+    private void menu_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_EditActionPerformed
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menu_EditActionPerformed
 
     /**
      * @param args the command line arguments
