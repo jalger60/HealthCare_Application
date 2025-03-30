@@ -208,17 +208,30 @@ public class Patient_Selection extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_BackToAllActionPerformed
 
     private void menu_PDemographicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_PDemographicsActionPerformed
-        
-        Patient_Demographics patient = operations.getPatientDemographics(getPatientID()); // Fetch patient data
-      
-        if (patient != null) {
-            patient.setVisible(true); // Show patient form with data
-            patient.setPatientID(PatientID);
-            
+       
+        // Get the patient ID
+        int patientID = getPatientID(); 
+
+        if (patientID == 0) {
+            // No patient selected, open a blank Patient_Demographics form for a new patient
+            Patient_Demographics newPatientForm = new Patient_Demographics();
+            newPatientForm.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
+            // Fetch patient data for an existing patient
+            Patient_Demographics patient = operations.getPatientDemographics(patientID);
+
+            if (patient != null) {
+                patient.setVisible(true);
+                patient.setPatientID(patientID);
+            } else {
+                JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
+
+        // Close the current form
         this.dispose();
+        
+        
     }//GEN-LAST:event_menu_PDemographicsActionPerformed
 
     public String GetTxt_Search_BoxText() {

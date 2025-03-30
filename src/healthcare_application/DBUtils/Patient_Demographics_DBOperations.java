@@ -10,6 +10,7 @@ public class Patient_Demographics_DBOperations {
     public Patient_Demographics getPatientDemographics(int patientID) {
         
         Patient_Demographics patient = new Patient_Demographics();
+        
         Connection con = PatientSelection_DBOperations.connectToDatabase();
         if (con != null) {
             CallableStatement stmt = null;
@@ -77,8 +78,76 @@ public class Patient_Demographics_DBOperations {
         return patient;
     }
     
+    
+    public void addPatientDemographics(Patient_Demographics patient) {
+        try (Connection con = PatientSelection_DBOperations.connectToDatabase()) {
+            if (con == null) {
+                System.out.println("Connection to the database failed!");
+                return;
+            }
+
+            String storedProc = "{CALL AddPatientDemographics(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"; // 21 parameters
+
+            try (CallableStatement stmt = con.prepareCall(storedProc)) {
+                if (patient == null) {
+                    System.out.println("Patient demographics data is null!");
+                    return;
+                }
+
+                // Set parameters correctly
+                stmt.setString(1, patient.getTxt_LastNameValue());
+                stmt.setString(2, patient.getTxt_PreLastNameValue());
+                stmt.setString(3, patient.getTxt_FirstNameValue());
+                stmt.setString(4, patient.getTxt_HomeAddressValue());
+                stmt.setString(5, patient.getTxt_CityValue());
+                stmt.setString(6, patient.getCbox_StateValue());
+                stmt.setString(7, patient.getTxt_ZipCodeValue());
+                stmt.setString(8, patient.getCbox_CountryValue());
+                stmt.setString(9, patient.getCbox_CitizenshipValue());
+                stmt.setString(10, patient.getTxt_MobilePhoneValue());
+                stmt.setString(11, patient.getTxt_Em_Phone_NumValue());
+                stmt.setString(12, patient.getTxt_EmailValue());
+                stmt.setString(13, patient.getPass_SSNValue());
+
+                // Handle DOB safely
+                java.util.Date dob = (patient.getDatechooser_DOB() != null) ? patient.getDatechooser_DOB().getDate() : null;
+                if (dob != null) {
+                    stmt.setDate(14, new java.sql.Date(dob.getTime()));
+                } else {
+                    stmt.setNull(14, java.sql.Types.DATE);
+                }
+
+                stmt.setString(15, patient.getCbox_GenderValue());
+                stmt.setString(16, patient.getCbox_EthnicityValue());
+                stmt.setString(17, patient.getCbox_Martial_StatusValue());
+                stmt.setString(18, patient.getTxtA_CurrentHCPValue());
+                stmt.setString(19, patient.getTxtA_CommentsValue());
+                stmt.setString(20, patient.getTxt_NOKRValue());  // Next of Kin
+                stmt.setString(21, patient.getTxt_Next_of_kinValue()); // Next of Kin Relationship
+
+                // Log parameter values
+                System.out.println("Inserting new patient record...");
+
+                // Execute stored procedure
+                stmt.executeUpdate();
+
+            } catch (SQLException ex) {
+                System.err.println("Error executing stored procedure: " + ex.getMessage());
+                System.err.println("SQL State: " + ex.getSQLState() + " | Error Code: " + ex.getErrorCode());
+            }
+        } catch (SQLException ex) {
+            System.err.println("Database connection error: " + ex.getMessage());
+        }
+    }
+
+
+    
+    
+    
+    
+    
   
-    public void updatePatientDemographics(int patientID, Patient_Demographics patient) {
+    public void updatePatientDemographics(Patient_Demographics patient, int patientID) {
         
         
         
@@ -154,6 +223,40 @@ public class Patient_Demographics_DBOperations {
 
     
     }
+    
+    
+    public void deletePatientDemographics(int patientID) {
+        try (Connection con = PatientSelection_DBOperations.connectToDatabase()) {
 
+            if (con == null) {
+                System.out.println("Connection to the database failed!");
+                return;
+            }
+
+            String storedProc = "{CALL DeletePatientDemographics(?)}"; // Calling the stored procedure
+
+            try (CallableStatement stmt = con.prepareCall(storedProc)) {
+                stmt.setInt(1, patientID); // Set the Patient ID parameter
+
+                // Execute update
+                int rowsAffected = stmt.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("Patient ID " + patientID + " marked as deleted.");
+                } else {
+                    System.out.println("No patient found with ID: " + patientID);
+                }
+
+            } catch (SQLException ex) {
+                System.err.println("Error executing stored procedure: " + ex.getMessage());
+                System.err.println("SQL State: " + ex.getSQLState() + " | Error Code: " + ex.getErrorCode());
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Database connection error: " + ex.getMessage());
+        }
+    }
+
+    
     
 }

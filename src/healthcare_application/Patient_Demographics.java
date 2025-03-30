@@ -315,6 +315,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
         menu_Add = new javax.swing.JMenuItem();
         menu_Edit = new javax.swing.JMenuItem();
         menu_Save = new javax.swing.JMenuItem();
+        menu_delete = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -632,6 +633,11 @@ public class Patient_Demographics extends javax.swing.JFrame {
         menu_Actions.setText("Actions");
 
         menu_Add.setText("Add Record");
+        menu_Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_AddActionPerformed(evt);
+            }
+        });
         menu_Actions.add(menu_Add);
 
         menu_Edit.setText("Edit Record");
@@ -649,6 +655,14 @@ public class Patient_Demographics extends javax.swing.JFrame {
             }
         });
         menu_Actions.add(menu_Save);
+
+        menu_delete.setText("Delete Record");
+        menu_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_deleteActionPerformed(evt);
+            }
+        });
+        menu_Actions.add(menu_delete);
 
         menu_PatientDemographics.add(menu_Actions);
 
@@ -682,7 +696,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
         
-       
+       operations.updatePatientDemographics(this, PDpatientID);
         
         
         
@@ -692,6 +706,16 @@ public class Patient_Demographics extends javax.swing.JFrame {
         
         // TODO add your handling code here:
     }//GEN-LAST:event_menu_EditActionPerformed
+
+    private void menu_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_deleteActionPerformed
+        
+            operations.deletePatientDemographics(PDpatientID);
+    }//GEN-LAST:event_menu_deleteActionPerformed
+
+    private void menu_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_AddActionPerformed
+        operations.addPatientDemographics(this);
+        
+    }//GEN-LAST:event_menu_AddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -768,6 +792,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     private javax.swing.JMenu menu_Forms;
     private javax.swing.JMenuBar menu_PatientDemographics;
     private javax.swing.JMenuItem menu_Save;
+    private javax.swing.JMenuItem menu_delete;
     private javax.swing.JPanel panel_PDemographics;
     private javax.swing.JPasswordField pass_SSN;
     private javax.swing.JTextArea txtA_Comments;

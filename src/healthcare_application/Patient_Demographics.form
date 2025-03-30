@@ -23,6 +23,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add Record"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_AddActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menu_Edit">
               <Properties>
@@ -38,6 +41,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_SaveActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menu_delete">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Delete Record"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_deleteActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
