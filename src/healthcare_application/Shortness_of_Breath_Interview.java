@@ -24,9 +24,9 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         l_SOBToday = new javax.swing.JLabel();
         l_SOBScale = new javax.swing.JLabel();
         l_SOBYesterday = new javax.swing.JLabel();
-        txt_SOBToday = new javax.swing.JTextField();
-        txt_SOBScale = new javax.swing.JTextField();
-        txt_SOBYesterday = new javax.swing.JTextField();
+        cbox_SOBT = new javax.swing.JComboBox<>();
+        cbox_SOBScale = new javax.swing.JComboBox<>();
+        cbox_SOBYesterday = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabl_SOBRecords = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -66,48 +66,53 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         l_SOBYesterday.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         l_SOBYesterday.setText("Worse than the day before");
 
-        txt_SOBToday.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cbox_SOBT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cbox_SOBT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
 
-        txt_SOBScale.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cbox_SOBScale.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cbox_SOBScale.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mild", "More Severe", "Very Severe" }));
 
-        txt_SOBYesterday.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cbox_SOBYesterday.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cbox_SOBYesterday.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
 
         javax.swing.GroupLayout panel_SOBALayout = new javax.swing.GroupLayout(panel_SOBA);
         panel_SOBA.setLayout(panel_SOBALayout);
         panel_SOBALayout.setHorizontalGroup(
             panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_SOBALayout.createSequentialGroup()
-                .addGap(44, 44, 44)
                 .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(l_SOBToday)
-                    .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SOBALayout.createSequentialGroup()
+                    .addGroup(panel_SOBALayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(l_SOBToday)
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SOBALayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(l_SOBYesterday)
-                            .addGap(15, 15, 15))
-                        .addComponent(l_SOBScale, javax.swing.GroupLayout.Alignment.TRAILING)))
-                .addGap(13, 13, 13)
-                .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_SOBYesterday, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                    .addComponent(txt_SOBToday)
-                    .addComponent(txt_SOBScale))
-                .addContainerGap(67, Short.MAX_VALUE))
+                            .addComponent(l_SOBScale))
+                        .addGap(18, 18, 18)))
+                .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbox_SOBT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbox_SOBScale, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbox_SOBYesterday, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         panel_SOBALayout.setVerticalGroup(
             panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_SOBALayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(35, 35, 35)
                 .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(l_SOBToday)
-                    .addComponent(txt_SOBToday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(l_SOBScale)
-                    .addComponent(txt_SOBScale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                    .addComponent(cbox_SOBT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
+                .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbox_SOBScale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(l_SOBScale))
+                .addGap(45, 45, 45)
                 .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(l_SOBYesterday)
-                    .addComponent(txt_SOBYesterday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70))
+                    .addComponent(cbox_SOBYesterday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         tabl_SOBRecords.setModel(new javax.swing.table.DefaultTableModel(
@@ -188,7 +193,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -211,7 +216,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
                         .addComponent(l_SOBA)
                         .addGap(18, 18, 18)
                         .addComponent(panel_SOBA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -257,35 +262,44 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     
     
     private void LockScreen () {
-        txt_SOBToday.setEditable(false);
-        txt_SOBToday.setBackground(Color.lightGray);
-        txt_SOBToday.setText(" ");
+        cbox_SOBT.setEditable(false);
+        cbox_SOBT.setBackground(Color.lightGray);
+        cbox_SOBT.setSelectedIndex(-1);
+        cbox_SOBT.setEnabled(false);
         
-        txt_SOBScale.setEditable(false);
-        txt_SOBScale.setBackground(Color.lightGray);
-        txt_SOBScale.setText(" ");
+        cbox_SOBScale.setEditable(false);
+        cbox_SOBScale.setBackground(Color.lightGray);
+        cbox_SOBScale.setSelectedIndex(-1);
+        cbox_SOBScale.setEnabled(false);
         
-        txt_SOBYesterday.setEditable(false);
-        txt_SOBYesterday.setBackground(Color.lightGray);
-        txt_SOBYesterday.setText(" ");
+        cbox_SOBYesterday.setEditable(false);
+        cbox_SOBYesterday.setBackground(Color.lightGray);
+        cbox_SOBYesterday.setSelectedIndex(-1);
+        cbox_SOBYesterday.setEnabled(false);
         
         
     }
     
     private void UnlockScreen () {
         
-        txt_SOBToday.setEditable(true);
-        txt_SOBToday.setBackground(Color.white);
+        cbox_SOBT.setEditable(true);
+        cbox_SOBT.setBackground(Color.white);
+        cbox_SOBT.setEnabled(true);
         
-        txt_SOBScale.setEditable(true);
-        txt_SOBScale.setBackground(Color.white);
+        cbox_SOBScale.setEditable(true);
+        cbox_SOBScale.setBackground(Color.white);
+        cbox_SOBScale.setEnabled(true);
         
-        txt_SOBYesterday.setEditable(true);
-        txt_SOBYesterday.setBackground(Color.white);
+        cbox_SOBYesterday.setEditable(true);
+        cbox_SOBYesterday.setBackground(Color.white);
+        cbox_SOBYesterday.setEnabled(true);
         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbox_SOBScale;
+    private javax.swing.JComboBox<String> cbox_SOBT;
+    private javax.swing.JComboBox<String> cbox_SOBYesterday;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -304,8 +318,5 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_Save;
     private javax.swing.JPanel panel_SOBA;
     private javax.swing.JTable tabl_SOBRecords;
-    private javax.swing.JTextField txt_SOBScale;
-    private javax.swing.JTextField txt_SOBToday;
-    private javax.swing.JTextField txt_SOBYesterday;
     // End of variables declaration//GEN-END:variables
 }

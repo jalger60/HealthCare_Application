@@ -62,8 +62,6 @@ public class Patient_Selection extends javax.swing.JFrame {
                 {},
                 {},
                 {},
-                {},
-                {},
                 {}
             },
             new String [] {
