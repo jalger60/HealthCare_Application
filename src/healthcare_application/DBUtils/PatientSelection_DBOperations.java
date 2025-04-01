@@ -31,74 +31,11 @@ public class PatientSelection_DBOperations {
         Connection dbConnection = connectToDatabase();
         CallableStatement callableStatement = null;
         ResultSet resultSet = null;
-        
-        DefaultTableModel tableModel = new DefaultTableModel() {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return false; // Make all cells non-editable
-        }
-        };
-        
-        
 
-        if (dbConnection != null) {
-            try {
-                String searchforpatientsSP = "{CALL GetPatient(?)}"; // Corrected stored procedure call syntax with parameter placeholder
-                callableStatement = dbConnection.prepareCall(searchforpatientsSP);
+        // Define column names
+        String[] columnNames = {"Patient ID", "Last Name", "First Name", "Phone Number", "Date of Birth"};
 
-                // Set the input parameter for the stored procedure
-                callableStatement.setString(1, searchText); // Assuming the stored procedure expects a string as input
-
-                // Execute the stored procedure and get the ResultSet
-                resultSet = callableStatement.executeQuery();
-
-                // Process the ResultSet
-                if (resultSet != null) {
-                    ResultSetMetaData metaData = resultSet.getMetaData();
-                    int columnCount = metaData.getColumnCount();
-
-                    // Get column names and add them to the table model
-                    for (int i = 1; i <= columnCount; i++) {
-                        tableModel.addColumn(metaData.getColumnName(i));
-                    }
-
-                    // Check if resultSet is empty (i.e., no matching names found)
-                    if (!resultSet.isBeforeFirst()) { 
-                        JOptionPane.showMessageDialog(null, 
-                            "No patients found matching the search criteria.", 
-                            "Information", JOptionPane.INFORMATION_MESSAGE);
-                        return SearchforAllPatients(); 
-                    
-                    } else {
-                        // Add data rows to the table model
-                        while (resultSet.next()) {
-                            Object[] rowData = new Object[columnCount];
-                            for (int i = 1; i <= columnCount; i++) {
-                                rowData[i - 1] = resultSet.getString(i); 
-                            }
-                            tableModel.addRow(rowData);
-                        }
-                    }
-                }
-
-            } catch (SQLException ex) {
-                System.err.println("Error executing stored procedure: " + ex.getMessage());
-                // Handle error, perhaps return an empty table model or null to indicate error
-            } 
-        } else {
-            System.out.println("Database connection was not established. Cannot search for patients.");
-            // Handle no connection, perhaps return an empty table model or null
-        }
-        return tableModel; // Return the populated DefaultTableModel
-    }
-    
-    
-    public DefaultTableModel SearchforAllPatients() {
-        Connection dbConnection = connectToDatabase();
-        CallableStatement callableStatement = null;
-        ResultSet resultSet = null;
-
-        DefaultTableModel tableModel = new DefaultTableModel() {
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Make all cells non-editable
@@ -107,25 +44,20 @@ public class PatientSelection_DBOperations {
 
         if (dbConnection != null) {
             try {
-                String searchForPatientsSP = "{CALL GetAllPatient()}"; // No parameter required
-                callableStatement = dbConnection.prepareCall(searchForPatientsSP);
+                String searchforpatientsSP = "{CALL GetPatient(?)}";
+                callableStatement = dbConnection.prepareCall(searchforpatientsSP);
+                callableStatement.setString(1, searchText);
 
                 resultSet = callableStatement.executeQuery();
 
                 if (resultSet != null) {
-                    ResultSetMetaData metaData = resultSet.getMetaData();
-                    int columnCount = metaData.getColumnCount();
-
-                    // Add column names to the table model
-                    for (int i = 1; i <= columnCount; i++) {
-                        tableModel.addColumn(metaData.getColumnName(i));
-                    }
+                    int columnCount = resultSet.getMetaData().getColumnCount();
 
                     if (!resultSet.isBeforeFirst()) { 
                         JOptionPane.showMessageDialog(null, 
-                            "No patients found.", 
+                            "No patients found matching the search criteria.", 
                             "Information", JOptionPane.INFORMATION_MESSAGE);
-                         
+                        return SearchforAllPatients(); 
                     } else {
                         while (resultSet.next()) {
                             Object[] rowData = new Object[columnCount];
@@ -136,16 +68,85 @@ public class PatientSelection_DBOperations {
                         }
                     }
                 }
-
             } catch (SQLException ex) {
                 System.err.println("Error executing stored procedure: " + ex.getMessage());
-            } 
-        } else {
-            System.out.println("Database connection was not established. Cannot retrieve patients.");
+            } finally {
+            // Close resources
+            try {
+                if (resultSet != null) resultSet.close();
+                if (callableStatement != null) callableStatement.close();
+                if (dbConnection != null) dbConnection.close();  
+                     System.out.println("Connection Closed");
+            } catch (SQLException ex) {
+                System.err.println("Error closing database resources: " + ex.getMessage());
+            }
         }
-
+        } else {
+            System.out.println("Database connection was not established. Cannot search for patients.");
+        }
         return tableModel;
     }
+
+    
+    
+   public DefaultTableModel SearchforAllPatients() {
+    Connection dbConnection = connectToDatabase();
+    CallableStatement callableStatement = null;
+    ResultSet resultSet = null;
+
+    DefaultTableModel tableModel = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // Make all cells non-editable
+        }
+    };
+
+    if (dbConnection != null) {
+        try {
+            String searchForPatientsSP = "{CALL GetAllPatients()}";
+            callableStatement = dbConnection.prepareCall(searchForPatientsSP);
+            resultSet = callableStatement.executeQuery();
+
+            if (resultSet != null) {
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                int columnCount = metaData.getColumnCount();
+
+                // Add column names dynamically
+                for (int i = 1; i <= columnCount; i++) {
+                    tableModel.addColumn(metaData.getColumnName(i));
+                }
+
+                if (!resultSet.isBeforeFirst()) {
+                    JOptionPane.showMessageDialog(null, "No patients found.", "Information", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    while (resultSet.next()) {
+                        Object[] rowData = new Object[columnCount];
+                        for (int i = 1; i <= columnCount; i++) {
+                            rowData[i - 1] = resultSet.getString(i);
+                        }
+                        tableModel.addRow(rowData);
+                    }
+                }
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Error executing stored procedure: " + ex.getMessage());
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (callableStatement != null) callableStatement.close();
+                if (dbConnection != null) dbConnection.close(); System.out.println("Connection Closed");
+            } catch (SQLException e) {
+                System.err.println("Error closing resources: " + e.getMessage());
+            }
+        }
+    } else {
+        System.out.println("Database connection was not established. Cannot retrieve patients.");
+    }
+
+    return tableModel;
+}
+
   
 
     

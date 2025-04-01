@@ -134,7 +134,7 @@ public class Patient_Demographics_DBOperations {
             } catch (SQLException ex) {
                 System.err.println("Error executing stored procedure: " + ex.getMessage());
                 System.err.println("SQL State: " + ex.getSQLState() + " | Error Code: " + ex.getErrorCode());
-            }
+            } 
         } catch (SQLException ex) {
             System.err.println("Database connection error: " + ex.getMessage());
         }

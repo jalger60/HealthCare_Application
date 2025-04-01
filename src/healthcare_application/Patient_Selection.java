@@ -261,88 +261,73 @@ public class Patient_Selection extends javax.swing.JFrame {
     }
     
     private void performSearch() {
-        String searchText = txt_Search_Box.getText();
-        PatientSelection_DBOperations dbOperations = new PatientSelection_DBOperations();
-        DefaultTableModel table = dbOperations.SearchforPatients(searchText);
+    String searchText = txt_Search_Box.getText();
+    PatientSelection_DBOperations dbOperations = new PatientSelection_DBOperations();
+    DefaultTableModel table = dbOperations.SearchforPatients(searchText);
 
-        // Set the new column names
-        String[] columnNames = {"Patient ID", "Last Name", "First Name", "Phone Number", "Date of Birth"};
-        table.setColumnIdentifiers(columnNames);
+    // Directly set the model without modifying columns again
+    tabl_Patient_Table.setModel(table);
+    
+    JTableHeader header = tabl_Patient_Table.getTableHeader();
+    header.setFont(header.getFont().deriveFont(Font.BOLD));
 
-        tabl_Patient_Table.setModel(table);
+    // Check if the table has rows before adding selection listener
+    if (tabl_Patient_Table.getRowCount() > 0) {
+        tabl_Patient_Table.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) { // Prevent duplicate triggering
+                int selectedRow = tabl_Patient_Table.getSelectedRow();
 
-        JTableHeader header = tabl_Patient_Table.getTableHeader();
-        header.setFont(header.getFont().deriveFont(Font.BOLD));
+                if (selectedRow != -1) { // Ensure a row is selected
+                    int patientIDColumnIndex = 0; // Index of "Patient ID" column
 
-        // Check if the table has rows
-        if (tabl_Patient_Table.getRowCount() > 0) {
-            // Add a ListSelectionListener to detect row selection
-            tabl_Patient_Table.getSelectionModel().addListSelectionListener(event -> {
-                if (!event.getValueIsAdjusting()) { // Prevent double triggering
-                    int selectedRow = tabl_Patient_Table.getSelectedRow();
+                    Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, patientIDColumnIndex);
 
-                    if (selectedRow != -1) { // Ensure a row is selected
-                        int patientIDColumnIndex = 0; // Modify based on the actual column index
-
-                        Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, patientIDColumnIndex);
-
-                        if (patientIDValue != null) {
-                            try {
-                                int patientID = Integer.parseInt(patientIDValue.toString());
-                                setPatientID(patientID); // Store the selected Patient ID
-                                System.out.println(getPatientID());
-
-                            } catch (NumberFormatException e) {
-                                System.err.println("Invalid Patient ID format: " + e.getMessage());
-                            }
+                    if (patientIDValue != null) {
+                        try {
+                            int patientID = Integer.parseInt(patientIDValue.toString());
+                            setPatientID(patientID); // Store the selected Patient ID
+                            System.out.println("Selected Patient ID: " + getPatientID());
+                        } catch (NumberFormatException e) {
+                            System.err.println("Invalid Patient ID format: " + e.getMessage());
                         }
                     }
                 }
-            });
-        }
+            }
+        });
+    }
 }
+
 
     
     private void GetAllPatients() {
-        
         PatientSelection_DBOperations dbOperations = new PatientSelection_DBOperations();
-        DefaultTableModel table = dbOperations.SearchforAllPatients();
-        
-        String[] columnNames = {"Patient ID", "Last Name", "First Name", "Phone Number", "Date of Birth"};
-        table.setColumnIdentifiers(columnNames);
+        DefaultTableModel tableModel = dbOperations.SearchforAllPatients();
 
-
-        tabl_Patient_Table.setModel(table);
+        // Set the table model and refresh the table
+        tabl_Patient_Table.setModel(tableModel);
         JTableHeader header = tabl_Patient_Table.getTableHeader();
         header.setFont(header.getFont().deriveFont(Font.BOLD));
 
+        // Ensure row selection event triggers
+        tabl_Patient_Table.getSelectionModel().addListSelectionListener(event -> {
+            if (!event.getValueIsAdjusting()) { // Prevent double triggering
+                int selectedRow = tabl_Patient_Table.getSelectedRow();
+                if (selectedRow != -1) { 
+                    Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, 0); // Patient ID column
 
-        // Check if the table has rows
-        if (tabl_Patient_Table.getRowCount() > 0) {
-            // Add a ListSelectionListener to detect row selection
-            tabl_Patient_Table.getSelectionModel().addListSelectionListener(event -> {
-                if (!event.getValueIsAdjusting()) { // Prevent double triggering
-                    int selectedRow = tabl_Patient_Table.getSelectedRow();
-
-                    if (selectedRow != -1) { // Ensure a row is selected
-                        int patientIDColumnIndex = 0; // Modify based on the actual column index
-
-                        Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, patientIDColumnIndex);
-
-                        if (patientIDValue != null) {
-                            try {
-                                int patientID = Integer.parseInt(patientIDValue.toString());
-                                setPatientID(patientID); // Store the selected Patient ID
-                          
-                            } catch (NumberFormatException e) {
-                                System.err.println("Invalid Patient ID format: " + e.getMessage());
-                            }
+                    if (patientIDValue != null) {
+                        try {
+                            int patientID = Integer.parseInt(patientIDValue.toString());
+                            setPatientID(patientID); // Store the selected Patient ID
+                        } catch (NumberFormatException e) {
+                            System.err.println("Invalid Patient ID format: " + e.getMessage());
                         }
                     }
                 }
-            });
-        }
+            }
+        });
     }
+
     
     
     
