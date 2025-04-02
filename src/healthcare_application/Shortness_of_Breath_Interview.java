@@ -13,6 +13,7 @@ import java.util.List;
 public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     
     private int patientID;
+    private int RecordID;
     Shortness_Of_Breath_DBOperations soba = new Shortness_Of_Breath_DBOperations();
    
     public Shortness_of_Breath_Interview() {
@@ -86,7 +87,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         cbox_SOBT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
 
         cbox_SOBScale.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cbox_SOBScale.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mild", "More Severe", "Very Severe" }));
+        cbox_SOBScale.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "Mild", "More Severe", "Very Severe" }));
 
         cbox_SOBYesterday.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cbox_SOBYesterday.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
@@ -251,6 +252,8 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_Edit_ModeActionPerformed
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
+        
+        soba.editSOBAssessment(RecordID, patientID, this);
         LockScreen();
     }//GEN-LAST:event_menu_SaveActionPerformed
 
@@ -319,9 +322,11 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         // Table model to display data in JTable
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Date");
+        model.addColumn("Time");
         model.addColumn("Shortness of Breath");
         model.addColumn("Severity Level");
         model.addColumn("Worse Than Yesterday");
+        model.addColumn("Record ID");
 
         // Store data for comboboxes in a list or map for later use
         List<Object[]> rowDataList = new ArrayList<>();
@@ -329,19 +334,23 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         // Populate table with result set data
         try {
             while (rs.next()) {
-                Object[] row = new Object[4];
+                Object[] row = new Object[6];
                 row[0] = rs.getString("Date");
+                row[1] = rs.getString("Time");
 
                 // Convert the "Shortness of Breath" value (1 -> Yes, 0 -> No)
-                int sob = rs.getInt("Shortness of Breath");
-                row[1] = (sob == 1) ? "Yes" : "No";
+                int sob = rs.getInt("Shortness of Breath Today");
+                row[2] = (sob == 1) ? "Yes" : "No";
 
                 // Convert the "Worse Than Yesterday" value (1 -> Yes, 0 -> No)
                 int worseYesterday = rs.getInt("MoreShortThanYesterday");
-                row[3] = (worseYesterday == 1) ? "Yes" : "No";
+                row[4] = (worseYesterday == 1) ? "Yes" : "No";
 
                 // For severity, you can display as-is or map it to other values if necessary
-                row[2] = rs.getString("SeverityLevel");
+                row[3] = rs.getString("SeverityLevel");
+                
+                RecordID = rs.getInt("SOBID");
+                
 
                 // Add row to model
                 model.addRow(row);
@@ -354,17 +363,21 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
             tabl_SOBRecords.setModel(model);
 
             // Hide the columns (indexes 1, 2, and 3)
-            tabl_SOBRecords.getColumnModel().getColumn(1).setMaxWidth(0);
-            tabl_SOBRecords.getColumnModel().getColumn(1).setMinWidth(0);
-            tabl_SOBRecords.getColumnModel().getColumn(1).setPreferredWidth(0);
-            
             tabl_SOBRecords.getColumnModel().getColumn(2).setMaxWidth(0);
             tabl_SOBRecords.getColumnModel().getColumn(2).setMinWidth(0);
             tabl_SOBRecords.getColumnModel().getColumn(2).setPreferredWidth(0);
-
+            
             tabl_SOBRecords.getColumnModel().getColumn(3).setMaxWidth(0);
             tabl_SOBRecords.getColumnModel().getColumn(3).setMinWidth(0);
             tabl_SOBRecords.getColumnModel().getColumn(3).setPreferredWidth(0);
+
+            tabl_SOBRecords.getColumnModel().getColumn(4).setMaxWidth(0);
+            tabl_SOBRecords.getColumnModel().getColumn(4).setMinWidth(0);
+            tabl_SOBRecords.getColumnModel().getColumn(4).setPreferredWidth(0);
+            
+            tabl_SOBRecords.getColumnModel().getColumn(5).setMaxWidth(0);
+            tabl_SOBRecords.getColumnModel().getColumn(5).setMinWidth(0);
+            tabl_SOBRecords.getColumnModel().getColumn(5).setPreferredWidth(0);
 
             // Add ListSelectionListener to the JTable to capture selection changes
             tabl_SOBRecords.getSelectionModel().addListSelectionListener(e -> {
@@ -374,9 +387,11 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
                         // Get the values of the selected row from the stored list
                         Object[] selectedRowData = rowDataList.get(selectedRow);
                         String date = (String) selectedRowData[0];
-                        String sob = (String) selectedRowData[1];
-                        String severity = (String) selectedRowData[2];
-                        String worseYesterday = (String) selectedRowData[3];
+                        String Time = (String) selectedRowData[1];
+                        String sob = (String) selectedRowData[2];
+                        String severity = (String) selectedRowData[3];
+                        String worseYesterday = (String) selectedRowData[4];
+                        String Record_ID = (String) selectedRowData[5];
 
                         // Populate the JComboBox components with values from the selected record
                         cbox_SOBScale.setSelectedItem(severity);  // Set the severity level in the SOB Scale ComboBox
@@ -401,16 +416,16 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     
     
 
-    public javax.swing.JComboBox<String> getCbox_SOBScale() {
-        return cbox_SOBScale;
+    public String getCbox_SOBScale() {
+        return cbox_SOBScale.getSelectedItem().toString();
     }
 
-    public javax.swing.JComboBox<String> getCbox_SOBT() {
-        return cbox_SOBT;
+    public String getCbox_SOBT() {
+        return cbox_SOBT.getSelectedItem().toString();
     }
 
-    public javax.swing.JComboBox<String> getCbox_SOBYesterday() {
-        return cbox_SOBYesterday;
+    public String getCbox_SOBYesterday() {
+        return cbox_SOBYesterday.getSelectedItem().toString();
     }
     
     public void setCbox_SOBScale(javax.swing.JComboBox<String> cbox_SOBScale) {

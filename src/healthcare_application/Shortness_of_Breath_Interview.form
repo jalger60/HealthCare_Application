@@ -256,10 +256,11 @@
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Mild"/>
-                <StringItem index="1" value="More Severe"/>
-                <StringItem index="2" value="Very Severe"/>
+              <StringArray count="4">
+                <StringItem index="0" value="N/A"/>
+                <StringItem index="1" value="Mild"/>
+                <StringItem index="2" value="More Severe"/>
+                <StringItem index="3" value="Very Severe"/>
               </StringArray>
             </Property>
           </Properties>
