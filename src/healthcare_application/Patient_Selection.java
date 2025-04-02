@@ -4,6 +4,7 @@ package healthcare_application;
 import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.PatientSelection_DBOperations;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
+import healthcare_application.DBUtils.Shortness_Of_Breath_DBOperations;
 import javax.swing.JOptionPane;
 import javax.swing.table.JTableHeader;
 import java.awt.Font;
@@ -12,7 +13,7 @@ public class Patient_Selection extends javax.swing.JFrame {
 
     private static int PatientID;
     Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
-    
+    Shortness_Of_Breath_DBOperations soba = new Shortness_Of_Breath_DBOperations();
     
     
     public Patient_Selection() {
@@ -191,9 +192,17 @@ public class Patient_Selection extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_ATAFormActionPerformed
 
     private void menu_SOBAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SOBAActionPerformed
-        Shortness_of_Breath_Interview SOBA = new Shortness_of_Breath_Interview();
-        SOBA.setVisible(true);
+        
+
+        // Create an instance of Shortness_of_Breath_Interview and pass the patientID
+        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID());
+
+        // Set the form to be visible
+        sobaInterviewForm.setVisible(true);
         this.dispose();
+       
+        
+     
     }//GEN-LAST:event_menu_SOBAActionPerformed
 
     private void btn_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SearchActionPerformed
@@ -221,7 +230,7 @@ public class Patient_Selection extends javax.swing.JFrame {
 
             if (patient != null) {
                 patient.setVisible(true);
-                patient.setPatientID(patientID);
+                patient.setPatientIDPD(patientID);
             } else {
                 JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
             }

@@ -2,14 +2,30 @@
 package healthcare_application;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import healthcare_application.DBUtils.Shortness_Of_Breath_DBOperations;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
-
+    
+    private int patientID;
+    Shortness_Of_Breath_DBOperations soba = new Shortness_Of_Breath_DBOperations();
    
     public Shortness_of_Breath_Interview() {
         initComponents();
         LockScreen();
+    }
+    
+    public Shortness_of_Breath_Interview(int patientID) {
+        this.patientID = patientID;
+        initComponents();
+        LockScreen();
+        initializeTable();
+        
     }
 
     
@@ -80,17 +96,12 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         panel_SOBALayout.setHorizontalGroup(
             panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_SOBALayout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_SOBALayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(l_SOBToday)
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_SOBALayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(l_SOBYesterday)
-                            .addComponent(l_SOBScale))
-                        .addGap(18, 18, 18)))
+                    .addComponent(l_SOBYesterday)
+                    .addComponent(l_SOBScale)
+                    .addComponent(l_SOBToday))
+                .addGap(18, 18, 18)
                 .addGroup(panel_SOBALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbox_SOBT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbox_SOBScale, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,17 +126,20 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
                 .addContainerGap(152, Short.MAX_VALUE))
         );
 
+        tabl_SOBRecords.setAutoCreateRowSorter(true);
         tabl_SOBRecords.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Date", "Shortness of Breath", "Severity Level", "Worse"
             }
         ));
+        tabl_SOBRecords.setShowGrid(true);
         jScrollPane2.setViewportView(tabl_SOBRecords);
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -192,31 +206,31 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(panel_SOBA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addComponent(l_SOBA, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(l_SOBA, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(235, 235, 235))
+                        .addGap(17, 17, 17)
+                        .addComponent(panel_SOBA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(l_SOBA)
-                        .addGap(18, 18, 18)
-                        .addComponent(panel_SOBA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panel_SOBA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -272,28 +286,143 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         cbox_SOBScale.setSelectedIndex(-1);
         cbox_SOBScale.setEnabled(false);
         
-        cbox_SOBYesterday.setEditable(false);
+        cbox_SOBYesterday.setEnabled(false);
         cbox_SOBYesterday.setBackground(Color.lightGray);
         cbox_SOBYesterday.setSelectedIndex(-1);
-        cbox_SOBYesterday.setEnabled(false);
+        cbox_SOBYesterday.setEditable(false);
         
         
     }
     
     private void UnlockScreen () {
         
-        cbox_SOBT.setEditable(true);
-        cbox_SOBT.setBackground(Color.white);
         cbox_SOBT.setEnabled(true);
+        cbox_SOBT.setBackground(Color.white);
+        cbox_SOBT.setEditable(false);
         
-        cbox_SOBScale.setEditable(true);
-        cbox_SOBScale.setBackground(Color.white);
         cbox_SOBScale.setEnabled(true);
+        cbox_SOBScale.setBackground(Color.white);
+        cbox_SOBScale.setEditable(false);
         
-        cbox_SOBYesterday.setEditable(true);
-        cbox_SOBYesterday.setBackground(Color.white);
+        
         cbox_SOBYesterday.setEnabled(true);
+        cbox_SOBYesterday.setBackground(Color.white);
+        cbox_SOBYesterday.setEditable(false);
         
+    }
+    
+    private void initializeTable() {
+    // Call the PatientDBUtils method to get the ResultSet
+    ResultSet rs = Shortness_Of_Breath_DBOperations.PatientDBUtils(patientID);
+
+    if (rs != null) {
+        // Table model to display data in JTable
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Date");
+        model.addColumn("Shortness of Breath");
+        model.addColumn("Severity Level");
+        model.addColumn("Worse Than Yesterday");
+
+        // Store data for comboboxes in a list or map for later use
+        List<Object[]> rowDataList = new ArrayList<>();
+
+        // Populate table with result set data
+        try {
+            while (rs.next()) {
+                Object[] row = new Object[4];
+                row[0] = rs.getString("Date");
+
+                // Convert the "Shortness of Breath" value (1 -> Yes, 0 -> No)
+                int sob = rs.getInt("Shortness of Breath");
+                row[1] = (sob == 1) ? "Yes" : "No";
+
+                // Convert the "Worse Than Yesterday" value (1 -> Yes, 0 -> No)
+                int worseYesterday = rs.getInt("MoreShortThanYesterday");
+                row[3] = (worseYesterday == 1) ? "Yes" : "No";
+
+                // For severity, you can display as-is or map it to other values if necessary
+                row[2] = rs.getString("SeverityLevel");
+
+                // Add row to model
+                model.addRow(row);
+
+                // Store data in the list for future reference
+                rowDataList.add(row);
+            }
+
+            // Set the model to the existing JTable
+            tabl_SOBRecords.setModel(model);
+
+            // Hide the columns (indexes 1, 2, and 3)
+            tabl_SOBRecords.getColumnModel().getColumn(1).setMaxWidth(0);
+            tabl_SOBRecords.getColumnModel().getColumn(1).setMinWidth(0);
+            tabl_SOBRecords.getColumnModel().getColumn(1).setPreferredWidth(0);
+            
+            tabl_SOBRecords.getColumnModel().getColumn(2).setMaxWidth(0);
+            tabl_SOBRecords.getColumnModel().getColumn(2).setMinWidth(0);
+            tabl_SOBRecords.getColumnModel().getColumn(2).setPreferredWidth(0);
+
+            tabl_SOBRecords.getColumnModel().getColumn(3).setMaxWidth(0);
+            tabl_SOBRecords.getColumnModel().getColumn(3).setMinWidth(0);
+            tabl_SOBRecords.getColumnModel().getColumn(3).setPreferredWidth(0);
+
+            // Add ListSelectionListener to the JTable to capture selection changes
+            tabl_SOBRecords.getSelectionModel().addListSelectionListener(e -> {
+                if (!e.getValueIsAdjusting()) {  // Check if the selection has changed
+                    int selectedRow = tabl_SOBRecords.getSelectedRow();
+                    if (selectedRow != -1) {
+                        // Get the values of the selected row from the stored list
+                        Object[] selectedRowData = rowDataList.get(selectedRow);
+                        String date = (String) selectedRowData[0];
+                        String sob = (String) selectedRowData[1];
+                        String severity = (String) selectedRowData[2];
+                        String worseYesterday = (String) selectedRowData[3];
+
+                        // Populate the JComboBox components with values from the selected record
+                        cbox_SOBScale.setSelectedItem(severity);  // Set the severity level in the SOB Scale ComboBox
+                        cbox_SOBT.setSelectedItem(sob);  // Set the Shortness of Breath value in the SOBT ComboBox
+                        cbox_SOBYesterday.setSelectedItem(worseYesterday);  // Set the Worse Than Yesterday value
+                    }
+                }
+            });
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Error processing data: " + e.getMessage());
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Error retrieving data from database.");
+    }
+}
+
+
+
+
+    
+    
+
+    public javax.swing.JComboBox<String> getCbox_SOBScale() {
+        return cbox_SOBScale;
+    }
+
+    public javax.swing.JComboBox<String> getCbox_SOBT() {
+        return cbox_SOBT;
+    }
+
+    public javax.swing.JComboBox<String> getCbox_SOBYesterday() {
+        return cbox_SOBYesterday;
+    }
+    
+    public void setCbox_SOBScale(javax.swing.JComboBox<String> cbox_SOBScale) {
+        this.cbox_SOBScale = cbox_SOBScale;
+    }
+
+    public void setCbox_SOBT(javax.swing.JComboBox<String> cbox_SOBT) {
+        this.cbox_SOBT = cbox_SOBT;
+    }
+
+    public void setCbox_SOBYesterday(javax.swing.JComboBox<String> cbox_SOBYesterday) {
+        this.cbox_SOBYesterday = cbox_SOBYesterday;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

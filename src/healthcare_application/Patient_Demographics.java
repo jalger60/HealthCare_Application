@@ -21,7 +21,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }
     
     public Patient_Demographics(int patientID) {
-        setPatientID(patientID);
+        setPatientIDPD(patientID);
         initComponents();
         LockScreen();
         
@@ -29,11 +29,11 @@ public class Patient_Demographics extends javax.swing.JFrame {
         
     }
     
-    public int getPatientID() {
+    public int getPatientIDPD() {
         return PDpatientID;
     }
     
-    public void setPatientID(int PDpatientID) {
+    public void setPatientIDPD(int PDpatientID) {
         this.PDpatientID = PDpatientID;
     }
     
@@ -438,6 +438,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
         menu_PatientDemographics = new javax.swing.JMenuBar();
         menu_Forms = new javax.swing.JMenu();
         menu_Patient_Selection = new javax.swing.JMenuItem();
+        menu_SOBA = new javax.swing.JMenuItem();
         menu_Actions = new javax.swing.JMenu();
         menu_Add = new javax.swing.JMenuItem();
         menu_Edit = new javax.swing.JMenuItem();
@@ -764,6 +765,14 @@ public class Patient_Demographics extends javax.swing.JFrame {
         });
         menu_Forms.add(menu_Patient_Selection);
 
+        menu_SOBA.setText("Shortness of Breath Assessment");
+        menu_SOBA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_SOBAActionPerformed(evt);
+            }
+        });
+        menu_Forms.add(menu_SOBA);
+
         menu_PatientDemographics.add(menu_Forms);
 
         menu_Actions.setText("Actions");
@@ -866,6 +875,14 @@ public class Patient_Demographics extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_menu_Patient_SelectionActionPerformed
 
+    private void menu_SOBAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SOBAActionPerformed
+        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientIDPD());
+
+        // Set the form to be visible
+        sobaInterviewForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menu_SOBAActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -941,6 +958,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     private javax.swing.JMenu menu_Forms;
     private javax.swing.JMenuBar menu_PatientDemographics;
     private javax.swing.JMenuItem menu_Patient_Selection;
+    private javax.swing.JMenuItem menu_SOBA;
     private javax.swing.JMenuItem menu_Save;
     private javax.swing.JMenuItem menu_delete;
     private javax.swing.JPanel panel_PDemographics;
