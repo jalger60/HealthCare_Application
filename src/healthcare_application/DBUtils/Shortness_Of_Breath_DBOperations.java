@@ -136,6 +136,25 @@ public class Shortness_Of_Breath_DBOperations {
             }
         }
     }
+    
+    public static void insertRecord(int patientID, boolean sob, String severity, boolean moreShort) {
+        String sql = "CALL InsertShortnessOfBreath(?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = PatientSelection_DBOperations.connectToDatabase();
+             CallableStatement stmt = conn.prepareCall(sql)) {
+
+            stmt.setInt(1, patientID);
+            stmt.setDate(2, Date.valueOf(LocalDate.now()));
+            stmt.setTime(3, Time.valueOf(LocalTime.now()));
+            stmt.setBoolean(4, sob);
+            stmt.setString(5, severity);
+            stmt.setBoolean(6, moreShort);
+            stmt.execute();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
   
     

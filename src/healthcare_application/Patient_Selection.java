@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.PatientSelection_DBOperations;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
 import healthcare_application.DBUtils.Shortness_Of_Breath_DBOperations;
+import healthcare_application.DBUtils.Shortness_of_Breath_Auto_Interview;
 import javax.swing.JOptionPane;
 import javax.swing.table.JTableHeader;
 import java.awt.Font;
@@ -43,6 +44,7 @@ public class Patient_Selection extends javax.swing.JFrame {
         menu_SOBA = new javax.swing.JMenuItem();
         menu_PDemographics = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        menu_Auto_SOBA = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,6 +156,15 @@ public class Patient_Selection extends javax.swing.JFrame {
         menu_PSelect_Bar.add(jMenu1);
 
         jMenu2.setText("Actions");
+
+        menu_Auto_SOBA.setText("Shortness of Breath Assessment");
+        menu_Auto_SOBA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Auto_SOBAActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu_Auto_SOBA);
+
         menu_PSelect_Bar.add(jMenu2);
 
         setJMenuBar(menu_PSelect_Bar);
@@ -241,6 +252,10 @@ public class Patient_Selection extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_menu_PDemographicsActionPerformed
+
+    private void menu_Auto_SOBAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Auto_SOBAActionPerformed
+        Shortness_of_Breath_Auto_Interview.conductInterview(getPatientID());
+    }//GEN-LAST:event_menu_Auto_SOBAActionPerformed
 
     public String GetTxt_Search_BoxText() {
         return txt_Search_Box.getText();
@@ -349,6 +364,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_PSelect_Title;
     private javax.swing.JLabel lbl_Search;
     private javax.swing.JMenuItem menu_ATAForm;
+    private javax.swing.JMenuItem menu_Auto_SOBA;
     private javax.swing.JMenuItem menu_PDemographics;
     private javax.swing.JMenuBar menu_PSelect_Bar;
     private javax.swing.JMenuItem menu_SOBA;

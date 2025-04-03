@@ -218,95 +218,72 @@ public class Patient_Demographics extends javax.swing.JFrame {
 
     
    private void LockScreen() {
-     
-        txt_LastName.setText(" ");
-        txt_LastName.setEditable(false);
-        txt_LastName.setBackground(Color.lightGray);
-        
-        txt_PreLastName.setText(" ");
-        txt_PreLastName.setEditable(false);
-        txt_PreLastName.setBackground(Color.lightGray);
-        
-        txt_FirstName.setText("");
-        txt_FirstName.setEditable(false);
-        txt_FirstName.setBackground(Color.LIGHT_GRAY);
+    txt_LastName.setEditable(false);
+    txt_LastName.setBackground(Color.lightGray);
 
-        txt_HomeAddress.setText("");
-        txt_HomeAddress.setEditable(false);
-        txt_HomeAddress.setBackground(Color.LIGHT_GRAY);
+    txt_PreLastName.setEditable(false);
+    txt_PreLastName.setBackground(Color.lightGray);
 
-        txt_City.setText("");
-        txt_City.setEditable(false);
-        txt_City.setBackground(Color.LIGHT_GRAY);
+    txt_FirstName.setEditable(false);
+    txt_FirstName.setBackground(Color.LIGHT_GRAY);
 
-        txt_ZipCode.setText("");
-        txt_ZipCode.setEditable(false);
-        txt_ZipCode.setBackground(Color.LIGHT_GRAY);
+    txt_HomeAddress.setEditable(false);
+    txt_HomeAddress.setBackground(Color.LIGHT_GRAY);
 
-        txt_MobilePhone.setText("");
-        txt_MobilePhone.setEditable(false);
-        txt_MobilePhone.setBackground(Color.LIGHT_GRAY);
+    txt_City.setEditable(false);
+    txt_City.setBackground(Color.LIGHT_GRAY);
 
-        txt_Em_Phone_Num.setText("");
-        txt_Em_Phone_Num.setEditable(false);
-        txt_Em_Phone_Num.setBackground(Color.LIGHT_GRAY);
+    txt_ZipCode.setEditable(false);
+    txt_ZipCode.setBackground(Color.LIGHT_GRAY);
 
-        txt_Email.setText("");
-        txt_Email.setEditable(false);
-        txt_Email.setBackground(Color.LIGHT_GRAY);
+    txt_MobilePhone.setEditable(false);
+    txt_MobilePhone.setBackground(Color.LIGHT_GRAY);
 
-        pass_SSN.setText("");
-        pass_SSN.setEditable(false);
-        pass_SSN.setBackground(Color.LIGHT_GRAY);
+    txt_Em_Phone_Num.setEditable(false);
+    txt_Em_Phone_Num.setBackground(Color.LIGHT_GRAY);
 
-        txtA_CurrentHCP.setText("");
-        txtA_CurrentHCP.setEditable(false);
-        txtA_CurrentHCP.setBackground(Color.LIGHT_GRAY);
+    txt_Email.setEditable(false);
+    txt_Email.setBackground(Color.LIGHT_GRAY);
 
-        txtA_Comments.setText("");
-        txtA_Comments.setEditable(false);
-        txtA_Comments.setBackground(Color.LIGHT_GRAY);
+    pass_SSN.setEditable(false);
+    pass_SSN.setBackground(Color.LIGHT_GRAY);
 
-        txt_NOKR.setText("");
-        txt_NOKR.setEditable(false);
-        txt_NOKR.setBackground(Color.LIGHT_GRAY);
+    txtA_CurrentHCP.setEditable(false);
+    txtA_CurrentHCP.setBackground(Color.LIGHT_GRAY);
 
-        txt_Next_of_kin.setText("");
-        txt_Next_of_kin.setEditable(false);
-        txt_Next_of_kin.setBackground(Color.LIGHT_GRAY);
+    txtA_Comments.setEditable(false);
+    txtA_Comments.setBackground(Color.LIGHT_GRAY);
 
-        // Disable dropdown selections
-        cbox_State.setSelectedIndex(-1);
-        cbox_State.setEnabled(false);
-        cbox_State.setBackground(Color.LIGHT_GRAY);
+    txt_NOKR.setEditable(false);
+    txt_NOKR.setBackground(Color.LIGHT_GRAY);
 
-        cbox_Country.setSelectedIndex(-1);
-        cbox_Country.setEnabled(false);
-        cbox_Country.setBackground(Color.LIGHT_GRAY);
+    txt_Next_of_kin.setEditable(false);
+    txt_Next_of_kin.setBackground(Color.LIGHT_GRAY);
 
-        cbox_Citizenship.setSelectedIndex(-1);
-        cbox_Citizenship.setEnabled(false);
-        cbox_Citizenship.setBackground(Color.LIGHT_GRAY);
+    // Disable dropdown selections without clearing them
+    cbox_State.setEnabled(false);
+    cbox_State.setBackground(Color.LIGHT_GRAY);
 
-        cbox_Gender.setSelectedIndex(-1);
-        cbox_Gender.setEnabled(false);
-        cbox_Gender.setBackground(Color.LIGHT_GRAY);
+    cbox_Country.setEnabled(false);
+    cbox_Country.setBackground(Color.LIGHT_GRAY);
 
-        cbox_Ethnicity.setSelectedIndex(-1);
-        cbox_Ethnicity.setEnabled(false);
-        cbox_Ethnicity.setBackground(Color.LIGHT_GRAY);
+    cbox_Citizenship.setEnabled(false);
+    cbox_Citizenship.setBackground(Color.LIGHT_GRAY);
 
-        cbox_Martial_Status.setSelectedIndex(-1);
-        cbox_Martial_Status.setEnabled(false);
-        cbox_Martial_Status.setBackground(Color.LIGHT_GRAY);
+    cbox_Gender.setEnabled(false);
+    cbox_Gender.setBackground(Color.LIGHT_GRAY);
 
-        // Clear and disable the date chooser
-        datechooser_DOB.setDate(null);
-        datechooser_DOB.setEnabled(false);
-        datechooser_DOB.setBackground(Color.LIGHT_GRAY);
-        
-    
-   }
+    cbox_Ethnicity.setEnabled(false);
+    cbox_Ethnicity.setBackground(Color.LIGHT_GRAY);
+
+    cbox_Martial_Status.setEnabled(false);
+    cbox_Martial_Status.setBackground(Color.LIGHT_GRAY);
+
+    // Disable the date chooser without clearing it
+    datechooser_DOB.setEnabled(false);
+    datechooser_DOB.setBackground(Color.LIGHT_GRAY);
+}
+
    
    private void UnLockScreen () {
         txt_LastName.setEditable(true);
@@ -843,8 +820,10 @@ public class Patient_Demographics extends javax.swing.JFrame {
         
       if (PDpatientID == 0) {
          operations.addPatientDemographics(this);
+         LockScreen();
        } else {
          operations.updatePatientDemographics(this, PDpatientID);
+         LockScreen();
        } 
         
         
