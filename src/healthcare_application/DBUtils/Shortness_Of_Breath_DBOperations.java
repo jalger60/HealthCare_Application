@@ -3,6 +3,8 @@ package healthcare_application.DBUtils;
 
 
 import java.sql.*;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import healthcare_application.Shortness_of_Breath_Interview;
 
 
@@ -41,26 +43,85 @@ public class Shortness_Of_Breath_DBOperations {
         Connection con = null;
         CallableStatement stmt = null;
 
+        try {
+            // Establish database connection
+            con = PatientSelection_DBOperations.connectToDatabase();
+            if (con != null) {
+                // Prepare stored procedure call with seven parameters
+                String qrySP = "{ CALL EditSOBAssessment(?, ?, ?, ?, ?, ?, ?) }";
+                stmt = con.prepareCall(qrySP);
+
+                // Retrieve selected row from JTable
+
+
+                // Retrieve DateTime and Time from JTable
+                String sobDate = sobInterview.getSelectedSOBDate();  // SOB Date (e.g., "April / 01 / 2025")
+                String sobTime = sobInterview.getSelectedSOBTime();  // SOB Time (e.g., "02:30 PM")
+
+                // Convert SOB Date to MySQL DATETIME format (YYYY-MM-DD)
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM / dd / yyyy");
+                LocalDate date = LocalDate.parse(sobDate, dateFormatter);  // Convert to LocalDate
+                String formattedDate = date.toString();  // MySQL format is 'YYYY-MM-DD'
+
+                // Convert SOB Time to MySQL TIME format (HH:MM:SS)
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                LocalTime time = LocalTime.parse(sobTime, timeFormatter);  // Convert to LocalTime
+                String formattedTime = time.toString();  // MySQL format is 'HH:mm:ss'
+
+                // Combine Date and Time into a MySQL-compatible DATETIME (YYYY-MM-DD HH:MM:SS)
+                String formattedDateTime = formattedDate + " " + formattedTime;
+
+                // Set parameters for stored procedure
+                stmt.setInt(1, sobID);  // Record ID
+                stmt.setInt(2, patientID);  // Patient ID
+                stmt.setString(3, formattedDateTime); // DATETIME (YYYY-MM-DD HH:MM:SS)
+                stmt.setString(4, formattedTime); // TIME (HH:MM:SS)
+                stmt.setBoolean(5, "Yes".equals(sobInterview.getCbox_SOBT()));  // ShortnessOfBreath
+                stmt.setString(6, sobInterview.getCbox_SOBScale());  // Severity Level
+                stmt.setBoolean(7, "Yes".equals(sobInterview.getCbox_SOBYesterday()));  // MoreShortThanYesterday
+
+                // Execute stored procedure
+                stmt.executeUpdate();
+
+
+            } else {
+                System.out.println("Failed to connect to the database.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error executing stored procedure: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error parsing date or time: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.out.println("Error closing resources: " + e.getMessage());
+            }
+        }
+   }
+    
+ 
+
+    public void deleteSOBAssessment(int sobID, int patientID) {
+        Connection con = null;
+        CallableStatement stmt = null;
 
         try {
             // Establish database connection
             con = PatientSelection_DBOperations.connectToDatabase();
             if (con != null) {
-                // Prepare stored procedure call
-                String qrySP = "{ CALL EditSOBAssessment(?, ?, ?, ?, ?) }";
+                // Prepare stored procedure call with two parameters
+                String qrySP = "{ CALL DeleteSOBAssessment(?, ?) }";
                 stmt = con.prepareCall(qrySP);
 
+                // Set parameters for the stored procedure
+                stmt.setInt(1, sobID);  // SOB ID
+                stmt.setInt(2, patientID);  // Patient ID
 
-
-                // Set parameters for stored procedure
-                stmt.setInt(1, sobID);                               // Record ID
-                stmt.setInt(2, patientID);                           // Patient ID
-                stmt.setInt(3, "Yes".equals(sobInterview.getCbox_SOBT()) ? 1 : 0);
-                stmt.setString(4, sobInterview.getCbox_SOBScale());              // Severity Level
-                stmt.setInt(5, "Yes".equals(sobInterview.getCbox_SOBYesterday()) ? 1 : 0);
                 // Execute stored procedure
                 stmt.executeUpdate();
-
+                System.out.println("SOBAssessment record marked as deleted.");
             } else {
                 System.out.println("Failed to connect to the database.");
             }
@@ -74,13 +135,8 @@ public class Shortness_Of_Breath_DBOperations {
                 System.out.println("Error closing resources: " + e.getMessage());
             }
         }
+    }
 
-    
-}
-
-
-
-   
-
+  
     
 }

@@ -14,6 +14,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     
     private int patientID;
     private int RecordID;
+    
     Shortness_Of_Breath_DBOperations soba = new Shortness_Of_Breath_DBOperations();
    
     public Shortness_of_Breath_Interview() {
@@ -259,7 +260,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 
     private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed
         
-        // soba.deleteSOBRecord(RecordID, patientID);
+        soba.deleteSOBAssessment(RecordID, patientID);
         LockScreen();
     }//GEN-LAST:event_menu_DeleteActionPerformed
 
@@ -397,6 +398,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
                             
                             setRecordID(RecordID);
                             
+                            
 
                             // Populate the JComboBox components with values from the selected record
                             cbox_SOBScale.setSelectedItem(severity);  // Set the severity level in the SOB Scale ComboBox
@@ -460,6 +462,26 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     
     public void setPatientIDSOBA (int patientID) {
         this.patientID = patientID;
+    }
+    
+    
+    
+    // Method to get SOB Date from the selected row
+    public String getSelectedSOBDate() {
+        int selectedRow = tabl_SOBRecords.getSelectedRow();
+        if (selectedRow != -1) {
+            return tabl_SOBRecords.getValueAt(selectedRow, 0).toString(); // Adjust index if necessary
+        }
+        return null; // No row selected
+    }
+
+    // Method to get SOB Time from the selected row
+    public String getSelectedSOBTime() {
+        int selectedRow = tabl_SOBRecords.getSelectedRow();
+        if (selectedRow != -1) {
+            return tabl_SOBRecords.getValueAt(selectedRow, 1).toString(); // Adjust index if necessary
+        }
+        return null; // No row selected
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
