@@ -258,6 +258,8 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_SaveActionPerformed
 
     private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed
+        
+        // soba.deleteSOBRecord(RecordID, patientID);
         LockScreen();
     }//GEN-LAST:event_menu_DeleteActionPerformed
 
@@ -315,98 +317,101 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     }
     
     private void initializeTable() {
-    // Call the PatientDBUtils method to get the ResultSet
-    ResultSet rs = Shortness_Of_Breath_DBOperations.PatientDBUtils(patientID);
+        // Call the PatientDBUtils method to get the ResultSet
+        ResultSet rs = Shortness_Of_Breath_DBOperations.PatientDBUtils(patientID);
 
-    if (rs != null) {
-        // Table model to display data in JTable
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Date");
-        model.addColumn("Time");
-        model.addColumn("Shortness of Breath");
-        model.addColumn("Severity Level");
-        model.addColumn("Worse Than Yesterday");
-        model.addColumn("Record ID");
+        if (rs != null) {
+            // Table model to display data in JTable
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Date");
+            model.addColumn("Time");
+            model.addColumn("Shortness of Breath");
+            model.addColumn("Severity Level");
+            model.addColumn("Worse Than Yesterday");
+            model.addColumn("Record ID");
 
-        // Store data for comboboxes in a list or map for later use
-        List<Object[]> rowDataList = new ArrayList<>();
+            // Store data for comboboxes in a list or map for later use
+            List<Object[]> rowDataList = new ArrayList<>();
 
-        // Populate table with result set data
-        try {
-            while (rs.next()) {
-                Object[] row = new Object[6];
-                row[0] = rs.getString("Date");
-                row[1] = rs.getString("Time");
+            // Populate table with result set data
+            try {
+                while (rs.next()) {
+                    Object[] row = new Object[6];
+                    row[0] = rs.getString("Date");
+                    row[1] = rs.getString("Time");
 
-                // Convert the "Shortness of Breath" value (1 -> Yes, 0 -> No)
-                int sob = rs.getInt("Shortness of Breath Today");
-                row[2] = (sob == 1) ? "Yes" : "No";
+                    // Convert the "Shortness of Breath" value (1 -> Yes, 0 -> No)
+                    int sob = rs.getInt("Shortness of Breath Today");
+                    row[2] = (sob == 1) ? "Yes" : "No";
 
-                // Convert the "Worse Than Yesterday" value (1 -> Yes, 0 -> No)
-                int worseYesterday = rs.getInt("MoreShortThanYesterday");
-                row[4] = (worseYesterday == 1) ? "Yes" : "No";
+                    // Convert the "Worse Than Yesterday" value (1 -> Yes, 0 -> No)
+                    int worseYesterday = rs.getInt("MoreShortThanYesterday");
+                    row[4] = (worseYesterday == 1) ? "Yes" : "No";
 
-                // For severity, you can display as-is or map it to other values if necessary
-                row[3] = rs.getString("SeverityLevel");
-                
-                RecordID = rs.getInt("SOBID");
-                
+                    // For severity, you can display as-is or map it to other values if necessary
+                    row[3] = rs.getString("SeverityLevel");
 
-                // Add row to model
-                model.addRow(row);
+                    row[5] = rs.getInt("SOBID");
 
-                // Store data in the list for future reference
-                rowDataList.add(row);
-            }
 
-            // Set the model to the existing JTable
-            tabl_SOBRecords.setModel(model);
+                    // Add row to model
+                    model.addRow(row);
 
-            // Hide the columns (indexes 1, 2, and 3)
-            tabl_SOBRecords.getColumnModel().getColumn(2).setMaxWidth(0);
-            tabl_SOBRecords.getColumnModel().getColumn(2).setMinWidth(0);
-            tabl_SOBRecords.getColumnModel().getColumn(2).setPreferredWidth(0);
-            
-            tabl_SOBRecords.getColumnModel().getColumn(3).setMaxWidth(0);
-            tabl_SOBRecords.getColumnModel().getColumn(3).setMinWidth(0);
-            tabl_SOBRecords.getColumnModel().getColumn(3).setPreferredWidth(0);
-
-            tabl_SOBRecords.getColumnModel().getColumn(4).setMaxWidth(0);
-            tabl_SOBRecords.getColumnModel().getColumn(4).setMinWidth(0);
-            tabl_SOBRecords.getColumnModel().getColumn(4).setPreferredWidth(0);
-            
-            tabl_SOBRecords.getColumnModel().getColumn(5).setMaxWidth(0);
-            tabl_SOBRecords.getColumnModel().getColumn(5).setMinWidth(0);
-            tabl_SOBRecords.getColumnModel().getColumn(5).setPreferredWidth(0);
-
-            // Add ListSelectionListener to the JTable to capture selection changes
-            tabl_SOBRecords.getSelectionModel().addListSelectionListener(e -> {
-                if (!e.getValueIsAdjusting()) {  // Check if the selection has changed
-                    int selectedRow = tabl_SOBRecords.getSelectedRow();
-                    if (selectedRow != -1) {
-                        // Get the values of the selected row from the stored list
-                        Object[] selectedRowData = rowDataList.get(selectedRow);
-                        String date = (String) selectedRowData[0];
-                        String Time = (String) selectedRowData[1];
-                        String sob = (String) selectedRowData[2];
-                        String severity = (String) selectedRowData[3];
-                        String worseYesterday = (String) selectedRowData[4];
-                        String Record_ID = (String) selectedRowData[5];
-
-                        // Populate the JComboBox components with values from the selected record
-                        cbox_SOBScale.setSelectedItem(severity);  // Set the severity level in the SOB Scale ComboBox
-                        cbox_SOBT.setSelectedItem(sob);  // Set the Shortness of Breath value in the SOBT ComboBox
-                        cbox_SOBYesterday.setSelectedItem(worseYesterday);  // Set the Worse Than Yesterday value
-                    }
+                    // Store data in the list for future reference
+                    rowDataList.add(row);
                 }
-            });
 
-        } catch (SQLException e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(this, "Error processing data: " + e.getMessage());
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "Error retrieving data from database.");
+                // Set the model to the existing JTable
+                tabl_SOBRecords.setModel(model);
+
+                // Hide the columns (indexes 1, 2, and 3)
+                tabl_SOBRecords.getColumnModel().getColumn(2).setMaxWidth(0);
+                tabl_SOBRecords.getColumnModel().getColumn(2).setMinWidth(0);
+                tabl_SOBRecords.getColumnModel().getColumn(2).setPreferredWidth(0);
+
+                tabl_SOBRecords.getColumnModel().getColumn(3).setMaxWidth(0);
+                tabl_SOBRecords.getColumnModel().getColumn(3).setMinWidth(0);
+                tabl_SOBRecords.getColumnModel().getColumn(3).setPreferredWidth(0);
+
+                tabl_SOBRecords.getColumnModel().getColumn(4).setMaxWidth(0);
+                tabl_SOBRecords.getColumnModel().getColumn(4).setMinWidth(0);
+                tabl_SOBRecords.getColumnModel().getColumn(4).setPreferredWidth(0);
+
+                tabl_SOBRecords.getColumnModel().getColumn(5).setMaxWidth(0);
+                tabl_SOBRecords.getColumnModel().getColumn(5).setMinWidth(0);
+                tabl_SOBRecords.getColumnModel().getColumn(5).setPreferredWidth(0);
+
+                // Add ListSelectionListener to the JTable to capture selection changes
+                tabl_SOBRecords.getSelectionModel().addListSelectionListener(e -> {
+                    if (!e.getValueIsAdjusting()) {  // Check if the selection has changed
+                        int selectedRow = tabl_SOBRecords.getSelectedRow();
+                        if (selectedRow != -1) {
+                            // Get the values of the selected row from the stored list
+                            Object[] selectedRowData = rowDataList.get(selectedRow);
+                            String date = (String) selectedRowData[0];
+                            String Time = (String) selectedRowData[1];
+                            String sob = (String) selectedRowData[2];
+                            String severity = (String) selectedRowData[3];
+                            String worseYesterday = (String) selectedRowData[4];
+                            RecordID = (int) selectedRowData[5];  
+                            
+                            setRecordID(RecordID);
+                            
+
+                            // Populate the JComboBox components with values from the selected record
+                            cbox_SOBScale.setSelectedItem(severity);  // Set the severity level in the SOB Scale ComboBox
+                            cbox_SOBT.setSelectedItem(sob);  // Set the Shortness of Breath value in the SOBT ComboBox
+                            cbox_SOBYesterday.setSelectedItem(worseYesterday);  // Set the Worse Than Yesterday value
+                        }
+                    }
+                });
+
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error processing data: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Error retrieving data from database.");
     }
 }
 
@@ -428,6 +433,15 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         return cbox_SOBYesterday.getSelectedItem().toString();
     }
     
+    public int getRecordID () {
+        return this.RecordID;
+    }
+    
+    public int getPatientIDSOBA () {
+        return this.patientID;
+    }
+    
+    
     public void setCbox_SOBScale(javax.swing.JComboBox<String> cbox_SOBScale) {
         this.cbox_SOBScale = cbox_SOBScale;
     }
@@ -438,6 +452,14 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 
     public void setCbox_SOBYesterday(javax.swing.JComboBox<String> cbox_SOBYesterday) {
         this.cbox_SOBYesterday = cbox_SOBYesterday;
+    }
+    
+    public void setRecordID (int RecordID) {
+        this.RecordID = RecordID;
+    }
+    
+    public void setPatientIDSOBA (int patientID) {
+        this.patientID = patientID;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
