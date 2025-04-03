@@ -248,6 +248,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
         UnlockScreen();
         Shortness_of_Breath_Auto_Interview.conductInterview(patientID);
+        initializeTable();
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
     private void menu_Edit_ModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_ModeActionPerformed
@@ -257,6 +258,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
         
         soba.editSOBAssessment(RecordID, patientID, this);
+        initializeTable();
         LockScreen();
     }//GEN-LAST:event_menu_SaveActionPerformed
 
