@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.Shortness_Of_Breath_DBOperations;
+import healthcare_application.DBUtils.Shortness_of_Breath_Auto_Interview;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -246,6 +247,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
         UnlockScreen();
+        Shortness_of_Breath_Auto_Interview.conductInterview(patientID);
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
     private void menu_Edit_ModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_ModeActionPerformed
@@ -284,18 +286,18 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private void LockScreen () {
         cbox_SOBT.setEditable(false);
         cbox_SOBT.setBackground(Color.lightGray);
-        cbox_SOBT.setSelectedIndex(-1);
         cbox_SOBT.setEnabled(false);
+        cbox_SOBT.setSelectedIndex(-1);
         
         cbox_SOBScale.setEditable(false);
         cbox_SOBScale.setBackground(Color.lightGray);
-        cbox_SOBScale.setSelectedIndex(-1);
         cbox_SOBScale.setEnabled(false);
+        cbox_SOBScale.setSelectedIndex(-1);
         
         cbox_SOBYesterday.setEnabled(false);
         cbox_SOBYesterday.setBackground(Color.lightGray);
-        cbox_SOBYesterday.setSelectedIndex(-1);
         cbox_SOBYesterday.setEditable(false);
+        cbox_SOBYesterday.setSelectedIndex(-1);
         
         
     }
@@ -311,9 +313,11 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         cbox_SOBScale.setEditable(false);
         
         
+        
         cbox_SOBYesterday.setEnabled(true);
         cbox_SOBYesterday.setBackground(Color.white);
         cbox_SOBYesterday.setEditable(false);
+        
         
     }
     

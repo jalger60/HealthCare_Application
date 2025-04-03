@@ -6,6 +6,7 @@ import java.sql.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import healthcare_application.Shortness_of_Breath_Interview;
+import javax.swing.JOptionPane;
 
 
 public class Shortness_Of_Breath_DBOperations {
@@ -143,6 +144,11 @@ public class Shortness_Of_Breath_DBOperations {
         try (Connection conn = PatientSelection_DBOperations.connectToDatabase();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
+            // Ensure severity is not null
+            if (severity == null) {
+                severity = "N/A";
+            }
+
             stmt.setInt(1, patientID);
             stmt.setDate(2, Date.valueOf(LocalDate.now()));
             stmt.setTime(3, Time.valueOf(LocalTime.now()));
@@ -156,6 +162,6 @@ public class Shortness_Of_Breath_DBOperations {
         }
     }
 
-  
+      
     
 }
