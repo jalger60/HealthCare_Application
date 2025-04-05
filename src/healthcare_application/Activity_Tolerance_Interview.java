@@ -2,15 +2,129 @@
 package healthcare_application;
 
 import java.awt.Color;
-
+import java.sql.*;
+import healthcare_application.DBUtils.Activity_Tolerance_Assessment_DBOperations;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Activity_Tolerance_Interview extends javax.swing.JFrame {
-
-   
+    
+    private int patientID;
+    private int RecordID;
+    Activity_Tolerance_Assessment_DBOperations ATA = new Activity_Tolerance_Assessment_DBOperations();
+    
     public Activity_Tolerance_Interview() {
         initComponents();
         LockScreen();
+        
     }
+    
+     public Activity_Tolerance_Interview(int patientID) {
+        setPatientID(patientID);
+        initComponents();
+        initializeTable();
+        LockScreen();
+        
+    }
+    
+    public int getPatientID() {
+        return this.patientID;
+    }
+    
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
+    }
+    
+    public int getRecordID() {
+        return this.RecordID;
+    }
+    
+    public void setRecordID(int RecordID) {
+        this.RecordID = RecordID;
+    }
+    
+    // Getter and Setter for cbox_ClimbStairs (returns selected value as String)
+    public String getCbox_ClimbStairs() {
+        return (String) cbox_ClimbStairs.getSelectedItem();
+    }
+
+    public void setCbox_ClimbStairs(String value) {
+        cbox_ClimbStairs.setSelectedItem(value);
+    }
+
+    // Getter and Setter for cbox_Dressed (returns selected value as String)
+    public String getCbox_Dressed() {
+        return (String) cbox_Dressed.getSelectedItem();
+    }
+
+    public void setCbox_Dressed(String value) {
+        cbox_Dressed.setSelectedItem(value);
+    }
+
+    // Getter and Setter for cbox_Drinking (returns selected value as String)
+    public String getCbox_Drinking() {
+        return (String) cbox_Drinking.getSelectedItem();
+    }
+
+    public void setCbox_Drinking(String value) {
+        cbox_Drinking.setSelectedItem(value);
+    }
+
+    // Getter and Setter for cbox_Eating (returns selected value as String)
+    public String getCbox_Eating() {
+        return (String) cbox_Eating.getSelectedItem();
+    }
+
+    public void setCbox_Eating(String value) {
+        cbox_Eating.setSelectedItem(value);
+    }
+
+    // Getter and Setter for cbox_House (returns selected value as String)
+    public String getCbox_House() {
+        return (String) cbox_House.getSelectedItem();
+    }
+
+    public void setCbox_House(String value) {
+        cbox_House.setSelectedItem(value);
+    }
+
+    // Getter and Setter for txt_NumStairs (returns the value as an int if it's not null)
+    public Integer getTxt_NumStairs() {
+        try {
+            String text = txt_NumStairs.getText();
+            if (text != null && !text.isEmpty()) {
+                return Integer.valueOf(text);
+            }
+        } catch (NumberFormatException e) {
+            // Return a default value (e.g., 0) if the conversion fails or text is not a valid integer
+            System.err.println(e);
+        }
+        return null; // Default value if not a valid integer
+    }
+
+    public void setTxt_NumStairs(int value) {
+        txt_NumStairs.setText(String.valueOf(value));
+    }
+    
+    public String getSelectedATDate() {
+        int selectedRow = tabl_Activity.getSelectedRow();
+        if (selectedRow != -1) {
+            return tabl_Activity.getValueAt(selectedRow, 0).toString(); // Adjust index if necessary
+        }
+        return null; // No row selected
+    }
+
+    // Method to get SOB Time from the selected row
+    public String getSelectedATTime() {
+        int selectedRow = tabl_Activity.getSelectedRow();
+        if (selectedRow != -1) {
+            return tabl_Activity.getValueAt(selectedRow, 1).toString(); // Adjust index if necessary
+        }
+        return null; // No row selected
+    }
+
 
     
     @SuppressWarnings("unchecked")
@@ -30,9 +144,9 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         cbox_Dressed = new javax.swing.JComboBox<>();
         cbox_House = new javax.swing.JComboBox<>();
         cbox_ClimbStairs = new javax.swing.JComboBox<>();
-        cbox_numStairs = new javax.swing.JComboBox<>();
+        txt_NumStairs = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabl_Activity = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_SOBA = new javax.swing.JMenu();
         SOBA_form = new javax.swing.JMenuItem();
@@ -67,22 +181,21 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         lbl_ATClimb1_steps.setText("How many steps are you able to climb ");
 
         cbox_Eating.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cbox_Eating.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
+        cbox_Eating.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "Yes", "No" }));
 
         cbox_Drinking.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cbox_Drinking.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
+        cbox_Drinking.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "Yes", "No" }));
 
         cbox_Dressed.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cbox_Dressed.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
+        cbox_Dressed.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "Yes", "No" }));
 
         cbox_House.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cbox_House.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
+        cbox_House.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "Yes", "No" }));
 
         cbox_ClimbStairs.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cbox_ClimbStairs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yes", "No" }));
+        cbox_ClimbStairs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "Yes", "No" }));
 
-        cbox_numStairs.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cbox_numStairs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1-3", "4-6", "7-10" }));
+        txt_NumStairs.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout panel_ATALayout = new javax.swing.GroupLayout(panel_ATA);
         panel_ATA.setLayout(panel_ATALayout);
@@ -90,7 +203,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
             panel_ATALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_ATALayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(panel_ATALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel_ATALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panel_ATALayout.createSequentialGroup()
                         .addComponent(lbl_ATDressing)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -115,7 +228,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
                     .addGroup(panel_ATALayout.createSequentialGroup()
                         .addComponent(lbl_ATClimb1_steps)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbox_numStairs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_NumStairs)))
                 .addContainerGap(181, Short.MAX_VALUE))
         );
         panel_ATALayout.setVerticalGroup(
@@ -144,22 +257,22 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panel_ATALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_ATClimb1_steps)
-                    .addComponent(cbox_numStairs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(122, Short.MAX_VALUE))
+                    .addComponent(txt_NumStairs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabl_Activity.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Date", "Time"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabl_Activity);
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
@@ -248,7 +361,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panel_ATA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,6 +382,9 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
     private void menu_Save_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Save_RecordActionPerformed
+       
+        ATA.editActivityToleranceByPatient(getRecordID(), patientID, this);
+        System.out.println(getRecordID());
         LockScreen();
     }//GEN-LAST:event_menu_Save_RecordActionPerformed
 
@@ -277,9 +393,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_Delete_RecordActionPerformed
 
     private void menu_Patient_SelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectActionPerformed
-        Patient_Selection patient_select = new Patient_Selection();
-        patient_select.setVisible(true);
-        this.dispose();
+       
     }//GEN-LAST:event_menu_Patient_SelectActionPerformed
 
     
@@ -319,27 +433,27 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private void LockScreen () {
         cbox_Eating.setEnabled(false);
         cbox_Eating.setBackground(Color.lightGray);
-        cbox_Eating.setSelectedIndex(-1);
+        
         
         cbox_Drinking.setEnabled(false);
         cbox_Drinking.setBackground(Color.lightGray);
-        cbox_Drinking.setSelectedIndex(-1);
+        
         
         cbox_Dressed.setEnabled(false);
         cbox_Dressed.setBackground(Color.lightGray);
-        cbox_Dressed.setSelectedIndex(-1);
+        
         
         cbox_House.setEnabled(false);
         cbox_House.setBackground(Color.lightGray);
-        cbox_House.setSelectedIndex(-1);
+        
         
         cbox_ClimbStairs.setEnabled(false);
         cbox_ClimbStairs.setBackground(Color.lightGray);
-        cbox_ClimbStairs.setSelectedIndex(-1);
         
-        cbox_numStairs.setEnabled(false);
-        cbox_numStairs.setBackground(Color.lightGray);
-        cbox_numStairs.setSelectedIndex(-1);
+        
+        txt_NumStairs.setEditable(false);
+        txt_NumStairs.setBackground(Color.lightGray);
+        
                          
                 
     }
@@ -366,12 +480,133 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         cbox_ClimbStairs.setBackground(Color.white);
         cbox_ClimbStairs.setSelectedIndex(-1);
         
-        cbox_numStairs.setEnabled(true);
-        cbox_numStairs.setBackground(Color.white);
-        cbox_numStairs.setSelectedIndex(-1);
+        txt_NumStairs.setEditable(true);
+        txt_NumStairs.setBackground(Color.white);
+        txt_NumStairs.setText(" ");
         
                          
     }
+    
+    private void initializeTable() {
+    // Call the PatientDBUtils method to get the ResultSet
+    ResultSet rs = Activity_Tolerance_Assessment_DBOperations.PatientDBUtils(patientID);
+
+    if (rs != null) {
+        // Table model to display data in JTable
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Date");
+        model.addColumn("Time");
+        model.addColumn("Trouble Eating");
+        model.addColumn("Trouble Drinking");
+        model.addColumn("Trouble Getting Dressed");
+        model.addColumn("Trouble Walking around the House");
+        model.addColumn("Trouble Climbing Stairs");
+        model.addColumn("Number of Stairs");
+        model.addColumn("Record ID");
+
+        // Store data for comboboxes in a list or map for later use
+        List<Object[]> rowDataList = new ArrayList<>();
+
+        // Populate table with result set data
+        try {
+            while (rs.next()) {
+                Object[] row = new Object[9];
+                row[0] = rs.getString("Date");
+                row[1] = rs.getString("Time");
+                row[2] = rs.getString("TroubleEating");
+                row[3] = rs.getString("TroubleDrinking");
+                row[4] = rs.getString("TroubleGettingDressed");
+                row[5] = rs.getString("TroubleWalkingAroundHouse");
+                row[6] = rs.getString("TroubleClimbingStairs");
+                row[7] = rs.getObject("Number_Of_Stairs");
+                row[8] = rs.getInt("Record ID");
+
+                // Add row to model
+                model.addRow(row);
+
+                // Store data in the list for future reference
+                rowDataList.add(row);
+            }
+
+            // Set the model to the existing JTable
+            tabl_Activity.setModel(model);
+
+            // Hide the columns (indexes 2 to 7)
+            tabl_Activity.getColumnModel().getColumn(2).setMaxWidth(0);
+            tabl_Activity.getColumnModel().getColumn(2).setMinWidth(0);
+            tabl_Activity.getColumnModel().getColumn(2).setPreferredWidth(0);
+
+            tabl_Activity.getColumnModel().getColumn(3).setMaxWidth(0);
+            tabl_Activity.getColumnModel().getColumn(3).setMinWidth(0);
+            tabl_Activity.getColumnModel().getColumn(3).setPreferredWidth(0);
+
+            tabl_Activity.getColumnModel().getColumn(4).setMaxWidth(0);
+            tabl_Activity.getColumnModel().getColumn(4).setMinWidth(0);
+            tabl_Activity.getColumnModel().getColumn(4).setPreferredWidth(0);
+
+            tabl_Activity.getColumnModel().getColumn(5).setMaxWidth(0);
+            tabl_Activity.getColumnModel().getColumn(5).setMinWidth(0);
+            tabl_Activity.getColumnModel().getColumn(5).setPreferredWidth(0);
+
+            tabl_Activity.getColumnModel().getColumn(6).setMaxWidth(0);
+            tabl_Activity.getColumnModel().getColumn(6).setMinWidth(0);
+            tabl_Activity.getColumnModel().getColumn(6).setPreferredWidth(0);
+
+            tabl_Activity.getColumnModel().getColumn(7).setMaxWidth(0);
+            tabl_Activity.getColumnModel().getColumn(7).setMinWidth(0);
+            tabl_Activity.getColumnModel().getColumn(7).setPreferredWidth(0);
+            
+            tabl_Activity.getColumnModel().getColumn(8).setMaxWidth(0);
+            tabl_Activity.getColumnModel().getColumn(8).setMinWidth(0);
+            tabl_Activity.getColumnModel().getColumn(8).setPreferredWidth(0);
+
+            // Add ListSelectionListener to the JTable to capture selection changes
+            tabl_Activity.getSelectionModel().addListSelectionListener(e -> {
+                if (!e.getValueIsAdjusting()) {  // Check if the selection has changed
+                    int selectedRow = tabl_Activity.getSelectedRow();
+                    if (selectedRow != -1) {
+                        // Get the values of the selected row from the stored list
+                        Object[] selectedRowData = rowDataList.get(selectedRow);
+                        String date = (String) selectedRowData[0];
+                        String time = (String) selectedRowData[1];
+                        String troubleEating = (String) selectedRowData[2];
+                        String troubleDrinking = (String) selectedRowData[3];
+                        String troubleGettingDressed = (String) selectedRowData[4];
+                        String troubleWalking = (String) selectedRowData[5];
+                        String troubleClimbing = (String) selectedRowData[6];
+                        Object stairsValue = selectedRowData[7];
+                        RecordID = (int) selectedRowData[8];  // Get the Record ID from the row data
+                        
+                        setRecordID(RecordID);
+                       
+                        // Populate the JComboBox components with values from the selected record
+                        cbox_Eating.setSelectedItem(troubleEating);  // Trouble Eating
+                        cbox_Drinking.setSelectedItem(troubleDrinking);  // Trouble Drinking
+                        cbox_Dressed.setSelectedItem(troubleGettingDressed);  // Trouble Getting Dressed
+                        cbox_House.setSelectedItem(troubleWalking);  // Trouble Walking Around House
+                        cbox_ClimbStairs.setSelectedItem(troubleClimbing);  // Trouble Climbing Stairs
+
+                        // Handle the "Number of Stairs" field (null check)
+                        if (stairsValue != null) {
+                            txt_NumStairs.setText(stairsValue.toString());
+                        } else {
+                            txt_NumStairs.setText("");  // Leave empty if null
+                        }
+                    }
+                }
+            });
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Error processing data: " + e.getMessage());
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Error retrieving data from database.");
+    }
+}
+
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem SOBA_form;
@@ -380,10 +615,8 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbox_Drinking;
     private javax.swing.JComboBox<String> cbox_Eating;
     private javax.swing.JComboBox<String> cbox_House;
-    private javax.swing.JComboBox<String> cbox_numStairs;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_ATClimb1_steps;
     private javax.swing.JLabel lbl_ATClimbing_Stairs;
     private javax.swing.JLabel lbl_ATDressing;
@@ -399,5 +632,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private javax.swing.JMenu menu_SOBA;
     private javax.swing.JMenuItem menu_Save_Record;
     private javax.swing.JPanel panel_ATA;
+    private javax.swing.JTable tabl_Activity;
+    private javax.swing.JTextField txt_NumStairs;
     // End of variables declaration//GEN-END:variables
 }

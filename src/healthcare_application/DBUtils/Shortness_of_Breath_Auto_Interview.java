@@ -8,7 +8,7 @@ import javax.swing.*;
 public class Shortness_of_Breath_Auto_Interview {
     
     public static void conductInterview(int patientID) {
-        // Create the decision tree directly within this method
+        // Create the decision tree Node root, q2
         DecisionNode root, q2;
 
         // Build the decision tree
@@ -33,11 +33,31 @@ public class Shortness_of_Breath_Auto_Interview {
             if (response == JOptionPane.YES_OPTION) {
                 if (currentNode == root) { // Q1: Shortness of Breath
                     shortnessOfBreath = true;
+                    boolean valid = false;
+                    int severity = 0;
                     
-                    // Immediately ask severity level
-                    String severityInput = JOptionPane.showInputDialog("On a scale of 1-5, how severe is it?");
-                    int severity = Integer.parseInt(severityInput);
-                    
+                    // Validate severity input between 1 and 5
+                    while (!valid) {
+                        try {
+                            String severityInput = JOptionPane.showInputDialog("On a scale of 1-5, how severe is it?");
+                            if (severityInput == null) {
+                                JOptionPane.showMessageDialog(null, "Severity input canceled.");
+                                return; // Exit interview early if canceled
+                            }
+
+                            severity = Integer.parseInt(severityInput);
+
+                            if (severity >= 1 && severity <= 5) {
+                                valid = true;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Please enter a number between 1 and 5.");
+                            }
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Invalid input. Please enter a numeric value between 1 and 5.");
+                        }
+                    }
+                       
+               
                     if (severity >= 1 && severity <= 3) {
                         severityLevel = "Mild";
                     } else if (severity == 4) {
@@ -61,7 +81,7 @@ public class Shortness_of_Breath_Auto_Interview {
     }
 
     // DecisionNode class to represent each question in the decision tree
-    static class DecisionNode {
+    private static class DecisionNode {
         String question;
         DecisionNode yesBranch;
         DecisionNode noBranch;

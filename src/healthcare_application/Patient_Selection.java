@@ -1,6 +1,7 @@
 
 package healthcare_application;
 
+import healthcare_application.DBUtils.Activity_Tolerance_Assessment_Auto_Interview;
 import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.PatientSelection_DBOperations;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
@@ -45,6 +46,7 @@ public class Patient_Selection extends javax.swing.JFrame {
         menu_PDemographics = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menu_Auto_SOBA = new javax.swing.JMenuItem();
+        menu_ATA = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,6 +167,14 @@ public class Patient_Selection extends javax.swing.JFrame {
         });
         jMenu2.add(menu_Auto_SOBA);
 
+        menu_ATA.setText("Activity Tolerance Assessment");
+        menu_ATA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_ATAActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu_ATA);
+
         menu_PSelect_Bar.add(jMenu2);
 
         setJMenuBar(menu_PSelect_Bar);
@@ -197,7 +207,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_ATAFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAFormActionPerformed
-        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview();
+        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID());
         ATA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menu_ATAFormActionPerformed
@@ -256,6 +266,10 @@ public class Patient_Selection extends javax.swing.JFrame {
     private void menu_Auto_SOBAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Auto_SOBAActionPerformed
         Shortness_of_Breath_Auto_Interview.conductInterview(getPatientID());
     }//GEN-LAST:event_menu_Auto_SOBAActionPerformed
+
+    private void menu_ATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAActionPerformed
+        Activity_Tolerance_Assessment_Auto_Interview.conductInterview(PatientID);
+    }//GEN-LAST:event_menu_ATAActionPerformed
 
     public String GetTxt_Search_BoxText() {
         return txt_Search_Box.getText();
@@ -363,6 +377,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_PSelect_Title;
     private javax.swing.JLabel lbl_Search;
+    private javax.swing.JMenuItem menu_ATA;
     private javax.swing.JMenuItem menu_ATAForm;
     private javax.swing.JMenuItem menu_Auto_SOBA;
     private javax.swing.JMenuItem menu_PDemographics;
