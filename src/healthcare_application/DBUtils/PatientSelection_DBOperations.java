@@ -10,7 +10,7 @@ public class PatientSelection_DBOperations {
 
     public static Connection connectToDatabase() {
         String dbURL = "jdbc:mysql://127.0.0.1:3306"
-                + "/healthcare_app_java?autoReconnect=true&useSSL=false";
+                + "/healthcare_application_java?autoReconnect=true&useSSL=false";
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -86,66 +86,65 @@ public class PatientSelection_DBOperations {
         }
         return tableModel;
     }
-
     
     
-   public DefaultTableModel SearchforAllPatients() {
-    Connection dbConnection = connectToDatabase();
-    CallableStatement callableStatement = null;
-    ResultSet resultSet = null;
+    public DefaultTableModel SearchforAllPatients() {
+        Connection dbConnection = connectToDatabase();
+        CallableStatement callableStatement = null;
+        ResultSet resultSet = null;
 
-    DefaultTableModel tableModel = new DefaultTableModel() {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return false; // Make all cells non-editable
-        }
-    };
+        // Create the table model with column names
+        String[] columnNames = {"Patient ID", "First Name", "Last Name", "Phone Number", "Date of Birth"};
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Make all cells non-editable
+            }
+        };
 
-    if (dbConnection != null) {
-        try {
-            String searchForPatientsSP = "{CALL GetAllPatients()}";
-            callableStatement = dbConnection.prepareCall(searchForPatientsSP);
-            resultSet = callableStatement.executeQuery();
-
-            if (resultSet != null) {
-                ResultSetMetaData metaData = resultSet.getMetaData();
-                int columnCount = metaData.getColumnCount();
-
-                // Add column names dynamically
-                for (int i = 1; i <= columnCount; i++) {
-                    tableModel.addColumn(metaData.getColumnName(i));
-                }
+        if (dbConnection != null) {
+            try {
+                String searchForPatientsSP = "{CALL GetAllPatients()}";
+                callableStatement = dbConnection.prepareCall(searchForPatientsSP);
+                resultSet = callableStatement.executeQuery();
 
                 if (!resultSet.isBeforeFirst()) {
                     JOptionPane.showMessageDialog(null, "No patients found.", "Information", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     while (resultSet.next()) {
-                        Object[] rowData = new Object[columnCount];
-                        for (int i = 1; i <= columnCount; i++) {
-                            rowData[i - 1] = resultSet.getString(i);
-                        }
+                        Object[] rowData = new Object[5];
+                        rowData[0] = resultSet.getString("Patient ID");
+                        rowData[1] = resultSet.getString("First Name");
+                        rowData[2] = resultSet.getString("Last Name");
+                        rowData[3] = resultSet.getString("Phone Number");
+                        rowData[4] = resultSet.getString("Date of Birth");
                         tableModel.addRow(rowData);
                     }
                 }
-            }
 
-        } catch (SQLException ex) {
-            System.err.println("Error executing stored procedure: " + ex.getMessage());
-        } finally {
-            try {
-                if (resultSet != null) resultSet.close();
-                if (callableStatement != null) callableStatement.close();
-                if (dbConnection != null) dbConnection.close(); System.out.println("Connection Closed");
-            } catch (SQLException e) {
-                System.err.println("Error closing resources: " + e.getMessage());
+            } catch (SQLException ex) {
+                System.err.println("Error executing stored procedure: " + ex.getMessage());
+            } finally {
+                try {
+                    if (resultSet != null) resultSet.close();
+                    if (callableStatement != null) callableStatement.close();
+                    if (dbConnection != null) dbConnection.close();
+                    System.out.println("Connection Closed");
+                } catch (SQLException e) {
+                    System.err.println("Error closing resources: " + e.getMessage());
+                }
             }
+        } else {
+            System.out.println("Database connection was not established. Cannot retrieve patients.");
         }
-    } else {
-        System.out.println("Database connection was not established. Cannot retrieve patients.");
+
+        return tableModel;
     }
 
-    return tableModel;
-}
+
+    
+    
+  
 
   
 

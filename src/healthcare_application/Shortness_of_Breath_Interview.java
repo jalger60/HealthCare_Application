@@ -16,7 +16,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private int patientID;
     private int RecordID;
     
-    Shortness_Of_Breath_DBOperations soba = new Shortness_Of_Breath_DBOperations();
+    
    
     public Shortness_of_Breath_Interview() {
         initComponents();
@@ -257,14 +257,14 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
         
-        soba.editSOBAssessment(RecordID, patientID, this);
+        Shortness_Of_Breath_DBOperations.editSOBAssessment(RecordID, patientID, this);
         initializeTable();
         LockScreen();
     }//GEN-LAST:event_menu_SaveActionPerformed
 
     private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed
         
-        soba.deleteSOBAssessment(RecordID, patientID);
+        Shortness_Of_Breath_DBOperations.deleteSOBAssessment(RecordID, patientID);
         LockScreen();
     }//GEN-LAST:event_menu_DeleteActionPerformed
 

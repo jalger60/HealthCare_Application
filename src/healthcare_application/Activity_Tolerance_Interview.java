@@ -1,6 +1,7 @@
 
 package healthcare_application;
 
+import healthcare_application.DBUtils.Activity_Tolerance_Assessment_Auto_Interview;
 import java.awt.Color;
 import java.sql.*;
 import healthcare_application.DBUtils.Activity_Tolerance_Assessment_DBOperations;
@@ -13,7 +14,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     
     private int patientID;
     private int RecordID;
-    Activity_Tolerance_Assessment_DBOperations ATA = new Activity_Tolerance_Assessment_DBOperations();
+    
     
     public Activity_Tolerance_Interview() {
         initComponents();
@@ -378,17 +379,19 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_Edit_RecordActionPerformed
 
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
-        UnlockScreen();
+        Activity_Tolerance_Assessment_Auto_Interview.conductInterview(patientID);
+        initializeTable();
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
     private void menu_Save_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Save_RecordActionPerformed
        
-        ATA.editActivityToleranceByPatient(getRecordID(), patientID, this);
+        Activity_Tolerance_Assessment_DBOperations.editActivityToleranceByPatient(getRecordID(), patientID, this);
         System.out.println(getRecordID());
         LockScreen();
     }//GEN-LAST:event_menu_Save_RecordActionPerformed
 
     private void menu_Delete_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Delete_RecordActionPerformed
+        Activity_Tolerance_Assessment_DBOperations.deleteATAssessment(getRecordID(), patientID);
         LockScreen();
     }//GEN-LAST:event_menu_Delete_RecordActionPerformed
 

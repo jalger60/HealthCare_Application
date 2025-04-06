@@ -40,7 +40,7 @@ public class Shortness_Of_Breath_DBOperations {
         return rs;
     }
     
-    public void editSOBAssessment(int sobID, int patientID, Shortness_of_Breath_Interview sobInterview) {
+    public static void editSOBAssessment(int sobID, int patientID, Shortness_of_Breath_Interview sobInterview) {
         Connection con = null;
         CallableStatement stmt = null;
 
@@ -104,7 +104,7 @@ public class Shortness_Of_Breath_DBOperations {
     
  
 
-    public void deleteSOBAssessment(int sobID, int patientID) {
+    public static void deleteSOBAssessment(int sobID, int patientID) {
         Connection con = null;
         CallableStatement stmt = null;
 

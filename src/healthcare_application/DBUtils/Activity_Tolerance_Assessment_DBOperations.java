@@ -107,7 +107,7 @@ public class Activity_Tolerance_Assessment_DBOperations {
     }
     
     
-    public void editActivityToleranceByPatient(int activityToleranceID, int patientID, Activity_Tolerance_Interview activityTolerance) {
+    public static void editActivityToleranceByPatient(int activityToleranceID, int patientID, Activity_Tolerance_Interview activityTolerance) {
         Connection con = null;
         CallableStatement stmt = null;
 
@@ -171,6 +171,41 @@ public class Activity_Tolerance_Assessment_DBOperations {
             System.out.println("Invalid input: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Error parsing date or time: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                System.out.println("Error closing resources: " + e.getMessage());
+            }
+        }
+    }
+    
+    
+    public static void deleteATAssessment(int ATID, int patientID) {
+        Connection con = null;
+        CallableStatement stmt = null;
+
+        try {
+            // Establish database connection
+            con = PatientSelection_DBOperations.connectToDatabase();
+            if (con != null) {
+                // Prepare stored procedure call with two parameters
+                String qrySP = "{ CALL DeleteActivityTolerance(?, ?) }";
+                stmt = con.prepareCall(qrySP);
+
+                // Set parameters for the stored procedure
+                stmt.setInt(1, ATID);  // SOB ID
+                stmt.setInt(2, patientID);  // Patient ID
+
+                // Execute stored procedure
+                stmt.executeUpdate();
+                System.out.println("Activity Assessment record marked as deleted.");
+            } else {
+                System.out.println("Failed to connect to the database.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error executing stored procedure: " + e.getMessage());
         } finally {
             try {
                 if (stmt != null) stmt.close();
