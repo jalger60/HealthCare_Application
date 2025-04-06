@@ -282,7 +282,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_BackToAllActionPerformed
 
     private void menu_GMH_FormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_GMH_FormActionPerformed
-        
+        GMH_Auto_Interview.start(PatientID);
     }//GEN-LAST:event_menu_GMH_FormActionPerformed
 
     public String GetTxt_Search_BoxText() {
