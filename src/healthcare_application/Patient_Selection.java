@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.PatientSelection_DBOperations;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
 import healthcare_application.DBUtils.Shortness_Of_Breath_DBOperations;
+import healthcare_application.DBUtils.GMH_DBOperations;
 import healthcare_application.DBUtils.Shortness_of_Breath_Auto_Interview;
 import healthcare_application.DBUtils.GMH_Auto_Interview;
 import javax.swing.JOptionPane;
@@ -45,6 +46,7 @@ public class Patient_Selection extends javax.swing.JFrame {
         menu_ATAForm = new javax.swing.JMenuItem();
         menu_SOBA = new javax.swing.JMenuItem();
         menu_PDemographics = new javax.swing.JMenuItem();
+        menu_GMH = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menu_Auto_SOBA = new javax.swing.JMenuItem();
         menu_ATA = new javax.swing.JMenuItem();
@@ -156,6 +158,14 @@ public class Patient_Selection extends javax.swing.JFrame {
             }
         });
         jMenu1.add(menu_PDemographics);
+
+        menu_GMH.setText("General Medical History Form");
+        menu_GMH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_GMHActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menu_GMH);
 
         menu_PSelect_Bar.add(jMenu1);
 
@@ -285,6 +295,15 @@ public class Patient_Selection extends javax.swing.JFrame {
         GMH_Auto_Interview.start(PatientID);
     }//GEN-LAST:event_menu_GMH_FormActionPerformed
 
+    private void menu_GMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_GMHActionPerformed
+        GMH_DBOperations gmho = new GMH_DBOperations();
+        General_Medical_History history = gmho.getGeneralMedicalHistory(PatientID);
+        
+        history.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_menu_GMHActionPerformed
+
     public String GetTxt_Search_BoxText() {
         return txt_Search_Box.getText();
     }
@@ -394,6 +413,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_ATA;
     private javax.swing.JMenuItem menu_ATAForm;
     private javax.swing.JMenuItem menu_Auto_SOBA;
+    private javax.swing.JMenuItem menu_GMH;
     private javax.swing.JMenuItem menu_GMH_Form;
     private javax.swing.JMenuItem menu_PDemographics;
     private javax.swing.JMenuBar menu_PSelect_Bar;
