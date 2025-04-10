@@ -42,34 +42,36 @@ public class Activity_Tolerance_Assessment_DBOperations {
     }
     
     
-    public static void insertActivityToleranceRecord(
-        int patientID,
-        boolean eating,
-        boolean drinking,
-        boolean gettingDressed,
-        boolean walking,
-        boolean stairs,
-        Integer stairQty // Can be null
-        ) {
-    // Updated SQL to match stored procedure (with 10 parameters)
+public static void insertActivityToleranceRecord(
+    int patientID,
+    Boolean eating,  // Changed to Boolean to handle null
+    Boolean drinking, // Changed to Boolean to handle null
+    Boolean gettingDressed, // Changed to Boolean to handle null
+    Boolean walking, // Changed to Boolean to handle null
+    Boolean stairs, // Changed to Boolean to handle null
+    Integer stairQty // Can be null
+) {
+    // Updated SQL to match stored procedure (with 9 parameters)
     String sql = "CALL InsertActivityTolerance(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     Connection conn = null;
     CallableStatement stmt = null;
 
     try {
+        // Establish database connection
         conn = PatientSelection_DBOperations.connectToDatabase();
         stmt = conn.prepareCall(sql);
 
         // Setting parameters for the stored procedure
         stmt.setInt(1, patientID); // PatientID
-        stmt.setDate(2, Date.valueOf(LocalDate.now())); // ATDate
-        stmt.setTime(3, Time.valueOf(LocalTime.now())); // ATTime
-        stmt.setBoolean(4, eating); // Eating
-        stmt.setBoolean(5, drinking); // Drinking
-        stmt.setBoolean(6, gettingDressed); // GettingDressed
-        stmt.setBoolean(7, walking); // Walking
-        stmt.setBoolean(8, stairs); // Stairs
+        stmt.setDate(2, Date.valueOf(LocalDate.now())); // ATDate (current date)
+        stmt.setTime(3, Time.valueOf(LocalTime.now())); // ATTime (current time)
+
+        stmt.setObject(4, eating); // Eating
+        stmt.setObject(5, drinking); // Drinking
+        stmt.setObject(6, gettingDressed); // GettingDressed
+        stmt.setObject(7, walking); // Walking
+        stmt.setObject(8, stairs); // Stairs
 
         // Handling the stairQty parameter if it is null or not
         if (stairQty != null) {
@@ -83,10 +85,10 @@ public class Activity_Tolerance_Assessment_DBOperations {
         System.out.println("Activity Tolerance record inserted successfully.");
 
     } catch (SQLException e) {
-        System.err.println("Error executing procedure: " + e);
-        // Log or rethrow exception here for better debugging
+        System.err.println("Error executing procedure: " + e.getMessage());
+        e.printStackTrace(); // Optionally, log the full stack trace for debugging purposes
     } finally {
-        // Close the statement
+        // Close the statement and connection in the finally block to ensure they are closed even in case of error
         try {
             if (stmt != null && !stmt.isClosed()) {
                 stmt.close();
@@ -95,7 +97,6 @@ public class Activity_Tolerance_Assessment_DBOperations {
             System.out.println("Error closing CallableStatement: " + ex.getMessage());
         }
 
-        // Close the connection
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
@@ -103,8 +104,9 @@ public class Activity_Tolerance_Assessment_DBOperations {
         } catch (SQLException ex) {
             System.out.println("Error closing Connection: " + ex.getMessage());
         }
-      }
     }
+}
+
     
     
     public static void editActivityToleranceByPatient(int activityToleranceID, int patientID, Activity_Tolerance_Interview activityTolerance) {
