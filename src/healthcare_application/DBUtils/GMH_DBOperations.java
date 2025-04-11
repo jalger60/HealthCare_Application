@@ -68,8 +68,8 @@ public class GMH_DBOperations {
                 rs = stmt.executeQuery();
 
                 if (rs.next()) {
-                    history.setGMHID(rs.getString("GeneralMedicalHistoryID"));
-                    history.setPatientID(rs.getString("PatientID"));
+                    history.setGMHID(rs.getInt("GeneralMedicalHistoryID"));
+                    history.setPatientID(rs.getInt("PatientID"));
                     history.setTobaccoUse(rs.getString("Tobacco"));
                     history.setTobaccoQuantity(rs.getString("TobaccoQuantity"));
                     history.setTobaccoDuration(rs.getString("Tobaccoduraton"));

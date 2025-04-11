@@ -2,8 +2,10 @@
 package healthcare_application;
 
 
+import healthcare_application.DBUtils.GMH_DBOperations;
 import javax.swing.*;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
+import static healthcare_application.Patient_Selection.getPatientID;
 import java.awt.Color;
 
 
@@ -416,6 +418,8 @@ public class Patient_Demographics extends javax.swing.JFrame {
         menu_Forms = new javax.swing.JMenu();
         menu_Patient_Selection = new javax.swing.JMenuItem();
         menu_SOBA = new javax.swing.JMenuItem();
+        menu_ATA = new javax.swing.JMenuItem();
+        menu_GMH = new javax.swing.JMenuItem();
         menu_Actions = new javax.swing.JMenu();
         menu_Add = new javax.swing.JMenuItem();
         menu_Edit = new javax.swing.JMenuItem();
@@ -750,6 +754,22 @@ public class Patient_Demographics extends javax.swing.JFrame {
         });
         menu_Forms.add(menu_SOBA);
 
+        menu_ATA.setText("Activity Tolerance Assessment");
+        menu_ATA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_ATAActionPerformed(evt);
+            }
+        });
+        menu_Forms.add(menu_ATA);
+
+        menu_GMH.setText("General Medical History Form");
+        menu_GMH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_GMHActionPerformed(evt);
+            }
+        });
+        menu_Forms.add(menu_GMH);
+
         menu_PatientDemographics.add(menu_Forms);
 
         menu_Actions.setText("Actions");
@@ -862,6 +882,20 @@ public class Patient_Demographics extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_menu_SOBAActionPerformed
 
+    private void menu_ATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAActionPerformed
+        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientIDPD());
+        ATA.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menu_ATAActionPerformed
+
+    private void menu_GMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_GMHActionPerformed
+        GMH_DBOperations gmho = new GMH_DBOperations();
+        General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientIDPD());
+        
+        history.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menu_GMHActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -931,10 +965,12 @@ public class Patient_Demographics extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_SSN;
     private javax.swing.JLabel lbl_State;
     private javax.swing.JLabel lbl_ZipCode;
+    private javax.swing.JMenuItem menu_ATA;
     private javax.swing.JMenu menu_Actions;
     private javax.swing.JMenuItem menu_Add;
     private javax.swing.JMenuItem menu_Edit;
     private javax.swing.JMenu menu_Forms;
+    private javax.swing.JMenuItem menu_GMH;
     private javax.swing.JMenuBar menu_PatientDemographics;
     private javax.swing.JMenuItem menu_Patient_Selection;
     private javax.swing.JMenuItem menu_SOBA;

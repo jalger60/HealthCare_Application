@@ -1,12 +1,14 @@
 
 package healthcare_application;
 
+import healthcare_application.DBUtils.GMH_DBOperations;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.Shortness_Of_Breath_DBOperations;
 import healthcare_application.DBUtils.Shortness_of_Breath_Auto_Interview;
+import static healthcare_application.Patient_Selection.getPatientID;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     }
     
     public Shortness_of_Breath_Interview(int patientID) {
-        this.patientID = patientID;
+        setPatientIDSOBA(patientID);
         initComponents();
         LockScreen();
         initializeTable();
@@ -52,6 +54,8 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         menu_Forms = new javax.swing.JMenu();
         menu_ATA = new javax.swing.JMenuItem();
         menu_Patient_Selection = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        menu_GMH = new javax.swing.JMenuItem();
         menu_Actions = new javax.swing.JMenu();
         menu_Add_Record = new javax.swing.JMenuItem();
         menu_Edit_Mode = new javax.swing.JMenuItem();
@@ -165,6 +169,22 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         });
         menu_Forms.add(menu_Patient_Selection);
 
+        jMenuItem1.setText("Activity Tolerance Form");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menu_Forms.add(jMenuItem1);
+
+        menu_GMH.setText("General Medical History Form");
+        menu_GMH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_GMHActionPerformed(evt);
+            }
+        });
+        menu_Forms.add(menu_GMH);
+
         jMenuBar1.add(menu_Forms);
 
         menu_Actions.setText("Actions");
@@ -240,14 +260,14 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_ATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAActionPerformed
-         Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview();
-         ATA.setVisible(true);
-         this.dispose();
+        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientIDSOBA());
+        ATA.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_menu_ATAActionPerformed
 
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
         UnlockScreen();
-        Shortness_of_Breath_Auto_Interview.conductInterview(patientID);
+        Shortness_of_Breath_Auto_Interview.conductInterview(getPatientIDSOBA());
         initializeTable();
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
@@ -257,22 +277,37 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
         
-        Shortness_Of_Breath_DBOperations.editSOBAssessment(RecordID, patientID, this);
+        Shortness_Of_Breath_DBOperations.editSOBAssessment(RecordID, getPatientIDSOBA(), this);
         initializeTable();
         LockScreen();
     }//GEN-LAST:event_menu_SaveActionPerformed
 
     private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed
         
-        Shortness_Of_Breath_DBOperations.deleteSOBAssessment(RecordID, patientID);
+        Shortness_Of_Breath_DBOperations.deleteSOBAssessment(RecordID, getPatientIDSOBA());
         LockScreen();
     }//GEN-LAST:event_menu_DeleteActionPerformed
 
     private void menu_Patient_SelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectionActionPerformed
         Patient_Selection patient_select = new Patient_Selection();
         patient_select.setVisible(true);
+        patient_select.setPatientID(getPatientIDSOBA());
         this.dispose();
     }//GEN-LAST:event_menu_Patient_SelectionActionPerformed
+
+    private void menu_GMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_GMHActionPerformed
+        GMH_DBOperations gmho = new GMH_DBOperations();
+        General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientIDSOBA());
+        
+        history.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menu_GMHActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientIDSOBA());
+        ATA.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     
     public static void main(String args[]) {
@@ -495,6 +530,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbox_SOBT;
     private javax.swing.JComboBox<String> cbox_SOBYesterday;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
@@ -508,6 +544,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_Delete;
     private javax.swing.JMenuItem menu_Edit_Mode;
     private javax.swing.JMenu menu_Forms;
+    private javax.swing.JMenuItem menu_GMH;
     private javax.swing.JMenuItem menu_Patient_Selection;
     private javax.swing.JMenuItem menu_Save;
     private javax.swing.JPanel panel_SOBA;

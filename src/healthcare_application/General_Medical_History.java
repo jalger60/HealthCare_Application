@@ -3,7 +3,10 @@ package healthcare_application;
 
 
 import healthcare_application.DBUtils.GMH_DBOperations;
+import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
+import static healthcare_application.Patient_Selection.getPatientID;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 public class General_Medical_History extends javax.swing.JFrame {
 
     private int patientID;
@@ -19,10 +22,6 @@ public class General_Medical_History extends javax.swing.JFrame {
     private void initComponents() {
 
         GenMedTitle = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        txt_GMH_ID = new javax.swing.JTextField();
-        txt_Patient_ID = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         txt_Tobacco_Use = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -46,12 +45,11 @@ public class General_Medical_History extends javax.swing.JFrame {
         cbox_BloodType = new javax.swing.JComboBox<>();
         cbox_RH = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        menu_Shortness_Of_Breath = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menu_Patient_Demographics = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        menu_ATA = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         menu_Edit = new javax.swing.JRadioButtonMenuItem();
@@ -59,23 +57,10 @@ public class General_Medical_History extends javax.swing.JFrame {
         menu_Delete = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(840, 748));
 
         GenMedTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         GenMedTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         GenMedTitle.setText("General Medical History");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("General Medical History ID: ");
-
-        txt_GMH_ID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        txt_Patient_ID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("*Patient ID: ");
 
         txt_Tobacco_Use.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -147,25 +132,42 @@ public class General_Medical_History extends javax.swing.JFrame {
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(92, 40));
 
-        jMenu2.setText("Navigate");
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menu_Shortness_Of_Breath.setText("Navigate");
+        menu_Shortness_Of_Breath.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jMenuItem1.setText("Patient Selection");
-        jMenu2.add(jMenuItem1);
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menu_Shortness_Of_Breath.add(jMenuItem1);
 
-        jMenuItem2.setText("Patient Demographics");
-        jMenu2.add(jMenuItem2);
-
-        jMenuItem3.setText("General Medical History");
-        jMenu2.add(jMenuItem3);
+        menu_Patient_Demographics.setText("Patient Demographics");
+        menu_Patient_Demographics.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Patient_DemographicsActionPerformed(evt);
+            }
+        });
+        menu_Shortness_Of_Breath.add(menu_Patient_Demographics);
 
         jMenuItem4.setText("Shortness of Breath");
-        jMenu2.add(jMenuItem4);
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        menu_Shortness_Of_Breath.add(jMenuItem4);
 
-        jMenuItem5.setText("Activity Tolerance");
-        jMenu2.add(jMenuItem5);
+        menu_ATA.setText("Activity Tolerance");
+        menu_ATA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_ATAActionPerformed(evt);
+            }
+        });
+        menu_Shortness_Of_Breath.add(menu_ATA);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menu_Shortness_Of_Breath);
 
         jMenu1.setText("Actions");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -210,38 +212,29 @@ public class General_Medical_History extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txt_Patient_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txt_Tobacco_Use, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txt_Tob_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txt_Tob_Duration, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txt_Alcohol_Use, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txt_Alcohol_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_GMH_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(txt_Tobacco_Use, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_Tob_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_Tob_Duration, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_Alcohol_Use, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_Alcohol_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,36 +272,8 @@ public class General_Medical_History extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(GenMedTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txt_GMH_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txt_Patient_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt_Tobacco_Use, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txt_Tob_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txt_Tob_Duration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txt_Alcohol_Use, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txt_Alcohol_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
@@ -328,13 +293,32 @@ public class General_Medical_History extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(cbox_BloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbox_BloodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txt_Tobacco_Use, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(cbox_RH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                            .addComponent(jLabel4)
+                            .addComponent(txt_Tob_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txt_Tob_Duration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txt_Alcohol_Use, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txt_Alcohol_Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(cbox_RH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         pack();
@@ -345,15 +329,50 @@ public class General_Medical_History extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_EditActionPerformed
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
-        patientID = Integer.parseInt(getPatientID());
-        gmhID = Integer.parseInt(getGMHID());
-        GMH_DBOperations.updateGeneralMedicalHistory(this, gmhID, patientID);
+    
+        GMH_DBOperations.updateGeneralMedicalHistory(this, getGMHID(), getPatientID());
         
     }//GEN-LAST:event_menu_SaveActionPerformed
 
     private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed
-        GMH_DBOperations.deleteGeneralMedicalHistory(gmhID, patientID);
+        GMH_DBOperations.deleteGeneralMedicalHistory(getGMHID(), getPatientID());
     }//GEN-LAST:event_menu_DeleteActionPerformed
+
+    private void menu_Patient_DemographicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_DemographicsActionPerformed
+        
+        Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
+        Patient_Demographics patient = operations.getPatientDemographics(getPatientID());
+
+            if (patient != null) {
+                patient.setVisible(true);
+                patient.setPatientIDPD(patientID);
+            } else {
+                JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            this.dispose();
+    }//GEN-LAST:event_menu_Patient_DemographicsActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // Create an instance of Shortness_of_Breath_Interview and pass the patientID
+        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID());
+
+        // Set the form to be visible
+        sobaInterviewForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void menu_ATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAActionPerformed
+         Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID());
+         ATA.setVisible(true);
+         this.dispose();
+    }//GEN-LAST:event_menu_ATAActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Patient_Selection select = new Patient_Selection ();
+        select.setVisible(true);
+        select.setPatientID(getPatientID());
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,20 +475,20 @@ public class General_Medical_History extends javax.swing.JFrame {
         txt_Drug_Use.setText(use);
     }
 
-    public String getGMHID() {
-        return txt_GMH_ID.getText();
+    public int getGMHID() {
+        return this.gmhID;
     }
 
-    public void setGMHID(String gmhID) {
-        txt_GMH_ID.setText(gmhID);
+    public void setGMHID(int gmhID) {
+        this.gmhID = gmhID;
     }
 
-    public String getPatientID() {
-        return txt_Patient_ID.getText();
+    public int getPatientID() {
+        return this.patientID;
     }
 
-    public void setPatientID(String patientID) {
-        txt_Patient_ID.setText(patientID);
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
     }
 
     public String getTobaccoDuration() {
@@ -516,11 +535,6 @@ public class General_Medical_History extends javax.swing.JFrame {
         txt_Drug_Use.setEditable(false);
         txt_Drug_Use.setBackground(Color.LIGHT_GRAY);
 
-        txt_GMH_ID.setEditable(false);
-        txt_GMH_ID.setBackground(Color.LIGHT_GRAY);
-
-        txt_Patient_ID.setEditable(false);
-        txt_Patient_ID.setBackground(Color.LIGHT_GRAY);
 
         txt_Tob_Duration.setEditable(false);
         txt_Tob_Duration.setBackground(Color.LIGHT_GRAY);
@@ -569,13 +583,6 @@ public class General_Medical_History extends javax.swing.JFrame {
         txt_Tobacco_Use.setEditable(true);
         txt_Tobacco_Use.setBackground(Color.WHITE);
 
-        // GMH_ID and Patient_ID: Read-only (not editable)
-        txt_GMH_ID.setEditable(false);
-        txt_GMH_ID.setBackground(Color.WHITE);
-
-        txt_Patient_ID.setEditable(false);
-        txt_Patient_ID.setBackground(Color.WHITE);
-
         // Enable and set background for JComboBoxes
         cbox_BloodType.setEnabled(true);
         cbox_BloodType.setBackground(Color.WHITE);
@@ -591,12 +598,10 @@ public class General_Medical_History extends javax.swing.JFrame {
     private javax.swing.JLabel GenMedTitle;
     private javax.swing.JComboBox<String> cbox_BloodType;
     private javax.swing.JComboBox<String> cbox_RH;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -605,25 +610,22 @@ public class General_Medical_History extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JMenuItem menu_ATA;
     private javax.swing.JRadioButtonMenuItem menu_Delete;
     private javax.swing.JRadioButtonMenuItem menu_Edit;
+    private javax.swing.JMenuItem menu_Patient_Demographics;
     private javax.swing.JRadioButtonMenuItem menu_Save;
+    private javax.swing.JMenu menu_Shortness_Of_Breath;
     private javax.swing.JTextField txt_Alcohol_Duration;
     private javax.swing.JTextField txt_Alcohol_Quantity;
     private javax.swing.JTextField txt_Alcohol_Use;
     private javax.swing.JTextField txt_Drug_Duration;
     private javax.swing.JTextField txt_Drug_Type;
     private javax.swing.JTextField txt_Drug_Use;
-    private javax.swing.JTextField txt_GMH_ID;
-    private javax.swing.JTextField txt_Patient_ID;
     private javax.swing.JTextField txt_Tob_Duration;
     private javax.swing.JTextField txt_Tob_Quantity;
     private javax.swing.JTextField txt_Tobacco_Use;

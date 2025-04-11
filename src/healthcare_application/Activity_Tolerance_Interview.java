@@ -5,6 +5,9 @@ import healthcare_application.DBUtils.Activity_Tolerance_Assessment_Auto_Intervi
 import java.awt.Color;
 import java.sql.*;
 import healthcare_application.DBUtils.Activity_Tolerance_Assessment_DBOperations;
+import healthcare_application.DBUtils.GMH_DBOperations;
+import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
+import static healthcare_application.Patient_Selection.getPatientID;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -152,6 +155,8 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         menu_SOBA = new javax.swing.JMenu();
         SOBA_form = new javax.swing.JMenuItem();
         menu_Patient_Select = new javax.swing.JMenuItem();
+        menu_GMH = new javax.swing.JMenuItem();
+        menu_Patient_Demographics = new javax.swing.JMenuItem();
         menu_ATAOptions = new javax.swing.JMenu();
         menu_Add_Record = new javax.swing.JMenuItem();
         menu_Edit_Record = new javax.swing.JMenuItem();
@@ -295,6 +300,22 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         });
         menu_SOBA.add(menu_Patient_Select);
 
+        menu_GMH.setText("General Medical History Form");
+        menu_GMH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_GMHActionPerformed(evt);
+            }
+        });
+        menu_SOBA.add(menu_GMH);
+
+        menu_Patient_Demographics.setText("Patient Demographics Form");
+        menu_Patient_Demographics.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_Patient_DemographicsActionPerformed(evt);
+            }
+        });
+        menu_SOBA.add(menu_Patient_Demographics);
+
         jMenuBar1.add(menu_SOBA);
 
         menu_ATAOptions.setText("Actions");
@@ -369,9 +390,13 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SOBA_formActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SOBA_formActionPerformed
-        Shortness_of_Breath_Interview SOBA = new Shortness_of_Breath_Interview();
-        SOBA.setVisible(true);
+        // Create an instance of Shortness_of_Breath_Interview and pass the patientID
+        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID());
+
+        // Set the form to be visible
+        sobaInterviewForm.setVisible(true);
         this.dispose();
+
     }//GEN-LAST:event_SOBA_formActionPerformed
 
     private void menu_Edit_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_RecordActionPerformed
@@ -396,8 +421,31 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_Delete_RecordActionPerformed
 
     private void menu_Patient_SelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectActionPerformed
-       
+            Patient_Selection patient_select = new Patient_Selection();
+            patient_select.setVisible(true);
+            patient_select.setPatientID(getPatientID());
+            this.dispose();
     }//GEN-LAST:event_menu_Patient_SelectActionPerformed
+
+    private void menu_Patient_DemographicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_DemographicsActionPerformed
+        Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
+        Patient_Demographics patient = operations.getPatientDemographics(getPatientID());
+
+            if (patient != null) {
+                patient.setVisible(true);
+                patient.setPatientIDPD(getPatientID());
+            } else {
+                JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_menu_Patient_DemographicsActionPerformed
+
+    private void menu_GMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_GMHActionPerformed
+        GMH_DBOperations gmho = new GMH_DBOperations();
+        General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientID());
+        
+        history.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menu_GMHActionPerformed
 
     
     public static void main(String args[]) {
@@ -631,6 +679,8 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_Add_Record;
     private javax.swing.JMenuItem menu_Delete_Record;
     private javax.swing.JMenuItem menu_Edit_Record;
+    private javax.swing.JMenuItem menu_GMH;
+    private javax.swing.JMenuItem menu_Patient_Demographics;
     private javax.swing.JMenuItem menu_Patient_Select;
     private javax.swing.JMenu menu_SOBA;
     private javax.swing.JMenuItem menu_Save_Record;
