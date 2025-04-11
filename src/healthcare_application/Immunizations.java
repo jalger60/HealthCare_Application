@@ -1,20 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package healthcare_application;
 
-/**
- *
- * @author jaked
- */
+import static com.mysql.cj.util.StringUtils.isNullOrEmpty;
+import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.List;
+import healthcare_application.DBUtils.Immunizations_DBOperations;
+
 public class Immunizations extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Immunizations
-     */
+    private int patientID;
+    private int RecordID;
+    
+    
     public Immunizations() {
         initComponents();
+        
+    }
+    
+    public Immunizations(int patientID) {
+        setPatientID(patientID);
+        initComponents();
+        initializeTable();
     }
 
     /**
@@ -29,16 +40,18 @@ public class Immunizations extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txt_delivery = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txt_Comments = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txt_HCPId = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabl_Immunizations = new javax.swing.JTable();
         date_Immu_Date = new com.toedter.calendar.JDateChooser();
         date_expiration = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        txt_Vaccine = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
@@ -47,7 +60,7 @@ public class Immunizations extends javax.swing.JFrame {
         jRadioButtonMenuItem8 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem9 = new javax.swing.JRadioButtonMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        menu_Add = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
@@ -74,7 +87,7 @@ public class Immunizations extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("HCP ID: ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabl_Immunizations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -85,7 +98,13 @@ public class Immunizations extends javax.swing.JFrame {
                 "Immunization ID", "Vaccine"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabl_Immunizations);
+        if (tabl_Immunizations.getColumnModel().getColumnCount() > 0) {
+            tabl_Immunizations.getColumnModel().getColumn(1).setHeaderValue("Vaccine");
+        }
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Vaccine");
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(70, 40));
 
@@ -115,9 +134,14 @@ public class Immunizations extends javax.swing.JFrame {
 
         jMenu2.setText("Actions");
 
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Add Record");
-        jMenu2.add(jRadioButtonMenuItem1);
+        menu_Add.setSelected(true);
+        menu_Add.setText("Add Record");
+        menu_Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_AddActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu_Add);
 
         jRadioButtonMenuItem2.setSelected(true);
         jRadioButtonMenuItem2.setText("Edit Record");
@@ -140,72 +164,90 @@ public class Immunizations extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(180, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(date_Immu_Date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(date_expiration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txt_Comments, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(date_expiration, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txt_delivery, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txt_Comments, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(0, 0, Short.MAX_VALUE)))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_HCPId, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(114, 114, 114))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(400, 400, 400))))
+                                .addComponent(txt_Vaccine, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_HCPId, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(407, 407, 407)
+                        .addComponent(jLabel1)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel1)
-                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(txt_Vaccine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(date_Immu_Date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(date_expiration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(txt_delivery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(txt_Comments, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel9))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_HCPId, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_HCPId, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))))
-                .addContainerGap(115, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menu_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_AddActionPerformed
+        Immunizations_DBOperations.addImmunizationHistory(this, getPatientID());
+    }//GEN-LAST:event_menu_AddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,11 +283,204 @@ public class Immunizations extends javax.swing.JFrame {
             }
         });
     }
+    
+    public int getPatientID() {
+        return this.patientID;
+    }
+    
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
+    }
+    
+    public int getRecordID() {
+        return this.RecordID;
+    }
+    
+    public void setRecordID(int recordID) {
+        this.RecordID = recordID;
+    }
+    
+    // Getter for datechooser_DOB
+    public com.toedter.calendar.JDateChooser getImmu_Date() {
+        return this.date_Immu_Date;
+    }
+    
+    // Setter for datechooser_DOB with null check
+    public void setImmu_Date(com.toedter.calendar.JDateChooser date_Immu_Date) {
+        this.date_Immu_Date = (date_Immu_Date != null) ? date_Immu_Date : null;
+    }
+    
+    // Getter for datechooser_DOB
+    public com.toedter.calendar.JDateChooser getImmu_Exp_Date() {
+        return this.date_expiration;
+    }
+    
+    // Setter for datechooser_DOB with null check
+    public void setExpImmu_Date(com.toedter.calendar.JDateChooser date_Immu_Date) {
+        this.date_expiration = (date_expiration != null) ? date_expiration : null;
+    }
+    
+    // Getters and setters for JTextArea fields
+    public String getDelivery() {
+        return txt_delivery.getText();
+    }
+
+    public void setDelivery(String value) {
+        txt_delivery.setText(isNullOrEmpty(value) ? null : value);
+    }
+    
+    // Getters and setters for JTextArea fields
+    public String getComments() {
+        return txt_Comments.getText();
+    }
+
+    public void setComments(String value) {
+        txt_Comments.setText(isNullOrEmpty(value) ? null : value);
+    }
+    
+    // Getters and setters for JTextArea fields
+    public String getHCPId() {
+        return txt_HCPId.getText();
+    }
+
+    public void setHCPId(String value) {
+        txt_HCPId.setText(isNullOrEmpty(value) ? null : value);
+    }
+    
+    // Getters and setters for JTextArea fields
+    public String getVaccine() {
+        return txt_Vaccine.getText();
+    }
+
+    public void setVaccine(String value) {
+        txt_Vaccine.setText(isNullOrEmpty(value) ? null : value);
+    }
+    
+    
+    private void initializeTable() {
+        // Call the PatientDBUtils method to get the ResultSet
+        ResultSet rs = Immunizations_DBOperations.PatientDBUtils(patientID);
+
+        if (rs != null) {
+            // Table model to display data in JTable
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Date");
+            model.addColumn("Expiration Date");
+            model.addColumn("Delivery");
+            model.addColumn("Comments");
+            model.addColumn("HCPId");
+            model.addColumn("Immunization ID");
+            model.addColumn("Vaccine");
+            model.addColumn("Patient ID");
+
+            // Store data for comboboxes in a list or map for later use
+            List<Object[]> rowDataList = new ArrayList<>();
+
+            // Populate table with result set data
+            try {
+                while (rs.next()) {
+                    Object[] row = new Object[7];
+                    row[0] = rs.getTimestamp("Date");
+                    row[1] = rs.getTimestamp("Expiration Date");             
+                    row[2] = rs.getString("Delivery");
+                    row[3] = rs.getString("Comments"); 
+                    row[4] = rs.getString("HCPId");
+
+                    row[5] = rs.getInt("ImmunizationsID");
+                    row[6] = rs.getString("Vaccine");
+                    row[7] = rs.getString("PatientID");
+                    // Add row to model
+                    model.addRow(row);
+
+                    // Store data in the list for future reference
+                    rowDataList.add(row);
+                }
+
+                // Set the model to the existing JTable
+                tabl_Immunizations.setModel(model);
+
+                // Hide the columns (indexes 1, 2, and 3)
+                tabl_Immunizations.getColumnModel().getColumn(0).setMaxWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(0).setMinWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+                tabl_Immunizations.getColumnModel().getColumn(1).setMaxWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(1).setMinWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(1).setPreferredWidth(0);
+
+                tabl_Immunizations.getColumnModel().getColumn(2).setMaxWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(2).setMinWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(2).setPreferredWidth(0);
+
+                tabl_Immunizations.getColumnModel().getColumn(3).setMaxWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(3).setMinWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(3).setPreferredWidth(0);
+                
+                
+                tabl_Immunizations.getColumnModel().getColumn(4).setMaxWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(4).setMinWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(4).setPreferredWidth(0);
+                
+                tabl_Immunizations.getColumnModel().getColumn(7).setMaxWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(7).setMinWidth(0);
+                tabl_Immunizations.getColumnModel().getColumn(7).setPreferredWidth(0);
+                
+
+                // Add ListSelectionListener to the JTable to capture selection changes
+                tabl_Immunizations.getSelectionModel().addListSelectionListener(e -> {
+                    if (!e.getValueIsAdjusting()) {  // Check if the selection has changed
+                        int selectedRow = tabl_Immunizations.getSelectedRow();
+                        if (selectedRow != -1) {
+                            // Get the values of the selected row from the stored list
+                            Object[] selectedRowData = rowDataList.get(selectedRow);
+                            Timestamp timestamp = (Timestamp) selectedRowData[0];
+                            java.util.Date date = new java.util.Date(timestamp.getTime());
+                            
+                            Timestamp expireTimestamp = (Timestamp) selectedRowData[1];
+                            java.util.Date expireDate = new java.util.Date(expireTimestamp.getTime());
+                            
+                            
+                            String delivery = (String) selectedRowData[2];
+                            String comments = (String) selectedRowData[3];
+                            String hcpid = (String) selectedRowData[4];
+                            RecordID = (int) selectedRowData[5];  
+                            
+                            String vaccine = (String) selectedRowData[6];
+                            
+                            patientID = (int) selectedRowData[7];
+                            
+                            setRecordID(RecordID);
+                            
+                            setPatientID(patientID);
+                            
+                            date_Immu_Date.setDate(date);
+                            date_expiration.setDate(expireDate); 
+                            
+                            txt_Vaccine.setText(vaccine);
+                            txt_delivery.setText(delivery);
+                            txt_Comments.setText(comments);
+                            txt_HCPId.setText(hcpid);
+                            
+
+                            
+                        }
+                    }
+                });
+
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error processing data: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Error retrieving data from database.");
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser date_Immu_Date;
     private com.toedter.calendar.JDateChooser date_expiration;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -254,7 +489,6 @@ public class Immunizations extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
@@ -264,9 +498,11 @@ public class Immunizations extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem8;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JRadioButtonMenuItem menu_Add;
+    private javax.swing.JTable tabl_Immunizations;
     private javax.swing.JTextField txt_Comments;
     private javax.swing.JTextField txt_HCPId;
+    private javax.swing.JTextField txt_Vaccine;
+    private javax.swing.JTextField txt_delivery;
     // End of variables declaration//GEN-END:variables
 }

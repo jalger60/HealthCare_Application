@@ -47,6 +47,7 @@ public class Patient_Selection extends javax.swing.JFrame {
         menu_SOBA = new javax.swing.JMenuItem();
         menu_PDemographics = new javax.swing.JMenuItem();
         menu_GMH = new javax.swing.JMenuItem();
+        menu_Immunizations = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menu_Auto_SOBA = new javax.swing.JMenuItem();
         menu_ATA = new javax.swing.JMenuItem();
@@ -166,6 +167,14 @@ public class Patient_Selection extends javax.swing.JFrame {
             }
         });
         jMenu1.add(menu_GMH);
+
+        menu_Immunizations.setText("Immunizations Form");
+        menu_Immunizations.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_ImmunizationsActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menu_Immunizations);
 
         menu_PSelect_Bar.add(jMenu1);
 
@@ -304,6 +313,12 @@ public class Patient_Selection extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menu_GMHActionPerformed
 
+    private void menu_ImmunizationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ImmunizationsActionPerformed
+        Immunizations immunizatons = new Immunizations(getPatientID());
+        immunizatons.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menu_ImmunizationsActionPerformed
+
     public String GetTxt_Search_BoxText() {
         return txt_Search_Box.getText();
     }
@@ -415,6 +430,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_Auto_SOBA;
     private javax.swing.JMenuItem menu_GMH;
     private javax.swing.JMenuItem menu_GMH_Form;
+    private javax.swing.JMenuItem menu_Immunizations;
     private javax.swing.JMenuItem menu_PDemographics;
     private javax.swing.JMenuBar menu_PSelect_Bar;
     private javax.swing.JMenuItem menu_SOBA;
