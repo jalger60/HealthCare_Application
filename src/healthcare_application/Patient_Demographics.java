@@ -6,6 +6,7 @@ import healthcare_application.DBUtils.GMH_DBOperations;
 import javax.swing.*;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
 import static healthcare_application.Patient_Selection.getPatientID;
+import healthcare_application.Validation.Patient_Demographics_Validation;
 import java.awt.Color;
 
 
@@ -837,7 +838,19 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
-        
+      
+      
+      String validationMessage = Patient_Demographics_Validation.validateFirstName(txt_FirstName.getText());
+      String lastName = Patient_Demographics_Validation.validateLastName(txt_LastName.getText());
+      String city = Patient_Demographics_Validation.validateCity(txt_City.getText());
+      String zipCode = Patient_Demographics_Validation.validateZipCode(txt_ZipCode.getText());
+      
+      if (validationMessage != null || lastName != null || city != null || zipCode != null) {
+            // Show the validation error in a dialog
+            JOptionPane.showMessageDialog(null, "First Name, Last Name, City, and ZipCode has invalid data.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return; // Stop before saving
+        } 
+      
       if (PDpatientID == 0) {
          operations.addPatientDemographics(this);
          LockScreen();
