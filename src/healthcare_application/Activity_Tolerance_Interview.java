@@ -1,6 +1,7 @@
 
 package healthcare_application;
 
+import General_Functionality.User_Modes;
 import healthcare_application.DBUtils.Activity_Tolerance_Assessment_Auto_Interview;
 import java.awt.Color;
 import java.sql.*;
@@ -21,16 +22,18 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     
     public Activity_Tolerance_Interview() {
         initComponents();
-        LockScreen();
-        
+//        LockScreen();
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
     }
     
-     public Activity_Tolerance_Interview(int patientID) {
+    public Activity_Tolerance_Interview(int patientID) {
         setPatientID(patientID);
         initComponents();
         initializeTable();
-        LockScreen();
-        
+//        LockScreen();   
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
     }
     
     public int getPatientID() {
@@ -400,10 +403,14 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_SOBA_formActionPerformed
 
     private void menu_Edit_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_RecordActionPerformed
-        UnlockScreen();
+//        UnlockScreen();
+        User_Modes.Edit_Mode(this);
+        User_Modes.Edit_Message(this);
     }//GEN-LAST:event_menu_Edit_RecordActionPerformed
 
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
+        User_Modes.Edit_Mode(this);
+        User_Modes.View_Only_Message(this);
         Activity_Tolerance_Assessment_Auto_Interview.conductInterview(patientID);
         initializeTable();
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
@@ -412,12 +419,12 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
        
         Activity_Tolerance_Assessment_DBOperations.editActivityToleranceByPatient(getRecordID(), patientID, this);
         System.out.println(getRecordID());
-        LockScreen();
+//        LockScreen();
     }//GEN-LAST:event_menu_Save_RecordActionPerformed
 
     private void menu_Delete_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Delete_RecordActionPerformed
         Activity_Tolerance_Assessment_DBOperations.deleteATAssessment(getRecordID(), patientID);
-        LockScreen();
+//        LockScreen();
     }//GEN-LAST:event_menu_Delete_RecordActionPerformed
 
     private void menu_Patient_SelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectActionPerformed
@@ -481,62 +488,62 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }
     
     
-    private void LockScreen () {
-        cbox_Eating.setEnabled(false);
-        cbox_Eating.setBackground(Color.lightGray);
-        
-        
-        cbox_Drinking.setEnabled(false);
-        cbox_Drinking.setBackground(Color.lightGray);
-        
-        
-        cbox_Dressed.setEnabled(false);
-        cbox_Dressed.setBackground(Color.lightGray);
-        
-        
-        cbox_House.setEnabled(false);
-        cbox_House.setBackground(Color.lightGray);
-        
-        
-        cbox_ClimbStairs.setEnabled(false);
-        cbox_ClimbStairs.setBackground(Color.lightGray);
-        
-        
-        txt_NumStairs.setEditable(false);
-        txt_NumStairs.setBackground(Color.lightGray);
-        
-                         
-                
-    }
+//    private void LockScreen () {
+//        cbox_Eating.setEnabled(false);
+//        cbox_Eating.setBackground(Color.lightGray);
+//        
+//        
+//        cbox_Drinking.setEnabled(false);
+//        cbox_Drinking.setBackground(Color.lightGray);
+//        
+//        
+//        cbox_Dressed.setEnabled(false);
+//        cbox_Dressed.setBackground(Color.lightGray);
+//        
+//        
+//        cbox_House.setEnabled(false);
+//        cbox_House.setBackground(Color.lightGray);
+//        
+//        
+//        cbox_ClimbStairs.setEnabled(false);
+//        cbox_ClimbStairs.setBackground(Color.lightGray);
+//        
+//        
+//        txt_NumStairs.setEditable(false);
+//        txt_NumStairs.setBackground(Color.lightGray);
+//        
+//                         
+//                
+//    }
     
-    private void UnlockScreen () {
-       
-        cbox_Eating.setEnabled(true);
-        cbox_Eating.setBackground(Color.white);
-        cbox_Eating.setSelectedIndex(-1);
-        
-        cbox_Drinking.setEnabled(true);
-        cbox_Drinking.setBackground(Color.white);
-        cbox_Drinking.setSelectedIndex(-1);
-        
-        cbox_Dressed.setEnabled(true);
-        cbox_Dressed.setBackground(Color.white);
-        cbox_Dressed.setSelectedIndex(-1);
-        
-        cbox_House.setEnabled(true);
-        cbox_House.setBackground(Color.white);
-        cbox_House.setSelectedIndex(-1);
-        
-        cbox_ClimbStairs.setEnabled(true);
-        cbox_ClimbStairs.setBackground(Color.white);
-        cbox_ClimbStairs.setSelectedIndex(-1);
-        
-        txt_NumStairs.setEditable(true);
-        txt_NumStairs.setBackground(Color.white);
-        txt_NumStairs.setText(" ");
-        
-                         
-    }
+//    private void UnlockScreen () {
+//       
+//        cbox_Eating.setEnabled(true);
+//        cbox_Eating.setBackground(Color.white);
+//        cbox_Eating.setSelectedIndex(-1);
+//        
+//        cbox_Drinking.setEnabled(true);
+//        cbox_Drinking.setBackground(Color.white);
+//        cbox_Drinking.setSelectedIndex(-1);
+//        
+//        cbox_Dressed.setEnabled(true);
+//        cbox_Dressed.setBackground(Color.white);
+//        cbox_Dressed.setSelectedIndex(-1);
+//        
+//        cbox_House.setEnabled(true);
+//        cbox_House.setBackground(Color.white);
+//        cbox_House.setSelectedIndex(-1);
+//        
+//        cbox_ClimbStairs.setEnabled(true);
+//        cbox_ClimbStairs.setBackground(Color.white);
+//        cbox_ClimbStairs.setSelectedIndex(-1);
+//        
+//        txt_NumStairs.setEditable(true);
+//        txt_NumStairs.setBackground(Color.white);
+//        txt_NumStairs.setText(" ");
+//        
+//                         
+//    }
     
     private void initializeTable() {
         // Call the PatientDBUtils method to get the ResultSet

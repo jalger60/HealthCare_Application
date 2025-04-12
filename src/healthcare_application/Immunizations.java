@@ -1,6 +1,7 @@
 
 package healthcare_application;
 
+import General_Functionality.User_Modes;
 import static com.mysql.cj.util.StringUtils.isNullOrEmpty;
 import com.toedter.calendar.JDateChooser;
 import healthcare_application.DBUtils.GMH_DBOperations;
@@ -22,14 +23,17 @@ public class Immunizations extends javax.swing.JFrame {
     
     public Immunizations() {
         initComponents();
-        
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
     }
     
     public Immunizations(int patientID) {
         setPatientID(patientID);
         initComponents();
         initializeTable();
-        ViewMode();
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
+//        ViewMode();
     }
 
     /**

@@ -1,6 +1,6 @@
-
 package healthcare_application;
 
+import General_Functionality.User_Modes;
 import healthcare_application.DBUtils.Activity_Tolerance_Assessment_Auto_Interview;
 import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.PatientSelection_DBOperations;
@@ -16,15 +16,12 @@ import java.awt.Font;
 public class Patient_Selection extends javax.swing.JFrame {
 
     private static int PatientID;
-  
-    
-    
-    
+     
     public Patient_Selection() {
         initComponents();
         GetAllPatients();
-       
-        
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
     }
 
     

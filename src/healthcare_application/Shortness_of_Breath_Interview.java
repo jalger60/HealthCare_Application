@@ -1,6 +1,7 @@
 
 package healthcare_application;
 
+import General_Functionality.User_Modes;
 import healthcare_application.DBUtils.GMH_DBOperations;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -22,14 +23,18 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
    
     public Shortness_of_Breath_Interview() {
         initComponents();
-        LockScreen();
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
+//        LockScreen();
     }
     
     public Shortness_of_Breath_Interview(int patientID) {
         setPatientIDSOBA(patientID);
         initComponents();
-        LockScreen();
         initializeTable();
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
+//        LockScreen();
         
     }
 

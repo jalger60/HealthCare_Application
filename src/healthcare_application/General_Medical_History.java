@@ -2,6 +2,7 @@
 package healthcare_application;
 
 
+import General_Functionality.User_Modes;
 import healthcare_application.DBUtils.GMH_Auto_Interview;
 import healthcare_application.DBUtils.GMH_DBOperations;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
@@ -11,16 +12,20 @@ public class General_Medical_History extends javax.swing.JFrame {
 
     private int patientID;
     private int gmhID;
+    
     public General_Medical_History() {
-        
         initComponents();
-        LockScreen();
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
+//        LockScreen();
     }
     
     public General_Medical_History(int patientID) {
         setPatientID(patientID);
         initComponents();
-        LockScreen();
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
+//        LockScreen();
        
     }
 

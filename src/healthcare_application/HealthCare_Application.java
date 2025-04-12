@@ -14,8 +14,7 @@ public class HealthCare_Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("dl;ajkfdja;lfjda;klfja;ljif");
-        System.out.println("I dislike pwds.");
+        Patient_Selection Patient_Sel = new Patient_Selection();
     }
     
 }

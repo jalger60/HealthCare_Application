@@ -2,6 +2,7 @@
 package healthcare_application;
 
 
+import General_Functionality.User_Modes;
 import healthcare_application.DBUtils.GMH_DBOperations;
 import javax.swing.*;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
@@ -19,17 +20,17 @@ public class Patient_Demographics extends javax.swing.JFrame {
     
     public Patient_Demographics() {
         initComponents();
-        LockScreen();
-        
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
+//        LockScreen();       
     }
     
     public Patient_Demographics(int patientID) {
         setPatientIDPD(patientID);
         initComponents();
-        LockScreen();
-        
-        
-        
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
+//        LockScreen();
     }
     
     public int getPatientIDPD() {
