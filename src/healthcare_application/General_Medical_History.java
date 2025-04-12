@@ -389,8 +389,11 @@ public class General_Medical_History extends javax.swing.JFrame {
 
     private void radio_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_addActionPerformed
         GMH_Auto_Interview.start(getPatientID());
-        GMH_DBOperations history = new GMH_DBOperations();
-        history.getGeneralMedicalHistory(patientID);
+        GMH_DBOperations gmho = new GMH_DBOperations();
+        General_Medical_History history = gmho.getGeneralMedicalHistory(patientID);
+        history.setVisible(true);
+        this.dispose();
+
     }//GEN-LAST:event_radio_addActionPerformed
 
     /**

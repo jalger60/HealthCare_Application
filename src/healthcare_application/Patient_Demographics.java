@@ -891,27 +891,18 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_ATAActionPerformed
 
     private void menu_GMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_GMHActionPerformed
-        // Assuming getPatientIDPD() is correctly implemented and returns the actual patient ID
-        int patientID = getPatientIDPD();  // Store once to avoid repeated calls
+        int patientID = getPatientIDPD();
+        GMH_DBOperations gmho = new GMH_DBOperations();
+        General_Medical_History history = gmho.getGeneralMedicalHistory(patientID);
 
-        // If no existing record found, create a new one
-        if (patientID == getPatientIDPD()) {
-        
-           General_Medical_History history = new General_Medical_History();
-           history.setPatientID(patientID);
-           history.setVisible(true);
-           this.dispose();
-           
+        // Assuming a new/empty record has patientID == 0
+        if (history.getPatientID() == 0) {
+            // No existing data found, so set the actual patient ID
+            history.setPatientID(patientID);
         }
-        else {
-             GMH_DBOperations gmho = new GMH_DBOperations();
-             General_Medical_History history = gmho.getGeneralMedicalHistory(patientID);
-             // Show the history form
-             history.setVisible(true);
 
-             // Close the current window
-             this.dispose();
-        }
+        history.setVisible(true);
+        this.dispose();
         
         
     }//GEN-LAST:event_menu_GMHActionPerformed
