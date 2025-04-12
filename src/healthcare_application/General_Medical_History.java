@@ -2,9 +2,9 @@
 package healthcare_application;
 
 
+import healthcare_application.DBUtils.GMH_Auto_Interview;
 import healthcare_application.DBUtils.GMH_DBOperations;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
-import static healthcare_application.Patient_Selection.getPatientID;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 public class General_Medical_History extends javax.swing.JFrame {
@@ -12,8 +12,16 @@ public class General_Medical_History extends javax.swing.JFrame {
     private int patientID;
     private int gmhID;
     public General_Medical_History() {
+        
         initComponents();
         LockScreen();
+    }
+    
+    public General_Medical_History(int patientID) {
+        setPatientID(patientID);
+        initComponents();
+        LockScreen();
+       
     }
 
    
@@ -51,7 +59,7 @@ public class General_Medical_History extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         menu_ATA = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        radio_add = new javax.swing.JRadioButtonMenuItem();
         menu_Edit = new javax.swing.JRadioButtonMenuItem();
         menu_Save = new javax.swing.JRadioButtonMenuItem();
         menu_Delete = new javax.swing.JRadioButtonMenuItem();
@@ -172,9 +180,14 @@ public class General_Medical_History extends javax.swing.JFrame {
         jMenu1.setText("Actions");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Add Record");
-        jMenu1.add(jRadioButtonMenuItem1);
+        radio_add.setSelected(true);
+        radio_add.setText("Add Record");
+        radio_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radio_addActionPerformed(evt);
+            }
+        });
+        jMenu1.add(radio_add);
 
         menu_Edit.setSelected(true);
         menu_Edit.setText("Edit Record");
@@ -373,6 +386,12 @@ public class General_Medical_History extends javax.swing.JFrame {
         select.setPatientID(getPatientID());
         this.dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void radio_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_addActionPerformed
+        GMH_Auto_Interview.start(getPatientID());
+        GMH_DBOperations history = new GMH_DBOperations();
+        history.getGeneralMedicalHistory(patientID);
+    }//GEN-LAST:event_radio_addActionPerformed
 
     /**
      * @param args the command line arguments
@@ -613,13 +632,13 @@ public class General_Medical_History extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JMenuItem menu_ATA;
     private javax.swing.JRadioButtonMenuItem menu_Delete;
     private javax.swing.JRadioButtonMenuItem menu_Edit;
     private javax.swing.JMenuItem menu_Patient_Demographics;
     private javax.swing.JRadioButtonMenuItem menu_Save;
     private javax.swing.JMenu menu_Shortness_Of_Breath;
+    private javax.swing.JRadioButtonMenuItem radio_add;
     private javax.swing.JTextField txt_Alcohol_Duration;
     private javax.swing.JTextField txt_Alcohol_Quantity;
     private javax.swing.JTextField txt_Alcohol_Use;

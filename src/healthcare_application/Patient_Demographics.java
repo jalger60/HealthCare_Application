@@ -842,9 +842,11 @@ public class Patient_Demographics extends javax.swing.JFrame {
          operations.addPatientDemographics(this);
          LockScreen();
        } else {
-         operations.updatePatientDemographics(this, PDpatientID);
+         operations.updatePatientDemographics(this, getPatientIDPD());
          LockScreen();
-       } 
+       }
+      
+       operations.getPatientDemographics(PDpatientID);
         
         
         
@@ -867,7 +869,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_AddActionPerformed
 
     private void menu_Patient_SelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectionActionPerformed
-        PDpatientID = 0;
+
         Patient_Selection select = new Patient_Selection ();
         select.setVisible(true);
         select.setPatientID(PDpatientID);
@@ -889,16 +891,32 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_ATAActionPerformed
 
     private void menu_GMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_GMHActionPerformed
-        GMH_DBOperations gmho = new GMH_DBOperations();
-        General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientIDPD());
+        // Assuming getPatientIDPD() is correctly implemented and returns the actual patient ID
+        int patientID = getPatientIDPD();  // Store once to avoid repeated calls
+
+        // If no existing record found, create a new one
+        if (patientID == getPatientIDPD()) {
         
-        history.setVisible(true);
-        this.dispose();
+           General_Medical_History history = new General_Medical_History();
+           history.setPatientID(patientID);
+           history.setVisible(true);
+           this.dispose();
+           
+        }
+        else {
+             GMH_DBOperations gmho = new GMH_DBOperations();
+             General_Medical_History history = gmho.getGeneralMedicalHistory(patientID);
+             // Show the history form
+             history.setVisible(true);
+
+             // Close the current window
+             this.dispose();
+        }
+        
+        
     }//GEN-LAST:event_menu_GMHActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

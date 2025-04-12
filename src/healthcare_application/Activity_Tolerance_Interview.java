@@ -539,122 +539,129 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }
     
     private void initializeTable() {
-    // Call the PatientDBUtils method to get the ResultSet
-    ResultSet rs = Activity_Tolerance_Assessment_DBOperations.PatientDBUtils(patientID);
+        // Call the PatientDBUtils method to get the ResultSet
+        ResultSet rs = Activity_Tolerance_Assessment_DBOperations.PatientDBUtils(patientID);
 
-    if (rs != null) {
-        // Table model to display data in JTable
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Date");
-        model.addColumn("Time");
-        model.addColumn("Trouble Eating");
-        model.addColumn("Trouble Drinking");
-        model.addColumn("Trouble Getting Dressed");
-        model.addColumn("Trouble Walking around the House");
-        model.addColumn("Trouble Climbing Stairs");
-        model.addColumn("Number of Stairs");
-        model.addColumn("Record ID");
+        if (rs != null) {
 
-        // Store data for comboboxes in a list or map for later use
-        List<Object[]> rowDataList = new ArrayList<>();
 
-        // Populate table with result set data
-        try {
-            while (rs.next()) {
-                Object[] row = new Object[9];
-                row[0] = rs.getString("Date");
-                row[1] = rs.getString("Time");
-                row[2] = rs.getString("TroubleEating");
-                row[3] = rs.getString("TroubleDrinking");
-                row[4] = rs.getString("TroubleGettingDressed");
-                row[5] = rs.getString("TroubleWalkingAroundHouse");
-                row[6] = rs.getString("TroubleClimbingStairs");
-                row[7] = rs.getObject("Number_Of_Stairs");
-                row[8] = rs.getInt("Record ID");
+            DefaultTableModel model = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; // Make all cells non-editable
+                }
+            };
 
-                // Add row to model
-                model.addRow(row);
+            model.addColumn("Date");
+            model.addColumn("Time");
+            model.addColumn("Trouble Eating");
+            model.addColumn("Trouble Drinking");
+            model.addColumn("Trouble Getting Dressed");
+            model.addColumn("Trouble Walking around the House");
+            model.addColumn("Trouble Climbing Stairs");
+            model.addColumn("Number of Stairs");
+            model.addColumn("Record ID");
 
-                // Store data in the list for future reference
-                rowDataList.add(row);
-            }
+            // Store data for comboboxes in a list or map for later use
+            List<Object[]> rowDataList = new ArrayList<>();
 
-            // Set the model to the existing JTable
-            tabl_Activity.setModel(model);
+            // Populate table with result set data
+            try {
+                while (rs.next()) {
+                    Object[] row = new Object[9];
+                    row[0] = rs.getString("Date");
+                    row[1] = rs.getString("Time");
+                    row[2] = rs.getString("TroubleEating");
+                    row[3] = rs.getString("TroubleDrinking");
+                    row[4] = rs.getString("TroubleGettingDressed");
+                    row[5] = rs.getString("TroubleWalkingAroundHouse");
+                    row[6] = rs.getString("TroubleClimbingStairs");
+                    row[7] = rs.getObject("Number_Of_Stairs");
+                    row[8] = rs.getInt("Record ID");
 
-            // Hide the columns (indexes 2 to 7)
-            tabl_Activity.getColumnModel().getColumn(2).setMaxWidth(0);
-            tabl_Activity.getColumnModel().getColumn(2).setMinWidth(0);
-            tabl_Activity.getColumnModel().getColumn(2).setPreferredWidth(0);
+                    // Add row to model
+                    model.addRow(row);
 
-            tabl_Activity.getColumnModel().getColumn(3).setMaxWidth(0);
-            tabl_Activity.getColumnModel().getColumn(3).setMinWidth(0);
-            tabl_Activity.getColumnModel().getColumn(3).setPreferredWidth(0);
+                    // Store data in the list for future reference
+                    rowDataList.add(row);
+                }
 
-            tabl_Activity.getColumnModel().getColumn(4).setMaxWidth(0);
-            tabl_Activity.getColumnModel().getColumn(4).setMinWidth(0);
-            tabl_Activity.getColumnModel().getColumn(4).setPreferredWidth(0);
+                // Set the model to the existing JTable
+                tabl_Activity.setModel(model);
 
-            tabl_Activity.getColumnModel().getColumn(5).setMaxWidth(0);
-            tabl_Activity.getColumnModel().getColumn(5).setMinWidth(0);
-            tabl_Activity.getColumnModel().getColumn(5).setPreferredWidth(0);
+                // Hide the columns (indexes 2 to 7)
+                tabl_Activity.getColumnModel().getColumn(2).setMaxWidth(0);
+                tabl_Activity.getColumnModel().getColumn(2).setMinWidth(0);
+                tabl_Activity.getColumnModel().getColumn(2).setPreferredWidth(0);
 
-            tabl_Activity.getColumnModel().getColumn(6).setMaxWidth(0);
-            tabl_Activity.getColumnModel().getColumn(6).setMinWidth(0);
-            tabl_Activity.getColumnModel().getColumn(6).setPreferredWidth(0);
+                tabl_Activity.getColumnModel().getColumn(3).setMaxWidth(0);
+                tabl_Activity.getColumnModel().getColumn(3).setMinWidth(0);
+                tabl_Activity.getColumnModel().getColumn(3).setPreferredWidth(0);
 
-            tabl_Activity.getColumnModel().getColumn(7).setMaxWidth(0);
-            tabl_Activity.getColumnModel().getColumn(7).setMinWidth(0);
-            tabl_Activity.getColumnModel().getColumn(7).setPreferredWidth(0);
-            
-            tabl_Activity.getColumnModel().getColumn(8).setMaxWidth(0);
-            tabl_Activity.getColumnModel().getColumn(8).setMinWidth(0);
-            tabl_Activity.getColumnModel().getColumn(8).setPreferredWidth(0);
+                tabl_Activity.getColumnModel().getColumn(4).setMaxWidth(0);
+                tabl_Activity.getColumnModel().getColumn(4).setMinWidth(0);
+                tabl_Activity.getColumnModel().getColumn(4).setPreferredWidth(0);
 
-            // Add ListSelectionListener to the JTable to capture selection changes
-            tabl_Activity.getSelectionModel().addListSelectionListener(e -> {
-                if (!e.getValueIsAdjusting()) {  // Check if the selection has changed
-                    int selectedRow = tabl_Activity.getSelectedRow();
-                    if (selectedRow != -1) {
-                        // Get the values of the selected row from the stored list
-                        Object[] selectedRowData = rowDataList.get(selectedRow);
-                        String date = (String) selectedRowData[0];
-                        String time = (String) selectedRowData[1];
-                        String troubleEating = (String) selectedRowData[2];
-                        String troubleDrinking = (String) selectedRowData[3];
-                        String troubleGettingDressed = (String) selectedRowData[4];
-                        String troubleWalking = (String) selectedRowData[5];
-                        String troubleClimbing = (String) selectedRowData[6];
-                        Object stairsValue = selectedRowData[7];
-                        RecordID = (int) selectedRowData[8];  // Get the Record ID from the row data
-                        
-                        setRecordID(RecordID);
-                       
-                        // Populate the JComboBox components with values from the selected record
-                        cbox_Eating.setSelectedItem(troubleEating);  // Trouble Eating
-                        cbox_Drinking.setSelectedItem(troubleDrinking);  // Trouble Drinking
-                        cbox_Dressed.setSelectedItem(troubleGettingDressed);  // Trouble Getting Dressed
-                        cbox_House.setSelectedItem(troubleWalking);  // Trouble Walking Around House
-                        cbox_ClimbStairs.setSelectedItem(troubleClimbing);  // Trouble Climbing Stairs
+                tabl_Activity.getColumnModel().getColumn(5).setMaxWidth(0);
+                tabl_Activity.getColumnModel().getColumn(5).setMinWidth(0);
+                tabl_Activity.getColumnModel().getColumn(5).setPreferredWidth(0);
 
-                        // Handle the "Number of Stairs" field (null check)
-                        if (stairsValue != null) {
-                            txt_NumStairs.setText(stairsValue.toString());
-                        } else {
-                            txt_NumStairs.setText("");  // Leave empty if null
+                tabl_Activity.getColumnModel().getColumn(6).setMaxWidth(0);
+                tabl_Activity.getColumnModel().getColumn(6).setMinWidth(0);
+                tabl_Activity.getColumnModel().getColumn(6).setPreferredWidth(0);
+
+                tabl_Activity.getColumnModel().getColumn(7).setMaxWidth(0);
+                tabl_Activity.getColumnModel().getColumn(7).setMinWidth(0);
+                tabl_Activity.getColumnModel().getColumn(7).setPreferredWidth(0);
+
+                tabl_Activity.getColumnModel().getColumn(8).setMaxWidth(0);
+                tabl_Activity.getColumnModel().getColumn(8).setMinWidth(0);
+                tabl_Activity.getColumnModel().getColumn(8).setPreferredWidth(0);
+
+                // Add ListSelectionListener to the JTable to capture selection changes
+                tabl_Activity.getSelectionModel().addListSelectionListener(e -> {
+                    if (!e.getValueIsAdjusting()) {  // Check if the selection has changed
+                        int selectedRow = tabl_Activity.getSelectedRow();
+                        if (selectedRow != -1) {
+                            // Get the values of the selected row from the stored list
+                            Object[] selectedRowData = rowDataList.get(selectedRow);
+                            String date = (String) selectedRowData[0];
+                            String time = (String) selectedRowData[1];
+                            String troubleEating = (String) selectedRowData[2];
+                            String troubleDrinking = (String) selectedRowData[3];
+                            String troubleGettingDressed = (String) selectedRowData[4];
+                            String troubleWalking = (String) selectedRowData[5];
+                            String troubleClimbing = (String) selectedRowData[6];
+                            Object stairsValue = selectedRowData[7];
+                            RecordID = (int) selectedRowData[8];  // Get the Record ID from the row data
+
+                            setRecordID(RecordID);
+
+                            // Populate the JComboBox components with values from the selected record
+                            cbox_Eating.setSelectedItem(troubleEating);  // Trouble Eating
+                            cbox_Drinking.setSelectedItem(troubleDrinking);  // Trouble Drinking
+                            cbox_Dressed.setSelectedItem(troubleGettingDressed);  // Trouble Getting Dressed
+                            cbox_House.setSelectedItem(troubleWalking);  // Trouble Walking Around House
+                            cbox_ClimbStairs.setSelectedItem(troubleClimbing);  // Trouble Climbing Stairs
+
+                            // Handle the "Number of Stairs" field (null check)
+                            if (stairsValue != null) {
+                                txt_NumStairs.setText(stairsValue.toString());
+                            } else {
+                                txt_NumStairs.setText("");  // Leave empty if null
+                            }
                         }
                     }
-                }
-            });
+                });
 
-        } catch (SQLException e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(this, "Error processing data: " + e.getMessage());
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error processing data: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Error retrieving data from database.");
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Error retrieving data from database.");
     }
-}
 
 
 

@@ -134,6 +134,7 @@ public class Patient_Demographics_DBOperations {
 
                 // Retrieve the generated Patient ID
                 int patientID = stmt.getInt(22);
+                patient.setPatientIDPD(patientID);
                 System.out.println("New Patient ID: " + patientID);
 
                 // Store the Patient ID in the Patient_Demographics object

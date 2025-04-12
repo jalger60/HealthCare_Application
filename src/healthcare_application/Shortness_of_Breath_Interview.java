@@ -363,8 +363,16 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         ResultSet rs = Shortness_Of_Breath_DBOperations.PatientDBUtils(patientID);
 
         if (rs != null) {
-            // Table model to display data in JTable
-            DefaultTableModel model = new DefaultTableModel();
+            
+            
+            // Read-only table model
+            DefaultTableModel model = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+           
             model.addColumn("Date");
             model.addColumn("Time");
             model.addColumn("Shortness of Breath");

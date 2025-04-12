@@ -16,8 +16,8 @@ import java.awt.Font;
 public class Patient_Selection extends javax.swing.JFrame {
 
     private static int PatientID;
-    Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
-    Shortness_Of_Breath_DBOperations soba = new Shortness_Of_Breath_DBOperations();
+  
+    
     
     
     public Patient_Selection() {
@@ -260,7 +260,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_SearchActionPerformed
 
     private void menu_PDemographicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_PDemographicsActionPerformed
-       
+        Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
         // Get the patient ID
         int patientID = getPatientID(); 
 
