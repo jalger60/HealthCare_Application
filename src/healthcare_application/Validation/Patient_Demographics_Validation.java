@@ -103,6 +103,18 @@ public class Patient_Demographics_Validation {
         return digitsOnly.replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1-$2-$3");
     }
     
+    public static String validateComment(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return null; // Accept null or empty as valid
+        }
+
+        if (input.length() > 254) {
+            throw new IllegalArgumentException("Comment cannot exceed 254 characters.");
+        }
+
+        return input;
+    }
+    
 
     
 

@@ -9,6 +9,7 @@ import healthcare_application.DBUtils.Activity_Tolerance_Assessment_DBOperations
 import healthcare_application.DBUtils.GMH_DBOperations;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
 import static healthcare_application.Patient_Selection.getPatientID;
+import healthcare_application.Validation.ActivityTolerance_Validation;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -416,7 +417,19 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
     private void menu_Save_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Save_RecordActionPerformed
-       
+        
+        String num_Steps = txt_NumStairs.getText();
+        // Treat null or empty input as acceptable (optional)
+        if (num_Steps == null || num_Steps.trim().isEmpty()) {
+            ActivityTolerance_Validation.validateDigitsOnly(num_Steps);
+            
+        } else {
+            try {
+                ActivityTolerance_Validation.validateDigitsOnly(num_Steps);
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Data Input Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
         Activity_Tolerance_Assessment_DBOperations.editActivityToleranceByPatient(getRecordID(), patientID, this);
         System.out.println(getRecordID());
 //        LockScreen();

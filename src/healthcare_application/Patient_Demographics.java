@@ -696,7 +696,20 @@ public class Patient_Demographics extends javax.swing.JFrame {
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
       
-      
+      String comments = txtA_Comments.getText();
+      if (comments == null || comments.trim().isEmpty()) {
+            Patient_Demographics_Validation.validateComment(comments);
+            
+        } else {
+            try {
+               Patient_Demographics_Validation.validateComment(comments);
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Data Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        
+        
       String validationMessage = Patient_Demographics_Validation.validateFirstName(txt_FirstName.getText());
       String lastName = Patient_Demographics_Validation.validateLastName(txt_LastName.getText());
       String city = Patient_Demographics_Validation.validateCity(txt_City.getText());
@@ -730,6 +743,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
        }
         
        operations.getPatientDemographics(PDpatientID);
+       User_Modes.View_Only_Mode(this);
         
         
         

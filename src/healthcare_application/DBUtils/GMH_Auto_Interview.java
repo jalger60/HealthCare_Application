@@ -3,6 +3,7 @@ package healthcare_application.DBUtils;
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
+import healthcare_application.Validation.GMH_Auto_Interview_Validation;
 
 public class GMH_Auto_Interview {
 
@@ -93,8 +94,33 @@ public class GMH_Auto_Interview {
         // Blood Type
         QuestionNode bloodQ = new QuestionNode("Do you know your blood type?");
         bloodQ.onYes = () -> {
-            String bloodType = JOptionPane.showInputDialog("Enter Blood Type (A, B, AB, O):");
-            String rh = JOptionPane.showInputDialog("Enter Rh factor (+ or -):");
+            String bloodType = null;
+            boolean isValid = false;
+
+            while (!isValid) {
+                bloodType = JOptionPane.showInputDialog("Enter Blood Type (A, B, AB, O):");
+
+                try {
+                    bloodType = GMH_Auto_Interview_Validation.validateBloodType(bloodType);
+                    isValid = true; // Exit loop if valid
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Input Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            
+            String rh = null;
+            boolean isValidRh = false;
+
+            while (!isValidRh) {
+                rh = JOptionPane.showInputDialog("Enter Rh factor (+ or -):");
+
+                try {
+                    rh = GMH_Auto_Interview_Validation.validateRhFactor(rh);
+                    isValidRh = true; // Exit loop if valid
+                } catch (IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Input Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
             answers.put("BloodType", bloodType);
             answers.put("Rh", rh);
         };
