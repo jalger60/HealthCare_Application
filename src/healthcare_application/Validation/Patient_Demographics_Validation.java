@@ -85,6 +85,24 @@ public class Patient_Demographics_Validation {
 
         return null; // Valid
     }
+    
+    public static String validatePhone(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            throw new IllegalArgumentException("Phone number cannot be null or empty.");
+        }
+
+        // Remove all non-digit characters
+        String digitsOnly = input.replaceAll("[^\\d]", "");
+
+        // Check if it has exactly 10 digits
+        if (digitsOnly.length() != 10) {
+            throw new IllegalArgumentException("Invalid phone number. It must contain exactly 10 digits.");
+        }
+
+        // Format as xxx-xxx-xxxx
+        return digitsOnly.replaceFirst("(\\d{3})(\\d{3})(\\d{4})", "$1-$2-$3");
+    }
+    
 
     
 

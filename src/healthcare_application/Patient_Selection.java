@@ -20,8 +20,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     public Patient_Selection() {
         initComponents();
         GetAllPatients();
-        User_Modes.View_Only_Mode(this);
-        User_Modes.View_Only_Message(this);
+        
     }
 
     
