@@ -58,6 +58,7 @@ public class User_Modes {
     }
     
     //Forms will change to this upon user clicking the add or edit buttons. 
+    //Enable all form compoenents disabled by View_Only_Mode
     public static void Edit_Mode(Container newCont){
         for(Component comp : newCont.getComponents()){
             if(comp instanceof JTextComponent){
@@ -94,6 +95,7 @@ public class User_Modes {
         }
     }
     
+    //Informs user that they are now in edit mode. 
     public static void Edit_Message(Component parent){
         SwingUtilities.invokeLater(() -> 
             JOptionPane.showMessageDialog(
