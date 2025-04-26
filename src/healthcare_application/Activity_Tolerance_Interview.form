@@ -52,6 +52,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Actions"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu_ATAOptionsMouseClicked"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_Add_Record">
               <Properties>
