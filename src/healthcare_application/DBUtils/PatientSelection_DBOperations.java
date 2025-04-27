@@ -14,7 +14,7 @@ public class PatientSelection_DBOperations {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(dbURL, "root", "password");
+            con = DriverManager.getConnection(dbURL, "root", "toor");
             System.out.println("Database connected successfully!"); // Optional confirmation message
         } catch (SQLException ex) {
             System.err.println("Database Connection Error: " + ex.getMessage());
@@ -113,11 +113,11 @@ public class PatientSelection_DBOperations {
                 } else {
                     while (resultSet.next()) {
                         Object[] rowData = new Object[5];
-                        rowData[0] = resultSet.getString("Patient ID");
-                        rowData[1] = resultSet.getString("First Name");
-                        rowData[2] = resultSet.getString("Last Name");
-                        rowData[3] = resultSet.getString("Phone Number");
-                        rowData[4] = resultSet.getString("Date of Birth");
+                        rowData[0] = resultSet.getString("PatientID");
+                        rowData[1] = resultSet.getString("PtFirstName");
+                        rowData[2] = resultSet.getString("PtLastName");
+                        rowData[3] = resultSet.getString("PtMobilePhone");
+                        rowData[4] = resultSet.getString("DOB");
                         tableModel.addRow(rowData);
                     }
                 }

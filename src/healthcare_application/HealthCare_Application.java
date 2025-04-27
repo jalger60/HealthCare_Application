@@ -15,6 +15,7 @@ public class HealthCare_Application {
      */
     public static void main(String[] args) {
         Patient_Selection Patient_Sel = new Patient_Selection();
+        Patient_Sel.setVisible(true);
     }
     
 }

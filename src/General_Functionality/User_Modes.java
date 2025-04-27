@@ -57,7 +57,7 @@ public class User_Modes {
         );
     }
     
-    //Forms will change to this upon user clicking the add or edit buttons. 
+    //Forms will change to this upon user clicking edit buttons. 
     //Enable all form compoenents disabled by View_Only_Mode
     public static void Edit_Mode(Container newCont){
         for(Component comp : newCont.getComponents()){
@@ -99,29 +99,61 @@ public class User_Modes {
     public static void Edit_Message(Component parent){
         SwingUtilities.invokeLater(() -> 
             JOptionPane.showMessageDialog(
+            parent,
+            "!ATTENTION!\nYou are now in EDIT mode!\nYou may now ADD, DELETE, and EDIT database entries!\nRemember to save your changes by clicking the save button!",
+            "Edit Mode Enabled",
+            JOptionPane.INFORMATION_MESSAGE
+            )
+        );
+    }
+    
+    //inform the user that they are in add mode
+    public static void Add_Message(Component parent){
+        SwingUtilities.invokeLater(() -> 
+            JOptionPane.showMessageDialog(
+            parent,
+            "A new empty record has been added to the database.\nYou are now in EDIT mode.\nPlease fill in the required information for this record using the textboxes.\nRemember to save your changes by clicking the save button!",
+            "Record Added",
+            JOptionPane.INFORMATION_MESSAGE
+            )
+        );
+    }
+    
+    //inform the user that they are in delete mode
+    public static void Delete_Message(Component parent){
+        SwingUtilities.invokeLater(() -> 
+                JOptionPane.showMessageDialog(
                 parent,
-                "!ATTENTION!\nYou are now in EDIT mode!\nYou may now ADD, DELETE, and EDIT database entries!\nPlease remember to click SAVE in the actions menu when you are done!",
-                "Edit Mode Enabled",
+                "This record has been marked for deletion.\n Notice that the deleted field has been set to 1.\nTo restore this record, set this field to 0.\nRemember to save your changes by clicking the save button!",
+                "Record Deleted",
                 JOptionPane.INFORMATION_MESSAGE
             )
         );
     }
-    //Add text in textboxes to the database as a new entry. 
-    public static void Add_Record(){
-        
+
+    public static void Successful_Save_Message(Component parent){
+        SwingUtilities.invokeLater(() -> 
+                JOptionPane.showMessageDialog(
+                parent,
+                "This record has been saved! Returning to read only mode!",
+                "Record Saved",
+                JOptionPane.INFORMATION_MESSAGE
+            )
+        );
     }
     
-    //Allows user to edit the text inside the textboxes and submit them as changes to an existing record in the database. 
-    public static void Edit_Record(){
-        
-    }
-    //delete the currently selected record from the database.
-    public static void Del_Record(){
-        
+    public static void Failed_Save_Message(Component parent){
+        SwingUtilities.invokeLater(() -> 
+                JOptionPane.showMessageDialog(
+                parent,
+                "Unable to save record! Please contact a system admin for further assistance!",
+                "Error",
+                JOptionPane.INFORMATION_MESSAGE
+            )
+        );
     }
     
-    //Save what is in the textboxes to the database to database.
-    public static void Save_Record(){
-        
-    }
+    
 }
+    
+
