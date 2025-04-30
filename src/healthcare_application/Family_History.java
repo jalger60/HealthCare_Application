@@ -1,16 +1,17 @@
 package healthcare_application;
 
 import General_Functionality.User_Modes;
+import healthcare_application.DBUtils.Family_History_DBOperations;
+import healthcare_application.DBUtils.Family_History_Automated_Interview;
 
 public class Family_History extends javax.swing.JFrame {
 
-    int modeFlag;
+    private int modeFlag;
     
     public Family_History() {
         initComponents();
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
-        
         modeFlag = 0;
     }
 
@@ -34,29 +35,31 @@ public class Family_History extends javax.swing.JFrame {
         PIDbox = new javax.swing.JTextField();
         nameBox = new javax.swing.JTextField();
         relationBox = new javax.swing.JTextField();
-        aliveBox = new javax.swing.JTextField();
-        LWPBox = new javax.swing.JTextField();
         MDisorderBox = new javax.swing.JTextField();
         SDisorderBox = new javax.swing.JTextField();
-        DisorderHRFBox = new javax.swing.JTextField();
         deletedBox = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        aliveBox = new javax.swing.JCheckBox();
+        HRFbox = new javax.swing.JCheckBox();
+        LWPbox = new javax.swing.JCheckBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        goToActivityTolerance = new javax.swing.JRadioButtonMenuItem();
-        goToFamHistory = new javax.swing.JRadioButtonMenuItem();
-        goToGenMedHistory = new javax.swing.JRadioButtonMenuItem();
-        goToImmunizations = new javax.swing.JRadioButtonMenuItem();
-        goToPatientDemos = new javax.swing.JRadioButtonMenuItem();
-        goToPatientSelection = new javax.swing.JRadioButtonMenuItem();
-        goToShortnessOfBreathInterview = new javax.swing.JCheckBoxMenuItem();
+        JMenu = new javax.swing.JMenu();
+        patientSelectionNavBtn = new javax.swing.JMenuItem();
+        patientDemographicsNavBtn = new javax.swing.JMenuItem();
+        immunizationsNavBtn = new javax.swing.JMenuItem();
+        generalMedicalHistoryNavBtn = new javax.swing.JMenuItem();
+        familyHistoryNavBtn = new javax.swing.JMenuItem();
+        activityToleranceInterviewNavBtn = new javax.swing.JMenuItem();
+        shortnessOfBreathNavBtn = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        addButton = new javax.swing.JRadioButtonMenuItem();
-        editButton = new javax.swing.JRadioButtonMenuItem();
-        delButton = new javax.swing.JRadioButtonMenuItem();
-        saveButton = new javax.swing.JRadioButtonMenuItem();
+        editRecord = new javax.swing.JMenuItem();
+        saveRecord = new javax.swing.JMenuItem();
+        deleteRecord = new javax.swing.JMenuItem();
+        addRecord = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        FH_Interview_Btn = new javax.swing.JRadioButtonMenuItem();
+        startFHInterview = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -150,14 +153,6 @@ public class Family_History extends javax.swing.JFrame {
         relationBox.setMinimumSize(new java.awt.Dimension(65, 30));
         relationBox.setPreferredSize(new java.awt.Dimension(70, 30));
 
-        aliveBox.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        aliveBox.setMinimumSize(new java.awt.Dimension(65, 30));
-        aliveBox.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        LWPBox.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        LWPBox.setMinimumSize(new java.awt.Dimension(65, 30));
-        LWPBox.setPreferredSize(new java.awt.Dimension(70, 30));
-
         MDisorderBox.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         MDisorderBox.setMinimumSize(new java.awt.Dimension(65, 30));
         MDisorderBox.setPreferredSize(new java.awt.Dimension(70, 30));
@@ -165,10 +160,6 @@ public class Family_History extends javax.swing.JFrame {
         SDisorderBox.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         SDisorderBox.setMinimumSize(new java.awt.Dimension(65, 30));
         SDisorderBox.setPreferredSize(new java.awt.Dimension(70, 30));
-
-        DisorderHRFBox.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        DisorderHRFBox.setMinimumSize(new java.awt.Dimension(65, 30));
-        DisorderHRFBox.setPreferredSize(new java.awt.Dimension(70, 30));
 
         deletedBox.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         deletedBox.setMinimumSize(new java.awt.Dimension(65, 30));
@@ -178,120 +169,165 @@ public class Family_History extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Family History");
 
+        aliveBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aliveBoxActionPerformed(evt);
+            }
+        });
+
+        LWPbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LWPboxActionPerformed(evt);
+            }
+        });
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Family ID", "Paitent ID", "Name", "Relation", "Alive", "Lives With Patient", "Major Disorder", "Specific Type of Disorder", "Disorder HRF", "Deleted"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setResizable(false);
+            jTable2.getColumnModel().getColumn(4).setResizable(false);
+            jTable2.getColumnModel().getColumn(5).setResizable(false);
+            jTable2.getColumnModel().getColumn(6).setResizable(false);
+            jTable2.getColumnModel().getColumn(7).setResizable(false);
+            jTable2.getColumnModel().getColumn(8).setResizable(false);
+            jTable2.getColumnModel().getColumn(9).setResizable(false);
+        }
+
         jMenuBar1.setPreferredSize(new java.awt.Dimension(141, 40));
 
-        jMenu1.setText("Switch Pages");
+        JMenu.setText("Switch Pages");
 
-        goToActivityTolerance.setSelected(true);
-        goToActivityTolerance.setText("Activity Tolerance Interview");
-        goToActivityTolerance.addActionListener(new java.awt.event.ActionListener() {
+        patientSelectionNavBtn.setText("Patient Selection");
+        patientSelectionNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToActivityToleranceActionPerformed(evt);
+                patientSelectionNavBtnActionPerformed(evt);
             }
         });
-        jMenu1.add(goToActivityTolerance);
+        JMenu.add(patientSelectionNavBtn);
 
-        goToFamHistory.setSelected(true);
-        goToFamHistory.setText("Family History");
-        goToFamHistory.addActionListener(new java.awt.event.ActionListener() {
+        patientDemographicsNavBtn.setText("Patient Demographics");
+        patientDemographicsNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToFamHistoryActionPerformed(evt);
+                patientDemographicsNavBtnActionPerformed(evt);
             }
         });
-        jMenu1.add(goToFamHistory);
+        JMenu.add(patientDemographicsNavBtn);
 
-        goToGenMedHistory.setSelected(true);
-        goToGenMedHistory.setText("General Medical History");
-        goToGenMedHistory.addActionListener(new java.awt.event.ActionListener() {
+        immunizationsNavBtn.setText("Immunizations");
+        immunizationsNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToGenMedHistoryActionPerformed(evt);
+                immunizationsNavBtnActionPerformed(evt);
             }
         });
-        jMenu1.add(goToGenMedHistory);
+        JMenu.add(immunizationsNavBtn);
 
-        goToImmunizations.setSelected(true);
-        goToImmunizations.setText("Immunizations");
-        goToImmunizations.addActionListener(new java.awt.event.ActionListener() {
+        generalMedicalHistoryNavBtn.setText("General Medical History");
+        generalMedicalHistoryNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToImmunizationsActionPerformed(evt);
+                generalMedicalHistoryNavBtnActionPerformed(evt);
             }
         });
-        jMenu1.add(goToImmunizations);
+        JMenu.add(generalMedicalHistoryNavBtn);
 
-        goToPatientDemos.setSelected(true);
-        goToPatientDemos.setText("Patient Demographics");
-        goToPatientDemos.addActionListener(new java.awt.event.ActionListener() {
+        familyHistoryNavBtn.setText("Family History");
+        familyHistoryNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToPatientDemosActionPerformed(evt);
+                familyHistoryNavBtnActionPerformed(evt);
             }
         });
-        jMenu1.add(goToPatientDemos);
+        JMenu.add(familyHistoryNavBtn);
 
-        goToPatientSelection.setSelected(true);
-        goToPatientSelection.setText("Patient Selection");
-        goToPatientSelection.addActionListener(new java.awt.event.ActionListener() {
+        activityToleranceInterviewNavBtn.setText("Activity Tolerance Interview");
+        activityToleranceInterviewNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToPatientSelectionActionPerformed(evt);
+                activityToleranceInterviewNavBtnActionPerformed(evt);
             }
         });
-        jMenu1.add(goToPatientSelection);
+        JMenu.add(activityToleranceInterviewNavBtn);
 
-        goToShortnessOfBreathInterview.setSelected(true);
-        goToShortnessOfBreathInterview.setText("Shortness Of Breath Interview");
-        goToShortnessOfBreathInterview.addActionListener(new java.awt.event.ActionListener() {
+        shortnessOfBreathNavBtn.setText("Shortness of Breath Interview");
+        shortnessOfBreathNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToShortnessOfBreathInterviewActionPerformed(evt);
+                shortnessOfBreathNavBtnActionPerformed(evt);
             }
         });
-        jMenu1.add(goToShortnessOfBreathInterview);
+        JMenu.add(shortnessOfBreathNavBtn);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(JMenu);
 
         jMenu2.setText("Actions");
 
-        addButton.setSelected(true);
-        addButton.setText("Add Record");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        editRecord.setText("Edit Record");
+        editRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                editRecordActionPerformed(evt);
             }
         });
-        jMenu2.add(addButton);
+        jMenu2.add(editRecord);
 
-        editButton.setSelected(true);
-        editButton.setText("Edit Record");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
+        saveRecord.setText("Save Record");
+        saveRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
+                saveRecordActionPerformed(evt);
             }
         });
-        jMenu2.add(editButton);
+        jMenu2.add(saveRecord);
 
-        delButton.setSelected(true);
-        delButton.setText("Delete Record");
-        delButton.addActionListener(new java.awt.event.ActionListener() {
+        deleteRecord.setText("Delete Record");
+        deleteRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delButtonActionPerformed(evt);
+                deleteRecordActionPerformed(evt);
             }
         });
-        jMenu2.add(delButton);
+        jMenu2.add(deleteRecord);
 
-        saveButton.setSelected(true);
-        saveButton.setText("Save Record");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
+        addRecord.setText("Add Record");
+        addRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
+                addRecordActionPerformed(evt);
             }
         });
-        jMenu2.add(saveButton);
+        jMenu2.add(addRecord);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Interview");
 
-        FH_Interview_Btn.setSelected(true);
-        FH_Interview_Btn.setText("Start Interview");
-        jMenu3.add(FH_Interview_Btn);
+        startFHInterview.setText("Start Family History Interview");
+        startFHInterview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startFHInterviewActionPerformed(evt);
+            }
+        });
+        jMenu3.add(startFHInterview);
 
         jMenuBar1.add(jMenu3);
 
@@ -323,13 +359,15 @@ public class Family_History extends javax.swing.JFrame {
                             .addComponent(PIDbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nameBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(relationBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(aliveBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(LWPBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(MDisorderBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(SDisorderBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DisorderHRFBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deletedBox, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(172, Short.MAX_VALUE))
+                            .addComponent(deletedBox, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                            .addComponent(aliveBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(HRFbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LWPbox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,122 +375,168 @@ public class Family_History extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel10)
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(FIDbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(PIDbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(relationBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(aliveBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(LWPBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MDisorderBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SDisorderBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DisorderHRFBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deletedBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(FIDbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(PIDbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(nameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(relationBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(aliveBox)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LWPbox)
+                                .addGap(33, 33, 33)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MDisorderBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SDisorderBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(HRFbox)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(deletedBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2))
                 .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        modeFlag = 2;
-        
-        User_Modes.Edit_Mode(this);
-        User_Modes.Edit_Message(this);
-    }//GEN-LAST:event_editButtonActionPerformed
-
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        switch(modeFlag){
-            case 1:
-                
-        }
-                
-    }//GEN-LAST:event_saveButtonActionPerformed
-
-    private void delButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delButtonActionPerformed
-         modeFlag = 3;
-    }//GEN-LAST:event_delButtonActionPerformed
-
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-         modeFlag = 1;
-    }//GEN-LAST:event_addButtonActionPerformed
-
-    private void goToActivityToleranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToActivityToleranceActionPerformed
+    private void LWPboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LWPboxActionPerformed
         // TODO add your handling code here:
-        Activity_Tolerance_Interview newATI = new Activity_Tolerance_Interview();
-        newATI.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_goToActivityToleranceActionPerformed
+    }//GEN-LAST:event_LWPboxActionPerformed
 
-    private void goToFamHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToFamHistoryActionPerformed
+    private void aliveBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aliveBoxActionPerformed
         // TODO add your handling code here:
-        Family_History newFH = new Family_History();
-        newFH.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_goToFamHistoryActionPerformed
+    }//GEN-LAST:event_aliveBoxActionPerformed
 
-    private void goToGenMedHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToGenMedHistoryActionPerformed
-        // TODO add your handling code here:
-        General_Medical_History newGMH = new General_Medical_History();
-        newGMH.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_goToGenMedHistoryActionPerformed
-
-    private void goToImmunizationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToImmunizationsActionPerformed
-        // TODO add your handling code here:
-        Immunizations newI = new Immunizations();
-        newI.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_goToImmunizationsActionPerformed
-
-    private void goToPatientDemosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToPatientDemosActionPerformed
-        // TODO add your handling code here:
-        Patient_Demographics newPD = new Patient_Demographics();
-        newPD.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_goToPatientDemosActionPerformed
-
-    private void goToPatientSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToPatientSelectionActionPerformed
-        // TODO add your handling code here:
-        Patient_Selection newPS = new Patient_Selection();
-        newPS.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_goToPatientSelectionActionPerformed
-
-    private void goToShortnessOfBreathInterviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToShortnessOfBreathInterviewActionPerformed
+    private void shortnessOfBreathNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shortnessOfBreathNavBtnActionPerformed
         // TODO add your handling code here:
         Shortness_of_Breath_Interview newSOBI = new Shortness_of_Breath_Interview();
         newSOBI.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_goToShortnessOfBreathInterviewActionPerformed
+    }//GEN-LAST:event_shortnessOfBreathNavBtnActionPerformed
+
+    private void patientSelectionNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectionNavBtnActionPerformed
+        // TODO add your handling code here:
+        Patient_Selection newPS = new Patient_Selection();
+        newPS.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_patientSelectionNavBtnActionPerformed
+
+    private void activityToleranceInterviewNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceInterviewNavBtnActionPerformed
+        // TODO add your handling code here:
+        Activity_Tolerance_Interview newATI = new Activity_Tolerance_Interview();
+        newATI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_activityToleranceInterviewNavBtnActionPerformed
+
+    private void patientDemographicsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemographicsNavBtnActionPerformed
+        // TODO add your handling code here:
+        Patient_Demographics newPD = new Patient_Demographics();
+        newPD.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_patientDemographicsNavBtnActionPerformed
+
+    private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
+        // TODO add your handling code here:
+        Immunizations newI = new Immunizations();
+        newI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_immunizationsNavBtnActionPerformed
+
+    private void generalMedicalHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generalMedicalHistoryNavBtnActionPerformed
+        // TODO add your handling code here:
+        General_Medical_History newGMH = new General_Medical_History();
+        newGMH.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_generalMedicalHistoryNavBtnActionPerformed
+
+    private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
+        // TODO add your handling code here:
+        Family_History newFH = new Family_History();
+        newFH.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
+
+    private void editRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editRecordActionPerformed
+        // TODO add your handling code here:
+        User_Modes.Edit_Mode(this);
+        User_Modes.Edit_Message(this);
+        modeFlag = 2;
+    }//GEN-LAST:event_editRecordActionPerformed
+
+    private void saveRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRecordActionPerformed
+        // TODO add your handling code here:
+         //Initialize transfer variables. 
+        //Get text from textboxes and store them in variables for transfer to database via stored procedure. 
+        Family_History_DBOperations famObj = new Family_History_DBOperations();
+                       
+        int ent_PID = Integer.parseInt(PIDbox.getText().trim());
+        int ent_FID = Integer.parseInt(FIDbox.getText().trim()); 
+        String ent_Name = nameBox.getText().trim();
+        String ent_Relation = relationBox.getText().trim();
+        int ent_Alive = aliveBox.isSelected() ? 1 : 0;
+        int ent_LWP = LWPbox.isSelected() ? 1 : 0;
+        String ent_MajorDisorder = MDisorderBox.getText().trim();
+        String ent_SToD = SDisorderBox.getText().trim();
+        int ent_HRF = HRFbox.isSelected() ? 1 : 0;
+        int ent_deleted = Integer.parseInt(deletedBox.getText().trim());
+        
+        switch(modeFlag){
+           case 1:
+               famObj.addFHRecord(ent_PID, ent_Name, ent_Relation, ent_Alive, ent_LWP, ent_MajorDisorder, ent_SToD, ent_HRF, ent_deleted);
+           case 2:
+               famObj.editFHRecord(ent_FID, ent_Name, ent_Relation, ent_Alive, ent_LWP, ent_MajorDisorder, ent_SToD, ent_HRF);
+           case 3:  
+               famObj.delFHRecord(ent_FID);
+        }
+    }//GEN-LAST:event_saveRecordActionPerformed
+
+    private void deleteRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRecordActionPerformed
+        // TODO add your handling code here:
+        modeFlag = 3;
+    }//GEN-LAST:event_deleteRecordActionPerformed
+
+    private void addRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecordActionPerformed
+        // TODO add your handling code here:
+        modeFlag = 1;
+    }//GEN-LAST:event_addRecordActionPerformed
+
+    private void startFHInterviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startFHInterviewActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startFHInterviewActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -463,25 +547,22 @@ public class Family_History extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField DisorderHRFBox;
-    private javax.swing.JRadioButtonMenuItem FH_Interview_Btn;
     private javax.swing.JTextField FIDbox;
-    private javax.swing.JTextField LWPBox;
+    private javax.swing.JCheckBox HRFbox;
+    private javax.swing.JMenu JMenu;
+    private javax.swing.JCheckBox LWPbox;
     private javax.swing.JTextField MDisorderBox;
     private javax.swing.JTextField PIDbox;
     private javax.swing.JTextField SDisorderBox;
-    private javax.swing.JRadioButtonMenuItem addButton;
-    private javax.swing.JTextField aliveBox;
-    private javax.swing.JRadioButtonMenuItem delButton;
+    private javax.swing.JMenuItem activityToleranceInterviewNavBtn;
+    private javax.swing.JMenuItem addRecord;
+    private javax.swing.JCheckBox aliveBox;
+    private javax.swing.JMenuItem deleteRecord;
     private javax.swing.JTextField deletedBox;
-    private javax.swing.JRadioButtonMenuItem editButton;
-    private javax.swing.JRadioButtonMenuItem goToActivityTolerance;
-    private javax.swing.JRadioButtonMenuItem goToFamHistory;
-    private javax.swing.JRadioButtonMenuItem goToGenMedHistory;
-    private javax.swing.JRadioButtonMenuItem goToImmunizations;
-    private javax.swing.JRadioButtonMenuItem goToPatientDemos;
-    private javax.swing.JRadioButtonMenuItem goToPatientSelection;
-    private javax.swing.JCheckBoxMenuItem goToShortnessOfBreathInterview;
+    private javax.swing.JMenuItem editRecord;
+    private javax.swing.JMenuItem familyHistoryNavBtn;
+    private javax.swing.JMenuItem generalMedicalHistoryNavBtn;
+    private javax.swing.JMenuItem immunizationsNavBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -493,14 +574,19 @@ public class Family_History extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField nameBox;
+    private javax.swing.JMenuItem patientDemographicsNavBtn;
+    private javax.swing.JMenuItem patientSelectionNavBtn;
     private javax.swing.JTextField relationBox;
-    private javax.swing.JRadioButtonMenuItem saveButton;
+    private javax.swing.JMenuItem saveRecord;
+    private javax.swing.JMenuItem shortnessOfBreathNavBtn;
+    private javax.swing.JMenuItem startFHInterview;
     // End of variables declaration//GEN-END:variables
 }
