@@ -171,7 +171,7 @@ public class GMH_Auto_Interview {
 
 
         // Drug Questions
-        QuestionNode drugTypeQ = new QuestionNode("What type(s) of recreational drugs do you use?");
+        QuestionNode drugTypeQ = new QuestionNode("Do you use prescription or over-the-counter drugs?");
         drugTypeQ.onYes = () -> { // Using onYes to capture the type, assuming 'Yes' means they will enter a type
             String type = JOptionPane.showInputDialog("Enter type(s) of drug(s) used:");
             answers.put("DrugType", type);
@@ -188,24 +188,14 @@ public class GMH_Auto_Interview {
         drugTypeQ.yesNode = alcoholQ;
         drugTypeQ.noNode = alcoholQ; // Even if they cancel/say no to type, proceed
 
-        QuestionNode drugQ = new QuestionNode("Do you currently use any recreational drugs (not prescribed by a doctor)?");
-        drugQ.onYes = () -> {
-            answers.put("Drug Use", "Yes"); // Record that they use drugs
-            // No other action needed here, the yesNode will ask for type/duration
-        };
-        drugQ.onNo = () -> {
-            answers.put("Drug Use", "No");
-            // No need to put nulls for type/duration if using getOrDefault
-        };
-        // If Yes, ask for type; If No, skip to alcohol
-        drugQ.yesNode = drugTypeQ;
-        drugQ.noNode = alcoholQ;
+       
+        
 
 
         // --- Blood Type Confirmation Tree ---
 
         // Define the NEXT main question after blood type is determined or skipped
-        QuestionNode nextQuestionAfterBlood = drugQ; // Link all blood type paths here
+        QuestionNode nextQuestionAfterBlood = drugTypeQ; // Link all blood type paths here
 
         // Actions to store the final confirmed blood type
         Runnable storeAPos = () -> { answers.put("BloodType", "A"); answers.put("Rh", "+"); };
