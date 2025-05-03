@@ -37,6 +37,11 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 //        LockScreen();
         
     }
+    
+    private void refreshForm() {
+        this.dispose(); // Close current form
+        new Shortness_of_Breath_Interview(getPatientID()).setVisible(true); 
+    }
 
     
     @SuppressWarnings("unchecked")
@@ -271,26 +276,26 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_ATAActionPerformed
 
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
-        UnlockScreen();
+        
         Shortness_of_Breath_Auto_Interview.conductInterview(getPatientIDSOBA());
-        initializeTable();
+        refreshForm();
+        
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
     private void menu_Edit_ModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_ModeActionPerformed
-        UnlockScreen();
+        User_Modes.Edit_Mode(this);
     }//GEN-LAST:event_menu_Edit_ModeActionPerformed
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
         
         Shortness_Of_Breath_DBOperations.editSOBAssessment(RecordID, getPatientIDSOBA(), this);
-        initializeTable();
-        LockScreen();
+        refreshForm();
     }//GEN-LAST:event_menu_SaveActionPerformed
 
     private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed
         
         Shortness_Of_Breath_DBOperations.deleteSOBAssessment(RecordID, getPatientIDSOBA());
-        LockScreen();
+        User_Modes.View_Only_Mode(this);
     }//GEN-LAST:event_menu_DeleteActionPerformed
 
     private void menu_Patient_SelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectionActionPerformed
@@ -364,6 +369,8 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     }
     
     private void initializeTable() {
+        
+         tabl_SOBRecords.clearSelection();
         // Call the PatientDBUtils method to get the ResultSet
         ResultSet rs = Shortness_Of_Breath_DBOperations.PatientDBUtils(patientID);
 
@@ -440,7 +447,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
                 tabl_SOBRecords.getSelectionModel().addListSelectionListener(e -> {
                     if (!e.getValueIsAdjusting()) {  // Check if the selection has changed
                         int selectedRow = tabl_SOBRecords.getSelectedRow();
-                        if (selectedRow != -1) {
+                        if (selectedRow != -1 && selectedRow < rowDataList.size()) {
                             // Get the values of the selected row from the stored list
                             Object[] selectedRowData = rowDataList.get(selectedRow);
                             String date = (String) selectedRowData[0];

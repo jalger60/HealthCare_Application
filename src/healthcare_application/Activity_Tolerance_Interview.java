@@ -23,7 +23,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     
     public Activity_Tolerance_Interview() {
         initComponents();
-//        LockScreen();
+
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
     }
@@ -32,9 +32,14 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         setPatientID(patientID);
         initComponents();
         initializeTable();
-//        LockScreen();   
+ 
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
+    }
+    
+    private void refreshForm() {
+        this.dispose(); // Close current form
+        new Activity_Tolerance_Interview(getPatientID()).setVisible(true); 
     }
     
     public int getPatientID() {
@@ -410,10 +415,12 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_Edit_RecordActionPerformed
 
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
-        User_Modes.Edit_Mode(this);
-        User_Modes.View_Only_Message(this);
+
         Activity_Tolerance_Assessment_Auto_Interview.conductInterview(patientID);
-        initializeTable();
+        refreshForm();
+        
+        
+        
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
     private void menu_Save_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Save_RecordActionPerformed
@@ -432,12 +439,13 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         }
         Activity_Tolerance_Assessment_DBOperations.editActivityToleranceByPatient(getRecordID(), patientID, this);
         System.out.println(getRecordID());
-//        LockScreen();
+        refreshForm();
+
     }//GEN-LAST:event_menu_Save_RecordActionPerformed
 
     private void menu_Delete_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Delete_RecordActionPerformed
         Activity_Tolerance_Assessment_DBOperations.deleteATAssessment(getRecordID(), patientID);
-//        LockScreen();
+
     }//GEN-LAST:event_menu_Delete_RecordActionPerformed
 
     private void menu_Patient_SelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectActionPerformed
@@ -501,62 +509,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }
     
     
-//    private void LockScreen () {
-//        cbox_Eating.setEnabled(false);
-//        cbox_Eating.setBackground(Color.lightGray);
-//        
-//        
-//        cbox_Drinking.setEnabled(false);
-//        cbox_Drinking.setBackground(Color.lightGray);
-//        
-//        
-//        cbox_Dressed.setEnabled(false);
-//        cbox_Dressed.setBackground(Color.lightGray);
-//        
-//        
-//        cbox_House.setEnabled(false);
-//        cbox_House.setBackground(Color.lightGray);
-//        
-//        
-//        cbox_ClimbStairs.setEnabled(false);
-//        cbox_ClimbStairs.setBackground(Color.lightGray);
-//        
-//        
-//        txt_NumStairs.setEditable(false);
-//        txt_NumStairs.setBackground(Color.lightGray);
-//        
-//                         
-//                
-//    }
-    
-//    private void UnlockScreen () {
-//       
-//        cbox_Eating.setEnabled(true);
-//        cbox_Eating.setBackground(Color.white);
-//        cbox_Eating.setSelectedIndex(-1);
-//        
-//        cbox_Drinking.setEnabled(true);
-//        cbox_Drinking.setBackground(Color.white);
-//        cbox_Drinking.setSelectedIndex(-1);
-//        
-//        cbox_Dressed.setEnabled(true);
-//        cbox_Dressed.setBackground(Color.white);
-//        cbox_Dressed.setSelectedIndex(-1);
-//        
-//        cbox_House.setEnabled(true);
-//        cbox_House.setBackground(Color.white);
-//        cbox_House.setSelectedIndex(-1);
-//        
-//        cbox_ClimbStairs.setEnabled(true);
-//        cbox_ClimbStairs.setBackground(Color.white);
-//        cbox_ClimbStairs.setSelectedIndex(-1);
-//        
-//        txt_NumStairs.setEditable(true);
-//        txt_NumStairs.setBackground(Color.white);
-//        txt_NumStairs.setText(" ");
-//        
-//                         
-//    }
+
     
     private void initializeTable() {
         // Call the PatientDBUtils method to get the ResultSet
@@ -642,7 +595,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
                 tabl_Activity.getSelectionModel().addListSelectionListener(e -> {
                     if (!e.getValueIsAdjusting()) {  // Check if the selection has changed
                         int selectedRow = tabl_Activity.getSelectedRow();
-                        if (selectedRow != -1) {
+                        if (selectedRow != -1 && selectedRow < rowDataList.size()) {
                             // Get the values of the selected row from the stored list
                             Object[] selectedRowData = rowDataList.get(selectedRow);
                             String date = (String) selectedRowData[0];

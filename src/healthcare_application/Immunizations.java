@@ -289,11 +289,12 @@ public class Immunizations extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_AddActionPerformed
-        EditMode();
+        User_Modes.Edit_Mode(this);
+        ClearMode();
     }//GEN-LAST:event_menu_AddActionPerformed
 
     private void radio_buttion_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_buttion_editActionPerformed
-        EditMode(); 
+        User_Modes.Edit_Mode(this);
     }//GEN-LAST:event_radio_buttion_editActionPerformed
 
     private void jRadioButton_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_SaveActionPerformed
@@ -304,11 +305,16 @@ public class Immunizations extends javax.swing.JFrame {
             Immunizations_DBOperations.editImmunizationHistory(this, getPatientID(), getRecordID());
         }
         initializeTable();
+        User_Modes.View_Only_Mode(this);
+        setRecordID(0);
+        ClearMode();
         
     }//GEN-LAST:event_jRadioButton_SaveActionPerformed
 
     private void menu_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_deleteActionPerformed
         Immunizations_DBOperations.deleteImmunizationHistory(getRecordID(), getPatientID());
+        User_Modes.View_Only_Mode(this);
+        ClearMode();
     }//GEN-LAST:event_menu_deleteActionPerformed
 
     private void radio_Patient_SelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_Patient_SelectionActionPerformed
@@ -515,7 +521,7 @@ public class Immunizations extends javax.swing.JFrame {
             tabl_Immunizations.getSelectionModel().addListSelectionListener(e -> {
                 if (!e.getValueIsAdjusting()) {
                     int selectedRow = tabl_Immunizations.getSelectedRow();
-                    if (selectedRow != -1) {
+                    if (selectedRow != -1 && selectedRow < rowDataList.size()) {
                         Object[] selectedRowData = rowDataList.get(selectedRow);
                         Timestamp timestamp = (Timestamp) selectedRowData[0];
                         Timestamp expireTimestamp = (Timestamp) selectedRowData[1];
@@ -552,7 +558,7 @@ public class Immunizations extends javax.swing.JFrame {
 
     
     
-    private void EditMode() {
+    private void ClearMode() {
         // Clear text fields
         txt_Comments.setText("");
         txt_HCPId.setText("");
@@ -582,29 +588,7 @@ public class Immunizations extends javax.swing.JFrame {
         
     }
     
-    private void ViewMode() {
-        // Make text fields read-only
-        txt_Comments.setEditable(false);
-        txt_HCPId.setEditable(false);
-        txt_Vaccine.setEditable(false);
-        txt_delivery.setEditable(false);
-
-        // Set background to light gray
-        Color lightGray = new Color(240, 240, 240);
-        txt_Comments.setBackground(lightGray);
-        txt_HCPId.setBackground(lightGray);
-        txt_Vaccine.setBackground(lightGray);
-        txt_delivery.setBackground(lightGray);
-
-        // Disable date pickers
-        date_Immu_Date.setEnabled(false);
-        date_expiration.setEnabled(false);
-
-        // Also make date editor component backgrounds light gray
-        date_Immu_Date.setBackground(lightGray);
-        date_expiration.setBackground(lightGray);
-}
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser date_Immu_Date;
     private com.toedter.calendar.JDateChooser date_expiration;
