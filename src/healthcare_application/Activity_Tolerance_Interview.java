@@ -1,7 +1,7 @@
 
 package healthcare_application;
 
-import General_Functionality.User_Modes;
+import General_Functionality.*;
 import healthcare_application.DBUtils.Activity_Tolerance_Assessment_Auto_Interview;
 import java.awt.Color;
 import java.sql.*;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import healthcare_application.*;
 
 public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     
@@ -162,10 +163,13 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         tabl_Activity = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_SOBA = new javax.swing.JMenu();
-        SOBA_form = new javax.swing.JMenuItem();
-        menu_Patient_Select = new javax.swing.JMenuItem();
-        menu_GMH = new javax.swing.JMenuItem();
-        menu_Patient_Demographics = new javax.swing.JMenuItem();
+        patientSelectNavBtn = new javax.swing.JMenuItem();
+        patientDemoNavBtn = new javax.swing.JMenuItem();
+        immunizationsNavBtn = new javax.swing.JMenuItem();
+        GMHNavBtn = new javax.swing.JMenuItem();
+        familyHistoryNavBtn = new javax.swing.JMenuItem();
+        SoBNavBtn = new javax.swing.JMenuItem();
+        activityToleranceNavBtn = new javax.swing.JMenuItem();
         menu_ATAOptions = new javax.swing.JMenu();
         menu_Add_Record = new javax.swing.JMenuItem();
         menu_Edit_Record = new javax.swing.JMenuItem();
@@ -293,41 +297,70 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
 
         menu_SOBA.setText("Forms");
 
-        SOBA_form.setText("Shortness of Breath Form");
-        SOBA_form.addActionListener(new java.awt.event.ActionListener() {
+        patientSelectNavBtn.setText("Patient Selection");
+        patientSelectNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SOBA_formActionPerformed(evt);
+                patientSelectNavBtnActionPerformed(evt);
             }
         });
-        menu_SOBA.add(SOBA_form);
+        menu_SOBA.add(patientSelectNavBtn);
 
-        menu_Patient_Select.setText("Patient Selection Form");
-        menu_Patient_Select.addActionListener(new java.awt.event.ActionListener() {
+        patientDemoNavBtn.setText("Patient Demographics");
+        patientDemoNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_Patient_SelectActionPerformed(evt);
+                patientDemoNavBtnActionPerformed(evt);
             }
         });
-        menu_SOBA.add(menu_Patient_Select);
+        menu_SOBA.add(patientDemoNavBtn);
 
-        menu_GMH.setText("General Medical History Form");
-        menu_GMH.addActionListener(new java.awt.event.ActionListener() {
+        immunizationsNavBtn.setText("Immunizations");
+        immunizationsNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_GMHActionPerformed(evt);
+                immunizationsNavBtnActionPerformed(evt);
             }
         });
-        menu_SOBA.add(menu_GMH);
+        menu_SOBA.add(immunizationsNavBtn);
 
-        menu_Patient_Demographics.setText("Patient Demographics Form");
-        menu_Patient_Demographics.addActionListener(new java.awt.event.ActionListener() {
+        GMHNavBtn.setText("General Medical History");
+        GMHNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_Patient_DemographicsActionPerformed(evt);
+                GMHNavBtnActionPerformed(evt);
             }
         });
-        menu_SOBA.add(menu_Patient_Demographics);
+        menu_SOBA.add(GMHNavBtn);
+
+        familyHistoryNavBtn.setText("Family History");
+        familyHistoryNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                familyHistoryNavBtnActionPerformed(evt);
+            }
+        });
+        menu_SOBA.add(familyHistoryNavBtn);
+
+        SoBNavBtn.setText("Shortness of Breath Assessment");
+        SoBNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SoBNavBtnActionPerformed(evt);
+            }
+        });
+        menu_SOBA.add(SoBNavBtn);
+
+        activityToleranceNavBtn.setText("Activity Tolerance Assessment");
+        activityToleranceNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activityToleranceNavBtnActionPerformed(evt);
+            }
+        });
+        menu_SOBA.add(activityToleranceNavBtn);
 
         jMenuBar1.add(menu_SOBA);
 
         menu_ATAOptions.setText("Actions");
+        menu_ATAOptions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_ATAOptionsActionPerformed(evt);
+            }
+        });
 
         menu_Add_Record.setText("Add Record");
         menu_Add_Record.addActionListener(new java.awt.event.ActionListener() {
@@ -398,7 +431,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SOBA_formActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SOBA_formActionPerformed
+    private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
         Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID());
 
@@ -406,7 +439,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         sobaInterviewForm.setVisible(true);
         this.dispose();
 
-    }//GEN-LAST:event_SOBA_formActionPerformed
+    }//GEN-LAST:event_SoBNavBtnActionPerformed
 
     private void menu_Edit_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_RecordActionPerformed
 //        UnlockScreen();
@@ -448,14 +481,13 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
 
     }//GEN-LAST:event_menu_Delete_RecordActionPerformed
 
-    private void menu_Patient_SelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_SelectActionPerformed
-            Patient_Selection patient_select = new Patient_Selection();
+    private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
+            Patient_Selection patient_select = new Patient_Selection(getPatientID());
             patient_select.setVisible(true);
-            patient_select.setPatientID(getPatientID());
             this.dispose();
-    }//GEN-LAST:event_menu_Patient_SelectActionPerformed
+    }//GEN-LAST:event_patientSelectNavBtnActionPerformed
 
-    private void menu_Patient_DemographicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_DemographicsActionPerformed
+    private void patientDemoNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemoNavBtnActionPerformed
         Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
         Patient_Demographics patient = operations.getPatientDemographics(getPatientID());
 
@@ -465,15 +497,39 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
             }
-    }//GEN-LAST:event_menu_Patient_DemographicsActionPerformed
+    }//GEN-LAST:event_patientDemoNavBtnActionPerformed
 
-    private void menu_GMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_GMHActionPerformed
+    private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientID());
         
         history.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_menu_GMHActionPerformed
+    }//GEN-LAST:event_GMHNavBtnActionPerformed
+
+    private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
+        Immunizations newImmunizations = new Immunizations(getPatientID());
+        newImmunizations.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_immunizationsNavBtnActionPerformed
+
+    private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
+        Family_History newFamilyHistory = new Family_History(getPatientID());
+        newFamilyHistory.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
+
+    private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
+        // TODO add your handling code here:
+        Activity_Tolerance_Interview newATI = new Activity_Tolerance_Interview(getPatientID());
+        newATI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
+
+    private void menu_ATAOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAOptionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menu_ATAOptionsActionPerformed
 
     
     public static void main(String args[]) {
@@ -640,12 +696,16 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem SOBA_form;
+    private javax.swing.JMenuItem GMHNavBtn;
+    private javax.swing.JMenuItem SoBNavBtn;
+    private javax.swing.JMenuItem activityToleranceNavBtn;
     private javax.swing.JComboBox<String> cbox_ClimbStairs;
     private javax.swing.JComboBox<String> cbox_Dressed;
     private javax.swing.JComboBox<String> cbox_Drinking;
     private javax.swing.JComboBox<String> cbox_Eating;
     private javax.swing.JComboBox<String> cbox_House;
+    private javax.swing.JMenuItem familyHistoryNavBtn;
+    private javax.swing.JMenuItem immunizationsNavBtn;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_ATClimb1_steps;
@@ -659,12 +719,11 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_Add_Record;
     private javax.swing.JMenuItem menu_Delete_Record;
     private javax.swing.JMenuItem menu_Edit_Record;
-    private javax.swing.JMenuItem menu_GMH;
-    private javax.swing.JMenuItem menu_Patient_Demographics;
-    private javax.swing.JMenuItem menu_Patient_Select;
     private javax.swing.JMenu menu_SOBA;
     private javax.swing.JMenuItem menu_Save_Record;
     private javax.swing.JPanel panel_ATA;
+    private javax.swing.JMenuItem patientDemoNavBtn;
+    private javax.swing.JMenuItem patientSelectNavBtn;
     private javax.swing.JTable tabl_Activity;
     private javax.swing.JTextField txt_NumStairs;
     // End of variables declaration//GEN-END:variables

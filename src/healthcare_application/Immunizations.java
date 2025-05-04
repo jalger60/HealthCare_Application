@@ -63,10 +63,12 @@ public class Immunizations extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_Patient_Selection = new javax.swing.JMenu();
         radio_Patient_Selection = new javax.swing.JRadioButtonMenuItem();
-        menu_patient_demographics = new javax.swing.JRadioButtonMenuItem();
-        menu_gmh = new javax.swing.JRadioButtonMenuItem();
-        menu_ata = new javax.swing.JRadioButtonMenuItem();
-        menu_shortness_of_breath = new javax.swing.JRadioButtonMenuItem();
+        patientDemoNavBtn = new javax.swing.JRadioButtonMenuItem();
+        immunizationsNavBtn = new javax.swing.JMenuItem();
+        GMHNavBtn = new javax.swing.JRadioButtonMenuItem();
+        familyHistoryNavBTN = new javax.swing.JMenuItem();
+        activityToleranceNavBtn = new javax.swing.JRadioButtonMenuItem();
+        SoBNavBtn = new javax.swing.JRadioButtonMenuItem();
         menu_Edit = new javax.swing.JMenu();
         menu_Add = new javax.swing.JRadioButtonMenuItem();
         radio_buttion_edit = new javax.swing.JRadioButtonMenuItem();
@@ -115,7 +117,7 @@ public class Immunizations extends javax.swing.JFrame {
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(70, 40));
 
-        menu_Patient_Selection.setText("Navigation");
+        menu_Patient_Selection.setText("Switch Pages");
 
         radio_Patient_Selection.setSelected(true);
         radio_Patient_Selection.setText("Patient Selection");
@@ -126,41 +128,57 @@ public class Immunizations extends javax.swing.JFrame {
         });
         menu_Patient_Selection.add(radio_Patient_Selection);
 
-        menu_patient_demographics.setSelected(true);
-        menu_patient_demographics.setText("Patient Demographics");
-        menu_patient_demographics.addActionListener(new java.awt.event.ActionListener() {
+        patientDemoNavBtn.setSelected(true);
+        patientDemoNavBtn.setText("Patient Demographics");
+        patientDemoNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_patient_demographicsActionPerformed(evt);
+                patientDemoNavBtnActionPerformed(evt);
             }
         });
-        menu_Patient_Selection.add(menu_patient_demographics);
+        menu_Patient_Selection.add(patientDemoNavBtn);
 
-        menu_gmh.setSelected(true);
-        menu_gmh.setText("General Medical History");
-        menu_gmh.addActionListener(new java.awt.event.ActionListener() {
+        immunizationsNavBtn.setText("Immunizations");
+        immunizationsNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_gmhActionPerformed(evt);
+                immunizationsNavBtnActionPerformed(evt);
             }
         });
-        menu_Patient_Selection.add(menu_gmh);
+        menu_Patient_Selection.add(immunizationsNavBtn);
 
-        menu_ata.setSelected(true);
-        menu_ata.setText("Activity Tolerance");
-        menu_ata.addActionListener(new java.awt.event.ActionListener() {
+        GMHNavBtn.setSelected(true);
+        GMHNavBtn.setText("General Medical History");
+        GMHNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_ataActionPerformed(evt);
+                GMHNavBtnActionPerformed(evt);
             }
         });
-        menu_Patient_Selection.add(menu_ata);
+        menu_Patient_Selection.add(GMHNavBtn);
 
-        menu_shortness_of_breath.setSelected(true);
-        menu_shortness_of_breath.setText("Shortness of Breath ");
-        menu_shortness_of_breath.addActionListener(new java.awt.event.ActionListener() {
+        familyHistoryNavBTN.setText("Family History");
+        familyHistoryNavBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_shortness_of_breathActionPerformed(evt);
+                familyHistoryNavBTNActionPerformed(evt);
             }
         });
-        menu_Patient_Selection.add(menu_shortness_of_breath);
+        menu_Patient_Selection.add(familyHistoryNavBTN);
+
+        activityToleranceNavBtn.setSelected(true);
+        activityToleranceNavBtn.setText("Activity Tolerance Interview");
+        activityToleranceNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activityToleranceNavBtnActionPerformed(evt);
+            }
+        });
+        menu_Patient_Selection.add(activityToleranceNavBtn);
+
+        SoBNavBtn.setSelected(true);
+        SoBNavBtn.setText("Shortness of Breath Interview");
+        SoBNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SoBNavBtnActionPerformed(evt);
+            }
+        });
+        menu_Patient_Selection.add(SoBNavBtn);
 
         jMenuBar1.add(menu_Patient_Selection);
 
@@ -324,7 +342,7 @@ public class Immunizations extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_radio_Patient_SelectionActionPerformed
 
-    private void menu_patient_demographicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_patient_demographicsActionPerformed
+    private void patientDemoNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemoNavBtnActionPerformed
         Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
         Patient_Demographics patient = operations.getPatientDemographics(getPatientID());
 
@@ -335,30 +353,44 @@ public class Immunizations extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
             }
             this.dispose();
-    }//GEN-LAST:event_menu_patient_demographicsActionPerformed
+    }//GEN-LAST:event_patientDemoNavBtnActionPerformed
 
-    private void menu_gmhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_gmhActionPerformed
+    private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientID());
         
         history.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_menu_gmhActionPerformed
+    }//GEN-LAST:event_GMHNavBtnActionPerformed
 
-    private void menu_ataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ataActionPerformed
+    private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
         Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID());
         ATA.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_menu_ataActionPerformed
+    }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
 
-    private void menu_shortness_of_breathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_shortness_of_breathActionPerformed
+    private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
         Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID());
 
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_menu_shortness_of_breathActionPerformed
+    }//GEN-LAST:event_SoBNavBtnActionPerformed
+
+    private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
+        // TODO add your handling code here:
+        Immunizations newI = new Immunizations(getPatientID());
+        newI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_immunizationsNavBtnActionPerformed
+
+    private void familyHistoryNavBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBTNActionPerformed
+        // TODO add your handling code here:
+        Family_History newFH = new Family_History(getPatientID());
+        newFH.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_familyHistoryNavBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -590,8 +622,13 @@ public class Immunizations extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButtonMenuItem GMHNavBtn;
+    private javax.swing.JRadioButtonMenuItem SoBNavBtn;
+    private javax.swing.JRadioButtonMenuItem activityToleranceNavBtn;
     private com.toedter.calendar.JDateChooser date_Immu_Date;
     private com.toedter.calendar.JDateChooser date_expiration;
+    private javax.swing.JMenuItem familyHistoryNavBTN;
+    private javax.swing.JMenuItem immunizationsNavBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
@@ -605,11 +642,8 @@ public class Immunizations extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem menu_Add;
     private javax.swing.JMenu menu_Edit;
     private javax.swing.JMenu menu_Patient_Selection;
-    private javax.swing.JRadioButtonMenuItem menu_ata;
     private javax.swing.JRadioButtonMenuItem menu_delete;
-    private javax.swing.JRadioButtonMenuItem menu_gmh;
-    private javax.swing.JRadioButtonMenuItem menu_patient_demographics;
-    private javax.swing.JRadioButtonMenuItem menu_shortness_of_breath;
+    private javax.swing.JRadioButtonMenuItem patientDemoNavBtn;
     private javax.swing.JRadioButtonMenuItem radio_Patient_Selection;
     private javax.swing.JRadioButtonMenuItem radio_buttion_edit;
     private javax.swing.JTable tabl_Immunizations;

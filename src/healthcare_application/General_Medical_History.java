@@ -8,6 +8,7 @@ import healthcare_application.DBUtils.GMH_DBOperations;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import healthcare_application.*;
 public class General_Medical_History extends javax.swing.JFrame {
 
     private int patientID;
@@ -59,10 +60,13 @@ public class General_Medical_History extends javax.swing.JFrame {
         cbox_RH = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_Shortness_Of_Breath = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        menu_Patient_Demographics = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        menu_ATA = new javax.swing.JMenuItem();
+        patientSelectNavBtn = new javax.swing.JMenuItem();
+        patientDemoNavBtn = new javax.swing.JMenuItem();
+        immunizationsNavBtn = new javax.swing.JMenuItem();
+        GMHNavBtn = new javax.swing.JMenuItem();
+        familyHistoryNavBtn = new javax.swing.JMenuItem();
+        activityToleranceNavBtn = new javax.swing.JMenuItem();
+        SoBNavBtn = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         radio_add = new javax.swing.JRadioButtonMenuItem();
         menu_Edit = new javax.swing.JRadioButtonMenuItem();
@@ -145,40 +149,64 @@ public class General_Medical_History extends javax.swing.JFrame {
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(92, 40));
 
-        menu_Shortness_Of_Breath.setText("Navigate");
+        menu_Shortness_Of_Breath.setText("Switch Pages");
         menu_Shortness_Of_Breath.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jMenuItem1.setText("Patient Selection");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        patientSelectNavBtn.setText("Patient Selection");
+        patientSelectNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                patientSelectNavBtnActionPerformed(evt);
             }
         });
-        menu_Shortness_Of_Breath.add(jMenuItem1);
+        menu_Shortness_Of_Breath.add(patientSelectNavBtn);
 
-        menu_Patient_Demographics.setText("Patient Demographics");
-        menu_Patient_Demographics.addActionListener(new java.awt.event.ActionListener() {
+        patientDemoNavBtn.setText("Patient Demographics");
+        patientDemoNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_Patient_DemographicsActionPerformed(evt);
+                patientDemoNavBtnActionPerformed(evt);
             }
         });
-        menu_Shortness_Of_Breath.add(menu_Patient_Demographics);
+        menu_Shortness_Of_Breath.add(patientDemoNavBtn);
 
-        jMenuItem4.setText("Shortness of Breath");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        immunizationsNavBtn.setText("Immunizations");
+        immunizationsNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                immunizationsNavBtnActionPerformed(evt);
             }
         });
-        menu_Shortness_Of_Breath.add(jMenuItem4);
+        menu_Shortness_Of_Breath.add(immunizationsNavBtn);
 
-        menu_ATA.setText("Activity Tolerance");
-        menu_ATA.addActionListener(new java.awt.event.ActionListener() {
+        GMHNavBtn.setText("General Medical History");
+        GMHNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_ATAActionPerformed(evt);
+                GMHNavBtnActionPerformed(evt);
             }
         });
-        menu_Shortness_Of_Breath.add(menu_ATA);
+        menu_Shortness_Of_Breath.add(GMHNavBtn);
+
+        familyHistoryNavBtn.setText("Family History");
+        familyHistoryNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                familyHistoryNavBtnActionPerformed(evt);
+            }
+        });
+        menu_Shortness_Of_Breath.add(familyHistoryNavBtn);
+
+        activityToleranceNavBtn.setText("Activity Tolerance Interview");
+        activityToleranceNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activityToleranceNavBtnActionPerformed(evt);
+            }
+        });
+        menu_Shortness_Of_Breath.add(activityToleranceNavBtn);
+
+        SoBNavBtn.setText("Shortness of Breath Interview");
+        SoBNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SoBNavBtnActionPerformed(evt);
+            }
+        });
+        menu_Shortness_Of_Breath.add(SoBNavBtn);
 
         jMenuBar1.add(menu_Shortness_Of_Breath);
 
@@ -356,7 +384,7 @@ public class General_Medical_History extends javax.swing.JFrame {
         GMH_DBOperations.deleteGeneralMedicalHistory(getGMHID(), getPatientID());
     }//GEN-LAST:event_menu_DeleteActionPerformed
 
-    private void menu_Patient_DemographicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Patient_DemographicsActionPerformed
+    private void patientDemoNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemoNavBtnActionPerformed
         
         Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
         Patient_Demographics patient = operations.getPatientDemographics(getPatientID());
@@ -368,29 +396,29 @@ public class General_Medical_History extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
             }
             this.dispose();
-    }//GEN-LAST:event_menu_Patient_DemographicsActionPerformed
+    }//GEN-LAST:event_patientDemoNavBtnActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
         Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID());
 
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_SoBNavBtnActionPerformed
 
-    private void menu_ATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAActionPerformed
+    private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
          Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID());
          ATA.setVisible(true);
          this.dispose();
-    }//GEN-LAST:event_menu_ATAActionPerformed
+    }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
         Patient_Selection select = new Patient_Selection ();
         select.setVisible(true);
         select.setPatientID(getPatientID());
         this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_patientSelectNavBtnActionPerformed
 
     private void radio_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_addActionPerformed
         GMH_Auto_Interview.start(getPatientID());
@@ -400,6 +428,27 @@ public class General_Medical_History extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_radio_addActionPerformed
+
+    private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
+        // TODO add your handling code here:
+        Immunizations newI = new Immunizations(getPatientID());
+        newI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_immunizationsNavBtnActionPerformed
+
+    private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
+        // TODO add your handling code here:
+        General_Medical_History newGMH = new General_Medical_History(getPatientID());
+        newGMH.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_GMHNavBtnActionPerformed
+
+    private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
+        // TODO add your handling code here:
+        Family_History newFH = new Family_History(getPatientID());
+        newFH.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -622,9 +671,14 @@ public class General_Medical_History extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem GMHNavBtn;
     private javax.swing.JLabel GenMedTitle;
+    private javax.swing.JMenuItem SoBNavBtn;
+    private javax.swing.JMenuItem activityToleranceNavBtn;
     private javax.swing.JComboBox<String> cbox_BloodType;
     private javax.swing.JComboBox<String> cbox_RH;
+    private javax.swing.JMenuItem familyHistoryNavBtn;
+    private javax.swing.JMenuItem immunizationsNavBtn;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -638,14 +692,12 @@ public class General_Medical_History extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem menu_ATA;
     private javax.swing.JRadioButtonMenuItem menu_Delete;
     private javax.swing.JRadioButtonMenuItem menu_Edit;
-    private javax.swing.JMenuItem menu_Patient_Demographics;
     private javax.swing.JRadioButtonMenuItem menu_Save;
     private javax.swing.JMenu menu_Shortness_Of_Breath;
+    private javax.swing.JMenuItem patientDemoNavBtn;
+    private javax.swing.JMenuItem patientSelectNavBtn;
     private javax.swing.JRadioButtonMenuItem radio_add;
     private javax.swing.JTextField txt_Alcohol_Duration;
     private javax.swing.JTextField txt_Alcohol_Quantity;

@@ -1,11 +1,13 @@
 package healthcare_application;
 
-import General_Functionality.User_Modes;
+import General_Functionality.*;
 import healthcare_application.DBUtils.*;
+import healthcare_application.*;
 
 public class Family_History extends javax.swing.JFrame {
 
     private int modeFlag;
+    private int patientID;
     
     public Family_History() {
         initComponents();
@@ -14,21 +16,23 @@ public class Family_History extends javax.swing.JFrame {
         modeFlag = 0;
     }
     
-    public Family_History(int patientID) {
-       initComponents();
-       setPatientID(patientID);
-       User_Modes.View_Only_Mode(this);
-       User_Modes.View_Only_Message(this);
-       modeFlag = 0;   
-   }
-
-    public int getPatientID() {
+    public Family_History(int PatientID){
+        initComponents();
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
+        this.patientID = PatientID;
+        PIDbox.setText(String.valueOf(patientID));
+    }
+    
+    public void setPatientID(int newPatientID){
+        this.patientID = newPatientID;
+    }
+    
+    public int getPatientID(){
         return this.patientID;
     }
     
-    public void setPatientID(int patientID) {
-        this.patientID = patientID;
-    }    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -456,49 +460,49 @@ public class Family_History extends javax.swing.JFrame {
 
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         // TODO add your handling code here:
-        Shortness_of_Breath_Interview newSOBI = new Shortness_of_Breath_Interview();
+        Shortness_of_Breath_Interview newSOBI = new Shortness_of_Breath_Interview(getPatientID());
         newSOBI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_SoBNavBtnActionPerformed
 
     private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
         // TODO add your handling code here:
-        Patient_Selection newPS = new Patient_Selection();
+        Patient_Selection newPS = new Patient_Selection(getPatientID());
         newPS.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientSelectNavBtnActionPerformed
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
         // TODO add your handling code here:
-        Activity_Tolerance_Interview newATI = new Activity_Tolerance_Interview();
+        Activity_Tolerance_Interview newATI = new Activity_Tolerance_Interview(getPatientID());
         newATI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
 
     private void patientDemographicsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemographicsNavBtnActionPerformed
         // TODO add your handling code here:
-        Patient_Demographics newPD = new Patient_Demographics();
+        Patient_Demographics newPD = new Patient_Demographics(getPatientID());
         newPD.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientDemographicsNavBtnActionPerformed
 
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
         // TODO add your handling code here:
-        Immunizations newI = new Immunizations();
+        Immunizations newI = new Immunizations(getPatientID());
         newI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
 
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         // TODO add your handling code here:
-        General_Medical_History newGMH = new General_Medical_History();
+        General_Medical_History newGMH = new General_Medical_History(getPatientID());
         newGMH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GMHNavBtnActionPerformed
 
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
         // TODO add your handling code here:
-        Family_History newFH = new Family_History();
+        Family_History newFH = new Family_History(getPatientID());
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed

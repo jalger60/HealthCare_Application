@@ -11,39 +11,63 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menu_Forms">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Forms"/>
+            <Property name="text" type="java.lang.String" value="Switch Pages"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menu_Patient_Selection">
+            <MenuItem class="javax.swing.JMenuItem" name="patientSelectNavBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Patient Selection Form"/>
+                <Property name="text" type="java.lang.String" value="Patient Selection"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_Patient_SelectionActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="patientSelectNavBtnActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menu_SOBA">
+            <MenuItem class="javax.swing.JMenuItem" name="patientDemographicsNavBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Patient Demographics"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="patientDemographicsNavBtnActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="immunizationsNavBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Immunizations"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="immunizationsNavBtnActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="GMHNavBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="General Medical History"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GMHNavBtnActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="familyHistoryNavBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Family History"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="familyHistoryNavBtnActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="SoBNavBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Shortness of Breath Assessment"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_SOBAActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SoBNavBtnActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menu_ATA">
+            <MenuItem class="javax.swing.JMenuItem" name="activityToleranceNavBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Activity Tolerance Assessment"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_ATAActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menu_GMH">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="General Medical History Form"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_GMHActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="activityToleranceNavBtnActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
