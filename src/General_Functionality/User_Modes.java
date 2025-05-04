@@ -112,7 +112,7 @@ public class User_Modes {
         SwingUtilities.invokeLater(() -> 
             JOptionPane.showMessageDialog(
             parent,
-            "A new empty record has been added to the database.\nYou are now in EDIT mode.\nPlease fill in the required information for this record using the textboxes.\nRemember to save your changes by clicking the save button!",
+            "You have entered add mode!\nPlease begin inputting information.\nPlease fill in any fields marked with an '*'.\nWhen you are done filling in the patient's data, remember to click save!",
             "Record Added",
             JOptionPane.INFORMATION_MESSAGE
             )
@@ -142,6 +142,7 @@ public class User_Modes {
         );
     }
     
+    //Tell user that the attempt to chan
     public static void Failed_Save_Message(Component parent){
         SwingUtilities.invokeLater(() -> 
                 JOptionPane.showMessageDialog(

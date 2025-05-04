@@ -186,18 +186,4 @@ public class GMH_DBOperations {
             System.err.println("Database connection error: " + ex.getMessage());
         }
     }
-
-
-    
-    
-    
-
-
-    
-    
-    
-    
-
-     
-    
 }

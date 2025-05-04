@@ -24,13 +24,15 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     
     public Activity_Tolerance_Interview() {
         initComponents();
-
+        setPatientID(1);
+        LoggerUtility.initialize(getPatientID());
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
     }
     
     public Activity_Tolerance_Interview(int patientID) {
         setPatientID(patientID);
+        LoggerUtility.initialize(patientID);
         initComponents();
         initializeTable();
  
@@ -432,6 +434,9 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
+        //Log user moving forms
+        LoggerUtility.logAction("User went to Shortness of Breath Page", "john doe");
+
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
         Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID());
 
