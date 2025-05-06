@@ -1,7 +1,7 @@
 
 package healthcare_application;
 
-import General_Functionality.User_Modes;
+import General_Functionality.*;
 import healthcare_application.DBUtils.GMH_DBOperations;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -40,6 +40,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     
     private void refreshForm() {
         this.dispose(); // Close current form
+        LoggerUtility.logTemplate("Refreshed Shortness Of Breath Page", PName);
         new Shortness_of_Breath_Interview(getPatientID(), getPName()).setVisible(true); 
     }
 
@@ -298,6 +299,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
         Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientIDSOBA(), getPName());
+        LoggerUtility.logFormChange(ATA, PName);
         ATA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
@@ -327,6 +329,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 
     private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
         Patient_Selection patient_select = new Patient_Selection();
+        LoggerUtility.logFormChange(patient_select, PName);
         patient_select.setVisible(true);
         patient_select.setPatientID(getPatientIDSOBA());
         patient_select.setPName(getPName());
@@ -336,6 +339,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientIDSOBA());
+        LoggerUtility.logFormChange(history, PName);
         history.setPName(getPName());
         history.setVisible(true);
         this.dispose();
@@ -348,6 +352,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
         // TODO add your handling code here:
         Immunizations newI = new Immunizations(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newI, PName);
         newI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
@@ -355,6 +360,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private void patientDemoNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemoNavBtnActionPerformed
         // TODO add your handling code here:
         Patient_Demographics newPD = new Patient_Demographics(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newPD, PName);
         newPD.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientDemoNavBtnActionPerformed
@@ -362,6 +368,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
         // TODO add your handling code here:
         Family_History newFH = new Family_History(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newFH, PName);
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
@@ -369,6 +376,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         // TODO add your handling code here:
         Shortness_of_Breath_Interview newSoB = new Shortness_of_Breath_Interview(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newSoB, PName);
         newSoB.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_SoBNavBtnActionPerformed

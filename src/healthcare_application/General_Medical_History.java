@@ -2,7 +2,7 @@
 package healthcare_application;
 
 
-import General_Functionality.User_Modes;
+import General_Functionality.*;
 import healthcare_application.DBUtils.GMH_Auto_Interview;
 import healthcare_application.DBUtils.GMH_DBOperations;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
@@ -390,7 +390,7 @@ public class General_Medical_History extends javax.swing.JFrame {
         
         Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
         Patient_Demographics patient = operations.getPatientDemographics(getPatientID());
-
+        LoggerUtility.logFormChange(patient, PName);
             if (patient != null) {
                 patient.setVisible(true);
                 patient.setPatientIDPD(patientID);
@@ -404,7 +404,7 @@ public class General_Medical_History extends javax.swing.JFrame {
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
         Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID(), getPName());
-
+        LoggerUtility.logFormChange(sobaInterviewForm, PName);
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
         this.dispose();
@@ -412,12 +412,14 @@ public class General_Medical_History extends javax.swing.JFrame {
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
          Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID(), getPName());
+        LoggerUtility.logFormChange(ATA, PName);
          ATA.setVisible(true);
          this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
 
     private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
         Patient_Selection select = new Patient_Selection (getPatientID(), getPName());
+        LoggerUtility.logFormChange(select, PName);
         select.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientSelectNavBtnActionPerformed
@@ -426,6 +428,7 @@ public class General_Medical_History extends javax.swing.JFrame {
         GMH_Auto_Interview.start(getPatientID(), getPName());
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(patientID);
+        LoggerUtility.logFormChange(history, PName);
         history.setVisible(true);
         this.dispose();
 
@@ -434,6 +437,7 @@ public class General_Medical_History extends javax.swing.JFrame {
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
         // TODO add your handling code here:
         Immunizations newI = new Immunizations(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newI, PName);
         newI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
@@ -441,6 +445,7 @@ public class General_Medical_History extends javax.swing.JFrame {
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         // TODO add your handling code here:
         General_Medical_History newGMH = new General_Medical_History(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newGMH, PName);
         newGMH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GMHNavBtnActionPerformed
@@ -448,6 +453,7 @@ public class General_Medical_History extends javax.swing.JFrame {
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
         // TODO add your handling code here:
         Family_History newFH = new Family_History(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newFH, PName);
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed

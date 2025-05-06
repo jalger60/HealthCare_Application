@@ -1,6 +1,7 @@
 
 package healthcare_application;
 
+import General_Functionality.LoggerUtility;
 import General_Functionality.User_Modes;
 import static com.mysql.cj.util.StringUtils.isNullOrEmpty;
 import com.toedter.calendar.JDateChooser;
@@ -338,6 +339,7 @@ public class Immunizations extends javax.swing.JFrame {
 
     private void radio_Patient_SelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_Patient_SelectionActionPerformed
         Patient_Selection select = new Patient_Selection ();
+        LoggerUtility.logFormChange(select, PName);
         select.setVisible(true);
         select.setPatientID(getPatientID());
         select.setPName(getPName());
@@ -347,7 +349,7 @@ public class Immunizations extends javax.swing.JFrame {
     private void patientDemoNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemoNavBtnActionPerformed
         Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
         Patient_Demographics patient = operations.getPatientDemographics(getPatientID());
-
+        LoggerUtility.logFormChange(patient, PName);
             if (patient != null) {
                 patient.setVisible(true);
                 patient.setPatientIDPD(getPatientID());
@@ -361,6 +363,7 @@ public class Immunizations extends javax.swing.JFrame {
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientID());
+        LoggerUtility.logFormChange(history, PName);
         history.setPName(getPName());
         history.setVisible(true);
         this.dispose();
@@ -368,6 +371,7 @@ public class Immunizations extends javax.swing.JFrame {
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
         Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID(), getPName());
+        LoggerUtility.logFormChange(ATA, PName);
         ATA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
@@ -375,7 +379,7 @@ public class Immunizations extends javax.swing.JFrame {
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
         Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID(), getPName());
-
+        LoggerUtility.logFormChange(sobaInterviewForm, PName);
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
         this.dispose();
@@ -384,6 +388,7 @@ public class Immunizations extends javax.swing.JFrame {
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
         // TODO add your handling code here:
         Immunizations newI = new Immunizations(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newI, PName);
         newI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
@@ -391,6 +396,7 @@ public class Immunizations extends javax.swing.JFrame {
     private void familyHistoryNavBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBTNActionPerformed
         // TODO add your handling code here:
         Family_History newFH = new Family_History(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newFH, PName);
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBTNActionPerformed

@@ -444,12 +444,12 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
-        //Log user moving forms
-        LoggerUtility.logAction("User went to Shortness of Breath Page", "john doe");
 
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
         Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID(), getPName());
-
+        
+        //Log user moving to new form
+        LoggerUtility.logFormChange(sobaInterviewForm, PName);
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
         this.dispose();
@@ -494,6 +494,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
 
     private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
             Patient_Selection patient_select = new Patient_Selection(getPatientID(), getPName());
+            LoggerUtility.logFormChange(patient_select, PName);
             patient_select.setVisible(true);
             this.dispose();
     }//GEN-LAST:event_patientSelectNavBtnActionPerformed
@@ -501,10 +502,11 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private void patientDemoNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemoNavBtnActionPerformed
         Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
         Patient_Demographics patient = operations.getPatientDemographics(getPatientID());
-
+        LoggerUtility.logFormChange(patient, PName);
             if (patient != null) {
                 patient.setVisible(true);
                 patient.setPatientIDPD(getPatientID());
+                patient.setPName(getPName());
             } else {
                 JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -514,12 +516,14 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientID());
         history.setPName(getPName());
+        LoggerUtility.logFormChange(history, PName);
         history.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GMHNavBtnActionPerformed
 
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
         Immunizations newImmunizations = new Immunizations(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newImmunizations, PName);
         newImmunizations.setVisible(true);
         this.dispose();
         
@@ -527,6 +531,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
 
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
         Family_History newFamilyHistory = new Family_History(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newFamilyHistory, PName);
         newFamilyHistory.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
@@ -534,6 +539,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
         // TODO add your handling code here:
         Activity_Tolerance_Interview newATI = new Activity_Tolerance_Interview(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newATI, PName);
         newATI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed

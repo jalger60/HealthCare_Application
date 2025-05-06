@@ -2,6 +2,7 @@
 package healthcare_application;
 
 
+import General_Functionality.LoggerUtility;
 import General_Functionality.User_Modes;
 import healthcare_application.DBUtils.GMH_DBOperations;
 import javax.swing.*;
@@ -808,6 +809,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
 
         Patient_Selection select = new Patient_Selection();
+        LoggerUtility.logFormChange(select, PName);
         select.setVisible(true);
         select.setPatientID(PDpatientID);
         select.setPName(PName);
@@ -816,7 +818,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
 
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientIDPD(), getPName());
-
+        LoggerUtility.logFormChange(sobaInterviewForm, PName);
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
         this.dispose();
@@ -824,6 +826,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
         Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientIDPD(), getPName());
+        LoggerUtility.logFormChange(ATA, PName);
         ATA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
@@ -832,13 +835,13 @@ public class Patient_Demographics extends javax.swing.JFrame {
         int patientID = getPatientIDPD();
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(patientID);
+        LoggerUtility.logFormChange(history, PName);
         history.setPName(getPName());
         // Assuming a new/empty record has patientID == 0
         if (history.getPatientID() == 0) {
             // No existing data found, so set the actual patient ID
             history.setPatientID(patientID);
         }
-
         history.setVisible(true);
         this.dispose();
         
@@ -848,6 +851,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     private void patientDemographicsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemographicsNavBtnActionPerformed
         // TODO add your handling code here:
         Patient_Demographics newPD = new Patient_Demographics(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newPD, PName);
         newPD.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientDemographicsNavBtnActionPerformed
@@ -862,6 +866,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
         // TODO add your handling code here:
         Family_History newFH = new Family_History(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newFH, PName);
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed

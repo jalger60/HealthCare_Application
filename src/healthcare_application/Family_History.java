@@ -472,6 +472,7 @@ public class Family_History extends javax.swing.JFrame {
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         // TODO add your handling code here:
         Shortness_of_Breath_Interview newSOBI = new Shortness_of_Breath_Interview(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newSOBI, PName);
         newSOBI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_SoBNavBtnActionPerformed
@@ -479,6 +480,7 @@ public class Family_History extends javax.swing.JFrame {
     private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
         // TODO add your handling code here:
         Patient_Selection newPS = new Patient_Selection(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newPS, PName);
         newPS.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientSelectNavBtnActionPerformed
@@ -486,6 +488,7 @@ public class Family_History extends javax.swing.JFrame {
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
         // TODO add your handling code here:
         Activity_Tolerance_Interview newATI = new Activity_Tolerance_Interview(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newATI, PName);
         newATI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
@@ -493,6 +496,7 @@ public class Family_History extends javax.swing.JFrame {
     private void patientDemographicsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemographicsNavBtnActionPerformed
         // TODO add your handling code here:
         Patient_Demographics newPD = new Patient_Demographics(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newPD, PName);
         newPD.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientDemographicsNavBtnActionPerformed
@@ -500,6 +504,7 @@ public class Family_History extends javax.swing.JFrame {
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
         // TODO add your handling code here:
         Immunizations newI = new Immunizations(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newI, PName);
         newI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
@@ -507,6 +512,7 @@ public class Family_History extends javax.swing.JFrame {
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         // TODO add your handling code here:
         General_Medical_History newGMH = new General_Medical_History(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newGMH, PName);
         newGMH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GMHNavBtnActionPerformed
@@ -514,6 +520,7 @@ public class Family_History extends javax.swing.JFrame {
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
         // TODO add your handling code here:
         Family_History newFH = new Family_History(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newFH, PName);
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed

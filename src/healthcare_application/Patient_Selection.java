@@ -1,5 +1,6 @@
 package healthcare_application;
 
+import General_Functionality.LoggerUtility;
 import General_Functionality.User_Modes;
 import healthcare_application.DBUtils.Activity_Tolerance_Assessment_Auto_Interview;
 import javax.swing.table.DefaultTableModel;
@@ -258,6 +259,7 @@ public class Patient_Selection extends javax.swing.JFrame {
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
         Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID(), getPName());
+        LoggerUtility.logFormChange(ATA, PName);
         ATA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
@@ -267,7 +269,7 @@ public class Patient_Selection extends javax.swing.JFrame {
 
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
         Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID(), getPName());
-
+        LoggerUtility.logFormChange(sobaInterviewForm, PName);
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
         this.dispose();
@@ -288,12 +290,13 @@ public class Patient_Selection extends javax.swing.JFrame {
         if (patientID == 0) {
             // No patient selected, open a blank Patient_Demographics form for a new patient
             Patient_Demographics newPatientForm = new Patient_Demographics();
+            LoggerUtility.logFormChange(newPatientForm, PName);
             newPatientForm.setVisible(true);
             
         } else {
             // Fetch patient data for an existing patient
             Patient_Demographics patient = operations.getPatientDemographics(patientID);
-
+            LoggerUtility.logFormChange(patient, PName);
             if (patient != null) {
                 patient.setVisible(true);
                 patient.setPatientIDPD(patientID);
@@ -329,6 +332,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(PatientID);
+        LoggerUtility.logFormChange(history, PName);
         history.getPName();
         history.setVisible(true);
         this.dispose();
@@ -336,14 +340,16 @@ public class Patient_Selection extends javax.swing.JFrame {
     }//GEN-LAST:event_GMHNavBtnActionPerformed
 
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
-        Immunizations immunizatons = new Immunizations(getPatientID(), getPName());
-        immunizatons.setVisible(true);
+        Immunizations immunizations = new Immunizations(getPatientID(), getPName());
+        LoggerUtility.logFormChange(immunizations, PName);
+        immunizations.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
 
     private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
         // TODO add your handling code here:
         Patient_Selection newPS = new Patient_Selection(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newPS, PName);
         newPS.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientSelectNavBtnActionPerformed
@@ -351,6 +357,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
         // TODO add your handling code here:
         Family_History newFH = new Family_History(getPatientID(), getPName());
+        LoggerUtility.logFormChange(newFH, PName);
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed

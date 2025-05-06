@@ -4,6 +4,8 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.*;
+import javax.swing.JFrame;
+
 
 public class LoggerUtility {
     private static boolean isInitialized = false;
@@ -52,7 +54,7 @@ public class LoggerUtility {
         return maxLog + 1;
     }
     
-    public static void logAction(String action, String name){
+    public static void logTemplate(String action, String name){
         try{
             if(writer != null){
                 String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -66,6 +68,44 @@ public class LoggerUtility {
         }
     }
     
+    public static void logFormChange(JFrame newForm, String PName){
+        if (newForm == null){
+            return;
+        }
+        
+        String formTitle = newForm.getTitle();
+        String action = "";
+        
+        switch(formTitle){
+            case "Patient_Selection":
+                action = "Went to Patient Selection";
+                break;
+            case "Patient_Demographics":
+                action = "Went to Patient Demographics";
+                break;
+            case "General_Medical_History":
+                action = "Went to General Medical History";
+                break;
+            case "Family_History":
+                action = "Went to Family History";
+                break;
+            case "Immunizations":
+                action = "Went to Immunizations";
+                break;
+            case "Activity_Tolerance_Interview":
+                action = "Went to Activity Tolerance Interview";
+                break;
+            case "Shortness_of_Breath_Interview":
+                action = "Went to Shortness of Breath Interview";
+                break;
+        }
+        
+        logTemplate(action, PName);
+    }
+    
+    public static void getAction(){
+        
+    }
     public static void closeLog(){
         try{
             if (writer != null){
