@@ -309,17 +309,19 @@ public class Immunizations extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_AddActionPerformed
+        LoggerUtility.logUserAction("add", PName);
         User_Modes.Edit_Mode(this);
         ClearMode();
     }//GEN-LAST:event_menu_AddActionPerformed
 
     private void radio_buttion_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_buttion_editActionPerformed
+        LoggerUtility.logUserAction("edit", PName);
         User_Modes.Edit_Mode(this);
     }//GEN-LAST:event_radio_buttion_editActionPerformed
 
     private void jRadioButton_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_SaveActionPerformed
-        
-       if (getRecordID() == 0) {
+        LoggerUtility.logUserAction("save", PName);
+        if (getRecordID() == 0) {
             Immunizations_DBOperations.addImmunizationHistory(this, getPatientID());
         } else {
             Immunizations_DBOperations.editImmunizationHistory(this, getPatientID(), getRecordID());
@@ -332,6 +334,7 @@ public class Immunizations extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton_SaveActionPerformed
 
     private void menu_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_deleteActionPerformed
+        LoggerUtility.logUserAction("delete", PName);
         Immunizations_DBOperations.deleteImmunizationHistory(getRecordID(), getPatientID());
         User_Modes.View_Only_Mode(this);
         ClearMode();

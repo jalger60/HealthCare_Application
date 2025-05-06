@@ -103,9 +103,26 @@ public class LoggerUtility {
         logTemplate(action, PName);
     }
     
-    public static void getAction(){
+    public static void logUserAction(String action, String PName){
+        String actionMessage = "";
+        switch(action.toLowerCase()){
+            case "add":
+                actionMessage = "User added record";
+                break;
+            case "edit":
+                actionMessage = "User added record";
+                break;
+            case "save": 
+                actionMessage = "User saved record";
+                break;
+            case "delete":
+                actionMessage = "User deleted record";
+                break;
+        }
         
+        logTemplate(actionMessage, PName);
     }
+    
     public static void closeLog(){
         try{
             if (writer != null){

@@ -734,7 +734,8 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
-      
+      LoggerUtility.logUserAction("save", PName);
+
       String comments = txtA_Comments.getText();
       if (comments == null || comments.trim().isEmpty()) {
             Patient_Demographics_Validation.validateComment(comments);
@@ -789,18 +790,19 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_SaveActionPerformed
 
     private void menu_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_EditActionPerformed
+        LoggerUtility.logUserAction("edit", PName);
         User_Modes.Edit_Mode(this);
         User_Modes.Edit_Message(this);
-          
     }//GEN-LAST:event_menu_EditActionPerformed
 
     private void menu_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_deleteActionPerformed
-        
+            LoggerUtility.logUserAction("delete", PName);
             operations.deletePatientDemographics(PDpatientID);
             
     }//GEN-LAST:event_menu_deleteActionPerformed
 
     private void menu_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_AddActionPerformed
+        LoggerUtility.logUserAction("add", PName);
         User_Modes.Edit_Mode(this);
         User_Modes.Edit_Message(this);
         

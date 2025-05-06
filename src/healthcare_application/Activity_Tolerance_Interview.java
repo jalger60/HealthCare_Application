@@ -457,18 +457,19 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
 
     private void menu_Edit_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_RecordActionPerformed
 //        UnlockScreen();
+        LoggerUtility.logUserAction("edit", PName);
         User_Modes.Edit_Mode(this);
         User_Modes.Edit_Message(this);
     }//GEN-LAST:event_menu_Edit_RecordActionPerformed
 
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
-
+        LoggerUtility.logUserAction("add", PName);
         Activity_Tolerance_Assessment_Auto_Interview.conductInterview(patientID, PName);
         refreshForm();
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
     private void menu_Save_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Save_RecordActionPerformed
-        
+        LoggerUtility.logUserAction("save", PName);
         String num_Steps = txt_NumStairs.getText();
         // Treat null or empty input as acceptable (optional)
         if (num_Steps == null || num_Steps.trim().isEmpty()) {
@@ -488,6 +489,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_Save_RecordActionPerformed
 
     private void menu_Delete_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Delete_RecordActionPerformed
+        LoggerUtility.logUserAction("delete", PName);
         Activity_Tolerance_Assessment_DBOperations.deleteATAssessment(getRecordID(), patientID);
 
     }//GEN-LAST:event_menu_Delete_RecordActionPerformed

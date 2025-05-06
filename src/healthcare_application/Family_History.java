@@ -527,6 +527,7 @@ public class Family_History extends javax.swing.JFrame {
 
     private void editRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editRecordActionPerformed
         // TODO add your handling code here:
+        LoggerUtility.logUserAction("edit", PName);
         User_Modes.Edit_Mode(this);
         User_Modes.Edit_Message(this);
         modeFlag = 2;
@@ -536,6 +537,8 @@ public class Family_History extends javax.swing.JFrame {
         // TODO add your handling code here:
          //Initialize transfer variables. 
         //Get text from textboxes and store them in variables for transfer to database via stored procedure. 
+        LoggerUtility.logUserAction("save", PName);
+        
         Family_History_DBOperations famObj = new Family_History_DBOperations();
                        
         int ent_PID = Integer.parseInt(PIDbox.getText().trim());
@@ -561,11 +564,13 @@ public class Family_History extends javax.swing.JFrame {
 
     private void deleteRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRecordActionPerformed
         // TODO add your handling code here:
+        LoggerUtility.logUserAction("delete", PName);
         modeFlag = 3;
     }//GEN-LAST:event_deleteRecordActionPerformed
 
     private void addRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecordActionPerformed
         // TODO add your handling code here:
+        LoggerUtility.logUserAction("add", PName);
         modeFlag = 1;
     }//GEN-LAST:event_addRecordActionPerformed
 

@@ -373,16 +373,18 @@ public class General_Medical_History extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_EditActionPerformed
+        LoggerUtility.logUserAction("edit", PName);
         UnLockScreen();
     }//GEN-LAST:event_menu_EditActionPerformed
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
-    
+        LoggerUtility.logUserAction("save", PName);
         GMH_DBOperations.updateGeneralMedicalHistory(this, getGMHID(), getPatientID());
         
     }//GEN-LAST:event_menu_SaveActionPerformed
 
     private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed
+        LoggerUtility.logUserAction("delete", PName);
         GMH_DBOperations.deleteGeneralMedicalHistory(getGMHID(), getPatientID());
     }//GEN-LAST:event_menu_DeleteActionPerformed
 
@@ -425,6 +427,7 @@ public class General_Medical_History extends javax.swing.JFrame {
     }//GEN-LAST:event_patientSelectNavBtnActionPerformed
 
     private void radio_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_addActionPerformed
+        LoggerUtility.logUserAction("add", PName);
         GMH_Auto_Interview.start(getPatientID(), getPName());
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(patientID);

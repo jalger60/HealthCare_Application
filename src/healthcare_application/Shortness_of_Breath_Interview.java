@@ -305,24 +305,24 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
 
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
-        
+        LoggerUtility.logUserAction("add", PName);
         Shortness_of_Breath_Auto_Interview.conductInterview(getPatientIDSOBA(), getPName());
         refreshForm();
-        
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
     private void menu_Edit_ModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_ModeActionPerformed
+        LoggerUtility.logUserAction("edit", PName);
         User_Modes.Edit_Mode(this);
     }//GEN-LAST:event_menu_Edit_ModeActionPerformed
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
-        
+        LoggerUtility.logUserAction("save", PName);
         Shortness_Of_Breath_DBOperations.editSOBAssessment(RecordID, getPatientIDSOBA(), this);
         refreshForm();
     }//GEN-LAST:event_menu_SaveActionPerformed
 
     private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed
-        
+        LoggerUtility.logUserAction("delete", PName);
         Shortness_Of_Breath_DBOperations.deleteSOBAssessment(RecordID, getPatientIDSOBA());
         User_Modes.View_Only_Mode(this);
     }//GEN-LAST:event_menu_DeleteActionPerformed
