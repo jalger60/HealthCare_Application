@@ -115,6 +115,19 @@ public class Patient_Demographics_Validation {
         return input;
     }
     
+    public static String validateHomeAddress(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            throw new IllegalArgumentException("Home address cannot be empty.");
+        }
+
+        if (!input.matches("[a-zA-Z0-9 .,#\\-]+")) {
+            throw new IllegalArgumentException("Home address can only contain letters, numbers, spaces, commas, periods, hyphens, and '#'.");
+        }
+
+        return input;
+    }
+
+    
 
     
 
