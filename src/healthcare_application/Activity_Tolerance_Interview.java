@@ -20,19 +20,21 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     
     private int patientID;
     private int RecordID;
-    
+    private String PName;
     
     public Activity_Tolerance_Interview() {
         initComponents();
-        setPatientID(1);
-        LoggerUtility.initialize(getPatientID());
+        
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
     }
     
-    public Activity_Tolerance_Interview(int patientID) {
+    public Activity_Tolerance_Interview(int patientID, String PName) {
         setPatientID(patientID);
+        setPName(PName);
+        
         LoggerUtility.initialize(patientID);
+        
         initComponents();
         initializeTable();
  
@@ -42,7 +44,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     
     private void refreshForm() {
         this.dispose(); // Close current form
-        new Activity_Tolerance_Interview(getPatientID()).setVisible(true); 
+        new Activity_Tolerance_Interview(getPatientID(), getPName()).setVisible(true); 
     }
     
     public int getPatientID() {
@@ -51,6 +53,14 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     
     public void setPatientID(int patientID) {
         this.patientID = patientID;
+    }
+    
+    public String getPName(){
+        return this.PName;
+    }
+    
+    public void setPName(String PName){
+        this.PName = PName;
     }
     
     public int getRecordID() {
@@ -438,12 +448,11 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         LoggerUtility.logAction("User went to Shortness of Breath Page", "john doe");
 
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
-        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID());
+        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID(), getPName());
 
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
         this.dispose();
-
     }//GEN-LAST:event_SoBNavBtnActionPerformed
 
     private void menu_Edit_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Edit_RecordActionPerformed
@@ -454,11 +463,8 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
 
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
 
-        Activity_Tolerance_Assessment_Auto_Interview.conductInterview(patientID);
+        Activity_Tolerance_Assessment_Auto_Interview.conductInterview(patientID, PName);
         refreshForm();
-        
-        
-        
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
 
     private void menu_Save_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Save_RecordActionPerformed
@@ -487,7 +493,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_Delete_RecordActionPerformed
 
     private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
-            Patient_Selection patient_select = new Patient_Selection(getPatientID());
+            Patient_Selection patient_select = new Patient_Selection(getPatientID(), getPName());
             patient_select.setVisible(true);
             this.dispose();
     }//GEN-LAST:event_patientSelectNavBtnActionPerformed
@@ -507,27 +513,27 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientID());
-        
+        history.setPName(getPName());
         history.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GMHNavBtnActionPerformed
 
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
-        Immunizations newImmunizations = new Immunizations(getPatientID());
+        Immunizations newImmunizations = new Immunizations(getPatientID(), getPName());
         newImmunizations.setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
 
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
-        Family_History newFamilyHistory = new Family_History(getPatientID());
+        Family_History newFamilyHistory = new Family_History(getPatientID(), getPName());
         newFamilyHistory.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
         // TODO add your handling code here:
-        Activity_Tolerance_Interview newATI = new Activity_Tolerance_Interview(getPatientID());
+        Activity_Tolerance_Interview newATI = new Activity_Tolerance_Interview(getPatientID(), getPName());
         newATI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
