@@ -42,7 +42,6 @@ public class Patient_Selection extends javax.swing.JFrame {
         tabl_Patient_Table = new javax.swing.JTable();
         btn_Search = new javax.swing.JButton();
         btn_BackToAll = new javax.swing.JButton();
-        resetPatientID = new javax.swing.JButton();
         menu_PSelect_Bar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         patientSelectNavBtn = new javax.swing.JMenuItem();
@@ -100,40 +99,26 @@ public class Patient_Selection extends javax.swing.JFrame {
             }
         });
 
-        resetPatientID.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        resetPatientID.setText("Reset Patient ID");
-        resetPatientID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetPatientIDActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panel_PSelectLayout = new javax.swing.GroupLayout(panel_PSelect);
         panel_PSelect.setLayout(panel_PSelectLayout);
         panel_PSelectLayout.setHorizontalGroup(
             panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_PSelectLayout.createSequentialGroup()
-                .addGroup(panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_PSelectLayout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(lbl_Search)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_Search_Box, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbox_Search_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_Search)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panel_PSelectLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90)))
-                .addGroup(panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_PSelectLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(resetPatientID))
-                    .addComponent(btn_BackToAll))
+                .addGap(148, 148, 148)
+                .addComponent(lbl_Search)
+                .addGap(18, 18, 18)
+                .addComponent(txt_Search_Box, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cbox_Search_Box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_Search)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_BackToAll)
                 .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_PSelectLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(208, 208, 208))
         );
         panel_PSelectLayout.setVerticalGroup(
             panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,13 +130,8 @@ public class Patient_Selection extends javax.swing.JFrame {
                     .addComponent(lbl_Search)
                     .addComponent(btn_Search)
                     .addComponent(btn_BackToAll))
-                .addGroup(panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_PSelectLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_PSelectLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(resetPatientID)))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(127, Short.MAX_VALUE))
         );
 
@@ -372,12 +352,6 @@ public class Patient_Selection extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
 
-    private void resetPatientIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPatientIDActionPerformed
-        setPatientID(0);
-        JOptionPane.showMessageDialog(null, "Patient ID has been resetted. Choose a patient from the table",
-                "Reset Patient ID", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_resetPatientIDActionPerformed
-
     public String GetTxt_Search_BoxText() {
         return txt_Search_Box.getText();
     }
@@ -496,7 +470,6 @@ public class Patient_Selection extends javax.swing.JFrame {
     private javax.swing.JPanel panel_PSelect;
     private javax.swing.JMenuItem patientDemographicsNavBtn;
     private javax.swing.JMenuItem patientSelectNavBtn;
-    private javax.swing.JButton resetPatientID;
     private javax.swing.JTable tabl_Patient_Table;
     private javax.swing.JTextField txt_Search_Box;
     // End of variables declaration//GEN-END:variables
