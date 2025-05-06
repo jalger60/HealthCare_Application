@@ -16,15 +16,17 @@ import java.awt.Font;
 public class Patient_Selection extends javax.swing.JFrame {
 
     private static int PatientID;
-     
+    private static String PName;
+    
     public Patient_Selection() {
         initComponents();
         GetAllPatients();
     }
     
-    public Patient_Selection(int PatientID){
+    public Patient_Selection(int PatientID, String PName){
         initComponents();
         setPatientID(PatientID);
+        setPName(PName);
         GetAllPatients();
     }
 
@@ -255,7 +257,7 @@ public class Patient_Selection extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
-        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID());
+        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID(), getPName());
         ATA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
@@ -264,7 +266,7 @@ public class Patient_Selection extends javax.swing.JFrame {
         
 
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
-        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID());
+        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID(), getPName());
 
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
@@ -295,6 +297,7 @@ public class Patient_Selection extends javax.swing.JFrame {
             if (patient != null) {
                 patient.setVisible(true);
                 patient.setPatientIDPD(patientID);
+                patient.setPName(getPName());
             } else {
                 JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -307,11 +310,11 @@ public class Patient_Selection extends javax.swing.JFrame {
     }//GEN-LAST:event_patientDemographicsNavBtnActionPerformed
 
     private void menu_Auto_SOBAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Auto_SOBAActionPerformed
-        Shortness_of_Breath_Auto_Interview.conductInterview(getPatientID());
+        Shortness_of_Breath_Auto_Interview.conductInterview(getPatientID(), getPName());
     }//GEN-LAST:event_menu_Auto_SOBAActionPerformed
 
     private void menu_ATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAActionPerformed
-        Activity_Tolerance_Assessment_Auto_Interview.conductInterview(PatientID);
+        Activity_Tolerance_Assessment_Auto_Interview.conductInterview(PatientID, PName);
     }//GEN-LAST:event_menu_ATAActionPerformed
 
     private void btn_BackToAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackToAllActionPerformed
@@ -320,34 +323,34 @@ public class Patient_Selection extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_BackToAllActionPerformed
 
     private void menu_GMH_FormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_GMH_FormActionPerformed
-        GMH_Auto_Interview.start(PatientID);
+        GMH_Auto_Interview.start(getPatientID(), getPName());
     }//GEN-LAST:event_menu_GMH_FormActionPerformed
 
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(PatientID);
-        
+        history.getPName();
         history.setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_GMHNavBtnActionPerformed
 
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
-        Immunizations immunizatons = new Immunizations(getPatientID());
+        Immunizations immunizatons = new Immunizations(getPatientID(), getPName());
         immunizatons.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
 
     private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
         // TODO add your handling code here:
-        Patient_Selection newPS = new Patient_Selection(getPatientID());
+        Patient_Selection newPS = new Patient_Selection(getPatientID(), getPName());
         newPS.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientSelectNavBtnActionPerformed
 
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
         // TODO add your handling code here:
-        Family_History newFH = new Family_History(getPatientID());
+        Family_History newFH = new Family_History(getPatientID(), getPName());
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
@@ -364,6 +367,17 @@ public class Patient_Selection extends javax.swing.JFrame {
         this.PatientID = patientID;
     }
     
+    public static String getPName(){
+        return PName;
+    }
+    
+    public void setPName(String PName){
+        this.PName = PName;
+    }
+
+    public void setPName(String FPName, String LPName){
+        this.PName = FPName + " " + LPName;
+    }
     
     public static void main(String args[]) {
         
@@ -398,12 +412,16 @@ public class Patient_Selection extends javax.swing.JFrame {
                         int patientIDColumnIndex = 0; // Index of "Patient ID" column
 
                         Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, patientIDColumnIndex);
+                        Object PFName = tabl_Patient_Table.getValueAt(selectedRow, 4);
+                        Object PLName = tabl_Patient_Table.getValueAt(selectedRow, 2);
 
                         if (patientIDValue != null) {
                             try {
                                 int patientID = Integer.parseInt(patientIDValue.toString());
                                 setPatientID(patientID); // Store the selected Patient ID
+                                setPName(PFName.toString(), PLName.toString());
                                 System.out.println("Selected Patient ID: " + getPatientID());
+                                System.out.println("Selected Patient Name: " + getPName());
                             } catch (NumberFormatException e) {
                                 System.err.println("Invalid Patient ID format: " + e.getMessage());
                             }
@@ -431,11 +449,14 @@ public class Patient_Selection extends javax.swing.JFrame {
                 int selectedRow = tabl_Patient_Table.getSelectedRow();
                 if (selectedRow != -1) { 
                     Object patientIDValue = tabl_Patient_Table.getValueAt(selectedRow, 0); // Patient ID column
+                    Object PFName = tabl_Patient_Table.getValueAt(selectedRow, 4);
+                    Object PLName = tabl_Patient_Table.getValueAt(selectedRow, 2);
 
                     if (patientIDValue != null) {
                         try {
                             int patientID = Integer.parseInt(patientIDValue.toString());
                             setPatientID(patientID); // Store the selected Patient ID
+                            setPName(PFName.toString(), PLName.toString());
                         } catch (NumberFormatException e) {
                             System.err.println("Invalid Patient ID format: " + e.getMessage());
                         }

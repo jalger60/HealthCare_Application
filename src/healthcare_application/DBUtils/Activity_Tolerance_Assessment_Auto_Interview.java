@@ -10,7 +10,7 @@ public class Activity_Tolerance_Assessment_Auto_Interview {
     private static boolean walking = false;
     private static boolean stairs = false;
     
-    public static void conductInterview(int patientID) {
+    public static void conductInterview(int patientID, String PName) {
         // Define the root of the binary decision tree
         DecisionNode root = buildDecisionTree();
         

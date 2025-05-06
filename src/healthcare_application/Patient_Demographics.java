@@ -15,6 +15,8 @@ import java.awt.Color;
 public class Patient_Demographics extends javax.swing.JFrame {
 
     private int PDpatientID;
+    private String PName;
+    
     Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
    
     
@@ -25,8 +27,9 @@ public class Patient_Demographics extends javax.swing.JFrame {
 //        LockScreen();       
     }
     
-    public Patient_Demographics(int patientID) {
+    public Patient_Demographics(int patientID, String PName) {
         setPatientIDPD(patientID);
+        setPName(PName);
         initComponents();
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
@@ -39,6 +42,14 @@ public class Patient_Demographics extends javax.swing.JFrame {
     
     public void setPatientIDPD(int PDpatientID) {
         this.PDpatientID = PDpatientID;
+    }
+    
+    public String getPName(){
+        return PName;
+    }
+    
+    public void setPName(String PName){
+        this.PName = PName;
     }
     
     // Getters and setters for JComboBox fields with null or empty check
@@ -796,14 +807,15 @@ public class Patient_Demographics extends javax.swing.JFrame {
 
     private void patientSelectNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientSelectNavBtnActionPerformed
 
-        Patient_Selection select = new Patient_Selection ();
+        Patient_Selection select = new Patient_Selection();
         select.setVisible(true);
         select.setPatientID(PDpatientID);
+        select.setPName(PName);
         this.dispose();
     }//GEN-LAST:event_patientSelectNavBtnActionPerformed
 
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
-        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientIDPD());
+        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientIDPD(), getPName());
 
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
@@ -811,7 +823,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     }//GEN-LAST:event_SoBNavBtnActionPerformed
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
-        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientIDPD());
+        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientIDPD(), getPName());
         ATA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
@@ -820,7 +832,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
         int patientID = getPatientIDPD();
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(patientID);
-
+        history.setPName(getPName());
         // Assuming a new/empty record has patientID == 0
         if (history.getPatientID() == 0) {
             // No existing data found, so set the actual patient ID
@@ -835,21 +847,21 @@ public class Patient_Demographics extends javax.swing.JFrame {
 
     private void patientDemographicsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemographicsNavBtnActionPerformed
         // TODO add your handling code here:
-        Patient_Demographics newPD = new Patient_Demographics(getPatientID());
+        Patient_Demographics newPD = new Patient_Demographics(getPatientID(), getPName());
         newPD.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientDemographicsNavBtnActionPerformed
 
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
         // TODO add your handling code here:
-        Immunizations newI = new Immunizations(getPatientID());
+        Immunizations newI = new Immunizations(getPatientID(), getPName());
         newI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
 
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
         // TODO add your handling code here:
-        Family_History newFH = new Family_History(getPatientID());
+        Family_History newFH = new Family_History(getPatientID(), getPName());
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed

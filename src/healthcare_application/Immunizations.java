@@ -19,7 +19,7 @@ public class Immunizations extends javax.swing.JFrame {
 
     private int patientID;
     private int RecordID;
-    
+    private String PName;
     
     public Immunizations() {
         initComponents();
@@ -27,8 +27,9 @@ public class Immunizations extends javax.swing.JFrame {
         User_Modes.View_Only_Message(this);
     }
     
-    public Immunizations(int patientID) {
+    public Immunizations(int patientID, String PName) {
         setPatientID(patientID);
+        setPName(PName);
         initComponents();
         initializeTable();
         User_Modes.View_Only_Mode(this);
@@ -339,6 +340,7 @@ public class Immunizations extends javax.swing.JFrame {
         Patient_Selection select = new Patient_Selection ();
         select.setVisible(true);
         select.setPatientID(getPatientID());
+        select.setPName(getPName());
         this.dispose();
     }//GEN-LAST:event_radio_Patient_SelectionActionPerformed
 
@@ -349,6 +351,7 @@ public class Immunizations extends javax.swing.JFrame {
             if (patient != null) {
                 patient.setVisible(true);
                 patient.setPatientIDPD(getPatientID());
+                patient.setPName(getPName());
             } else {
                 JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -358,20 +361,20 @@ public class Immunizations extends javax.swing.JFrame {
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientID());
-        
+        history.setPName(getPName());
         history.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GMHNavBtnActionPerformed
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
-        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID());
+        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientID(), getPName());
         ATA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
 
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         // Create an instance of Shortness_of_Breath_Interview and pass the patientID
-        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID());
+        Shortness_of_Breath_Interview sobaInterviewForm = new Shortness_of_Breath_Interview(getPatientID(), getPName());
 
         // Set the form to be visible
         sobaInterviewForm.setVisible(true);
@@ -380,14 +383,14 @@ public class Immunizations extends javax.swing.JFrame {
 
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
         // TODO add your handling code here:
-        Immunizations newI = new Immunizations(getPatientID());
+        Immunizations newI = new Immunizations(getPatientID(), getPName());
         newI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
 
     private void familyHistoryNavBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBTNActionPerformed
         // TODO add your handling code here:
-        Family_History newFH = new Family_History(getPatientID());
+        Family_History newFH = new Family_History(getPatientID(), getPName());
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBTNActionPerformed
@@ -433,6 +436,14 @@ public class Immunizations extends javax.swing.JFrame {
     
     public void setPatientID(int patientID) {
         this.patientID = patientID;
+    }
+    
+    public String getPName(){
+        return PName;
+    }
+    
+    public void setPName(String PName){
+        this.PName = PName;
     }
     
     public int getRecordID() {

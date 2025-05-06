@@ -18,9 +18,8 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     
     private int patientID;
     private int RecordID;
+    private String PName;
     
-    
-   
     public Shortness_of_Breath_Interview() {
         initComponents();
         User_Modes.View_Only_Mode(this);
@@ -28,8 +27,9 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 //        LockScreen();
     }
     
-    public Shortness_of_Breath_Interview(int patientID) {
+    public Shortness_of_Breath_Interview(int patientID, String PName) {
         setPatientIDSOBA(patientID);
+        setPName(PName);
         initComponents();
         initializeTable();
         User_Modes.View_Only_Mode(this);
@@ -40,7 +40,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     
     private void refreshForm() {
         this.dispose(); // Close current form
-        new Shortness_of_Breath_Interview(getPatientID()).setVisible(true); 
+        new Shortness_of_Breath_Interview(getPatientID(), getPName()).setVisible(true); 
     }
 
     
@@ -297,14 +297,14 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void activityToleranceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityToleranceNavBtnActionPerformed
-        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientIDSOBA());
+        Activity_Tolerance_Interview ATA = new  Activity_Tolerance_Interview(getPatientIDSOBA(), getPName());
         ATA.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_activityToleranceNavBtnActionPerformed
 
     private void menu_Add_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Add_RecordActionPerformed
         
-        Shortness_of_Breath_Auto_Interview.conductInterview(getPatientIDSOBA());
+        Shortness_of_Breath_Auto_Interview.conductInterview(getPatientIDSOBA(), getPName());
         refreshForm();
         
     }//GEN-LAST:event_menu_Add_RecordActionPerformed
@@ -329,13 +329,14 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         Patient_Selection patient_select = new Patient_Selection();
         patient_select.setVisible(true);
         patient_select.setPatientID(getPatientIDSOBA());
+        patient_select.setPName(getPName());
         this.dispose();
     }//GEN-LAST:event_patientSelectNavBtnActionPerformed
 
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(getPatientIDSOBA());
-        
+        history.setPName(getPName());
         history.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_GMHNavBtnActionPerformed
@@ -346,28 +347,28 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
 
     private void immunizationsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_immunizationsNavBtnActionPerformed
         // TODO add your handling code here:
-        Immunizations newI = new Immunizations(getPatientID());
+        Immunizations newI = new Immunizations(getPatientID(), getPName());
         newI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_immunizationsNavBtnActionPerformed
 
     private void patientDemoNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemoNavBtnActionPerformed
         // TODO add your handling code here:
-        Patient_Demographics newPD = new Patient_Demographics(getPatientID());
+        Patient_Demographics newPD = new Patient_Demographics(getPatientID(), getPName());
         newPD.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_patientDemoNavBtnActionPerformed
 
     private void familyHistoryNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familyHistoryNavBtnActionPerformed
         // TODO add your handling code here:
-        Family_History newFH = new Family_History(getPatientID());
+        Family_History newFH = new Family_History(getPatientID(), getPName());
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
 
     private void SoBNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoBNavBtnActionPerformed
         // TODO add your handling code here:
-        Shortness_of_Breath_Interview newSoB = new Shortness_of_Breath_Interview(getPatientID());
+        Shortness_of_Breath_Interview newSoB = new Shortness_of_Breath_Interview(getPatientID(), getPName());
         newSoB.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_SoBNavBtnActionPerformed
@@ -557,6 +558,10 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         return this.patientID;
     }
     
+    public String getPName(){
+        return PName;
+    }
+    
     
     public void setCbox_SOBScale(javax.swing.JComboBox<String> cbox_SOBScale) {
         this.cbox_SOBScale = cbox_SOBScale;
@@ -578,6 +583,9 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         this.patientID = patientID;
     }
     
+    public void setPName(String PName){
+        this.PName = PName;
+    }
     
     
     // Method to get SOB Date from the selected row

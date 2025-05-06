@@ -26,7 +26,7 @@ public class GMH_Auto_Interview {
     private static Map<String, String> answers = new HashMap<>();
 
     // --- start Method (Keep mostly as is, just ensure keys match) ---
-    public static void start(int patientID) {
+    public static void start(int patientID, String PName) {
         // Reset answers for a new interview
         answers.clear();
 

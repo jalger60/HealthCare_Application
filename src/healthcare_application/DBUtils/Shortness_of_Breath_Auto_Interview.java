@@ -7,7 +7,7 @@ import javax.swing.*;
    
 public class Shortness_of_Breath_Auto_Interview {
     
-    public static void conductInterview(int patientID) {
+    public static void conductInterview(int patientID, String PName) {
         // Create the decision tree Node root, q2
         DecisionNode root, q2;
 
