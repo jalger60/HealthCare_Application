@@ -24,7 +24,7 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     
     public Activity_Tolerance_Interview() {
         initComponents();
-        
+        this.setTitle("Activity Tolerance Interview");
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
     }
@@ -33,9 +33,8 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
         setPatientID(patientID);
         setPName(PName);
         
-        LoggerUtility.initialize(patientID);
-        
         initComponents();
+        this.setTitle("Activity Tolerance Interview");
         initializeTable();
  
         User_Modes.View_Only_Mode(this);

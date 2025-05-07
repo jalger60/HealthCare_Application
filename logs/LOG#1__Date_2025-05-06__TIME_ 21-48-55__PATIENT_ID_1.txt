@@ -1,0 +1,3 @@
+TIME RECORDED: 2025-05-06 21:48:56, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Went to Shortness of Breath Interview
+TIME RECORDED: 2025-05-06 21:49:01, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Went to General Medical History
+TIME RECORDED: 2025-05-06 21:49:06, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Went to Immunizations

@@ -1,0 +1,7 @@
+TIME RECORDED: 2025-05-06 20:53:51, PATIENT'S ID: 1, PATIENT'S NAME: 219-567-8945 John, ACTION: Activity Tolerance Interview Started
+TIME RECORDED: 2025-05-06 20:53:53, PATIENT'S ID: 1, PATIENT'S NAME: 219-567-8945 John, ACTION: Q: Did you have more trouble with the activity of 'eating' as compared to yesterday? | A: No
+TIME RECORDED: 2025-05-06 20:53:54, PATIENT'S ID: 1, PATIENT'S NAME: 219-567-8945 John, ACTION: Q: Did you have more trouble with the activity of 'drinking' as compared to yesterday? | A: No
+TIME RECORDED: 2025-05-06 20:53:54, PATIENT'S ID: 1, PATIENT'S NAME: 219-567-8945 John, ACTION: Q: Did you have more trouble with the activity of 'getting dressed' as compared to yesterday? | A: No
+TIME RECORDED: 2025-05-06 20:53:55, PATIENT'S ID: 1, PATIENT'S NAME: 219-567-8945 John, ACTION: Q: Did you have more trouble with the activity of 'walking around the house' as compared to yesterday? | A: No
+TIME RECORDED: 2025-05-06 20:53:56, PATIENT'S ID: 1, PATIENT'S NAME: 219-567-8945 John, ACTION: Q: Did you have more trouble with the activity of 'climbing stairs' as compared to yesterday? | A: No
+TIME RECORDED: 2025-05-06 20:53:56, PATIENT'S ID: 1, PATIENT'S NAME: 219-567-8945 John, ACTION: Activity Tolerance Interview Completed.

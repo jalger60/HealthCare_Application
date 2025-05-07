@@ -1,5 +1,6 @@
 package healthcare_application.DBUtils;
 
+import General_Functionality.LoggerUtility;
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,11 +28,14 @@ public class GMH_Auto_Interview {
 
     // --- start Method (Keep mostly as is, just ensure keys match) ---
     public static void start(int patientID, String PName) {
+        //Log that user has started the interview
+        LoggerUtility.logTemplate("User started the General Medical History Interview", PName);
+        
         // Reset answers for a new interview
         answers.clear();
 
-        QuestionNode root = buildInterviewTree();
-        runInterview(root);
+        QuestionNode root = buildInterviewTree(PName);
+        runInterview(root, PName);
 
         // --- Collect values (Ensure keys match those used in buildInterviewTree) ---
         String tobacco = answers.getOrDefault("Tobacco", "No"); // Default to No if not set
@@ -87,7 +91,7 @@ public class GMH_Auto_Interview {
     }
 
     // --- runInterview Method (Keep as is) ---
-    private static void runInterview(QuestionNode node) {
+    private static void runInterview(QuestionNode node, String PName) {
         while (node != null) {
             int response = JOptionPane.showConfirmDialog(
                     null,
@@ -102,18 +106,21 @@ public class GMH_Auto_Interview {
             switch (response) {
                 case JOptionPane.YES_OPTION:
                     if (node.onYes != null) {
+                        LoggerUtility.logTemplate("Q: " + node.question + "A: Yes", PName);
                         node.onYes.run(); // Execute action associated with answering Yes
                     }
                     nextNode = node.yesNode; // Set the next node for the Yes path
                     break;
                 case JOptionPane.NO_OPTION:
                     if (node.onNo != null) {
+                        LoggerUtility.logTemplate("Q: " + node.question + "A: No", PName);
                         node.onNo.run(); // Execute action associated with answering No
                     }
                     nextNode = node.noNode; // Set the next node for the No path
                     break;
                 case JOptionPane.CLOSED_OPTION: // Handle closing the dialog
                 default: // Includes CLOSED_OPTION and any other unexpected value
+                    LoggerUtility.logTemplate("Interview Canceled or Invalid Response", PName);
                     JOptionPane.showMessageDialog(null, "Interview canceled or invalid response.", "Interview Cancelled", JOptionPane.WARNING_MESSAGE);
                     // Decide how to handle cancellation - exit or maybe store partial data?
                     // For simplicity, we can clear answers and return, preventing DB save.
@@ -124,11 +131,12 @@ public class GMH_Auto_Interview {
         }
         // Interview completes when node becomes null
         System.out.println("Interview finished.");
+        LoggerUtility.logTemplate("User Completed General Medical History Interview", PName);
     }
 
 
     // --- buildInterviewTree Method (MODIFIED) ---
-    private static QuestionNode buildInterviewTree() {
+    private static QuestionNode buildInterviewTree(String PName) {
 
         // --- Define Subsequent Main Questions First (Drug, Alcohol, Tobacco) ---
         // We need these defined so the blood type branches can link to the *next* main question.
@@ -140,7 +148,13 @@ public class GMH_Auto_Interview {
             String tobaccoDuration = JOptionPane.showInputDialog("For how many years have you used tobacco?");
             answers.put("Tobacco", "Yes");
             answers.put("Tobacco Quantity", tobaccoQty);
+            if(tobaccoQty != null){
+                LoggerUtility.logTemplate("User uses " + tobaccoQty + " per day/week.", PName);
+            }
             answers.put("Tobacco Duration", tobaccoDuration); // Corrected key
+            if(tobaccoDuration != null){
+                LoggerUtility.logTemplate("User has used tobacco for " + tobaccoDuration + " year(s).", PName);
+            }
         };
         tobaccoQ.onNo = () -> {
             answers.put("Tobacco", "No");
@@ -160,7 +174,13 @@ public class GMH_Auto_Interview {
             String alcoholDuration = JOptionPane.showInputDialog("For how many years have you consumed alcohol?");
             answers.put("Alcohol", "Yes");
             answers.put("Alcohol Quantity", alcoholQty);
+            if(alcoholQty != null){
+                LoggerUtility.logTemplate( "User drinks " + alcoholQty + " per week.", PName);
+            }
             answers.put("Alcohol Duration", alcoholDuration);
+            if(alcoholDuration != null){
+                LoggerUtility.logTemplate( "User has consumed alcohol for " + alcoholDuration + " years.", PName);
+            }
         };
         alcoholQ.onNo = () -> {
             answers.put("Alcohol", "No");
@@ -175,14 +195,22 @@ public class GMH_Auto_Interview {
         drugTypeQ.onYes = () -> { // Using onYes to capture the type, assuming 'Yes' means they will enter a type
             String type = JOptionPane.showInputDialog("Enter type(s) of drug(s) used:");
             answers.put("DrugType", type);
+            if(type != null){
+                LoggerUtility.logTemplate("User uses the following drug(s): " + type + ".", PName);
+            }
             // Ask duration immediately after type
             String duration = JOptionPane.showInputDialog("For how long (e.g., months, years) have you used these drugs?");
             answers.put("Drug Duration", duration);
+            if(duration != null){
+                LoggerUtility.logTemplate("User has been using those drugs for " + duration + ".", PName);
+            }
         };
         // If they say 'No' to the type question (unlikely prompt, but handles cancel), skip duration
         drugTypeQ.onNo = () -> {
              answers.put("DrugType", "Declined to specify"); // Or null, or "Unknown"
+             LoggerUtility.logTemplate("User does not use drugs/declined to specify", PName);
              answers.put("Drug Duration", null);
+             LoggerUtility.logTemplate("No drug duration.", PName);
         };
         // Both paths from drug type lead to the alcohol question
         drugTypeQ.yesNode = alcoholQ;
@@ -198,15 +226,15 @@ public class GMH_Auto_Interview {
         QuestionNode nextQuestionAfterBlood = drugTypeQ; // Link all blood type paths here
 
         // Actions to store the final confirmed blood type
-        Runnable storeAPos = () -> { answers.put("BloodType", "A"); answers.put("Rh", "+"); };
-        Runnable storeANeg = () -> { answers.put("BloodType", "A"); answers.put("Rh", "-"); };
-        Runnable storeBPos = () -> { answers.put("BloodType", "B"); answers.put("Rh", "+"); };
-        Runnable storeBNeg = () -> { answers.put("BloodType", "B"); answers.put("Rh", "-"); };
-        Runnable storeABPos = () -> { answers.put("BloodType", "AB"); answers.put("Rh", "+"); };
-        Runnable storeABNeg = () -> { answers.put("BloodType", "AB"); answers.put("Rh", "-"); };
-        Runnable storeOPos = () -> { answers.put("BloodType", "O"); answers.put("Rh", "+"); };
-        Runnable storeONeg = () -> { answers.put("BloodType", "O"); answers.put("Rh", "-"); };
-        Runnable storeUnknown = () -> { answers.put("BloodType", "Unknown"); answers.put("Rh", "Unknown"); };
+        Runnable storeAPos = () -> { answers.put("BloodType", "A"); answers.put("Rh", "+"); LoggerUtility.logTemplate("User's bloodtype is A+.", PName); };
+        Runnable storeANeg = () -> { answers.put("BloodType", "A"); answers.put("Rh", "-"); LoggerUtility.logTemplate("User's bloodtype is A-.", PName); };
+        Runnable storeBPos = () -> { answers.put("BloodType", "B"); answers.put("Rh", "+"); LoggerUtility.logTemplate("User's bloodtype is B+.", PName); };
+        Runnable storeBNeg = () -> { answers.put("BloodType", "B"); answers.put("Rh", "-"); LoggerUtility.logTemplate("User's bloodtype is B-.", PName); };
+        Runnable storeABPos = () -> { answers.put("BloodType", "AB"); answers.put("Rh", "+"); LoggerUtility.logTemplate("User's bloodtype is AB+.", PName); };
+        Runnable storeABNeg = () -> { answers.put("BloodType", "AB"); answers.put("Rh", "-"); LoggerUtility.logTemplate("User's bloodtype is AB-.", PName); };
+        Runnable storeOPos = () -> { answers.put("BloodType", "O"); answers.put("Rh", "+"); LoggerUtility.logTemplate("User's bloodtype is O+.", PName); };
+        Runnable storeONeg = () -> { answers.put("BloodType", "O"); answers.put("Rh", "-"); LoggerUtility.logTemplate("User's bloodtype is O-.", PName); };
+        Runnable storeUnknown = () -> { answers.put("BloodType", "Unknown"); answers.put("Rh", "Unknown"); LoggerUtility.logTemplate("User does not know their bloodtype.", PName); };
 
         // Rh Factor Question Nodes (Leaf nodes of the confirmation sub-tree)
         QuestionNode rhQ_A = new QuestionNode("Is your blood type Rh Positive (+)?");

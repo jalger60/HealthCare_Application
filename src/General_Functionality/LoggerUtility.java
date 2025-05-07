@@ -13,8 +13,11 @@ public class LoggerUtility {
     private static int patientID;
     
     public static void initialize(int PID){
-        if(!isInitialized){
+        if(!isInitialized || patientID != PID){
             try{
+                if(writer != null){
+                    writer.close();
+                }
                 patientID = PID;
                 int logNum = getNextLogNumber(PID);
                 String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -27,7 +30,7 @@ public class LoggerUtility {
                 }
                 
                 File logFile = new File(logDir, filename);
-                writer = new BufferedWriter(new FileWriter(filename, true));
+                writer = new BufferedWriter(new FileWriter(logFile, true));
                 
                 isInitialized = true;
             }
@@ -77,25 +80,25 @@ public class LoggerUtility {
         String action = "";
         
         switch(formTitle){
-            case "Patient_Selection":
+            case "Patient Selection":
                 action = "Went to Patient Selection";
                 break;
-            case "Patient_Demographics":
+            case "Patient Demographics":
                 action = "Went to Patient Demographics";
                 break;
-            case "General_Medical_History":
+            case "General Medical History":
                 action = "Went to General Medical History";
                 break;
-            case "Family_History":
+            case "Family History":
                 action = "Went to Family History";
                 break;
             case "Immunizations":
                 action = "Went to Immunizations";
                 break;
-            case "Activity_Tolerance_Interview":
+            case "Activity Tolerance Interview":
                 action = "Went to Activity Tolerance Interview";
                 break;
-            case "Shortness_of_Breath_Interview":
+            case "Shortness of Breath Interview":
                 action = "Went to Shortness of Breath Interview";
                 break;
         }

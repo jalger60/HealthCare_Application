@@ -1,0 +1,8 @@
+TIME RECORDED: 2025-05-06 22:17:37, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User started the General Medical History Interview
+TIME RECORDED: 2025-05-06 22:17:41, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Do you know your specific blood type (e.g., A+, O-)?A: No
+TIME RECORDED: 2025-05-06 22:17:42, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Do you use prescription or over-the-counter drugs?A: No
+TIME RECORDED: 2025-05-06 22:17:43, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Do you consume alcohol?A: No
+TIME RECORDED: 2025-05-06 22:17:44, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Do you use tobacco?A: Yes
+TIME RECORDED: 2025-05-06 22:17:51, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User uses 100 per day/week.
+TIME RECORDED: 2025-05-06 22:17:51, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User has used tobacco for 60 year(s).
+TIME RECORDED: 2025-05-06 22:17:51, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User Completed General Medical History Interview

@@ -23,6 +23,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
     
     public Patient_Demographics() {
         initComponents();
+        this.setTitle("Patient Demographics");
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
 //        LockScreen();       
@@ -32,6 +33,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
         setPatientIDPD(patientID);
         setPName(PName);
         initComponents();
+        this.setTitle("Patient Demographics");
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
 //        LockScreen();

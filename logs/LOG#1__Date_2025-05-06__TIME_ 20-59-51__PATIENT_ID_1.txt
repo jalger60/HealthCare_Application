@@ -1,0 +1,8 @@
+TIME RECORDED: 2025-05-06 20:59:54, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Activity Tolerance Interview Started
+TIME RECORDED: 2025-05-06 20:59:55, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Did you have more trouble with the activity of 'eating' as compared to yesterday? | A: No
+TIME RECORDED: 2025-05-06 20:59:56, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Did you have more trouble with the activity of 'drinking' as compared to yesterday? | A: No
+TIME RECORDED: 2025-05-06 20:59:57, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Did you have more trouble with the activity of 'getting dressed' as compared to yesterday? | A: No
+TIME RECORDED: 2025-05-06 20:59:58, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Did you have more trouble with the activity of 'walking around the house' as compared to yesterday? | A: No
+TIME RECORDED: 2025-05-06 20:59:59, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Did you have more trouble with the activity of 'climbing stairs' as compared to yesterday? | A: Yes
+TIME RECORDED: 2025-05-06 21:00:03, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User Climbed: 600
+TIME RECORDED: 2025-05-06 21:00:03, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Activity Tolerance Interview Completed.

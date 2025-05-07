@@ -1,5 +1,6 @@
 package healthcare_application.DBUtils;
 
+import General_Functionality.LoggerUtility;
 import javax.swing.JOptionPane;
 
 public class Activity_Tolerance_Assessment_Auto_Interview {
@@ -12,6 +13,7 @@ public class Activity_Tolerance_Assessment_Auto_Interview {
     
     public static void conductInterview(int patientID, String PName) {
         // Define the root of the binary decision tree
+        LoggerUtility.logTemplate("Activity Tolerance Interview Started", PName);
         DecisionNode root = buildDecisionTree();
         
         Integer stairsClimbed = null;  // Allow null for skipped input
@@ -19,7 +21,9 @@ public class Activity_Tolerance_Assessment_Auto_Interview {
         DecisionNode currentNode = root;
         while (currentNode != null) {
             int response = JOptionPane.showConfirmDialog(null, currentNode.getQuestion(), "Activity Tolerance Interview", JOptionPane.YES_NO_OPTION);
-
+            String loggedResponse = (response == JOptionPane.YES_OPTION) ? "Yes" : "No";
+            LoggerUtility.logTemplate("Q: " + currentNode.getQuestion() + " | A: " + loggedResponse, PName);
+            
             if (response == JOptionPane.NO_OPTION && currentNode.getYesChild() != null) {
                 currentNode = currentNode.getYesChild(); // Move to the next question if "No"
                 continue;
@@ -27,7 +31,7 @@ public class Activity_Tolerance_Assessment_Auto_Interview {
 
             if (response == JOptionPane.YES_OPTION) {
                 if (currentNode.getQuestion().equals("Did you have more trouble with the activity of 'climbing stairs' as compared to yesterday?")) {
-                    stairsClimbed = getStairsClimbed();  // Prompt for stairs if relevant
+                    stairsClimbed = getStairsClimbed(PName);  // Prompt for stairs if relevant
                 }
 
                 // Record activity if "Yes" is selected
@@ -55,6 +59,7 @@ public class Activity_Tolerance_Assessment_Auto_Interview {
         );
 
         // Show success message to user
+        LoggerUtility.logTemplate("Activity Tolerance Interview Completed.", PName);
         String message = "Interview recorded successfully!";
         if (stairsClimbed != null) {
             message += "\nStairs Climbed at One Time: " + stairsClimbed;
@@ -63,10 +68,11 @@ public class Activity_Tolerance_Assessment_Auto_Interview {
     }
 
     // Updated method to get the number of stairs climbed (nullable)
-    private static Integer getStairsClimbed() {
+    private static Integer getStairsClimbed(String PName) {
         while (true) {
             String input = JOptionPane.showInputDialog("How many stairs are you able to climb at one time?");
             if (input == null) {
+                LoggerUtility.logTemplate("Stairs Skipped by User", PName);
                 JOptionPane.showMessageDialog(null, "Stairs input skipped.");
                 return null; // Exit the loop and return null to indicate no input
             }
@@ -74,6 +80,7 @@ public class Activity_Tolerance_Assessment_Auto_Interview {
             try {
                 int stairs = Integer.parseInt(input);
                 if (stairs >= 0) {
+                    LoggerUtility.logTemplate("User Climbed: " + stairs, PName);
                     return stairs;  // Return the valid stairs number
                 } else {
                     JOptionPane.showMessageDialog(null, "Please enter a positive number.");

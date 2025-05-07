@@ -24,6 +24,7 @@ public class Immunizations extends javax.swing.JFrame {
     
     public Immunizations() {
         initComponents();
+        this.setTitle("Immunizations");
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
     }
@@ -32,6 +33,7 @@ public class Immunizations extends javax.swing.JFrame {
         setPatientID(patientID);
         setPName(PName);
         initComponents();
+        this.setTitle("Immunizations");
         initializeTable();
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);

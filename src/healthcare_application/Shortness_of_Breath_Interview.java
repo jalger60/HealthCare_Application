@@ -22,6 +22,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
     
     public Shortness_of_Breath_Interview() {
         initComponents();
+        this.setTitle("Shortness of Breath Interview");
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
 //        LockScreen();
@@ -31,6 +32,7 @@ public class Shortness_of_Breath_Interview extends javax.swing.JFrame {
         setPatientIDSOBA(patientID);
         setPName(PName);
         initComponents();
+        this.setTitle("Shortness of Breath Interview");
         initializeTable();
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);

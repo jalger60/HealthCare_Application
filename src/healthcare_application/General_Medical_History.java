@@ -17,6 +17,7 @@ public class General_Medical_History extends javax.swing.JFrame {
     
     public General_Medical_History() {
         initComponents();
+        this.setTitle("General Medical History");
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
 //        LockScreen();
@@ -26,6 +27,7 @@ public class General_Medical_History extends javax.swing.JFrame {
         setPatientID(patientID);
         setPName(PName);
         initComponents();
+        this.setTitle("General Medical History");
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
 //        LockScreen();

@@ -12,6 +12,7 @@ public class Family_History extends javax.swing.JFrame {
     
     public Family_History() {
         initComponents();
+        this.setTitle("Family History");
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
         modeFlag = 0;
@@ -19,6 +20,7 @@ public class Family_History extends javax.swing.JFrame {
     
     public Family_History(int PatientID, String PName){
         initComponents();
+        this.setTitle("Family History");
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
         setPatientID(PatientID);
