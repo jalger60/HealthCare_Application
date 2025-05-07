@@ -9,6 +9,10 @@ import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import healthcare_application.*;
+import healthcare_application.DBUtils.Activity_Tolerance_Assessment_Auto_Interview;
+import healthcare_application.DBUtils.Shortness_of_Breath_Auto_Interview;
+import static healthcare_application.Patient_Selection.getPName;
+import static healthcare_application.Patient_Selection.getPatientID;
 public class General_Medical_History extends javax.swing.JFrame {
 
     private int patientID;
@@ -63,6 +67,11 @@ public class General_Medical_History extends javax.swing.JFrame {
         cbox_BloodType = new javax.swing.JComboBox<>();
         cbox_RH = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        radio_add = new javax.swing.JRadioButtonMenuItem();
+        menu_Edit = new javax.swing.JRadioButtonMenuItem();
+        menu_Save = new javax.swing.JRadioButtonMenuItem();
+        menu_Delete = new javax.swing.JRadioButtonMenuItem();
         menu_Shortness_Of_Breath = new javax.swing.JMenu();
         patientSelectNavBtn = new javax.swing.JMenuItem();
         patientDemoNavBtn = new javax.swing.JMenuItem();
@@ -71,11 +80,8 @@ public class General_Medical_History extends javax.swing.JFrame {
         familyHistoryNavBtn = new javax.swing.JMenuItem();
         activityToleranceNavBtn = new javax.swing.JMenuItem();
         SoBNavBtn = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        radio_add = new javax.swing.JRadioButtonMenuItem();
-        menu_Edit = new javax.swing.JRadioButtonMenuItem();
-        menu_Save = new javax.swing.JRadioButtonMenuItem();
-        menu_Delete = new javax.swing.JRadioButtonMenuItem();
+        menu_Interview = new javax.swing.JMenu();
+        menu_Start_Interview = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,6 +159,47 @@ public class General_Medical_History extends javax.swing.JFrame {
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(92, 40));
 
+        jMenu1.setText("Actions");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        radio_add.setSelected(true);
+        radio_add.setText("Add Record");
+        radio_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radio_addActionPerformed(evt);
+            }
+        });
+        jMenu1.add(radio_add);
+
+        menu_Edit.setSelected(true);
+        menu_Edit.setText("Edit Record");
+        menu_Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_EditActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menu_Edit);
+
+        menu_Save.setSelected(true);
+        menu_Save.setText("Save Record");
+        menu_Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_SaveActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menu_Save);
+
+        menu_Delete.setSelected(true);
+        menu_Delete.setText("Delete Record");
+        menu_Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_DeleteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menu_Delete);
+
+        jMenuBar1.add(jMenu1);
+
         menu_Shortness_Of_Breath.setText("Switch Pages");
         menu_Shortness_Of_Breath.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -214,46 +261,18 @@ public class General_Medical_History extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_Shortness_Of_Breath);
 
-        jMenu1.setText("Actions");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menu_Interview.setText("Interviews");
+        menu_Interview.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        radio_add.setSelected(true);
-        radio_add.setText("Add Record");
-        radio_add.addActionListener(new java.awt.event.ActionListener() {
+        menu_Start_Interview.setText("Start Interviews");
+        menu_Start_Interview.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radio_addActionPerformed(evt);
+                menu_Start_InterviewActionPerformed(evt);
             }
         });
-        jMenu1.add(radio_add);
+        menu_Interview.add(menu_Start_Interview);
 
-        menu_Edit.setSelected(true);
-        menu_Edit.setText("Edit Record");
-        menu_Edit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_EditActionPerformed(evt);
-            }
-        });
-        jMenu1.add(menu_Edit);
-
-        menu_Save.setSelected(true);
-        menu_Save.setText("Save Record");
-        menu_Save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_SaveActionPerformed(evt);
-            }
-        });
-        jMenu1.add(menu_Save);
-
-        menu_Delete.setSelected(true);
-        menu_Delete.setText("Delete Record");
-        menu_Delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_DeleteActionPerformed(evt);
-            }
-        });
-        jMenu1.add(menu_Delete);
-
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menu_Interview);
 
         setJMenuBar(jMenuBar1);
 
@@ -382,12 +401,15 @@ public class General_Medical_History extends javax.swing.JFrame {
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
         LoggerUtility.logUserAction("save", PName);
         GMH_DBOperations.updateGeneralMedicalHistory(this, getGMHID(), getPatientID());
+        User_Modes.View_Only_Mode(this);
         
     }//GEN-LAST:event_menu_SaveActionPerformed
 
     private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed
         LoggerUtility.logUserAction("delete", PName);
         GMH_DBOperations.deleteGeneralMedicalHistory(getGMHID(), getPatientID());
+        User_Modes.View_Only_Mode(this);
+        
     }//GEN-LAST:event_menu_DeleteActionPerformed
 
     private void patientDemoNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemoNavBtnActionPerformed
@@ -462,6 +484,24 @@ public class General_Medical_History extends javax.swing.JFrame {
         newFH.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
+
+    private void menu_Start_InterviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Start_InterviewActionPerformed
+        JOptionPane.showMessageDialog(
+            null,
+            "Shortness of Interview is about to begin.",
+            "Information",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+        Shortness_of_Breath_Auto_Interview.conductInterview(getPatientID(), getPName());
+        JOptionPane.showMessageDialog(
+            null,
+            "Activity Tolerance Interview is about to begin.",
+            "Information",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+        Activity_Tolerance_Assessment_Auto_Interview.conductInterview(getPatientID(), PName);
+        
+    }//GEN-LAST:event_menu_Start_InterviewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -715,8 +755,10 @@ public class General_Medical_History extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JRadioButtonMenuItem menu_Delete;
     private javax.swing.JRadioButtonMenuItem menu_Edit;
+    private javax.swing.JMenu menu_Interview;
     private javax.swing.JRadioButtonMenuItem menu_Save;
     private javax.swing.JMenu menu_Shortness_Of_Breath;
+    private javax.swing.JMenuItem menu_Start_Interview;
     private javax.swing.JMenuItem patientDemoNavBtn;
     private javax.swing.JMenuItem patientSelectNavBtn;
     private javax.swing.JRadioButtonMenuItem radio_add;

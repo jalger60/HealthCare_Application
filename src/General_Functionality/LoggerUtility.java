@@ -12,6 +12,29 @@ public class LoggerUtility {
     private static BufferedWriter writer;
     private static int patientID;
     
+    
+    public static void logNewPatientCreated(int newPatientID, String newPatientName) {
+        try {
+            String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            File logDir = new File("logs");
+            if (!logDir.exists()) {
+                logDir.mkdir();
+            }
+
+            // This goes in a separate master log file
+            File masterLog = new File(logDir, "MASTER_PATIENT_CREATION_LOG.txt");
+            BufferedWriter masterWriter = new BufferedWriter(new FileWriter(masterLog, true));
+
+            masterWriter.write("TIME RECORDED: " + time + ", NEW PATIENT ID: " + newPatientID + ", NAME: " + newPatientName + ", ACTION: Patient Record Created");
+            masterWriter.newLine();
+            masterWriter.flush();
+            masterWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
     public static void initialize(int PID){
         if(!isInitialized || patientID != PID){
             try{

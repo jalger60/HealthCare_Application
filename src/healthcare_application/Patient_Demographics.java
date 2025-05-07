@@ -841,10 +841,16 @@ public class Patient_Demographics extends javax.swing.JFrame {
         General_Medical_History history = gmho.getGeneralMedicalHistory(patientID);
         LoggerUtility.logFormChange(history, PName);
         history.setPName(getPName());
+        String firstname = txt_FirstName.getText();
+        String lastname = txt_LastName.getText();
+        String name = firstname + " " + lastname;
         // Assuming a new/empty record has patientID == 0
         if (history.getPatientID() == 0) {
             // No existing data found, so set the actual patient ID
             history.setPatientID(patientID);
+            LoggerUtility.logNewPatientCreated(patientID, name);
+            LoggerUtility.initialize(patientID);
+            LoggerUtility.logFormChange(history, name);
         }
         history.setVisible(true);
         this.dispose();

@@ -470,9 +470,9 @@ public class Activity_Tolerance_Interview extends javax.swing.JFrame {
     private void menu_Save_RecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Save_RecordActionPerformed
         LoggerUtility.logUserAction("save", PName);
         String num_Steps = txt_NumStairs.getText();
-        // Treat null or empty input as acceptable (optional)
+        // Treat null or empty input as acceptable 
         if (num_Steps == null || num_Steps.trim().isEmpty()) {
-            ActivityTolerance_Validation.validateDigitsOnly(num_Steps);
+           
             
         } else {
             try {

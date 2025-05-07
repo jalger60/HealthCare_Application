@@ -1,15 +1,10 @@
 package healthcare_application;
 
 import General_Functionality.LoggerUtility;
-import General_Functionality.User_Modes;
-import healthcare_application.DBUtils.Activity_Tolerance_Assessment_Auto_Interview;
 import javax.swing.table.DefaultTableModel;
 import healthcare_application.DBUtils.PatientSelection_DBOperations;
 import healthcare_application.DBUtils.Patient_Demographics_DBOperations;
-import healthcare_application.DBUtils.Shortness_Of_Breath_DBOperations;
 import healthcare_application.DBUtils.GMH_DBOperations;
-import healthcare_application.DBUtils.Shortness_of_Breath_Auto_Interview;
-import healthcare_application.DBUtils.GMH_Auto_Interview;
 import javax.swing.JOptionPane;
 import javax.swing.table.JTableHeader;
 import java.awt.Font;
@@ -47,6 +42,7 @@ public class Patient_Selection extends javax.swing.JFrame {
         tabl_Patient_Table = new javax.swing.JTable();
         btn_Search = new javax.swing.JButton();
         btn_BackToAll = new javax.swing.JButton();
+        btn_New_Patient = new javax.swing.JButton();
         menu_PSelect_Bar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         patientSelectNavBtn = new javax.swing.JMenuItem();
@@ -56,10 +52,6 @@ public class Patient_Selection extends javax.swing.JFrame {
         familyHistoryNavBtn = new javax.swing.JMenuItem();
         SoBNavBtn = new javax.swing.JMenuItem();
         activityToleranceNavBtn = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        menu_Auto_SOBA = new javax.swing.JMenuItem();
-        menu_ATA = new javax.swing.JMenuItem();
-        menu_GMH_Form = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,10 +96,24 @@ public class Patient_Selection extends javax.swing.JFrame {
             }
         });
 
+        btn_New_Patient.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_New_Patient.setText("Enter New Patient");
+        btn_New_Patient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_New_PatientActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_PSelectLayout = new javax.swing.GroupLayout(panel_PSelect);
         panel_PSelect.setLayout(panel_PSelectLayout);
         panel_PSelectLayout.setHorizontalGroup(
             panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_PSelectLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
+                .addComponent(btn_New_Patient)
+                .addGap(34, 34, 34))
             .addGroup(panel_PSelectLayout.createSequentialGroup()
                 .addGap(148, 148, 148)
                 .addComponent(lbl_Search)
@@ -120,10 +126,6 @@ public class Patient_Selection extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_BackToAll)
                 .addContainerGap(18, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_PSelectLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(208, 208, 208))
         );
         panel_PSelectLayout.setVerticalGroup(
             panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +138,9 @@ public class Patient_Selection extends javax.swing.JFrame {
                     .addComponent(btn_Search)
                     .addComponent(btn_BackToAll))
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel_PSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_New_Patient))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
 
@@ -202,34 +206,6 @@ public class Patient_Selection extends javax.swing.JFrame {
 
         menu_PSelect_Bar.add(jMenu1);
 
-        jMenu2.setText("Actions");
-
-        menu_Auto_SOBA.setText("Shortness of Breath Assessment");
-        menu_Auto_SOBA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_Auto_SOBAActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menu_Auto_SOBA);
-
-        menu_ATA.setText("Activity Tolerance Assessment");
-        menu_ATA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_ATAActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menu_ATA);
-
-        menu_GMH_Form.setText("General Medical History Assessment");
-        menu_GMH_Form.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_GMH_FormActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menu_GMH_Form);
-
-        menu_PSelect_Bar.add(jMenu2);
-
         setJMenuBar(menu_PSelect_Bar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -286,27 +262,16 @@ public class Patient_Selection extends javax.swing.JFrame {
 
     private void patientDemographicsNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientDemographicsNavBtnActionPerformed
         Patient_Demographics_DBOperations operations = new Patient_Demographics_DBOperations();
-        // Get the patient ID
-        int patientID = getPatientID(); 
-
-        if (patientID == 0) {
-            // No patient selected, open a blank Patient_Demographics form for a new patient
-            Patient_Demographics newPatientForm = new Patient_Demographics();
-            newPatientForm.setVisible(true);
-            LoggerUtility.logFormChange(newPatientForm, PName);
-            
-        } else {
-            // Fetch patient data for an existing patient
-            Patient_Demographics patient = operations.getPatientDemographics(patientID);
+        
+        Patient_Demographics patient = operations.getPatientDemographics(getPatientID());
             if (patient != null) {
                 patient.setVisible(true);
                 LoggerUtility.logFormChange(patient, PName);
-                patient.setPatientIDPD(patientID);
+                patient.setPatientIDPD(getPatientID());
                 patient.setPName(getPName());
             } else {
                 JOptionPane.showMessageDialog(this, "No patient data found!", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
 
         // Close the current form
         this.dispose();
@@ -314,27 +279,15 @@ public class Patient_Selection extends javax.swing.JFrame {
         
     }//GEN-LAST:event_patientDemographicsNavBtnActionPerformed
 
-    private void menu_Auto_SOBAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_Auto_SOBAActionPerformed
-        Shortness_of_Breath_Auto_Interview.conductInterview(getPatientID(), getPName());
-    }//GEN-LAST:event_menu_Auto_SOBAActionPerformed
-
-    private void menu_ATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_ATAActionPerformed
-        Activity_Tolerance_Assessment_Auto_Interview.conductInterview(PatientID, PName);
-    }//GEN-LAST:event_menu_ATAActionPerformed
-
     private void btn_BackToAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BackToAllActionPerformed
         GetAllPatients();
         
     }//GEN-LAST:event_btn_BackToAllActionPerformed
 
-    private void menu_GMH_FormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_GMH_FormActionPerformed
-        GMH_Auto_Interview.start(getPatientID(), getPName());
-    }//GEN-LAST:event_menu_GMH_FormActionPerformed
-
     private void GMHNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GMHNavBtnActionPerformed
         GMH_DBOperations gmho = new GMH_DBOperations();
         General_Medical_History history = gmho.getGeneralMedicalHistory(PatientID);
-        history.getPName();
+        history.setPName(PName);
         history.setVisible(true);
         LoggerUtility.logFormChange(history, PName);
         this.dispose();
@@ -362,6 +315,14 @@ public class Patient_Selection extends javax.swing.JFrame {
         LoggerUtility.logFormChange(newFH, PName);
         this.dispose();
     }//GEN-LAST:event_familyHistoryNavBtnActionPerformed
+
+    private void btn_New_PatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_New_PatientActionPerformed
+        setPatientID(0);
+        // No patient selected, open a blank Patient_Demographics form for a new patient
+        Patient_Demographics newPatientForm = new Patient_Demographics();
+        newPatientForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_New_PatientActionPerformed
 
     public String GetTxt_Search_BoxText() {
         return txt_Search_Box.getText();
@@ -485,18 +446,15 @@ public class Patient_Selection extends javax.swing.JFrame {
     private javax.swing.JMenuItem SoBNavBtn;
     private javax.swing.JMenuItem activityToleranceNavBtn;
     private javax.swing.JButton btn_BackToAll;
+    private javax.swing.JButton btn_New_Patient;
     private javax.swing.JButton btn_Search;
     private javax.swing.JComboBox<String> cbox_Search_Box;
     private javax.swing.JMenuItem familyHistoryNavBtn;
     private javax.swing.JMenuItem immunizationsNavBtn;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_PSelect_Title;
     private javax.swing.JLabel lbl_Search;
-    private javax.swing.JMenuItem menu_ATA;
-    private javax.swing.JMenuItem menu_Auto_SOBA;
-    private javax.swing.JMenuItem menu_GMH_Form;
     private javax.swing.JMenuBar menu_PSelect_Bar;
     private javax.swing.JPanel panel_PSelect;
     private javax.swing.JMenuItem patientDemographicsNavBtn;
