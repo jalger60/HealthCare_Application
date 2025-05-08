@@ -399,10 +399,30 @@ public class General_Medical_History extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_EditActionPerformed
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
+        //Perform Validation Checking Before Saving To The Database
+        if (txt_Tobacco_Use.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Tobacco use field is required.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+
+        if (txt_Alcohol_Use.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Alcohol use field is required.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+
+        if (txt_Drug_Use.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Drug use field is required.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+
+        if (cbox_BloodType.getSelectedItem().toString().equals("Unknown")) {
+        JOptionPane.showMessageDialog(this, "Please select a valid blood type.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        
         LoggerUtility.logUserAction("save", PName);
         GMH_DBOperations.updateGeneralMedicalHistory(this, getGMHID(), getPatientID());
         User_Modes.View_Only_Mode(this);
-        
     }//GEN-LAST:event_menu_SaveActionPerformed
 
     private void menu_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DeleteActionPerformed

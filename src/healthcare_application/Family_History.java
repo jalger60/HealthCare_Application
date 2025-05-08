@@ -166,14 +166,14 @@ public class Family_History extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Patient ID:");
+        jLabel2.setText("*Patient ID:");
         jLabel2.setMaximumSize(new java.awt.Dimension(40, 30));
         jLabel2.setMinimumSize(new java.awt.Dimension(40, 30));
         jLabel2.setName(""); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Name: ");
+        jLabel3.setText("*Name: ");
         jLabel3.setMaximumSize(new java.awt.Dimension(40, 30));
         jLabel3.setMinimumSize(new java.awt.Dimension(40, 30));
         jLabel3.setName(""); // NOI18N
@@ -618,9 +618,31 @@ public class Family_History extends javax.swing.JFrame {
          //Initialize transfer variables. 
         //Get text from textboxes and store them in variables for transfer to database via stored procedure. 
         LoggerUtility.logUserAction("save", PName);
-        try{                       
+        try{     
+            //Check user entered valid PID
+            String checkPID = PIDbox.getText().trim();
+            if (checkPID.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Patient ID cannot be empty.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            else if (!checkPID.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Patient ID must be a valid number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             int ent_PID = Integer.parseInt(PIDbox.getText().trim());
-            int ent_FID = Integer.parseInt(FIDbox.getText().trim()); 
+            
+            int ent_FID = Integer.parseInt(FIDbox.getText().trim());
+            
+            //Check user entered valid name
+            String checkName = nameBox.getText();
+            if(checkName.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Patient Name cannot be empty.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            else if(checkName.matches("\\d+")){
+                JOptionPane.showMessageDialog(this, "Patient ID cannot be empty.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             String ent_Name = nameBox.getText().trim();
             String ent_Relation = relationBox.getText().trim();
             int ent_Alive = aliveBox.isSelected() ? 1 : 0;

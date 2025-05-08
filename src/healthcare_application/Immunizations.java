@@ -86,10 +86,10 @@ public class Immunizations extends javax.swing.JFrame {
         jLabel1.setText("Immunizations");
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Immunization Date: ");
+        jLabel5.setText("*Immunization Date: ");
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Experation Date: ");
+        jLabel6.setText("*Experation Date: ");
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Delivery: ");
@@ -117,7 +117,7 @@ public class Immunizations extends javax.swing.JFrame {
         }
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Vaccine");
+        jLabel10.setText("*Vaccine");
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(70, 40));
 
@@ -322,12 +322,28 @@ public class Immunizations extends javax.swing.JFrame {
     }//GEN-LAST:event_radio_buttion_editActionPerformed
 
     private void jRadioButton_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_SaveActionPerformed
+        //Check Required Fields 
+        String checkVaccine =  txt_Vaccine.getText();
+        if(checkVaccine.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Vaccine field is required.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (date_Immu_Date.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Immunization date is required.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (date_expiration.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Expiration date is required.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }   
+        
         LoggerUtility.logUserAction("save", PName);
+        
         if (getRecordID() == 0) {
             Immunizations_DBOperations.addImmunizationHistory(this, getPatientID());
         } else {
             Immunizations_DBOperations.editImmunizationHistory(this, getPatientID(), getRecordID());
         }
+        
         initializeTable();
         User_Modes.View_Only_Mode(this);
         setRecordID(0);

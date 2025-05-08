@@ -261,13 +261,13 @@
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Immunization Date: "/>
+        <Property name="text" type="java.lang.String" value="*Immunization Date: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Experation Date: "/>
+        <Property name="text" type="java.lang.String" value="*Experation Date: "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_delivery">
@@ -337,7 +337,7 @@
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Vaccine"/>
+        <Property name="text" type="java.lang.String" value="*Vaccine"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_Vaccine">

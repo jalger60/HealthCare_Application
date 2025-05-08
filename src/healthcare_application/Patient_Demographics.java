@@ -307,12 +307,12 @@ public class Patient_Demographics extends javax.swing.JFrame {
         lbl_PDTitle.setText("Patient Demographics ");
 
         lbl_FirstName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_FirstName.setText("First Name");
+        lbl_FirstName.setText("*First Name");
 
         txt_FirstName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbl_LastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_LastName.setText("Last Name");
+        lbl_LastName.setText("*Last Name");
 
         txt_LastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -327,7 +327,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
         txt_HomeAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbl_City.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_City.setText("City");
+        lbl_City.setText("*City");
 
         txt_City.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -338,7 +338,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
         cbox_State.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming" }));
 
         lbl_ZipCode.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_ZipCode.setText("Zip Code");
+        lbl_ZipCode.setText("*Zip Code");
 
         lbl_Country.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_Country.setText("Country");
@@ -353,7 +353,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
         cbox_Citizenship.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Afghan", "Albanian", "Algerian", "Andorran", "Angolan", "Antiguan or Barbudan", "Argentine", "Armenian", "Australian", "Austrian", "Azerbaijani", "Bahamian", "Bahraini", "Bangladeshi", "Barbadian", "Belarusian", "Belgian", "Belizean", "Beninese", "Bhutanese", "Bolivian", "Bosnian or Herzegovinian", "Botswanan", "Brazilian", "Bruneian", "Bulgarian", "Burkinabé", "Burundian", "Cape Verdean", "Cambodian", "Cameroonian", "Canadian", "Central African", "Chadian", "Chilean", "Chinese", "Colombian", "Comoran", "Congolese", "Costa Rican", "Croatian", "Cuban", "Cypriot", "Czech", "Congolese", "Danish", "Djiboutian", "Dominican", "Dominican", "Ecuadorian", "Egyptian", "Salvadoran", "Equatorial Guinean", "Eritrean", "Estonian", "Swazi", "Ethiopian", "Fijian", "Finnish", "French", "Gabonese", "Gambian", "Georgian", "German", "Ghanaian", "Greek", "Grenadian", "Guatemalan", "Guinean", "Guinean-Bissauan", "Guyanese", "Haitian", "Honduran", "Hungarian", "Icelander", "Indian", "Indonesian", "Iranian", "Iraqi", "Irish", "Israeli", "Italian", "Jamaican", "Japanese", "Jordanian", "Kazakhstani", "Kenyan", "I-Kiribati", "North Korean", "South Korean", "Kuwaiti", "Kyrgyz", "Laotian", "Latvian", "Lebanese", "Mosotho", "Liberian", "Libyan", "Liechtensteinian", "Lithuanian", "Luxembourger", "Malagasy", "Malawian", "Malaysian", "Maldivian", "Malian", "Maltese", "Marshallese", "Mauritanian", "Mauritian", "Mexican", "Micronesian", "Moldovan", "Monegasque", "Mongolian", "Montenegrin", "Moroccan", "Mozambican", "Burmese", "Namibian", "Nauruan", "Nepali", "Dutch", "New Zealander", "Nicaraguan", "Nigerien", "Nigerian", "Macedonian", "Norwegian", "Omani", "Pakistani", "Palauan", "Panamanian", "Papua New Guinean", "Paraguayan", "Peruvian", "Filipino or Filipina", "Polish", "Portuguese", "Qatari", "Romanian", "Russian", "Rwandan", "Kittitian or Nevisian", "Saint Lucian", "Vincentian", "Samoan", "Sammarinese", "São Toméan", "Saudi", "Senegalese", "Serbian", "Seychellois", "Sierra Leonean", "Singaporean", "Slovak", "Slovenian", "Solomon Islander", "Somali", "South African", "South Sudanese", "Spanish", "Sri Lankan", "Sudanese", "Surinamese", "Swedish", "Swiss", "Syrian", "Taiwanese", "Tajik", "Tanzanian", "Thai", "Timorese", "Togolese", "Tongan", "Trinidadian or Tobagonian", "Tunisian", "Turkish", "Turkmen", "Tuvaluan", "Ugandan", "Ukrainian", "Emirati", "British", "American", "Uruguayan", "Uzbek", "Ni-Vanuatu", "Vatican", "Venezuelan", "Vietnamese", "Yemeni", "Zambian", "Zimbabwean" }));
 
         lbl_MobilePhone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_MobilePhone.setText("Mobile Phone");
+        lbl_MobilePhone.setText("*Mobile Phone");
 
         lbl_EmPhoneNum.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_EmPhoneNum.setText("Emergency Contact Number");
@@ -493,7 +493,7 @@ public class Patient_Demographics extends javax.swing.JFrame {
                                                 .addComponent(txt_Next_of_kin, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                                                 .addComponent(lbl_NOKRP)
                                                 .addComponent(txt_NOKR)))))
-                                .addContainerGap(101, Short.MAX_VALUE))))
+                                .addContainerGap(95, Short.MAX_VALUE))))
                     .addGroup(panel_PDemographicsLayout.createSequentialGroup()
                         .addGroup(panel_PDemographicsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_Citizenship, javax.swing.GroupLayout.Alignment.TRAILING)
