@@ -5,6 +5,7 @@
 package healthcare_application.DBUtils;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,7 +18,6 @@ public class Family_History_DBOperations {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(dbURL, "root", "toor");
-            JOptionPane.showMessageDialog(null, "Database Connected Successfully!", "Connection Successful", JOptionPane.INFORMATION_MESSAGE);
         }
         catch(SQLException ex){
             System.err.println("ERROR - COULD NOT CONNECT TO DATABASE!");
@@ -103,21 +103,41 @@ public class Family_History_DBOperations {
         }
     }
     
-    public void setTextBoxes(){
+    public void displayFH(int PID, javax.swing.JTable table){
         Connection conn = null;
         CallableStatement stmt = null;
         
         try{
             conn = connectToDatabase();
-            stmt = conn.prepareCall("{CALL getFamily(?)}");
+            
+            stmt = conn.prepareCall("{CALL getFamilyHistory(?)}");
+            stmt.setInt(1, PID);
+            
+            ResultSet tblVals = stmt.executeQuery();
+            
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            
+            model.setRowCount(0);
+            
+            while (tblVals.next()){
+                model.addRow(new Object[]{
+                    tblVals.getInt("FamilyID"),
+                    tblVals.getInt("PatientID"),
+                    tblVals.getString("Name"),
+                    tblVals.getString("Relation"),
+                    tblVals.getInt("Alive"),
+                    tblVals.getInt("Lives with patient"),
+                    tblVals.getString("MajorDisorder"),
+                    tblVals.getString("SpecificTypeDisorder"),
+                    tblVals.getInt("DisorderHRF"),
+                    tblVals.getInt("deleted")
+                });
+            }
+            
+            conn.close();
         }
         catch(SQLException ex){
             System.err.println("DATABASE ERROR!");
-        }
-                
-    }
-    
-    public void setRecordList(){
-        
+        }      
     }
 }

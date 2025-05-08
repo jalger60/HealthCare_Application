@@ -14,7 +14,7 @@ public class PatientSelection_DBOperations {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(dbURL, "root", "password");
+            con = DriverManager.getConnection(dbURL, "root", "toor");
             System.out.println("Database connected successfully!"); // Optional confirmation message
         } catch (SQLException ex) {
             System.err.println("Database Connection Error: " + ex.getMessage());
@@ -33,7 +33,7 @@ public class PatientSelection_DBOperations {
         ResultSet resultSet = null;
 
         // Define column names
-        String[] columnNames = {"Patient ID", "Last Name", "First Name", "Phone Number", "Date of Birth"};
+        String[] columnNames = {"PatientID", "Last Name", "First Name", "Phone Number", "Date of Birth"};
 
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
@@ -113,11 +113,11 @@ public class PatientSelection_DBOperations {
                 } else {
                     while (resultSet.next()) {
                         Object[] rowData = new Object[5];
-                        rowData[0] = resultSet.getString("Patient ID");
-                        rowData[1] = resultSet.getString("First Name");
-                        rowData[2] = resultSet.getString("Last Name");
-                        rowData[3] = resultSet.getString("Phone Number");
-                        rowData[4] = resultSet.getString("Date of Birth");
+                        rowData[0] = resultSet.getString("PatientID");
+                        rowData[1] = resultSet.getString("ptFirstName");
+                        rowData[2] = resultSet.getString("ptLastName");
+                        rowData[3] = resultSet.getString("ptMobilePhone");
+                        rowData[4] = resultSet.getString("DOB");
                         tableModel.addRow(rowData);
                     }
                 }

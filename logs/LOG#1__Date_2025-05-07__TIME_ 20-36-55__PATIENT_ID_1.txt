@@ -1,0 +1,10 @@
+TIME RECORDED: 2025-05-07 20:37:03, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Went to Family History
+TIME RECORDED: 2025-05-07 20:37:07, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User deleted record
+TIME RECORDED: 2025-05-07 20:37:15, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User deleted record
+TIME RECORDED: 2025-05-07 20:37:20, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User saved record
+TIME RECORDED: 2025-05-07 20:37:23, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User successfully deleted a log!
+TIME RECORDED: 2025-05-07 20:37:23, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User successfully saved their changes!
+TIME RECORDED: 2025-05-07 20:37:41, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User deleted record
+TIME RECORDED: 2025-05-07 20:37:45, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User saved record
+TIME RECORDED: 2025-05-07 20:37:47, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User successfully deleted a log!
+TIME RECORDED: 2025-05-07 20:37:47, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User successfully saved their changes!

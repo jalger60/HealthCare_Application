@@ -3,9 +3,12 @@ package healthcare_application;
 import General_Functionality.*;
 import healthcare_application.DBUtils.*;
 import healthcare_application.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JCheckBox;
 
 public class Family_History extends javax.swing.JFrame {
-
+    Family_History_DBOperations FHops = new Family_History_DBOperations();
     private int modeFlag;
     private int patientID;
     private String PName;
@@ -15,17 +18,18 @@ public class Family_History extends javax.swing.JFrame {
         this.setTitle("Family History");
         User_Modes.View_Only_Mode(this);
         User_Modes.View_Only_Message(this);
-        modeFlag = 0;
+        modeFlag = 0;        
     }
     
     public Family_History(int PatientID, String PName){
         initComponents();
         this.setTitle("Family History");
         User_Modes.View_Only_Mode(this);
+        fhTable.setEnabled(true);
         User_Modes.View_Only_Message(this);
         setPatientID(PatientID);
         setPName(PName);
-        PIDbox.setText(String.valueOf(patientID));
+        FHops.displayFH(PatientID, fhTable);
     }
     
     public void setPatientID(int newPatientID){
@@ -44,6 +48,61 @@ public class Family_History extends javax.swing.JFrame {
         this.PName = PName;
     }
 
+    public JTextField getNameBox() {
+        return nameBox;
+    }
+
+    public void setNameBox(JTextField nameBox) {
+        this.nameBox = nameBox;
+    }
+
+    public JTextField getRelationBox() {
+        return relationBox;
+    }
+
+    public void setRelationBox(JTextField relationBox) {
+        this.relationBox = relationBox;
+    }
+
+    public JCheckBox getAliveBox() {
+        return aliveBox;
+    }
+
+    public void setAliveBox(JCheckBox aliveBox) {
+        this.aliveBox = aliveBox;
+    }
+
+    public JCheckBox getLWPbox() {
+        return LWPbox;
+    }
+
+    public void setLWPbox(JCheckBox LWPbox) {
+        this.LWPbox = LWPbox;
+    }
+
+    public JTextField getMDisorderBox() {
+        return MDisorderBox;
+    }
+
+    public void setMDisorderBox(JTextField MDisorderBox) {
+        this.MDisorderBox = MDisorderBox;
+    }
+
+    public JTextField getSDisorderBox() {
+        return SDisorderBox;
+    }
+
+    public void setSDisorderBox(JTextField SDisorderBox) {
+        this.SDisorderBox = SDisorderBox;
+    }
+
+    public JCheckBox getHRFbox() {
+        return HRFbox;
+    }
+
+    public void setHRFbox(JCheckBox HRFbox) {
+        this.HRFbox = HRFbox;
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -73,7 +132,7 @@ public class Family_History extends javax.swing.JFrame {
         HRFbox = new javax.swing.JCheckBox();
         LWPbox = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        fhTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         JMenu = new javax.swing.JMenu();
         patientSelectNavBtn = new javax.swing.JMenuItem();
@@ -88,6 +147,7 @@ public class Family_History extends javax.swing.JFrame {
         editRecord = new javax.swing.JMenuItem();
         saveRecord = new javax.swing.JMenuItem();
         deleteRecord = new javax.swing.JMenuItem();
+        cancelAction = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         startFHInterview = new javax.swing.JMenuItem();
 
@@ -211,7 +271,7 @@ public class Family_History extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        fhTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -237,18 +297,23 @@ public class Family_History extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
-            jTable2.getColumnModel().getColumn(4).setResizable(false);
-            jTable2.getColumnModel().getColumn(5).setResizable(false);
-            jTable2.getColumnModel().getColumn(6).setResizable(false);
-            jTable2.getColumnModel().getColumn(7).setResizable(false);
-            jTable2.getColumnModel().getColumn(8).setResizable(false);
-            jTable2.getColumnModel().getColumn(9).setResizable(false);
+        fhTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fhTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(fhTable);
+        if (fhTable.getColumnModel().getColumnCount() > 0) {
+            fhTable.getColumnModel().getColumn(0).setResizable(false);
+            fhTable.getColumnModel().getColumn(1).setResizable(false);
+            fhTable.getColumnModel().getColumn(2).setResizable(false);
+            fhTable.getColumnModel().getColumn(3).setResizable(false);
+            fhTable.getColumnModel().getColumn(4).setResizable(false);
+            fhTable.getColumnModel().getColumn(5).setResizable(false);
+            fhTable.getColumnModel().getColumn(6).setResizable(false);
+            fhTable.getColumnModel().getColumn(7).setResizable(false);
+            fhTable.getColumnModel().getColumn(8).setResizable(false);
+            fhTable.getColumnModel().getColumn(9).setResizable(false);
         }
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(141, 40));
@@ -346,6 +411,14 @@ public class Family_History extends javax.swing.JFrame {
             }
         });
         jMenu2.add(deleteRecord);
+
+        cancelAction.setText("Cancel Action");
+        cancelAction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionActionPerformed(evt);
+            }
+        });
+        jMenu2.add(cancelAction);
 
         jMenuBar1.add(jMenu2);
 
@@ -529,10 +602,15 @@ public class Family_History extends javax.swing.JFrame {
 
     private void editRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editRecordActionPerformed
         // TODO add your handling code here:
+        if(modeFlag == 1 || modeFlag == 3){
+            JOptionPane.showMessageDialog(null, "You are already in another mode. You must click Save or Cancel to choose another mode.", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
         LoggerUtility.logUserAction("edit", PName);
         User_Modes.Edit_Mode(this);
         User_Modes.Edit_Message(this);
         modeFlag = 2;
+        }
     }//GEN-LAST:event_editRecordActionPerformed
 
     private void saveRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRecordActionPerformed
@@ -540,45 +618,108 @@ public class Family_History extends javax.swing.JFrame {
          //Initialize transfer variables. 
         //Get text from textboxes and store them in variables for transfer to database via stored procedure. 
         LoggerUtility.logUserAction("save", PName);
-        
-        Family_History_DBOperations famObj = new Family_History_DBOperations();
-                       
-        int ent_PID = Integer.parseInt(PIDbox.getText().trim());
-        int ent_FID = Integer.parseInt(FIDbox.getText().trim()); 
-        String ent_Name = nameBox.getText().trim();
-        String ent_Relation = relationBox.getText().trim();
-        int ent_Alive = aliveBox.isSelected() ? 1 : 0;
-        int ent_LWP = LWPbox.isSelected() ? 1 : 0;
-        String ent_MajorDisorder = MDisorderBox.getText().trim();
-        String ent_SToD = SDisorderBox.getText().trim();
-        int ent_HRF = HRFbox.isSelected() ? 1 : 0;
-        int ent_deleted = Integer.parseInt(deletedBox.getText().trim());
-        
-        switch(modeFlag){
-           case 1:
-               famObj.addFHRecord(ent_PID, ent_Name, ent_Relation, ent_Alive, ent_LWP, ent_MajorDisorder, ent_SToD, ent_HRF, ent_deleted);
-           case 2:
-               famObj.editFHRecord(ent_FID, ent_Name, ent_Relation, ent_Alive, ent_LWP, ent_MajorDisorder, ent_SToD, ent_HRF);
-           case 3:  
-               famObj.delFHRecord(ent_FID);
+        try{                       
+            int ent_PID = Integer.parseInt(PIDbox.getText().trim());
+            int ent_FID = Integer.parseInt(FIDbox.getText().trim()); 
+            String ent_Name = nameBox.getText().trim();
+            String ent_Relation = relationBox.getText().trim();
+            int ent_Alive = aliveBox.isSelected() ? 1 : 0;
+            int ent_LWP = LWPbox.isSelected() ? 1 : 0;
+            String ent_MajorDisorder = MDisorderBox.getText().trim();
+            String ent_SToD = SDisorderBox.getText().trim();
+            int ent_HRF = HRFbox.isSelected() ? 1 : 0;
+            int ent_deleted = Integer.parseInt(deletedBox.getText().trim());
+
+            switch(modeFlag){
+               case 1:
+                   FHops.addFHRecord(ent_PID, ent_Name, ent_Relation, ent_Alive, ent_LWP, ent_MajorDisorder, ent_SToD, ent_HRF, ent_deleted);
+                   LoggerUtility.logTemplate("User successfully added a log!", PName);
+                   break;
+               case 2:
+                   FHops.editFHRecord(ent_FID, ent_Name, ent_Relation, ent_Alive, ent_LWP, ent_MajorDisorder, ent_SToD, ent_HRF);
+                   LoggerUtility.logTemplate("User successfully edited a log!", PName);
+                   break;
+               case 3:  
+                   FHops.delFHRecord(ent_FID);
+                   LoggerUtility.logTemplate("User successfully deleted a log!", PName);
+                   break;
+            }
         }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error performing stored procedure!", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        LoggerUtility.logTemplate("User successfully saved their changes!", PName);
+
+        User_Modes.View_Only_Mode(this);
+        User_Modes.View_Only_Message(this);
+        
+        FHops.displayFH(patientID, fhTable);
+        fhTable.setEnabled(true);
     }//GEN-LAST:event_saveRecordActionPerformed
 
     private void deleteRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRecordActionPerformed
         // TODO add your handling code here:
-        LoggerUtility.logUserAction("delete", PName);
-        modeFlag = 3;
+        if(modeFlag == 1 || modeFlag == 2){
+            JOptionPane.showMessageDialog(null, "You are already in another mode. You must click Save or Cancel to choose another mode.", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            int selectedRow = fhTable.getSelectedRow();
+            fhTable.setValueAt(1, selectedRow, 9);            
+            LoggerUtility.logUserAction("delete", PName);
+            User_Modes.Delete_Message(this);
+            modeFlag = 3;
+        }
     }//GEN-LAST:event_deleteRecordActionPerformed
 
     private void addRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRecordActionPerformed
-        // TODO add your handling code here:
-        LoggerUtility.logUserAction("add", PName);
-        modeFlag = 1;
+        // TODO add your handling code here:        
+        if(modeFlag == 2 || modeFlag == 3){
+            JOptionPane.showMessageDialog(null, "You are already in another mode. You must click Save or Cancel to choose another mode.", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            LoggerUtility.logUserAction("add", PName);
+            User_Modes.Edit_Mode(this);
+            User_Modes.Add_Message(this);
+            
+            modeFlag = 1;
+        }
     }//GEN-LAST:event_addRecordActionPerformed
 
     private void startFHInterviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startFHInterviewActionPerformed
         // TODO add your handling code here:
+        Family_History_Automated_Interview.start(this);
+        FHops.displayFH(patientID, fhTable);
     }//GEN-LAST:event_startFHInterviewActionPerformed
+
+    private void cancelActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionActionPerformed
+         // TODO add your handling code here:
+        LoggerUtility.logTemplate("User Cancelled an Action.", PName);
+        JOptionPane.showConfirmDialog(null, "Action Cancelled!", "Cancelled", JOptionPane.INFORMATION_MESSAGE);
+        modeFlag = 0;
+        User_Modes.View_Only_Message(this);
+        User_Modes.View_Only_Mode(this);
+        fhTable.setEnabled(true);
+    }//GEN-LAST:event_cancelActionActionPerformed
+
+    private void fhTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fhTableMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = fhTable.getSelectedRow();
+        
+        if(selectedRow == -1){
+            System.out.println("Index out of bounds!!!");
+        }
+        
+        FIDbox.setText(fhTable.getValueAt(selectedRow, 0).toString());
+        PIDbox.setText(fhTable.getValueAt(selectedRow, 1).toString());
+        nameBox.setText(fhTable.getValueAt(selectedRow, 2).toString());
+        relationBox.setText(fhTable.getValueAt(selectedRow, 3).toString());
+        aliveBox.setSelected(fhTable.getValueAt(selectedRow, 4).toString().equals("1"));
+        LWPbox.setSelected(fhTable.getValueAt(selectedRow, 5).toString().equals("1"));
+        MDisorderBox.setText(fhTable.getValueAt(selectedRow, 6).toString());
+        SDisorderBox.setText(fhTable.getValueAt(selectedRow, 7).toString());
+        HRFbox.setSelected(fhTable.getValueAt(selectedRow, 8).toString().equals("1"));
+        deletedBox.setText(fhTable.getValueAt(selectedRow, 9).toString());
+    }//GEN-LAST:event_fhTableMouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -601,10 +742,12 @@ public class Family_History extends javax.swing.JFrame {
     private javax.swing.JMenuItem activityToleranceNavBtn;
     private javax.swing.JMenuItem addRecord;
     private javax.swing.JCheckBox aliveBox;
+    private javax.swing.JMenuItem cancelAction;
     private javax.swing.JMenuItem deleteRecord;
     private javax.swing.JTextField deletedBox;
     private javax.swing.JMenuItem editRecord;
     private javax.swing.JMenuItem familyHistoryNavBtn;
+    private javax.swing.JTable fhTable;
     private javax.swing.JMenuItem immunizationsNavBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -623,7 +766,6 @@ public class Family_History extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField nameBox;
     private javax.swing.JMenuItem patientDemographicsNavBtn;
     private javax.swing.JMenuItem patientSelectNavBtn;

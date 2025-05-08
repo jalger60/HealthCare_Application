@@ -1,0 +1,21 @@
+TIME RECORDED: 2025-05-07 23:37:51, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Went to Family History
+TIME RECORDED: 2025-05-07 23:37:54, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Started Family History Interview
+TIME RECORDED: 2025-05-07 23:37:56, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Do you want to enter a family member? | A: No
+TIME RECORDED: 2025-05-07 23:38:04, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Started Family History Interview
+TIME RECORDED: 2025-05-07 23:38:05, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Do you want to enter a family member?| A: Yes
+TIME RECORDED: 2025-05-07 23:38:09, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Do you want to specify this person's relation?| A: Yes
+TIME RECORDED: 2025-05-07 23:38:12, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Is this person alive?| A: Yes
+TIME RECORDED: 2025-05-07 23:38:12, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Does this person live with the patient?| A: Yes
+TIME RECORDED: 2025-05-07 23:38:13, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Does this person have a major disorder?| A: Yes
+TIME RECORDED: 2025-05-07 23:38:15, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Is there a specific type of disorder?| A: Yes
+TIME RECORDED: 2025-05-07 23:38:16, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Is the disorder high risk for the family?| A: Yes
+TIME RECORDED: 2025-05-07 23:38:17, PATIENT'S ID: 1, PATIENT'S NAME: frame0, ACTION: Completed family history interview
+TIME RECORDED: 2025-05-07 23:38:27, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Started Family History Interview
+TIME RECORDED: 2025-05-07 23:38:29, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Do you want to enter a family member?| A: Yes
+TIME RECORDED: 2025-05-07 23:38:32, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Do you want to specify this person's relation? | A: No
+TIME RECORDED: 2025-05-07 23:38:34, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Is this person alive? | A: No
+TIME RECORDED: 2025-05-07 23:38:35, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Does this person live with the patient? | A: No
+TIME RECORDED: 2025-05-07 23:38:36, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Does this person have a major disorder? | A: No
+TIME RECORDED: 2025-05-07 23:38:36, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Is there a specific type of disorder? | A: No
+TIME RECORDED: 2025-05-07 23:38:37, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Q: Is the disorder high risk for the family? | A: No
+TIME RECORDED: 2025-05-07 23:38:38, PATIENT'S ID: 1, PATIENT'S NAME: frame0, ACTION: Completed family history interview

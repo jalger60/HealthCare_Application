@@ -1,0 +1,1 @@
+TIME RECORDED: 2025-05-07 20:16:11, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Went to Family History

@@ -1,0 +1,5 @@
+TIME RECORDED: 2025-05-07 20:40:09, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: Went to Family History
+TIME RECORDED: 2025-05-07 20:40:12, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User added record
+TIME RECORDED: 2025-05-07 20:40:50, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User saved record
+TIME RECORDED: 2025-05-07 20:40:51, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User successfully added a log!
+TIME RECORDED: 2025-05-07 20:40:51, PATIENT'S ID: 1, PATIENT'S NAME: John Smith, ACTION: User successfully saved their changes!
